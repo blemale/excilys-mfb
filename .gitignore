@@ -1,6 +1,7 @@
 # Fichiers crées par Eclipse pour sa config
 .project
 .settings/
+.classpath/
 
 # Fichiers compilés
 target/
