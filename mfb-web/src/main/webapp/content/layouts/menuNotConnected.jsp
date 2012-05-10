@@ -4,7 +4,7 @@
 <div class="navbar navbar-fixed-top">
 			<div class="navbar-inner">
 				<div class="container">
-						<a class="brand" href="#">MotherFucker Banking</a>
+						<a class="brand" href="#">MF Banking</a>
 					    <form class="navbar-form form-inline pull-right">
 						    <input type="text" class="input-small" placeholder="Login">
 						    <input type="password" class="input-small" placeholder="Password">

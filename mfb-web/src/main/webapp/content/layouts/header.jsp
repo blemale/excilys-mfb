@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Test</title>
+		<title>MF Banking</title>
 		<meta charset="utf-8" />
 		<link rel="stylesheet" type="text/css" href="content/css/bootstrap.css" />
 		<link rel="stylesheet" type="text/css" href="content/css/bootstrap-responsive.css" />
