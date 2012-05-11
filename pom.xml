@@ -6,40 +6,93 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
+	<description>
+		The MFB project is a MOTHER FUCKER BANKING Project !!!
+	</description>
+
 	<modules>
 		<module>mfb-web</module>
 	</modules>
+
+	<issueManagement>
+		<system>Github</system>
+		<url>https://github.com/excilys-pdalpra/excilys-mfb/issues</url>
+	</issueManagement>
+
+	<ciManagement>
+		<system>Jenkins</system>
+	</ciManagement>
+
+	<scm>
+		<connection>git@github.com:excilys-pdalpra/excilys-mfb.git</connection>
+	</scm>
 
 	<developers>
 		<developer>
 			<id>pdalpra</id>
 			<name>Pierre DAL-PRA</name>
 			<email>pdalpra@excilys.com</email>
+			<organization>E Business Information</organization>
+			<organizationUrl>http://www.ebusinessinformation.fr</organizationUrl>
+			<timezone>+1</timezone>
+			<roles>
+				<role>Committer</role>
+			</roles>
 		</developer>
 		<developer>
 			<id>blemale</id>
 			<name>Bastien LEMALE</name>
 			<email>blemale@excilys.com</email>
+			<organization>E Business Information</organization>
+			<organizationUrl>http://www.ebusinessinformation.fr</organizationUrl>
+			<timezone>+1</timezone>
+			<roles>
+				<role>Committer</role>
+			</roles>
 		</developer>
 		<developer>
 			<id>tbakir</id>
 			<name>Tahar BAKIR</name>
 			<email>tbakir@excilys.com</email>
+			<organization>E Business Information</organization>
+			<organizationUrl>http://www.ebusinessinformation.fr</organizationUrl>
+			<timezone>+1</timezone>
+			<roles>
+				<role>Committer</role>
+			</roles>
 		</developer>
 		<developer>
 			<id>kpogorzelski</id>
 			<name>Kévin POGORZELSKI</name>
 			<email>kpogorzelski@excilys.com</email>
+			<organization>E Business Information</organization>
+			<organizationUrl>http://www.ebusinessinformation.fr</organizationUrl>
+			<timezone>+1</timezone>
+			<roles>
+				<role>Committer</role>
+			</roles>
 		</developer>
 		<developer>
 			<id>fguillain</id>
 			<name>François GUILLAIN</name>
 			<email>fguillain@excilys.com</email>
+			<organization>E Business Information</organization>
+			<organizationUrl>http://www.ebusinessinformation.fr</organizationUrl>
+			<timezone>+1</timezone>
+			<roles>
+				<role>Committer</role>
+			</roles>
 		</developer>
 		<developer>
 			<id>gvaroquaux</id>
 			<name>Guillaume VAROQUAUX</name>
 			<email>gvaroquaux@excilys.com</email>
+			<organization>E Business Information</organization>
+			<organizationUrl>http://www.ebusinessinformation.fr</organizationUrl>
+			<timezone>+1</timezone>
+			<roles>
+				<role>Committer</role>
+			</roles>
 		</developer>
 	</developers>
 
