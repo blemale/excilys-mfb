@@ -448,7 +448,6 @@
     clear: both;
   }
   [class*="span"] {
-    float: left;
     margin-left: 30px;
   }
   .container,

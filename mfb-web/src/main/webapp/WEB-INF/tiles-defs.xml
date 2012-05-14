@@ -18,8 +18,13 @@
 	</definition>
 	
 	<definition name="page404" extends="baseLayout">
-		<put-attribute name="title" value="Erreur introuvable" />
-		<put-attribute name="body" value="/WEB-INF/jsp/404.jsp" />
+		<put-attribute name="title" value="Erreur 404 - page introuvable" />
+		<put-attribute name="body" value="/WEB-INF/jsp/errors/404.jsp" />
+	</definition>
+	
+	<definition name="page500" extends="baseLayout">
+		<put-attribute name="title" value="Erreur 500 - problème interne" />
+		<put-attribute name="body" value="/WEB-INF/jsp/errors/500.jsp" />
 	</definition>
 	
 

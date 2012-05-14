@@ -158,7 +158,6 @@ a:hover {
   clear: both;
 }
 [class*="span"] {
-  float: left;
   margin-left: 20px;
 }
 .container,
@@ -641,7 +640,7 @@ select,
 .uneditable-input {
   display: inline-block;
   width: 210px;
-  height: 18px;
+  height: 25px;
   padding: 4px;
   margin-bottom: 9px;
   font-size: 13px;
@@ -1231,7 +1230,7 @@ legend + .control-group {
 .form-horizontal .help-block {
   margin-top: 9px;
   margin-bottom: 0;
-}
+}id="input-perso" 
 .form-horizontal .form-actions {
   padding-left: 160px;
 }
