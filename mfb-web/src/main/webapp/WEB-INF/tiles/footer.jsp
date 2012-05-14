@@ -4,4 +4,5 @@
 <footer class="footer">
 	<p>Projet de la formation E-Business</p>
 	<p>Réalisation : Bastien, François, Guillaume, Kévin, Pierre, Tahar</p>
+	<p><a href="https://github.com/excilys-pdalpra/excilys-mfb" target="_blank">Voir ce projet sur GitHub</a></p>
 </footer>
