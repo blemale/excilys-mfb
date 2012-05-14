@@ -17,5 +17,10 @@
 		<put-attribute name="title" value="Login" />
 	</definition>
 	
+	<definition name="page404" extends="baseLayout">
+		<put-attribute name="title" value="Erreur introuvable" />
+		<put-attribute name="body" value="/WEB-INF/jsp/404.jsp" />
+	</definition>
+	
 
 </tiles-definitions>

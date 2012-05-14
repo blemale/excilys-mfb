@@ -4,10 +4,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class Toto {
+public class Page404 {
 
-	@RequestMapping("/login.htm")
+	@RequestMapping("/404.htm")
 	public String redirect() {
-		return "login";
+		return "page404";
 	}
 }

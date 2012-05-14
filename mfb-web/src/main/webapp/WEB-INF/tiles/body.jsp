@@ -1,8 +1,6 @@
 <div class="container">
-
-	<header id="overview" class="jumbotron subhead span4 offset4">		
+	<header id="overview" class="span4 offset4">		
 		<h1>MF Banking</h1>
-		<p>Bienvenue sur votre gestionnaire de compte en ligne.</p>
+		<p class="lead">Bienvenue sur votre gestionnaire de compte en ligne.</p>
 	</header>
-
 </div>
