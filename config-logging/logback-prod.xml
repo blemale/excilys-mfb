@@ -10,9 +10,9 @@
 
 	<appender name="ROLLING_FILE"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>../logging-mfb/logging-mfb-prod.log</file>
+		<file>${catalina.home}/logging-mfb/logging-mfb-prod.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>../logging-mfb/%d{yyyy-MM,aux}/logging-mfb-prod.%d.%i.log
+			<fileNamePattern>${catalina.home}/logging-mfb/%d{yyyy-MM,aux}/logging-mfb-prod.%d.%i.log
 			</fileNamePattern>
 			<maxHistory>30</maxHistory>
 			<timeBasedFileNamingAndTriggeringPolicy
@@ -26,11 +26,11 @@
 		</encoder>
 	</appender>
 
-	<logger name="com.ebi.formation" level="warn">
+	<logger name="com.ebi.formation" level="warn" additivity="false">
 		<appender-ref ref="ROLLING_FILE" />
 	</logger>
 
-	<logger name="org.springframework" level="warn">
+	<logger name="org.springframework" level="warn" additivity="false">
 		<appender-ref ref="ROLLING_FILE" />
 	</logger>
 
