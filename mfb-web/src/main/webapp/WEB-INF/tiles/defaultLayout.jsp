@@ -6,6 +6,7 @@
 <head>
 <title><tiles:insertAttribute name="title" ignore="true" /></title><!-- ??? -->
 <meta charset="utf-8" />
+<link rel="shortcut icon" href="${contextPath}/content/images/favicon.ico" type="image/vnd.microsoft.icon" />
 <link rel="stylesheet" type="text/css" href="${contextPath}/content/css/bootstrap.css" />
 <link rel="stylesheet" type="text/css" href="${contextPath}/content/css/bootstrap-responsive.css" />
 <link rel="stylesheet" type="text/css" href="${contextPath}/content/css/style.css" />
