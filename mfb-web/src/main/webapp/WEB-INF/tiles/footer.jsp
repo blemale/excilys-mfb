@@ -1,4 +1,6 @@
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+
 <footer class="footer">
-	<p>Projet de la formation E-Business</p>
-	<p>Réalisation : Bastien, François, Guillaume, Kévin, Pierre, Tahar</p>
+	<p><spring:message code="footer.project" /></p>
+	<p><spring:message code="footer.realisation" /></p>
 </footer>
