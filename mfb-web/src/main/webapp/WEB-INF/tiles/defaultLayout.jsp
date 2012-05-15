@@ -6,11 +6,10 @@
 <head>
 <title><tiles:insertAttribute name="title" ignore="true" /></title><!-- ??? -->
 <meta charset="utf-8" />
-<link rel="shortcut icon" href="${contextPath}/content/images/favicon.ico" type="image/vnd.microsoft.icon" />
 <link rel="stylesheet" type="text/css" href="${contextPath}/content/css/bootstrap.css" />
 <link rel="stylesheet" type="text/css" href="${contextPath}/content/css/bootstrap-responsive.css" />
 <link rel="stylesheet" type="text/css" href="${contextPath}/content/css/style.css" />
-<link rel="icon" type="image/ico" href="${contextPath}/content/img/heart.ico" />
+<link rel="icon" type="image/ico" href="${contextPath}/content/images/heart.ico" />
 <script src="${contextPath}/content/js/jquery.js"></script>
 <script src="${contextPath}/content/js/bootstrap.js"></script>
 <script src="${contextPath}/content/js/bootstrap-alert.js"></script>
