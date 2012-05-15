@@ -5,6 +5,8 @@
 	<header id="overview" class="span8 offset2">		
 		<div id="colore404"><h1>Erreur 404</h1></div>
 		<p class="lead">Désolé, mais cette page n'existe pas !</p>
-		<p class="lead"><a href="${contextPath}">Revenir à l'accueil</a></p>
 	</header>
+	<section class="span4 offset8">
+		<p class="lead"><a href="${contextPath}">Revenir à l'accueil</a></p>
+	</section>
 </div>

@@ -2,7 +2,7 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <footer class="footer">
-	<p>Projet de la formation E-Business</p>
+	<p>Projet de la formation E-Business Information</p>
 	<p>Réalisation : 
 		<a href="https://github.com/excilys-blemale" target="_blank">Bastien</a>, 
 		<a href="https://github.com/excilys-fguillain" target="_blank">François</a>, 
