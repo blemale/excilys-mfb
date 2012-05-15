@@ -10,9 +10,9 @@
 
 	<appender name="ROLLING_FILE"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${catalina.home}/logging-fmb/logging-mfb-dev.log</file>
+		<file>${catalina.home}/logging-mfb/logging-mfb-dev.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${catalina.home}/logging-fmb/logging-mfb-dev.%d{yyyy-MM-dd_HH}.%i.log
+			<fileNamePattern>${catalina.home}/logging-mfb/logging-mfb-dev.%d{yyyy-MM-dd_HH}.%i.log
 			</fileNamePattern>
 			<maxHistory>10</maxHistory>
 			<timeBasedFileNamingAndTriggeringPolicy
