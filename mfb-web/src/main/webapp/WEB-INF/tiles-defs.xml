@@ -5,7 +5,7 @@
 	"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-
+	<!-- Layout principal -->
 	<definition name="baseLayout" template="/WEB-INF/tiles/defaultLayout.jsp">
 		<put-attribute name="title" value="Template" />
 		<put-attribute name="header" value="/WEB-INF/tiles/header.jsp" />
@@ -13,13 +13,19 @@
 		<put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp" />
 	</definition>
 
+	<!-- Menu de login -->
 	<definition name="login" extends="baseLayout">
 		<put-attribute name="title" value="Login" />
 	</definition>
 	
+	<!-- Pages d'erreur -->	
 	<definition name="page404" extends="baseLayout">
-		<put-attribute name="title" value="Erreur introuvable" />
-		<put-attribute name="body" value="/WEB-INF/jsp/404.jsp" />
+		<put-attribute name="title" value="Erreur 404 - page introuvable" />
+		<put-attribute name="body" value="/WEB-INF/jsp/errors/404.jsp" />
+	</definition>	
+	<definition name="page500" extends="baseLayout">
+		<put-attribute name="title" value="Erreur 500 - problème interne" />
+		<put-attribute name="body" value="/WEB-INF/jsp/errors/500.jsp" />
 	</definition>
 	
 

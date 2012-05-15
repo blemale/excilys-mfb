@@ -1,13 +1,13 @@
-package com.ebi.formation.mfb.web.controller;
+package com.ebi.formation.mfb.web.controller.errors;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class Login {
+public class Page500 {
 
-	@RequestMapping("/login.php")
+	@RequestMapping("/500.php")
 	public String redirect() {
-		return "login";
+		return "page500";
 	}
 }
