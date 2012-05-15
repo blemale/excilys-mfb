@@ -9,6 +9,7 @@
 <link rel="stylesheet" type="text/css" href="${contextPath}/content/css/bootstrap.css" />
 <link rel="stylesheet" type="text/css" href="${contextPath}/content/css/bootstrap-responsive.css" />
 <link rel="stylesheet" type="text/css" href="${contextPath}/content/css/style.css" />
+<link rel="icon" type="image/ico" href="${contextPath}/content/img/heart.ico" />
 <script src="${contextPath}/content/js/jquery.js"></script>
 <script src="${contextPath}/content/js/bootstrap.js"></script>
 <script src="${contextPath}/content/js/bootstrap-alert.js"></script>
