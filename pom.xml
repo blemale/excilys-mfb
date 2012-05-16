@@ -13,7 +13,6 @@
 	<modules>
 		<module>mfb-web</module>
 		<module>mfb-entities</module>
-		<module>mfb-services</module>
 		<module>mfb-dao</module>
 	</modules>
 
