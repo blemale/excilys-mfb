@@ -31,7 +31,7 @@ public class Role implements GrantedAuthority {
 	 * @author excilys
 	 * 
 	 */
-	public enum Right implements Serializable {
+	public enum Right {
 		ROLE_CLIENT, ROLE_ADMIN
 	}
 
