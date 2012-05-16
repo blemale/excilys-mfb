@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration debug="true" scan="true" scanPeriod="1 seconds">
+<configuration debug="true" scan="true" scanPeriod="30 seconds">
 
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
@@ -8,11 +8,13 @@
 		</encoder>
 	</appender>
 
+	<property resource="dev.properties" />
+
 	<appender name="ROLLING_FILE"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${catalina.home}/logging-mfb/logging-mfb-dev.log</file>
+		<file>${catalina.home}/${DIR_NAME}/${FILE_NAME}.log</file>
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${catalina.home}/logging-mfb/logging-mfb-dev.%d{yyyy-MM-dd_HH}.%i.log
+			<fileNamePattern>${catalina.home}/${DIR_NAME}/${FILE_NAME}.%d{yyyy-MM-dd_HH}.%i.log
 			</fileNamePattern>
 			<maxHistory>10</maxHistory>
 			<timeBasedFileNamingAndTriggeringPolicy
