@@ -1,0 +1,40 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+        
+        <changeSet author="excilys-pdalpra" id="1">
+        	<createTable tableName="ROLE">
+        		<column name="ID" type="bigint" autoIncrement="true">
+        			<constraints primaryKey="true" deleteCascade="true"/>
+        		</column>
+        		<column name="NAME" type="varchar(10)">
+        			<constraints nullable="false" unique="true" deleteCascade="true"/>
+        		</column>
+        	</createTable>
+        	<createTable tableName="PERSON">
+        		<column name="ID" type="bigint" autoIncrement="true">
+        			<constraints primaryKey="true"/>
+        		</column>
+        		<column name="USERNAME" type="varchar(20)">
+        			<constraints nullable="false" unique="true"/>
+        		</column>
+        		<column name="PASSWORD" type="varchar(128)">
+        			<constraints nullable="false"/>
+        		</column>
+        	</createTable>
+        	<createTable tableName="AUTHORITY">
+        		<column name="USER_ID" type="bigint">
+        			<constraints primaryKey="true"/>
+        		</column>
+        		<column name="ROLE_ID" type="bigint">
+        			<constraints primaryKey="true"/>
+        		</column> 		
+        	</createTable>
+        	<addForeignKeyConstraint constraintName="FK_USER" referencedTableName="PERSON" baseColumnNames="USER_ID" baseTableName="AUTHORITY" referencedColumnNames="ID"/>
+        	<addForeignKeyConstraint constraintName="FK_ROLE" referencedTableName="ROLE" baseColumnNames="ROLE_ID" baseTableName="AUTHORITY" referencedColumnNames="ID"/>
+        </changeSet>
+
+</databaseChangeLog>
+
