@@ -7,7 +7,7 @@
 <tiles-definitions>
 	<!-- Layout principal -->
 	<definition name="baseLayout" template="/WEB-INF/tiles/defaultLayout.jsp">
-		<put-attribute name="title" value="Template" />
+		<put-attribute name="title" value="title.default" />
 		<put-attribute name="header" value="/WEB-INF/tiles/header.jsp" />
 		<put-attribute name="body" value="/WEB-INF/tiles/body.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp" />
@@ -15,16 +15,16 @@
 
 	<!-- Menu de login -->
 	<definition name="login" extends="baseLayout">
-		<put-attribute name="title" value="Login" />
+		<put-attribute name="title" value="title.login" />
 	</definition>
 	
 	<!-- Pages d'erreur -->	
 	<definition name="page404" extends="baseLayout">
-		<put-attribute name="title" value="Erreur 404 - page introuvable" />
+		<put-attribute name="title" value="title.404" />
 		<put-attribute name="body" value="/WEB-INF/jsp/errors/404.jsp" />
 	</definition>	
 	<definition name="page500" extends="baseLayout">
-		<put-attribute name="title" value="Erreur 500 - problème interne" />
+		<put-attribute name="title" value="title.500" />
 		<put-attribute name="body" value="/WEB-INF/jsp/errors/500.jsp" />
 	</definition>
 	
