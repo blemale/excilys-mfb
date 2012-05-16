@@ -20,7 +20,7 @@
         		<column name="USERNAME" type="varchar(20)">
         			<constraints nullable="false" unique="true"/>
         		</column>
-        		<column name="PASSWORD" type="varchar(65)">
+        		<column name="PASSWORD" type="varchar(128)">
         			<constraints nullable="false"/>
         		</column>
         	</createTable>
