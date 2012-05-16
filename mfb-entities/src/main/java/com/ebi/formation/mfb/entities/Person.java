@@ -2,7 +2,7 @@ package com.ebi.formation.mfb.entities;
 
 import java.util.Collection;
 
-import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -26,14 +26,14 @@ public class Person implements UserDetails {
 	@Id
 	@GeneratedValue
 	private Long id;
-	@Basic(optional = false)
+	@Column(unique = true, nullable = false)
 	private String username;
 	@Transient
-	@Basic(optional = false)
+	@Column(nullable = false)
 	private String password;
 	@OneToMany
 	@JoinTable(name = "AUTHORITY", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
-	@Basic(optional = false)
+	@Column(nullable = false)
 	private Collection<Role> authorities;
 
 	public Long getId() {
