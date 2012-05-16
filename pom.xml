@@ -1,0 +1,287 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.ebi.formation</groupId>
+	<artifactId>mfb</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<description>
+		The MFB project is a MOTHER FUCKER BANKING Project !!!
+	</description>
+
+	<modules>
+		<module>mfb-web</module>
+		<module>mfb-entities</module>
+		<module>mfb-dao</module>
+	</modules>
+
+	<repositories>
+		<repository>
+			<id>excilys-repo</id>
+			<url>http://repository.excilys.com/content/repositories/releases</url>
+		</repository>
+	</repositories>
+
+	<issueManagement>
+		<system>Github</system>
+		<url>https://github.com/excilys-pdalpra/excilys-mfb/issues</url>
+	</issueManagement>
+
+	<ciManagement>
+		<system>Jenkins</system>
+	</ciManagement>
+
+	<scm>
+		<connection>git@github.com:excilys-pdalpra/excilys-mfb.git</connection>
+	</scm>
+
+	<developers>
+		<developer>
+			<id>pdalpra</id>
+			<name>Pierre DAL-PRA</name>
+			<email>pdalpra@excilys.com</email>
+			<organization>E Business Information</organization>
+			<organizationUrl>http://www.ebusinessinformation.fr</organizationUrl>
+			<timezone>+1</timezone>
+			<roles>
+				<role>Committer</role>
+			</roles>
+		</developer>
+		<developer>
+			<id>blemale</id>
+			<name>Bastien LEMALE</name>
+			<email>blemale@excilys.com</email>
+			<organization>E Business Information</organization>
+			<organizationUrl>http://www.ebusinessinformation.fr</organizationUrl>
+			<timezone>+1</timezone>
+			<roles>
+				<role>Committer</role>
+			</roles>
+		</developer>
+		<developer>
+			<id>tbakir</id>
+			<name>Tahar BAKIR</name>
+			<email>tbakir@excilys.com</email>
+			<organization>E Business Information</organization>
+			<organizationUrl>http://www.ebusinessinformation.fr</organizationUrl>
+			<timezone>+1</timezone>
+			<roles>
+				<role>Committer</role>
+			</roles>
+		</developer>
+		<developer>
+			<id>kpogorzelski</id>
+			<name>Kévin POGORZELSKI</name>
+			<email>kpogorzelski@excilys.com</email>
+			<organization>E Business Information</organization>
+			<organizationUrl>http://www.ebusinessinformation.fr</organizationUrl>
+			<timezone>+1</timezone>
+			<roles>
+				<role>Committer</role>
+			</roles>
+		</developer>
+		<developer>
+			<id>fguillain</id>
+			<name>François GUILLAIN</name>
+			<email>fguillain@excilys.com</email>
+			<organization>E Business Information</organization>
+			<organizationUrl>http://www.ebusinessinformation.fr</organizationUrl>
+			<timezone>+1</timezone>
+			<roles>
+				<role>Committer</role>
+			</roles>
+		</developer>
+		<developer>
+			<id>gvaroquaux</id>
+			<name>Guillaume VAROQUAUX</name>
+			<email>gvaroquaux@excilys.com</email>
+			<organization>E Business Information</organization>
+			<organizationUrl>http://www.ebusinessinformation.fr</organizationUrl>
+			<timezone>+1</timezone>
+			<roles>
+				<role>Committer</role>
+			</roles>
+		</developer>
+	</developers>
+
+	<properties>
+		<java.version>1.6</java.version>
+		<spring.version>3.1.1.RELEASE</spring.version>
+		<spring.security.version>3.1.0.RELEASE</spring.security.version>
+		<hibernate.version>4.1.3.Final</hibernate.version>
+		<tomcat.version>7.0.27</tomcat.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- Spring dependencies -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-beans</artifactId>
+				<version>${spring.version}</version>
+			</dependency>	
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-aop</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.javassist</groupId>
+				<artifactId>javassist</artifactId>
+				<version>3.16.1-GA</version>
+			</dependency>
+			<dependency>
+				<groupId>org.aspectj</groupId>
+				<artifactId>aspectjrt</artifactId>
+				<version>1.6.12</version>
+				<scope>runtime</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.aspectj</groupId>
+				<artifactId>aspectjweaver</artifactId>
+				<version>1.6.12</version>
+				<scope>runtime</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-orm</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-tx</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-webmvc</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-taglibs</artifactId>
+				<version>${spring.security.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-core</artifactId>
+				<version>${spring.security.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-config</artifactId>
+				<version>${spring.security.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-web</artifactId>
+				<version>${spring.security.version}</version>
+			</dependency>
+			<!-- Test dependencies -->
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.10</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.excilys.ebi.spring-dbunit</groupId>
+				<artifactId>spring-dbunit-test</artifactId>
+				<version>1.1.6</version>
+				<scope>test</scope>
+			</dependency>
+			<!-- Web dependencies -->
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>servlet-api</artifactId>
+				<version>2.5</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>jstl</artifactId>
+				<version>1.2</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.tiles</groupId>
+				<artifactId>tiles-extras</artifactId>
+				<version>2.2.2</version>
+			</dependency>
+			<!-- Persistence dependencies -->
+			<dependency>
+				<groupId>org.apache.tomcat</groupId>
+				<artifactId>tomcat-jdbc</artifactId>
+				<version>${tomcat.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-entitymanager</artifactId>
+				<version>${hibernate.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate.javax.persistence</groupId>
+				<artifactId>hibernate-jpa-2.0-api</artifactId>
+				<version>1.0.1.Final</version>
+			</dependency>
+			<dependency>
+				<groupId>org.liquibase</groupId>
+				<artifactId>liquibase-core</artifactId>
+				<version>2.0.5</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.derby</groupId>
+				<artifactId>derby</artifactId>
+				<version>10.8.2.2</version>
+			</dependency>
+			<dependency>
+				<groupId>postgresql</groupId>
+				<artifactId>postgresql</artifactId>
+				<version>9.1-901-1.jdbc4</version>
+			</dependency>
+			<!-- Logging dependencies -->
+			<dependency>
+				<groupId>commons-logging</groupId>
+				<artifactId>commons-logging</artifactId>
+				<version>1.1.1</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>1.0.3</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>jcl-over-slf4j</artifactId>
+				<version>1.6.4</version>
+			</dependency>
+			<dependency>
+				<groupId>com.mattbertolini</groupId>
+				<artifactId>liquibase-slf4j</artifactId>
+				<version>1.0.0</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>2.3.2</version>
+					<configuration>
+						<source>${java.version}</source>
+						<target>${java.version}</target>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>
