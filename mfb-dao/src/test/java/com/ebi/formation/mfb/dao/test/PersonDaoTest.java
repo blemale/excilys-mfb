@@ -16,6 +16,12 @@ import com.ebi.formation.mfb.dao.IPersonDao;
 import com.excilys.ebi.spring.dbunit.test.DataSet;
 import com.excilys.ebi.spring.dbunit.test.DataSetTestExecutionListener;
 
+/**
+ * Test unitaire de PersonDAO
+ * 
+ * @author excilys
+ * 
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:persistence-config.xml")
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DataSetTestExecutionListener.class })
@@ -25,12 +31,18 @@ public class PersonDaoTest {
 	@Autowired
 	private IPersonDao personDao;
 
+	/**
+	 * Test si un utilisateur existant est bien recuperé par le DAO
+	 */
 	@Test
 	public void testExistingPerson() {
 		UserDetails totoExists = personDao.findUserDetailsByUsername("toto");
 		assertNotNull(totoExists);
 	}
 
+	/**
+	 * Test si le DAO retourne bien null pour un utilisateur inexistant.
+	 */
 	@Test
 	public void testNotExistingPerson() {
 		UserDetails titiDoesntExist = personDao.findUserDetailsByUsername("titi");

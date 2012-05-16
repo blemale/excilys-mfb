@@ -11,6 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ebi.formation.mfb.dao.IPersonDao;
 
+/**
+ * Implémentation de IPersonDAO, via JPA.
+ * 
+ * @author excilys
+ * 
+ */
 @Repository
 @Transactional(readOnly = true)
 public class PersonDao implements IPersonDao {
@@ -18,10 +24,20 @@ public class PersonDao implements IPersonDao {
 	@PersistenceContext
 	private EntityManager em;
 
+	/**
+	 * Met à jour l'EntityManager à utiliser pour ce DAO.
+	 * 
+	 * @param em
+	 *            l'EntityManager à utiliser
+	 */
 	public void setEm(EntityManager em) {
 		this.em = em;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.dao.IPersonDao#findUserDetailsByUsername(java.lang.String)
+	 */
 	@Override
 	public UserDetails findUserDetailsByUsername(String username) {
 		UserDetails user;
