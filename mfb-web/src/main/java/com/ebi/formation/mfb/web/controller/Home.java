@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * 
  */
 @Controller
-public class Login {
+public class Home {
 
 	/**
 	 * @return String
 	 */
-	@RequestMapping("login.html")
+	@RequestMapping("home.html")
 	public String redirect() {
-		return "login";
+		return "home";
 	}
 }

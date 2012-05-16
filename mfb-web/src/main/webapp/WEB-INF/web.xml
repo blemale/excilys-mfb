@@ -12,19 +12,19 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>dispatcher</servlet-name>
-		<url-pattern>*.php</url-pattern>
+		<url-pattern>*.html</url-pattern>
 	</servlet-mapping>	
 
 	<error-page>
 		<error-code>404</error-code>
-		<location>/404.php</location>
+		<location>/404.html</location>
 	</error-page>
 	<error-page>
 		<error-code>500</error-code>
-		<location>/500.php</location>
+		<location>/500.html</location>
 	</error-page>
 
 	<welcome-file-list>
-		<welcome-file>/login.php</welcome-file>
+		<welcome-file>/login.html</welcome-file>
 	</welcome-file-list>
 </web-app>

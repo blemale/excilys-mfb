@@ -17,3 +17,9 @@
 #form-top {
 	margin-top: 0px;
 }
+
+.navbar .nav .active > a, .navbar .nav .active > a:hover {
+    /*background-color: #;*/
+    color: #BBBBBB;
+    text-decoration: none;
+}

@@ -13,7 +13,7 @@ public class Errors {
 	/**
 	 * @return String
 	 */
-	@RequestMapping("404.php")
+	@RequestMapping("404.html")
 	public String error404() {
 		return "page404";
 	}
@@ -21,7 +21,7 @@ public class Errors {
 	/**
 	 * @return String
 	 */
-	@RequestMapping("500.php")
+	@RequestMapping("500.html")
 	public String error500() {
 		return "page500";
 	}
