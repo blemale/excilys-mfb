@@ -2,10 +2,11 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<tiles:useAttribute id="title" name="title"/>
 
 <html>
 <head>
-<title><spring:message><tiles:insertAttribute name="title" ignore="true" /></spring:message></title>
+<title><spring:message code="${title}"/></title>
 <meta charset="utf-8" />
 <link rel="stylesheet" type="text/css" href="${contextPath}/content/css/bootstrap.css" />
 <link rel="stylesheet" type="text/css" href="${contextPath}/content/css/bootstrap-responsive.css" />
