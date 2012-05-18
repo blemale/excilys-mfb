@@ -3,7 +3,6 @@ package com.ebi.formation.mfb.dao.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
@@ -35,13 +34,9 @@ public class AccountDao implements IAccountDao {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Person> findOnwersByAccountId(Long id) {
+	public List<Person> findOwnersByAccountId(Long id) {
 		List<Person> persons;
-		try {
-			persons = em.createNamedQuery("findOnwersByAccountId").setParameter("id", id).getResultList();
-		} catch (NoResultException nre) {
-			persons = null;
-		}
+		persons = em.createNamedQuery("findOnwersByAccountId").setParameter("id", id).getResultList();
 		return persons;
 	}
 }

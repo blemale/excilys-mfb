@@ -62,11 +62,7 @@ public class PersonDao implements IPersonDao {
 	@Override
 	public List<Account> findAccountsByUserId(Long id) {
 		List<Account> accounts;
-		try {
-			accounts = em.createNamedQuery("findAccountsByUserId").setParameter("id", id).getResultList();
-		} catch (NoResultException nre) {
-			accounts = null;
-		}
+		accounts = em.createNamedQuery("findAccountsByUserId").setParameter("id", id).getResultList();
 		return accounts;
 	}
 }

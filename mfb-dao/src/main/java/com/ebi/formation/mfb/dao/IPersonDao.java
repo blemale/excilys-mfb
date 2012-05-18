@@ -24,11 +24,11 @@ public interface IPersonDao {
 	UserDetails findUserDetailsByUsername(String username);
 
 	/**
-	 * Recherche les comptes de l'utilisateur en fonction de son id
+	 * Recherche une liste des comptes de l'utilisateur en fonction de son id
 	 * 
 	 * @param id
 	 *            l'id de l'utilisateur
-	 * @return la liste des comptes de l'utilisateur, null sinon
+	 * @return la liste des comptes de l'utilisateur, une liste vide sinon
 	 */
 	List<Account> findAccountsByUserId(Long id);
 }

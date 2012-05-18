@@ -17,7 +17,7 @@ public interface IAccountDao {
 	 * 
 	 * @param id
 	 *            l'id du compte
-	 * @return la liste des propriétaires du compte, null sinon
+	 * @return la liste des propriétaires du compte, une liste vide sinon
 	 */
-	List<Person> findOnwersByAccountId(Long id);
+	List<Person> findOwnersByAccountId(Long id);
 }
