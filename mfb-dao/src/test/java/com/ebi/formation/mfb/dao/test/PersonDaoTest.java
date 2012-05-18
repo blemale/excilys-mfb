@@ -2,6 +2,9 @@ package com.ebi.formation.mfb.dao.test;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,6 +16,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
 import com.ebi.formation.mfb.dao.IPersonDao;
+import com.ebi.formation.mfb.entities.Role;
+import com.ebi.formation.mfb.entities.Role.Right;
 import com.excilys.ebi.spring.dbunit.test.DataSet;
 import com.excilys.ebi.spring.dbunit.test.DataSetTestExecutionListener;
 
@@ -47,5 +52,22 @@ public class PersonDaoTest {
 	public void testNotExistingPerson() {
 		UserDetails titiDoesntExist = personDao.findUserDetailsByUsername("titi");
 		assertNull(titiDoesntExist);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Test
+	public void testGetSingleAuthority() {
+		UserDetails totoIsAdmin = personDao.findUserDetailsByUsername("toto");
+		List<Role> roles = (List<Role>) totoIsAdmin.getAuthorities();
+		assertTrue(roles.get(0).getAuthority() == Right.ROLE_ADMIN.name());
+	}
+
+	@Test
+	public void testGetMultipleAuthorities() {
+		UserDetails fooIsAdminAndClient = personDao.findUserDetailsByUsername("foo");
+		@SuppressWarnings("unchecked")
+		List<Role> roles = (List<Role>) fooIsAdminAndClient.getAuthorities();
+		assertTrue(roles.get(0).getAuthority() == Right.ROLE_ADMIN.name());
+		assertTrue(roles.get(1).getAuthority() == Right.ROLE_CLIENT.name());
 	}
 }
