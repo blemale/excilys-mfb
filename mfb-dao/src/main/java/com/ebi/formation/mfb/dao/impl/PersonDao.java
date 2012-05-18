@@ -1,5 +1,7 @@
 package com.ebi.formation.mfb.dao.impl;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ebi.formation.mfb.dao.IPersonDao;
+import com.ebi.formation.mfb.entities.Account;
 
 /**
  * Implémentation de IPersonDAO, via JPA.
@@ -49,5 +52,21 @@ public class PersonDao implements IPersonDao {
 			user = null;
 		}
 		return user;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.dao.IPersonDao#findAccountsByUserId(java.lang.Long)
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Account> findAccountsByUserId(Long id) {
+		List<Account> accounts;
+		try {
+			accounts = em.createNamedQuery("findAccountsByUserId").setParameter("id", id).getResultList();
+		} catch (NoResultException nre) {
+			accounts = null;
+		}
+		return accounts;
 	}
 }

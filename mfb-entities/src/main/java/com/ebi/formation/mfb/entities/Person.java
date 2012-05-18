@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
@@ -24,7 +25,9 @@ import org.springframework.security.core.userdetails.UserDetails;
  * 
  */
 @Entity
-@NamedQuery(name = "findUserDetailsByUsername", query = "SELECT p FROM Person p WHERE p.username = :username")
+@NamedQueries({
+		@NamedQuery(name = "findUserDetailsByUsername", query = "SELECT p FROM Person p WHERE p.username = :username"),
+		@NamedQuery(name = "findAccountsByUserId", query = "SELECT p.accounts FROM Person p WHERE p.id = :id") })
 public class Person implements UserDetails {
 
 	/**
