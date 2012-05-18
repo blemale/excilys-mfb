@@ -1,6 +1,7 @@
 package com.ebi.formation.mfb.entities;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
@@ -32,7 +34,7 @@ public class Person implements UserDetails {
 	@Id
 	@GeneratedValue
 	private Long id;
-	@Column(unique = true, nullable = false)
+	@Column(unique = true, nullable = false, length = 20)
 	private String username;
 	@Transient
 	@Column(nullable = false)
@@ -41,6 +43,12 @@ public class Person implements UserDetails {
 	@JoinTable(name = "AUTHORITY", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
 	@Column(nullable = false)
 	private Collection<Role> authorities;
+	@Column(length = 64)
+	private String firstName;
+	@Column(length = 64)
+	private String lastName;
+	@ManyToMany(mappedBy = "owners")
+	private List<Account> accounts;
 
 	/**
 	 * Retourne l'identifiant de la personne
@@ -112,5 +120,26 @@ public class Person implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+
+	/**
+	 * @return the firstName
+	 */
+	public String getFirstName() {
+		return firstName;
+	}
+
+	/**
+	 * @return the lastName
+	 */
+	public String getLastName() {
+		return lastName;
+	}
+
+	/**
+	 * @return the accounts
+	 */
+	public List<Account> getAccounts() {
+		return accounts;
 	}
 }

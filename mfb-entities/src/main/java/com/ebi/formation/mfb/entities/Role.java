@@ -36,7 +36,7 @@ public class Role implements GrantedAuthority {
 	@Id
 	@GeneratedValue
 	private Long id;
-	@Column(name = "NAME")
+	@Column(name = "NAME", length = 25)
 	@Enumerated(EnumType.STRING)
 	private Right right;
 
