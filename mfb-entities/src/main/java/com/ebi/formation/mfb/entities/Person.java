@@ -38,7 +38,7 @@ public class Person implements UserDetails {
 	@Column(nullable = false)
 	private String password;
 	@OneToMany
-	@JoinTable(name = "AUTHORITY", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
+	@JoinTable(name = "AUTHORITY", joinColumns = @JoinColumn(name = "PERSON_ID"), inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
 	@Column(nullable = false)
 	private Collection<Role> authorities;
 
