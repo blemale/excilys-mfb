@@ -54,6 +54,9 @@ public class PersonDaoTest {
 		assertNull(titiDoesntExist);
 	}
 
+	/**
+	 * Test la récuperation du rôle d'un utilisateur donné
+	 */
 	@SuppressWarnings("unchecked")
 	@Test
 	public void testGetSingleAuthority() {
@@ -62,6 +65,9 @@ public class PersonDaoTest {
 		assertTrue(roles.get(0).getAuthority() == Right.ROLE_ADMIN.name());
 	}
 
+	/**
+	 * Test la récuperation de plusieurs rôles pour un utilisateur donné
+	 */
 	@Test
 	public void testGetMultipleAuthorities() {
 		UserDetails fooIsAdminAndClient = personDao.findUserDetailsByUsername("foo");

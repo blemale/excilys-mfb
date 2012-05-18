@@ -25,14 +25,14 @@
         		</column>
         	</createTable>
         	<createTable tableName="AUTHORITY">
-        		<column name="USER_ID" type="bigint">
+        		<column name="PERSON_ID" type="bigint">
         			<constraints primaryKey="true"/>
         		</column>
         		<column name="ROLE_ID" type="bigint">
         			<constraints primaryKey="true"/>
         		</column> 		
         	</createTable>
-        	<addForeignKeyConstraint constraintName="FK_USER" referencedTableName="PERSON" baseColumnNames="USER_ID" baseTableName="AUTHORITY" referencedColumnNames="ID"/>
+        	<addForeignKeyConstraint constraintName="FK_PERSON" referencedTableName="PERSON" baseColumnNames="PERSON_ID" baseTableName="AUTHORITY" referencedColumnNames="ID"/>
         	<addForeignKeyConstraint constraintName="FK_ROLE" referencedTableName="ROLE" baseColumnNames="ROLE_ID" baseTableName="AUTHORITY" referencedColumnNames="ID"/>
         </changeSet>
 

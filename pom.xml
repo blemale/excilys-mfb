@@ -14,6 +14,7 @@
 		<module>mfb-web</module>
 		<module>mfb-entities</module>
 		<module>mfb-dao</module>
+		<module>mfb-services</module>
 	</modules>
 
 	<repositories>
