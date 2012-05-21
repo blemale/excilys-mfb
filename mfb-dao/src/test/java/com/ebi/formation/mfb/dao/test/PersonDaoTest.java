@@ -15,6 +15,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ebi.formation.mfb.dao.IPersonDao;
 import com.ebi.formation.mfb.entities.Compte;
@@ -22,6 +25,7 @@ import com.ebi.formation.mfb.entities.Role;
 import com.ebi.formation.mfb.entities.Role.Right;
 import com.excilys.ebi.spring.dbunit.test.DataSet;
 import com.excilys.ebi.spring.dbunit.test.DataSetTestExecutionListener;
+import com.excilys.ebi.spring.dbunit.test.RollbackTransactionalDataSetTestExecutionListener;
 
 /**
  * Test unitaire de PersonDAO
@@ -31,8 +35,11 @@ import com.excilys.ebi.spring.dbunit.test.DataSetTestExecutionListener;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:persistence-config.xml")
-@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DataSetTestExecutionListener.class })
+@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, TransactionalTestExecutionListener.class,
+		RollbackTransactionalDataSetTestExecutionListener.class, DataSetTestExecutionListener.class })
 @DataSet("dataSet-PersonDaoTest.xml")
+@TransactionConfiguration
+@Transactional(readOnly = true)
 public class PersonDaoTest {
 
 	@Autowired

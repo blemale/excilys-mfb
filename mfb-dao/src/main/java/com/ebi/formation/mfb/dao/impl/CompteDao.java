@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.ebi.formation.mfb.dao.ICompteDao;
 import com.ebi.formation.mfb.entities.Person;
@@ -18,7 +17,6 @@ import com.ebi.formation.mfb.entities.Person;
  * 
  */
 @Repository
-@Transactional(readOnly = true)
 public class CompteDao implements ICompteDao {
 
 	@PersistenceContext

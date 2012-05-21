@@ -9,7 +9,6 @@ import javax.persistence.PersistenceContext;
 import org.hibernate.Hibernate;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.ebi.formation.mfb.dao.IPersonDao;
 import com.ebi.formation.mfb.entities.Compte;
@@ -21,7 +20,6 @@ import com.ebi.formation.mfb.entities.Compte;
  * 
  */
 @Repository
-@Transactional(readOnly = true)
 public class PersonDao implements IPersonDao {
 
 	@PersistenceContext
