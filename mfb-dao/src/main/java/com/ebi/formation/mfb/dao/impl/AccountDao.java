@@ -6,13 +6,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.ebi.formation.mfb.dao.IAccountDao;
 import com.ebi.formation.mfb.entities.Person;
 
 @Repository
-@Transactional(readOnly = true)
 public class AccountDao implements IAccountDao {
 
 	@PersistenceContext
