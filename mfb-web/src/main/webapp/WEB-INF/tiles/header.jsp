@@ -20,10 +20,10 @@
 					
 				</ul>
 				
-				<form class="navbar-form form-inline pull-right">
+				<form action="<c:url value='j_spring_security_check'/>" class="navbar-form form-inline pull-right" method="post">
 <%-- 					<sec:authorize access="isAnonymous()"> --%>
-						<input type="text" id="form-top" class="input-small form-top" placeholder="<spring:message code="header.placeholder.username" />">
-						<input type="password" id="form-top" class="input-small form-top" placeholder="<spring:message code="header.placeholder.password" />">
+						<input name="j_username" type="text" id="form-top" class="input-small form-top" placeholder="<spring:message code="header.placeholder.username" />">
+						<input name="j_password" type="password" id="form-top" class="input-small form-top" placeholder="<spring:message code="header.placeholder.password" />">
 						<button type="submit" class="btn">
 							<spring:message code="header.button.login" />
 						</button>
