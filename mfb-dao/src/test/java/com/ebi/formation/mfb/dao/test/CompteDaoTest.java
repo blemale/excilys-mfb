@@ -32,7 +32,7 @@ import com.excilys.ebi.spring.dbunit.test.RollbackTransactionalDataSetTestExecut
 @ContextConfiguration("classpath:persistence-config.xml")
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DataSetTestExecutionListener.class,
 		TransactionalTestExecutionListener.class, RollbackTransactionalDataSetTestExecutionListener.class })
-@DataSet("dataSet-AccountDaoTest.xml")
+@DataSet("dataSet-CompteDaoTest.xml")
 @TransactionConfiguration
 @Transactional
 public class CompteDaoTest {
