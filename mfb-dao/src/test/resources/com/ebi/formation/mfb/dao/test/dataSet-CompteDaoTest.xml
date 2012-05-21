@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<dataset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:noNamespaceSchemaLocation="dataset.xsd">
+
+	<person id="1" username="bastou" password="titi"/>
+	<role id="1" name="ROLE_ADMIN"/>
+	<authority person_id="1" role_id="1"/>
+	
+
+	<person id="2" username="pierre" password="bar"/>
+	<role id="2" name="ROLE_CLIENT" />
+	<authority person_id="2" role_id="1"/>
+	<authority person_id="2" role_id="2"/>
+
+	
+	<compte id="1" label="compte espece 1" solde="0" />
+	<person_compte compte_id="1" person_id="1"/>
+
+	<compte id="2" label="compte espece 2" solde="1" />
+	<person_compte compte_id="2" person_id="2"/>
+	
+	
+	<compte id="3" label="compte espece 3" solde="1" />
+	<person_compte compte_id="3" person_id="2"/>
+	<person_compte compte_id="3" person_id="1"/>
+		
+	<compte id="4" label="compte espece 4" solde="10000" />
+	<person_compte compte_id="4" person_id="1"/>
+		
+
+	<compte id="7" label="compte espece 7" solde="10000" />
+
+</dataset>

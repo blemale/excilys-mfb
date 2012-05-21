@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ebi.formation.mfb.dao.IPersonDao;
-import com.ebi.formation.mfb.entities.Account;
+import com.ebi.formation.mfb.entities.Compte;
 
 /**
  * Implémentation de IPersonDAO, via JPA.
@@ -60,9 +60,9 @@ public class PersonDao implements IPersonDao {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Account> findAccountsByUserId(Long id) {
-		List<Account> accounts;
-		accounts = em.createNamedQuery("findAccountsByUserId").setParameter("id", id).getResultList();
-		return accounts;
+	public List<Compte> findComptesByUserId(Long id) {
+		List<Compte> comptes;
+		comptes = em.createNamedQuery("findAccountsByUserId").setParameter("id", id).getResultList();
+		return comptes;
 	}
 }

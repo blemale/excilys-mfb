@@ -16,6 +16,13 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import com.excilys.ebi.spring.dbunit.test.DataSet;
 import com.excilys.ebi.spring.dbunit.test.DataSetTestExecutionListener;
 
+/**
+ * Test unitaire de UserDetailServiceImpl
+ * 
+ * @author excilys
+ * 
+ *         //
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:services-config.xml")
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DataSetTestExecutionListener.class })

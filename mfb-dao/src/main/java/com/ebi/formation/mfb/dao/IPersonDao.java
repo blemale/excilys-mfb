@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.ebi.formation.mfb.entities.Account;
+import com.ebi.formation.mfb.entities.Compte;
 
 /**
  * Cette interface représente le contrat à implémenter des DAO pour l'entité Person.
@@ -30,5 +30,5 @@ public interface IPersonDao {
 	 *            l'id de l'utilisateur
 	 * @return la liste des comptes de l'utilisateur, une liste vide sinon
 	 */
-	List<Account> findAccountsByUserId(Long id);
+	List<Compte> findComptesByUserId(Long id);
 }

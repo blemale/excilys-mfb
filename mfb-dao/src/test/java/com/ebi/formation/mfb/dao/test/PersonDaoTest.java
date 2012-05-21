@@ -17,7 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
 import com.ebi.formation.mfb.dao.IPersonDao;
-import com.ebi.formation.mfb.entities.Account;
+import com.ebi.formation.mfb.entities.Compte;
 import com.ebi.formation.mfb.entities.Role;
 import com.ebi.formation.mfb.entities.Role.Right;
 import com.excilys.ebi.spring.dbunit.test.DataSet;
@@ -84,7 +84,7 @@ public class PersonDaoTest {
 	 */
 	@Test
 	public void testNoAccount() {
-		List<Account> accounts = personDao.findAccountsByUserId(1L);
+		List<Compte> accounts = personDao.findComptesByUserId(1L);
 		assertTrue(accounts.isEmpty());
 	}
 
@@ -93,7 +93,7 @@ public class PersonDaoTest {
 	 */
 	@Test
 	public void testSingleAccount() {
-		List<Account> accounts = personDao.findAccountsByUserId(2L);
+		List<Compte> accounts = personDao.findComptesByUserId(2L);
 		assertEquals(1, accounts.size());
 	}
 
@@ -102,7 +102,7 @@ public class PersonDaoTest {
 	 */
 	@Test
 	public void testMultiplesAccounts() {
-		List<Account> accounts = personDao.findAccountsByUserId(3L);
+		List<Compte> accounts = personDao.findComptesByUserId(3L);
 		assertEquals(2, accounts.size());
 		assertEquals(new Long(2), accounts.get(0).getId());
 		assertEquals(new Long(3), accounts.get(1).getId());
