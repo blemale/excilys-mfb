@@ -19,9 +19,13 @@
 		<logout logout-success-url="/login.html" />
 	</http>
 
-	<beans:bean id="daoAuthenticationProvider"
-		class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
-		<beans:property name="userDetailsService" ref="userDetailsServiceImpl" />
+	<beans:bean id="daoAuthenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+		<beans:property name="userDetailsService" ref="userDetailsServiceImpl"/>
+		<beans:property name="passwordEncoder">
+			<beans:bean class="org.springframework.security.authentication.encoding.ShaPasswordEncoder">
+				<beans:constructor-arg value="512"/>
+			</beans:bean>
+		</beans:property>
 	</beans:bean>
 
 	<authentication-manager>
