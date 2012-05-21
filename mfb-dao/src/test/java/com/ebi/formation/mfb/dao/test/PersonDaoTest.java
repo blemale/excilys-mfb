@@ -104,7 +104,5 @@ public class PersonDaoTest {
 	public void testMultiplesAccounts() {
 		List<Compte> accounts = personDao.findComptesByUserId(3L);
 		assertEquals(2, accounts.size());
-		assertEquals(new Long(2), accounts.get(0).getId());
-		assertEquals(new Long(3), accounts.get(1).getId());
 	}
 }

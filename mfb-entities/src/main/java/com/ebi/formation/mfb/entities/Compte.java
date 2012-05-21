@@ -37,6 +37,8 @@ public class Compte implements Serializable {
 	@ManyToMany
 	@JoinTable(name = "PERSON_COMPTE", joinColumns = @JoinColumn(name = "COMPTE_ID"), inverseJoinColumns = @JoinColumn(name = "PERSON_ID"))
 	private List<Person> owners;
+	@Column(nullable = false)
+	private String numeroCompte;
 
 	/**
 	 * @return the id
@@ -64,5 +66,12 @@ public class Compte implements Serializable {
 	 */
 	public List<Person> getOwners() {
 		return owners;
+	}
+
+	/**
+	 * @return the numeroCompte
+	 */
+	public String getNumeroCompte() {
+		return numeroCompte;
 	}
 }
