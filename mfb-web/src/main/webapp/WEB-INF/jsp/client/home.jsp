@@ -23,14 +23,21 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr onclick="lienCompte('toto')">
+					<tr class="clickLine" onclick="lienCompte('toto')">
 						<td>45215425740</td>
 						<td>Livret de mon cul</td>
 						<td class="aligneSolde">452.894,45 $</td>
-						<td>
-							<a class="btn btn-mini btn-info" href="toto">Détails</a>
+						<td><a class="btn btn-mini btn-info" href="toto"><spring:message code="home.account.details"/></a>
 						</td>
 					</tr>
+					<c:forEach items="${comptes}" var="c">
+						<tr class="clickLine" onclick="lienCompte('${c}')">
+							<td>${c}</td>
+							<td>${c}</td>
+							<td>${c}</td>
+							<td><a class="btn btn-mini btn-info" href="${c}"><spring:message code="home.account.details"/></a></td>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>

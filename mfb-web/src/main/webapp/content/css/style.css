@@ -23,4 +23,7 @@
     color: #BBBBBB;
     text-decoration: none;
 }
+.clickLine {
+	cursor: pointer;
+}
 
