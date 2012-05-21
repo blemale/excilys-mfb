@@ -60,11 +60,16 @@
 		</dependency>
 		<dependency>
 			<groupId>com.ebi.formation</groupId>
+			<artifactId>mfb-entities</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ebi.formation</groupId>
 			<artifactId>mfb-services</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
-	
+
 	<build>
 		<finalName>mfb</finalName>
 	</build>

@@ -1,0 +1,10 @@
+----------------------------------------------------------------
+Mon May 21 12:35:41 CEST 2012:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.2.2 - (1181258): instance a816c00e-0137-6ef7-77fc-000002cc5160 
+on database directory memory:/home/excilys/workspace/MFB/excilys-mfb/mfb-services/mfb_db  with class loader sun.misc.Launcher$AppClassLoader@192d342 
+Loaded from file:/home/excilys/.m2/repository/org/apache/derby/derby/10.8.2.2/derby-10.8.2.2.jar
+java.vendor=Sun Microsystems Inc.
+java.runtime.version=1.6.0_31-b04
+user.dir=/home/excilys/workspace/MFB/excilys-mfb/mfb-services
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''

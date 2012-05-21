@@ -4,20 +4,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * Controller gérant l'accès à la partie admin de l'application.
+ * Controller gérant l'accès à la partie client de l'application.
  * 
  * @author kpogorzelski
  * 
  */
 @Controller
-@RequestMapping("/admin")
-public class Admin {
+@RequestMapping("/client")
+public class Client {
 
 	/**
 	 * @return String
 	 */
 	@RequestMapping("home.html")
 	public String redirect() {
-		return "admin";
+		return "home";
 	}
 }
