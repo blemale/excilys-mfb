@@ -32,4 +32,8 @@
 		jsr250-annotations="enabled" />
 
 	<beans:import resource="classpath:services-config.xml" />
+	
+	<beans:bean id="defaultWebSecurityExpressionHandler" class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler">
+	
+	</beans:bean>
 </beans:beans>

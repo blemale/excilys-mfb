@@ -37,7 +37,7 @@
 	<!-- Page d'accueil -->
 	<definition name="home" extends="baseLayout">
 		<put-attribute name="title" value="title.home" />
-		<put-attribute name="body" value="/WEB-INF/jsp/user/home.jsp" />
+		<put-attribute name="body" value="/WEB-INF/jsp/client/home.jsp" />
 	</definition>
 
 </tiles-definitions>
