@@ -7,10 +7,10 @@
         <changeSet author="excilys-pdalpra" id="1">
         	<createTable tableName="ROLE">
         		<column name="ID" type="bigint" autoIncrement="true">
-        			<constraints primaryKey="true" deleteCascade="true"/>
+        			<constraints primaryKey="true"/>
         		</column>
         		<column name="NAME" type="varchar(10)">
-        			<constraints nullable="false" unique="true" deleteCascade="true"/>
+        			<constraints nullable="false" unique="true"/>
         		</column>
         	</createTable>
         	<createTable tableName="PERSON">

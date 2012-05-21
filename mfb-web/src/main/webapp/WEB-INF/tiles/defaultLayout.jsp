@@ -15,11 +15,7 @@
 <script src="${contextPath}/content/js/jquery.js"></script>
 <script src="${contextPath}/content/js/bootstrap.js"></script>
 <script src="${contextPath}/content/js/bootstrap-alert.js"></script>
-<script>
-	$(document).ready(function() {
-		$(".alert").fadeOut(10000);
-	});
-</script>
+<script src="${contextPath}/content/js/scripts.js"></script>
 </head>
 <body>
 	<tiles:insertAttribute name="header" />

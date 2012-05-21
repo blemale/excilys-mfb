@@ -13,7 +13,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.Transient;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -39,7 +38,6 @@ public class Person implements UserDetails {
 	private Long id;
 	@Column(unique = true, nullable = false, length = 20)
 	private String username;
-	@Transient
 	@Column(nullable = false)
 	private String password;
 	@OneToMany

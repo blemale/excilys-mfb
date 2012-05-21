@@ -1248,9 +1248,12 @@ table {
 .table td {
   padding: 8px;
   line-height: 18px;
-  text-align: left;
+  text-align: center;
   vertical-align: top;
   border-top: 1px solid #dddddd;
+}
+.table .aligneSolde {
+  text-align: right;
 }
 .table th {
   font-weight: bold;
@@ -1326,11 +1329,11 @@ table {
 }
 .table-striped tbody tr:nth-child(odd) td,
 .table-striped tbody tr:nth-child(odd) th {
-  background-color: #f9f9f9;
+  background-color: #f0f0f0;
 }
 .table tbody tr:hover td,
 .table tbody tr:hover th {
-  background-color: #f5f5f5;
+  background-color: #badeff;
 }
 table .span1 {
   float: none;
