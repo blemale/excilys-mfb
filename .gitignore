@@ -3,6 +3,10 @@
 .classpath
 .project
 
+
+mfb-dao/derby.log
+mfb-services/derby.log
+
 # Fichiers compilés
 target/
 
