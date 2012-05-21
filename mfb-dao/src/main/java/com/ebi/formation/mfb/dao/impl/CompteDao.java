@@ -7,11 +7,17 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
-import com.ebi.formation.mfb.dao.IAccountDao;
+import com.ebi.formation.mfb.dao.ICompteDao;
 import com.ebi.formation.mfb.entities.Person;
 
+/**
+ * Implémentation de l'interface ICompteDao
+ * 
+ * @author excilys
+ * 
+ */
 @Repository
-public class AccountDao implements IAccountDao {
+public class CompteDao implements ICompteDao {
 
 	@PersistenceContext
 	private EntityManager em;
@@ -32,9 +38,9 @@ public class AccountDao implements IAccountDao {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Person> findOwnersByAccountId(Long id) {
+	public List<Person> findOwnersByCompteId(Long id) {
 		List<Person> persons;
-		persons = em.createNamedQuery("findOnwersByAccountId").setParameter("id", id).getResultList();
+		persons = em.createNamedQuery("findOwnersByAccountId").setParameter("id", id).getResultList();
 		return persons;
 	}
 }

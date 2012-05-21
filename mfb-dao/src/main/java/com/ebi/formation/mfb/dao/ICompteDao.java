@@ -10,7 +10,7 @@ import com.ebi.formation.mfb.entities.Person;
  * @author excilys
  * 
  */
-public interface IAccountDao {
+public interface ICompteDao {
 
 	/**
 	 * Recherche les propriétaires du compte en fonction de son id
@@ -19,5 +19,5 @@ public interface IAccountDao {
 	 *            l'id du compte
 	 * @return la liste des propriétaires du compte, une liste vide sinon
 	 */
-	List<Person> findOwnersByAccountId(Long id);
+	List<Person> findOwnersByCompteId(Long id);
 }

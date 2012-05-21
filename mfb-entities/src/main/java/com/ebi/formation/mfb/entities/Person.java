@@ -49,7 +49,7 @@ public class Person implements UserDetails {
 	@Column(length = 64)
 	private String lastName;
 	@ManyToMany(mappedBy = "owners")
-	private List<Account> accounts;
+	private List<Compte> accounts;
 
 	/**
 	 * Retourne l'identifiant de la personne
@@ -140,7 +140,7 @@ public class Person implements UserDetails {
 	/**
 	 * @return the accounts
 	 */
-	public List<Account> getAccounts() {
+	public List<Compte> getAccounts() {
 		return accounts;
 	}
 }

@@ -16,7 +16,7 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ebi.formation.mfb.dao.IAccountDao;
+import com.ebi.formation.mfb.dao.ICompteDao;
 import com.ebi.formation.mfb.entities.Person;
 import com.excilys.ebi.spring.dbunit.test.DataSet;
 import com.excilys.ebi.spring.dbunit.test.DataSetTestExecutionListener;
@@ -32,13 +32,13 @@ import com.excilys.ebi.spring.dbunit.test.RollbackTransactionalDataSetTestExecut
 @ContextConfiguration("classpath:persistence-config.xml")
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DataSetTestExecutionListener.class,
 		TransactionalTestExecutionListener.class, RollbackTransactionalDataSetTestExecutionListener.class })
-@DataSet("dataSet-AccountDaoTest.xml")
+@DataSet("dataSet-CompteDaoTest.xml")
 @TransactionConfiguration
 @Transactional
-public class AccountDaoTest {
+public class CompteDaoTest {
 
 	@Autowired
-	private IAccountDao accountDao;
+	private ICompteDao compteDao;
 
 	// TODO A VERIFIER AVEC STEPHANE
 	/**
@@ -46,7 +46,7 @@ public class AccountDaoTest {
 	 */
 	@Test
 	public void testNoExistingOwners() {
-		List<Person> owners = accountDao.findOwnersByAccountId(7L);
+		List<Person> owners = compteDao.findOwnersByCompteId(7L);
 		assertEquals(0, owners.size());
 	}
 
@@ -55,7 +55,7 @@ public class AccountDaoTest {
 	 */
 	@Test
 	public void testExistingOwnerByUserName() {
-		List<Person> owners = accountDao.findOwnersByAccountId(1L);
+		List<Person> owners = compteDao.findOwnersByCompteId(1L);
 		assertNotNull(owners);
 		assertEquals(1, owners.size());
 		assertEquals("bastou", owners.get(0).getUsername());
@@ -66,9 +66,7 @@ public class AccountDaoTest {
 	 */
 	@Test
 	public void testMultipleOwnersByUserName() {
-		List<Person> owners = accountDao.findOwnersByAccountId(3L);
+		List<Person> owners = compteDao.findOwnersByCompteId(3L);
 		assertEquals(2, owners.size());
-		assertEquals("bastou", owners.get(0).getUsername());
-		assertEquals("pierre", owners.get(1).getUsername());
 	}
 }

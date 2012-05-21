@@ -15,12 +15,10 @@ xsi:noNamespaceSchemaLocation="dataset.xsd">
 	<person id="3" username="bastou" password="titi"/>
 	<authority person_id="3" role_id="1"/>
 	
-	
-	<compte id="1" label="compte espece 1" solde="0" numeroCompte="1234567890123"/>
+	<compte id="1" label="compte espece 1" solde="0" />
+	<compte id="2" label="compte espece 2" solde="1" />
+	<compte id="3" label="compte espece 3" solde="1" />
 	<person_compte compte_id="1" person_id="2"/>
-
-	<compte id="2" label="compte espece 2" solde="1" numeroCompte="1234567890123"/>
-	<compte id="3" label="compte espece 3" solde="1" numeroCompte="1234567890123"/>
 	<person_compte compte_id="2" person_id="3"/>
 	<person_compte compte_id="3" person_id="3"/>
 	

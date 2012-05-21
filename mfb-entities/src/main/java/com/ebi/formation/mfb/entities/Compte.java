@@ -20,8 +20,8 @@ import javax.persistence.NamedQuery;
  * 
  */
 @Entity
-@NamedQuery(name = "findOnwersByAccountId", query = "SELECT a.owners FROM Account a WHERE a.id=:id ")
-public class Account implements Serializable {
+@NamedQuery(name = "findOwnersByAccountId", query = "SELECT a.owners FROM Compte a WHERE a.id=:id ")
+public class Compte implements Serializable {
 
 	/**
 	 * 
@@ -35,8 +35,10 @@ public class Account implements Serializable {
 	@Column(nullable = false)
 	private BigDecimal solde;
 	@ManyToMany
-	@JoinTable(name = "PERSON_ACCOUNT", joinColumns = @JoinColumn(name = "ACCOUNT_ID"), inverseJoinColumns = @JoinColumn(name = "PERSON_ID"))
+	@JoinTable(name = "PERSON_COMPTE", joinColumns = @JoinColumn(name = "COMPTE_ID"), inverseJoinColumns = @JoinColumn(name = "PERSON_ID"))
 	private List<Person> owners;
+	@Column(nullable = false)
+	private String numeroCompte;
 
 	/**
 	 * @return the id
@@ -64,5 +66,12 @@ public class Account implements Serializable {
 	 */
 	public List<Person> getOwners() {
 		return owners;
+	}
+
+	/**
+	 * @return the numeroCompte
+	 */
+	public String getNumeroCompte() {
+		return numeroCompte;
 	}
 }

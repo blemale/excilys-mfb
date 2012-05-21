@@ -11,7 +11,7 @@
 			<column name="LASTNAME" type="varchar(64)" />
 		</addColumn>
 
-		<createTable tableName="ACCOUNT">
+		<createTable tableName="COMPTE">
 			<column name="ID" type="bigint" autoIncrement="true">
 				<constraints primaryKey="true" deleteCascade="true" />
 			</column>
@@ -23,19 +23,19 @@
 				<constraints nullable="false" />
 			</column>
 		</createTable>
-		<createTable tableName="PERSON_ACCOUNT">
-			<column name="ACCOUNT_ID" type="bigint">
+		<createTable tableName="PERSON_COMPTE">
+			<column name="COMPTE_ID" type="bigint">
 				<constraints primaryKey="true" nullable="false" />
 			</column>
 			<column name="PERSON_ID" type="bigint">
 				<constraints primaryKey="true" nullable="false" />
 			</column>
 		</createTable>
-		<addForeignKeyConstraint constraintName="FK_PERSON_ACCOUNT"
+		<addForeignKeyConstraint constraintName="FK_PERSON_COMPTE"
 			referencedTableName="PERSON" baseColumnNames="PERSON_ID"
-			baseTableName="PERSON_ACCOUNT" referencedColumnNames="ID" />
+			baseTableName="PERSON_COMPTE" referencedColumnNames="ID" deleteCascade="true"/>
 		<addForeignKeyConstraint constraintName="FK_ACCOUNT_PERSON"
-			referencedTableName="ACCOUNT" baseColumnNames="ACCOUNT_ID"
-			baseTableName="PERSON_ACCOUNT" referencedColumnNames="ID" />
+			referencedTableName="COMPTE" baseColumnNames="COMPTE_ID"
+			baseTableName="PERSON_COMPTE" referencedColumnNames="ID" />
 	</changeSet>
 </databaseChangeLog>
