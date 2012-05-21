@@ -7,7 +7,7 @@
 <div class="navbar navbar-fixed-top">
 	<div class="navbar-inner">
 		<div class="container">
-			<a class="brand" href="${contextPath}">
+			<a class="brand" href="${contextPath}/home.html">
 				<spring:message code="header.title" />
 			</a>
 			<div class="nav-collapse collapse">
