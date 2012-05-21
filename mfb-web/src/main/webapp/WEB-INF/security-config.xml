@@ -13,7 +13,7 @@
 	<http pattern="/content/**" security="none"/>
 	
 	<http>
-		<form-login login-page="/login.html" default-target-url="http://www.google.com" always-use-default-target="true"/>		
+		<form-login login-page="/login.html" default-target-url="/home.html" always-use-default-target="true"/>		
 	</http>
 
 	<beans:bean id="daoAuthenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
