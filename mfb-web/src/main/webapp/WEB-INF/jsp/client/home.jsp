@@ -19,23 +19,17 @@
 						<th><spring:message code="home.accountNumber" /></th>
 						<th><spring:message code="home.label" /></th>
 						<th><spring:message code="home.sale" /></th>
-						<th></th>
+						<%-- <th></th> --%>
 					</tr>
 				</thead>
 				<tbody>
-					<tr class="clickLine" onclick="lienCompte('toto')">
-						<td>45215425740</td>
-						<td>Livret de mon cul</td>
-						<td class="aligneSolde">452.894,45 $</td>
-						<td><a class="btn btn-mini btn-info" href="toto"><spring:message code="home.account.details"/></a>
-						</td>
-					</tr>
 					<c:forEach items="${comptes}" var="c">
-						<tr class="clickLine" onclick="lienCompte('${c}')">
-							<td>${c}</td>
-							<td>${c}</td>
-							<td>${c}</td>
-							<td><a class="btn btn-mini btn-info" href="${c}"><spring:message code="home.account.details"/></a></td>
+						<%-- <tr class="clickLine" onclick="lienCompte('${c.numeroCompte}')"> --%>
+						<tr class="clickLine">
+							<td>${c.numeroCompte}</td>
+							<td>${c.label}</td>
+							<td>${c.solde}</td>
+							<%-- <td><a class="btn btn-mini btn-info" href="${c.numeroCompte}"><spring:message code="home.account.details"/></a></td> --%>
 						</tr>
 					</c:forEach>
 				</tbody>

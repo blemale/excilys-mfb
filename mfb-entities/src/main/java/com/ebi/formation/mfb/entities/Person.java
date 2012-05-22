@@ -26,7 +26,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Entity
 @NamedQueries({
 		@NamedQuery(name = "findUserDetailsByUsername", query = "SELECT p FROM Person p WHERE p.username = :username"),
-		@NamedQuery(name = "findAccountsByUserId", query = "SELECT p.accounts FROM Person p WHERE p.id = :id") })
+		@NamedQuery(name = "findComptesByUsername", query = "SELECT p.comptes FROM Person p WHERE p.username = :username") })
 public class Person implements UserDetails {
 
 	/**
@@ -49,7 +49,7 @@ public class Person implements UserDetails {
 	@Column(length = 64)
 	private String lastName;
 	@ManyToMany(mappedBy = "owners")
-	private List<Compte> accounts;
+	private List<Compte> comptes;
 
 	/**
 	 * Retourne l'identifiant de la personne
@@ -138,9 +138,9 @@ public class Person implements UserDetails {
 	}
 
 	/**
-	 * @return the accounts
+	 * @return the comptes
 	 */
-	public List<Compte> getAccounts() {
-		return accounts;
+	public List<Compte> getComptes() {
+		return comptes;
 	}
 }

@@ -54,13 +54,12 @@ public class PersonDao implements IPersonDao {
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.ebi.formation.mfb.dao.IPersonDao#findAccountsByUserId(java.lang.Long)
+	 * @see com.ebi.formation.mfb.dao.IPersonDao#findComptesByUsername(java.lang.String)
 	 */
 	@SuppressWarnings("unchecked")
-	@Override
-	public List<Compte> findComptesByUserId(Long id) {
+	public List<Compte> findComptesByUsername(String username) {
 		List<Compte> comptes;
-		comptes = em.createNamedQuery("findAccountsByUserId").setParameter("id", id).getResultList();
+		comptes = em.createNamedQuery("findComptesByUsername").setParameter("username", username).getResultList();
 		return comptes;
 	}
 }
