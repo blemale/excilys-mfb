@@ -30,14 +30,14 @@ public class Compte implements Serializable {
 	@Id
 	@GeneratedValue
 	private Long id;
-	@Column(nullable = false, length = 64)
+	@Column(nullable = false, length = 64, unique = true)
 	private String label;
 	@Column(nullable = false)
 	private BigDecimal solde;
 	@ManyToMany
 	@JoinTable(name = "PERSON_COMPTE", joinColumns = @JoinColumn(name = "COMPTE_ID"), inverseJoinColumns = @JoinColumn(name = "PERSON_ID"))
 	private List<Person> owners;
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private String numeroCompte;
 
 	/**

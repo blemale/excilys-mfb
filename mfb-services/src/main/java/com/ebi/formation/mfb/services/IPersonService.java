@@ -13,10 +13,10 @@ import com.ebi.formation.mfb.entities.Compte;
 public interface IPersonService {
 
 	/**
-	 * Retourne la liste des comptes de l'utilisateur dont l'id est passé en paramètre
+	 * Retourne la liste des comptes d'un utilisateur via son username
 	 * 
-	 * @param id
-	 * @return List<Compte>
+	 * @param username
+	 * @return
 	 */
-	List<Compte> findComptesByUserId(long id);
+	List<Compte> findComptesByUsername(String username);
 }

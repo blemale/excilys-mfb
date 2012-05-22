@@ -25,10 +25,9 @@ public class PersonService implements IPersonService {
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.ebi.formation.mfb.services.ICompteService#findCompteByUserId(long)
+	 * @see com.ebi.formation.mfb.services.IPersonService#findComptesByUsername(java.lang.String)
 	 */
-	@Override
-	public List<Compte> findComptesByUserId(long id) {
-		return personDao.findComptesByUserId(id);
+	public List<Compte> findComptesByUsername(String username) {
+		return personDao.findComptesByUsername(username);
 	}
 }

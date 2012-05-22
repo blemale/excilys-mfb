@@ -31,7 +31,7 @@ public class PersonServiceTest {
 	 */
 	@Test
 	public void testNotExistingAccount() {
-		List<Compte> comptes = personService.findComptesByUserId(1L);
+		List<Compte> comptes = personService.findComptesByUsername("toto");
 		assertEquals(0, comptes.size());
 	}
 
@@ -40,7 +40,7 @@ public class PersonServiceTest {
 	 */
 	@Test
 	public void testSingleAccount() {
-		List<Compte> accounts = personService.findComptesByUserId(2L);
+		List<Compte> accounts = personService.findComptesByUsername("foo");
 		assertEquals(1, accounts.size());
 	}
 
@@ -49,7 +49,7 @@ public class PersonServiceTest {
 	 */
 	@Test
 	public void testMultiplesAccounts() {
-		List<Compte> accounts = personService.findComptesByUserId(3L);
+		List<Compte> accounts = personService.findComptesByUsername("bastou");
 		assertEquals(2, accounts.size());
 		assertEquals(new Long(2), accounts.get(0).getId());
 		assertEquals(new Long(3), accounts.get(1).getId());

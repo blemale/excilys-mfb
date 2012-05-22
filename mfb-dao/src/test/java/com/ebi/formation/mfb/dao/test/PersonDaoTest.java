@@ -91,7 +91,7 @@ public class PersonDaoTest {
 	 */
 	@Test
 	public void testNoAccount() {
-		List<Compte> accounts = personDao.findComptesByUserId(1L);
+		List<Compte> accounts = personDao.findComptesByUsername("toto");
 		assertTrue(accounts.isEmpty());
 	}
 
@@ -100,7 +100,7 @@ public class PersonDaoTest {
 	 */
 	@Test
 	public void testSingleAccount() {
-		List<Compte> accounts = personDao.findComptesByUserId(2L);
+		List<Compte> accounts = personDao.findComptesByUsername("foo");
 		assertEquals(1, accounts.size());
 	}
 
@@ -109,7 +109,7 @@ public class PersonDaoTest {
 	 */
 	@Test
 	public void testMultiplesAccounts() {
-		List<Compte> accounts = personDao.findComptesByUserId(3L);
+		List<Compte> accounts = personDao.findComptesByUsername("bastou");
 		assertEquals(2, accounts.size());
 	}
 }
