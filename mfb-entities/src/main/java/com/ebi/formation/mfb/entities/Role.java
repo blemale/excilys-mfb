@@ -1,11 +1,14 @@
 package com.ebi.formation.mfb.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 import org.springframework.security.core.GrantedAuthority;
 
@@ -39,6 +42,8 @@ public class Role implements GrantedAuthority {
 	@Column(name = "NAME", length = 25)
 	@Enumerated(EnumType.STRING)
 	private Right right;
+	@ManyToMany(mappedBy = "authorities")
+	private List<Person> persons;
 
 	/**
 	 * @return l'id du rôle

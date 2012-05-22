@@ -4,11 +4,13 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -19,7 +21,6 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ebi.formation.mfb.dao.IPersonDao;
-import com.ebi.formation.mfb.entities.Role;
 import com.ebi.formation.mfb.entities.Role.Right;
 import com.excilys.ebi.spring.dbunit.test.DataSet;
 import com.excilys.ebi.spring.dbunit.test.RollbackTransactionalDataSetTestExecutionListener;
@@ -65,11 +66,10 @@ public class PersonDaoTest {
 	 * Test la récuperation du rôle d'un utilisateur donné
 	 */
 	@DataSet("dataSet-PersonDaoTest.xml")
-	@SuppressWarnings("unchecked")
 	@Test
 	public void testGetSingleAuthority() {
 		UserDetails totoIsAdmin = personDao.findUserDetailsByUsername("toto");
-		List<Role> roles = (List<Role>) totoIsAdmin.getAuthorities();
+		List<GrantedAuthority> roles = new ArrayList<GrantedAuthority>(totoIsAdmin.getAuthorities());
 		assertTrue(roles.get(0).getAuthority() == Right.ROLE_ADMIN.name());
 	}
 
@@ -80,8 +80,7 @@ public class PersonDaoTest {
 	@Test
 	public void testGetMultipleAuthorities() {
 		UserDetails fooIsAdminAndClient = personDao.findUserDetailsByUsername("foo");
-		@SuppressWarnings("unchecked")
-		List<Role> roles = (List<Role>) fooIsAdminAndClient.getAuthorities();
+		List<GrantedAuthority> roles = new ArrayList<GrantedAuthority>(fooIsAdminAndClient.getAuthorities());
 		assertTrue(roles.get(0).getAuthority() == Right.ROLE_ADMIN.name());
 		assertTrue(roles.get(1).getAuthority() == Right.ROLE_CLIENT.name());
 	}

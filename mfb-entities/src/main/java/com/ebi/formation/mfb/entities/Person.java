@@ -1,7 +1,7 @@
 package com.ebi.formation.mfb.entities;
 
-import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,10 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * Classe représentant une Person (utilisateur en base, qu'il soit un client ou un admin)
@@ -22,12 +18,8 @@ import org.springframework.security.core.userdetails.UserDetails;
  * 
  */
 @Entity
-public class Person implements UserDetails {
+public class Person {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1001161253306019172L;
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -35,10 +27,10 @@ public class Person implements UserDetails {
 	private String username;
 	@Column(nullable = false)
 	private String password;
-	@OneToMany
+	@ManyToMany
 	@JoinTable(name = "AUTHORITY", joinColumns = @JoinColumn(name = "PERSON_ID"), inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
 	@Column(nullable = false)
-	private Collection<Role> authorities;
+	private Set<Role> authorities;
 	@Column(length = 64)
 	private String firstName;
 	@Column(length = 64)
@@ -55,67 +47,25 @@ public class Person implements UserDetails {
 		return id;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.springframework.security.core.userdetails.UserDetails#getAuthorities()
+	/**
+	 * @return
 	 */
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
+	public Set<Role> getAuthorities() {
 		return authorities;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.springframework.security.core.userdetails.UserDetails#getPassword()
+	/**
+	 * @return
 	 */
-	@Override
 	public String getPassword() {
 		return password;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.springframework.security.core.userdetails.UserDetails#getUsername()
+	/**
+	 * @return
 	 */
-	@Override
 	public String getUsername() {
 		return username;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see org.springframework.security.core.userdetails.UserDetails#isAccountNonExpired()
-	 */
-	@Override
-	public boolean isAccountNonExpired() {
-		return true;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see org.springframework.security.core.userdetails.UserDetails#isAccountNonLocked()
-	 */
-	@Override
-	public boolean isAccountNonLocked() {
-		return true;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see org.springframework.security.core.userdetails.UserDetails#isCredentialsNonExpired()
-	 */
-	@Override
-	public boolean isCredentialsNonExpired() {
-		return true;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see org.springframework.security.core.userdetails.UserDetails#isEnabled()
-	 */
-	@Override
-	public boolean isEnabled() {
-		return true;
 	}
 
 	/**
