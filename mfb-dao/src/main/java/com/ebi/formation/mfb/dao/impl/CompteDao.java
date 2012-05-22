@@ -8,7 +8,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import com.ebi.formation.mfb.dao.ICompteDao;
-import com.ebi.formation.mfb.entities.Person;
+import com.ebi.formation.mfb.entities.Compte;
 
 /**
  * Implémentation de l'interface ICompteDao
@@ -22,25 +22,13 @@ public class CompteDao implements ICompteDao {
 	@PersistenceContext
 	private EntityManager em;
 
-	/**
-	 * Met à jour l'EntityManager à utiliser pour ce DAO.
-	 * 
-	 * @param em
-	 *            l'EntityManager à utiliser
-	 */
-	public void setEm(EntityManager em) {
-		this.em = em;
-	}
-
 	/*
 	 * (non-Javadoc)
-	 * @see com.ebi.formation.mfb.dao.IAccountDao#findOnwersByAccountId(java.lang.Long)
+	 * @see com.ebi.formation.mfb.dao.ICompteDao#findComptesByUsername(java.lang.String)
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Person> findOwnersByCompteId(Long id) {
-		List<Person> persons;
-		persons = em.createNamedQuery("findOwnersByAccountId").setParameter("id", id).getResultList();
-		return persons;
+	public List<Compte> findComptesByUsername(String username) {
+		return em.createNamedQuery("findComptesByUsername").setParameter("username", username).getResultList();
 	}
 }

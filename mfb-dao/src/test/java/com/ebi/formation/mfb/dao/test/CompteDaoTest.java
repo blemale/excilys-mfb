@@ -1,7 +1,7 @@
 package com.ebi.formation.mfb.dao.test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
@@ -17,9 +17,8 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ebi.formation.mfb.dao.ICompteDao;
-import com.ebi.formation.mfb.entities.Person;
+import com.ebi.formation.mfb.entities.Compte;
 import com.excilys.ebi.spring.dbunit.test.DataSet;
-import com.excilys.ebi.spring.dbunit.test.DataSetTestExecutionListener;
 import com.excilys.ebi.spring.dbunit.test.RollbackTransactionalDataSetTestExecutionListener;
 
 /**
@@ -30,9 +29,8 @@ import com.excilys.ebi.spring.dbunit.test.RollbackTransactionalDataSetTestExecut
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:persistence-config.xml")
-@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DataSetTestExecutionListener.class,
-		TransactionalTestExecutionListener.class, RollbackTransactionalDataSetTestExecutionListener.class })
-@DataSet("dataSet-CompteDaoTest.xml")
+@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
+		RollbackTransactionalDataSetTestExecutionListener.class, TransactionalTestExecutionListener.class, })
 @TransactionConfiguration
 @Transactional
 public class CompteDaoTest {
@@ -40,33 +38,33 @@ public class CompteDaoTest {
 	@Autowired
 	private ICompteDao compteDao;
 
-	// TODO A VERIFIER AVEC STEPHANE
 	/**
-	 * Test si un account a bien un ou plusieurs owners
+	 * Test lorsqu'un utilisateur n'a aucun compte
 	 */
+	@DataSet("dataSet-CompteDaoTest.xml")
 	@Test
-	public void testNoExistingOwners() {
-		List<Person> owners = compteDao.findOwnersByCompteId(7L);
-		assertEquals(0, owners.size());
+	public void testNoAccount() {
+		List<Compte> accounts = compteDao.findComptesByUsername("toto");
+		assertTrue(accounts.isEmpty());
 	}
 
 	/**
-	 * Test si un account a bien le bon proprio en checkant le username de celui ci
+	 * Test lorsqu'un utilisateur a un seul compte
 	 */
+	@DataSet("dataSet-CompteDaoTest.xml")
 	@Test
-	public void testExistingOwnerByUserName() {
-		List<Person> owners = compteDao.findOwnersByCompteId(1L);
-		assertNotNull(owners);
-		assertEquals(1, owners.size());
-		assertEquals("bastou", owners.get(0).getUsername());
+	public void testSingleAccount() {
+		List<Compte> accounts = compteDao.findComptesByUsername("foo");
+		assertEquals(1, accounts.size());
 	}
 
 	/**
-	 * Test compte ayant plusieurs owners (compte joint)
+	 * Test lorsqu'un utilisateur a plusieurs comptes
 	 */
+	@DataSet("dataSet-CompteDaoTest.xml")
 	@Test
-	public void testMultipleOwnersByUserName() {
-		List<Person> owners = compteDao.findOwnersByCompteId(3L);
-		assertEquals(2, owners.size());
+	public void testMultiplesAccounts() {
+		List<Compte> accounts = compteDao.findComptesByUsername("bastou");
+		assertEquals(2, accounts.size());
 	}
 }

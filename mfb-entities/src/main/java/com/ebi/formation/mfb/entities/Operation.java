@@ -9,7 +9,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
 /**
@@ -38,8 +37,6 @@ public class Operation {
 	@Enumerated(EnumType.STRING)
 	private OperationType type;
 	private BigDecimal montant;
-	@Column()
-	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
 	private DateTime dateValeur;
 
 	/**

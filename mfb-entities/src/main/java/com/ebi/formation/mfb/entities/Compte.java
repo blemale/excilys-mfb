@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.NamedQuery;
 
 /**
  * Classe répresentant un compte bancaire. Un compte pouvant avoir un ou plusieurs propriétaires
@@ -20,7 +19,6 @@ import javax.persistence.NamedQuery;
  * 
  */
 @Entity
-@NamedQuery(name = "findOwnersByAccountId", query = "SELECT a.owners FROM Compte a WHERE a.id=:id ")
 public class Compte implements Serializable {
 
 	/**

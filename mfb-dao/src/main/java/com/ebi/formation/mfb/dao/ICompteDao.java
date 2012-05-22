@@ -2,7 +2,7 @@ package com.ebi.formation.mfb.dao;
 
 import java.util.List;
 
-import com.ebi.formation.mfb.entities.Person;
+import com.ebi.formation.mfb.entities.Compte;
 
 /**
  * Cette interface représente le contrat à implémenter des DAO pour l'entité Account.
@@ -13,11 +13,10 @@ import com.ebi.formation.mfb.entities.Person;
 public interface ICompteDao {
 
 	/**
-	 * Recherche les propriétaires du compte en fonction de son id
+	 * Recherche la liste des comptes d'un utilisateur en fonction de son username
 	 * 
-	 * @param id
-	 *            l'id du compte
-	 * @return la liste des propriétaires du compte, une liste vide sinon
+	 * @param username
+	 * @return
 	 */
-	List<Person> findOwnersByCompteId(Long id);
+	List<Compte> findComptesByUsername(String username);
 }
