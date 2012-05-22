@@ -36,6 +36,7 @@
 				
 				<sec:authorize access="isAuthenticated()">
 					<form action="<c:url value='/j_spring_security_logout'/>" class="navbar-form form-inline pull-right" method="post">
+						${userFirstName} ${userLastName}
 						<button class="btn"><spring:message code="header.button.logout" /></button>
 						<a href="?lang=en"><img src="${contextPath}/content/images/drapeaux/en.png" height="30" width="30"/></a> 
 						<a href="?lang=fr"><img src="${contextPath}/content/images/drapeaux/fr.png" height="30" width="30"/></a>

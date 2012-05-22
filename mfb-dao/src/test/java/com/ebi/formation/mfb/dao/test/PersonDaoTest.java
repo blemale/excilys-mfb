@@ -1,5 +1,6 @@
 package com.ebi.formation.mfb.dao.test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -21,6 +22,7 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ebi.formation.mfb.dao.IPersonDao;
+import com.ebi.formation.mfb.entities.Person;
 import com.ebi.formation.mfb.entities.Role.Right;
 import com.excilys.ebi.spring.dbunit.test.DataSet;
 import com.excilys.ebi.spring.dbunit.test.RollbackTransactionalDataSetTestExecutionListener;
@@ -83,5 +85,22 @@ public class PersonDaoTest {
 		List<GrantedAuthority> roles = new ArrayList<GrantedAuthority>(fooIsAdminAndClient.getAuthorities());
 		assertTrue(roles.get(0).getAuthority() == Right.ROLE_ADMIN.name());
 		assertTrue(roles.get(1).getAuthority() == Right.ROLE_CLIENT.name());
+	}
+
+	/**
+	 * 
+	 */
+	@DataSet("dataSet-PersonDaoTest.xml")
+	@Test
+	public void testGetLastAndFirstName() {
+		Person p = personDao.findPersonByUsername("toto");
+		assertEquals("toto1", p.getFirstName());
+		assertEquals("toto2", p.getLastName());
+		p = personDao.findPersonByUsername("foo");
+		assertEquals("foo1", p.getFirstName());
+		assertEquals("foo2", p.getLastName());
+		p = personDao.findPersonByUsername("bastou");
+		assertEquals("bastou1", p.getFirstName());
+		assertEquals("bastou2", p.getLastName());
 	}
 }

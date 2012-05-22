@@ -48,21 +48,21 @@ public class Person {
 	}
 
 	/**
-	 * @return
+	 * @return the list of authorities
 	 */
 	public Set<Role> getAuthorities() {
 		return authorities;
 	}
 
 	/**
-	 * @return
+	 * @return the password
 	 */
 	public String getPassword() {
 		return password;
 	}
 
 	/**
-	 * @return
+	 * @return the username
 	 */
 	public String getUsername() {
 		return username;

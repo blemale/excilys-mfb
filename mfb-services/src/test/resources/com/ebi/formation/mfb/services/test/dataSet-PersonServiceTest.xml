@@ -11,8 +11,4 @@ xsi:noNamespaceSchemaLocation="dataset.xsd">
 	<role id="2" name="ROLE_CLIENT" />
 	<authority person_id="2" role_id="1"/>
 	<authority person_id="2" role_id="2"/>
-	
-	<person id="3" username="bastou" password="titi" firstname="bastou1" lastname="bastou2"/>
-	<authority person_id="3" role_id="1"/>
-	
 </dataset>

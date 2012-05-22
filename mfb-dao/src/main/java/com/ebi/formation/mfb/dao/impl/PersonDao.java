@@ -32,12 +32,22 @@ public class PersonDao implements IPersonDao {
 	public UserDetails findUserDetailsByUsername(String username) {
 		UserDetails user = null;
 		try {
-			Person p = (Person) em.createNamedQuery("findUserDetailsByUsername").setParameter("username", username)
-					.getSingleResult();
+			Person p = em.createNamedQuery("findUserDetailsByUsername", Person.class)
+					.setParameter("username", username).getSingleResult();
 			Hibernate.initialize(p.getAuthorities());
 			user = new User(p.getUsername(), p.getPassword(), true, true, true, true, p.getAuthorities());
 		} catch (NoResultException nre) {
 		}
 		return user;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.dao.IPersonDao#findPersonByUsername(java.lang.String)
+	 */
+	@Override
+	public Person findPersonByUsername(String username) {
+		return em.createNamedQuery("findPersonByUsername", Person.class).setParameter("username", username)
+				.getSingleResult();
 	}
 }

@@ -20,7 +20,7 @@ import com.ebi.formation.mfb.dao.IPersonDao;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired
-	private IPersonDao dao;
+	private IPersonDao personDao;
 
 	/*
 	 * (non-Javadoc)
@@ -28,10 +28,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	 */
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		UserDetails userDetails = dao.findUserDetailsByUsername(username);
+		UserDetails userDetails = personDao.findUserDetailsByUsername(username);
 		if (userDetails == null) {
-			StringBuilder builder = new StringBuilder("user ").append(username).append(" doesn't exist.");
-			throw new UsernameNotFoundException(builder.toString());
+			throw new UsernameNotFoundException(new StringBuilder("user ").append(username).append(" doesn't exist.")
+					.toString());
 		}
 		return userDetails;
 	}
