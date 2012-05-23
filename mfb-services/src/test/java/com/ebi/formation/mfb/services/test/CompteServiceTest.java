@@ -1,38 +1,39 @@
 package com.ebi.formation.mfb.services.test;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
+import com.ebi.formation.mfb.dao.ICompteDao;
 import com.ebi.formation.mfb.entities.Compte;
-import com.ebi.formation.mfb.services.ICompteService;
-import com.excilys.ebi.spring.dbunit.test.DataSet;
-import com.excilys.ebi.spring.dbunit.test.DataSetTestExecutionListener;
+import com.ebi.formation.mfb.services.impl.CompteService;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:services-config.xml")
-@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DataSetTestExecutionListener.class })
-@DataSet("dataSet-CompteServiceTest.xml")
+@RunWith(MockitoJUnitRunner.class)
+@ContextConfiguration(locations = "classpath:/services-config.xml")
 public class CompteServiceTest {
 
-	@Autowired
-	ICompteService compteService;
+	@Mock
+	ICompteDao compteDao;
+	@InjectMocks
+	CompteService compteService;
 
 	/**
 	 * Test le cas où un user n'a pas de compte
 	 */
 	@Test
 	public void testNotExistingAccount() {
-		List<Compte> comptes = compteService.findComptesByUsername("toto");
-		assertEquals(0, comptes.size());
+		when(compteDao.findComptesByUsername("foo")).thenReturn(new ArrayList<Compte>());
+		List<Compte> result = compteService.findComptesByUsername("foo");
+		assertEquals(0, result.size());
 	}
 
 	/**
@@ -40,8 +41,11 @@ public class CompteServiceTest {
 	 */
 	@Test
 	public void testSingleAccount() {
-		List<Compte> accounts = compteService.findComptesByUsername("foo");
-		assertEquals(1, accounts.size());
+		List<Compte> comptes = new ArrayList<Compte>();
+		comptes.add(new Compte());
+		when(compteDao.findComptesByUsername("foo")).thenReturn(comptes);
+		List<Compte> result = compteService.findComptesByUsername("foo");
+		assertEquals(1, result.size());
 	}
 
 	/**
@@ -49,9 +53,11 @@ public class CompteServiceTest {
 	 */
 	@Test
 	public void testMultiplesAccounts() {
-		List<Compte> accounts = compteService.findComptesByUsername("bastou");
-		assertEquals(2, accounts.size());
-		assertEquals(new Long(2), accounts.get(0).getId());
-		assertEquals(new Long(3), accounts.get(1).getId());
+		List<Compte> comptes = new ArrayList<Compte>();
+		comptes.add(new Compte());
+		comptes.add(new Compte());
+		when(compteDao.findComptesByUsername("foo")).thenReturn(comptes);
+		List<Compte> result = compteService.findComptesByUsername("foo");
+		assertEquals(2, result.size());
 	}
 }
