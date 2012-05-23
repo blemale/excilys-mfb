@@ -10,8 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-import org.springframework.security.core.GrantedAuthority;
-
 /**
  * Classe répresentant un rôle en base (ROLE_ADMIN ou ROLE_CLIENT)
  * 
@@ -19,12 +17,7 @@ import org.springframework.security.core.GrantedAuthority;
  * 
  */
 @Entity
-public class Role implements GrantedAuthority {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 3109154373012478120L;
+public class Role {
 
 	/**
 	 * Enumération des rôles
@@ -53,36 +46,9 @@ public class Role implements GrantedAuthority {
 	}
 
 	/**
-	 * Met à jour l'id du rôle
-	 * 
-	 * @param id
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	/**
 	 * @return le droit associé à ce rôle
 	 */
 	public Right getRight() {
 		return right;
-	}
-
-	/**
-	 * Modifie le droit de ce rôle
-	 * 
-	 * @param right
-	 */
-	public void setRight(Right right) {
-		this.right = right;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see org.springframework.security.core.GrantedAuthority#getAuthority()
-	 */
-	@Override
-	public String getAuthority() {
-		return right.name();
 	}
 }
