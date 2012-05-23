@@ -5,8 +5,7 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 
-	<include file="liquibase/changelogs/db-changelog-1.0.xml" />
-	<include file="liquibase/changelogs/db-changelog-2.0.xml" />
-	<include file="liquibase/changelogs/db-changelog-2.1.xml" />
-
+	<changeSet id="2.1" author="excilys-kpogorzelski">
+		<modifyDataType tableName="COMPTE" columnName="SOLDE" newDataType="numeric(30,10)"/>
+	</changeSet>
 </databaseChangeLog>
