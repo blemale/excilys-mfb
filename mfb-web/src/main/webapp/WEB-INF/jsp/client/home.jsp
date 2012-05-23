@@ -1,5 +1,6 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <header id="overview" class="span10 offset2">
 	<h1>
@@ -28,7 +29,16 @@
 						<tr class="clickLine">
 							<td>${c.numeroCompte}</td>
 							<td>${c.label}</td>
-							<td>${c.solde}</td>
+							<c:if test="${c.solde >= 0}">
+								<td class="aligneSolde coloreVert">
+									+ <fmt:formatNumber value="${c.solde}" minFractionDigits="2" pattern="#,###.##"/>
+								</td>
+							</c:if>
+							<c:if test="${c.solde < 0}">
+								<td class="aligneSolde coloreRouge">
+									- <fmt:formatNumber value="${c.solde*-1}" minFractionDigits="2" pattern="#,###.##"/>
+								</td>
+							</c:if>
 							<%-- <td><a class="btn btn-mini btn-info" href="${c.numeroCompte}"><spring:message code="home.account.details"/></a></td> --%>
 						</tr>
 					</c:forEach>
