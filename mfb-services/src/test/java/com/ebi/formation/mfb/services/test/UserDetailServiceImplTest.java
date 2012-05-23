@@ -1,20 +1,24 @@
 package com.ebi.formation.mfb.services.test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
-import com.excilys.ebi.spring.dbunit.test.DataSet;
-import com.excilys.ebi.spring.dbunit.test.DataSetTestExecutionListener;
+import com.ebi.formation.mfb.dao.IPersonDao;
+import com.ebi.formation.mfb.services.impl.UserDetailsServiceImpl;
 
 /**
  * Test unitaire de UserDetailServiceImpl
@@ -23,22 +27,24 @@ import com.excilys.ebi.spring.dbunit.test.DataSetTestExecutionListener;
  * 
  *         //
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:services-config.xml")
-@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class, DataSetTestExecutionListener.class })
-@DataSet("dataSet-UserDetailsServiceTest.xml")
+@RunWith(MockitoJUnitRunner.class)
+@ContextConfiguration(locations = "classpath:/services-config.xml")
 public class UserDetailServiceImplTest {
 
-	@Autowired
-	private UserDetailsService userDetailsService;
+	@Mock
+	private IPersonDao personDao;
+	@InjectMocks
+	private UserDetailsServiceImpl userDetailsService;
 
 	/**
 	 * Vérifie si un utilisateur existant est bien recuperé
 	 */
 	@Test
 	public void testExistingUser() {
-		UserDetails user = userDetailsService.loadUserByUsername("toto");
-		assertNotNull(user);
+		UserDetails user = new User("foo", "bar", new ArrayList<GrantedAuthority>());
+		when(personDao.findUserDetailsByUsername("foo")).thenReturn(user);
+		UserDetails result = userDetailsService.loadUserByUsername("foo");
+		assertNotNull(result);
 	}
 
 	/**
@@ -46,6 +52,19 @@ public class UserDetailServiceImplTest {
 	 */
 	@Test(expected = UsernameNotFoundException.class)
 	public void testNotExistingUser() {
-		userDetailsService.loadUserByUsername("titi");
+		when(personDao.findUserDetailsByUsername("foo")).thenReturn(null);
+		userDetailsService.loadUserByUsername("foo");
+	}
+
+	/**
+	 * Vérifie si un utilisateur existant est bien recuperé
+	 */
+	@Test
+	public void testReturnedUser() {
+		UserDetails user = new User("foo", "bar", new ArrayList<GrantedAuthority>());
+		when(personDao.findUserDetailsByUsername("foo")).thenReturn(user);
+		UserDetails result = userDetailsService.loadUserByUsername("foo");
+		assertEquals(user.getUsername(), result.getUsername());
+		assertEquals(user.getPassword(), result.getPassword());
 	}
 }

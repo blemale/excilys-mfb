@@ -1,16 +1,21 @@
 package com.ebi.formation.mfb.dao.impl;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
-import org.hibernate.Hibernate;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 import com.ebi.formation.mfb.dao.IPersonDao;
 import com.ebi.formation.mfb.entities.Person;
+import com.ebi.formation.mfb.entities.Role;
 
 /**
  * Implémentation de IPersonDAO, via JPA.
@@ -34,8 +39,11 @@ public class PersonDao implements IPersonDao {
 		try {
 			Person p = em.createNamedQuery("findUserDetailsByUsername", Person.class)
 					.setParameter("username", username).getSingleResult();
-			Hibernate.initialize(p.getAuthorities());
-			user = new User(p.getUsername(), p.getPassword(), true, true, true, true, p.getAuthorities());
+			Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+			for (Role role : p.getAuthorities()) {
+				authorities.add(new SimpleGrantedAuthority(role.getRight().name()));
+			}
+			user = new User(p.getUsername(), p.getPassword(), true, true, true, true, authorities);
 		} catch (NoResultException nre) {
 		}
 		return user;

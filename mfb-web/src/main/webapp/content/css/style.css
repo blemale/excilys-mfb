@@ -27,3 +27,13 @@
 	cursor: pointer;
 }
 
+.aligneSolde {
+	text-align: right;
+}
+
+.coloreVert {
+	color: #015f04;
+}
+.coloreRouge {
+	color: #5f0101;
+}

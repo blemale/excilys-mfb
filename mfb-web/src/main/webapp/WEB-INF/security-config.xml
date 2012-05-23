@@ -17,6 +17,10 @@
 		<form-login login-page="/login.html" default-target-url="/home.html"
 			always-use-default-target="true" />
 		<logout logout-success-url="/login.html" />
+		
+		<session-management>
+			<concurrency-control max-sessions="1"/>
+		</session-management>
 	</http>
 
 	<beans:bean id="daoAuthenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
@@ -34,10 +38,6 @@
 
 	<global-method-security secured-annotations="enabled"
 		jsr250-annotations="enabled" />
-
-	<beans:import resource="classpath:services-config.xml" />
 	
-	<beans:bean id="defaultWebSecurityExpressionHandler" class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler">
-	
-	</beans:bean>
+	<beans:bean id="defaultWebSecurityExpressionHandler" class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler"/>
 </beans:beans>
