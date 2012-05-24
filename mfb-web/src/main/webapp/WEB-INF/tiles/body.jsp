@@ -4,4 +4,10 @@
 <header id="overview" class="span10 offset2">		
 	<h1><spring:message code="body.title" /></h1>
 	<p class="lead"><spring:message code="body.welcome" /></p>
+	 <c:if test="${not empty sessionScope['SPRING_SECURITY_LAST_EXCEPTION']}">
+		<div class="alert alert-error alertDisparait">
+			<strong>Attention !</strong><br/> ${sessionScope['SPRING_SECURITY_LAST_EXCEPTION'].message}
+		</div>
+		<c:set var="SPRING_SECURITY_LAST_EXCEPTION" scope="session" value="${ null }"/>
+	</c:if>
 </header>
