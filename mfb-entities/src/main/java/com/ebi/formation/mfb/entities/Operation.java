@@ -2,18 +2,21 @@ package com.ebi.formation.mfb.entities;
 
 import java.math.BigDecimal;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import org.joda.time.DateTime;
 
 /**
  * Classe répresentant une opération bancaire (virement, retrait, ...)
  * 
+ * @author excilys
+ * 
+ */
+/**
  * @author excilys
  * 
  */
@@ -26,18 +29,19 @@ public class Operation {
 	 * @author excilys
 	 * 
 	 */
-	public enum OperationType {
-		VIREMENT, PAIEMENT_CARTE, RETRAIT_CARTE, DEPOT_ESPECE, RETRAIT_ESPECE, PAIEMENT_CHEQUE, DEPOT_CHEQUE
-	}
-
 	@Id
 	@GeneratedValue
 	private Long id;
-	@Column(name = "TYPE", length = 25)
-	@Enumerated(EnumType.STRING)
+	@OneToOne
+	@JoinColumn(name = "TYPE")
 	private OperationType type;
 	private BigDecimal montant;
 	private DateTime dateValeur;
+	private DateTime dateEffet;
+	private String label;
+	@OneToOne
+	@JoinColumn(name = "COMPTE")
+	private Compte compte;
 
 	/**
 	 * @return the id
@@ -65,5 +69,26 @@ public class Operation {
 	 */
 	public DateTime getDateValeur() {
 		return dateValeur;
+	}
+
+	/**
+	 * @return
+	 */
+	public DateTime getDateEffet() {
+		return dateEffet;
+	}
+
+	/**
+	 * @return
+	 */
+	public String getLabel() {
+		return label;
+	}
+
+	/**
+	 * @return
+	 */
+	public Compte getCompte() {
+		return compte;
 	}
 }
