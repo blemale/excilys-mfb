@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+	<changeSet id="2.0" author="excilys-tbakir">
+		<modifyDataType tableName="COMPTE" columnName="SOLDE" newDataType="numeric(30,4)"/>
+		
+		<createTable tableName="OPERATION">
+			<column name="ID" type="bigint" autoIncrement="true">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="LABEL" type="varchar(64)">
+				<constraints nullable="false" />
+			</column>
+			<column name="MONTANT" type="numeric(30,4)" defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="DATEEFFET" type="timestamp">
+				<constraints nullable="false" />
+			</column>
+			<column name="DATEVALEUR" type="timestamp">
+				<constraints nullable="false" />
+			</column>
+			
+			<column name="TYPE" type="bigint">
+				<constraints nullable="false" />
+			</column>
+			<column name="COMPTE" type="bigint">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+		
+		<createTable tableName="OPERATIONTYPE">
+			<column name="ID" type="bigint">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="LABEL" type="varchar(64)">
+				<constraints nullable="false" unique="true" />
+			</column>
+		</createTable>
+		
+		<addForeignKeyConstraint constraintName="FK_OPERATION_TYPE"
+			referencedTableName="OPERATIONTYPE" baseColumnNames="TYPE"
+			baseTableName="OPERATION" referencedColumnNames="ID"/>
+		<addForeignKeyConstraint constraintName="FK_OPERATION_COMPTE"
+			referencedTableName="COMPTE" baseColumnNames="COMPTE"
+			baseTableName="OPERATION" referencedColumnNames="ID" />
+	</changeSet>
+</databaseChangeLog>
+			
+			
+			
+			
