@@ -35,8 +35,7 @@
 		</createTable>
 		<addForeignKeyConstraint constraintName="FK_PERSON_COMPTE"
 			referencedTableName="PERSON" baseColumnNames="PERSON_ID"
-			baseTableName="PERSON_COMPTE" referencedColumnNames="ID"
-			deleteCascade="true" />
+			baseTableName="PERSON_COMPTE" referencedColumnNames="ID"/>
 		<addForeignKeyConstraint constraintName="FK_ACCOUNT_PERSON"
 			referencedTableName="COMPTE" baseColumnNames="COMPTE_ID"
 			baseTableName="PERSON_COMPTE" referencedColumnNames="ID" />
