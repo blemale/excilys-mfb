@@ -31,4 +31,9 @@ public class CompteService implements ICompteService {
 	public List<Compte> findComptesByUsername(String username) {
 		return compteDao.findComptesByUsername(username);
 	}
+
+	@Override
+	public boolean checkCompteOwnershipByUsernameAndCompteId(String username, Long compteId) {
+		return compteDao.checkCompteOwnershipByUsernameAndCompteId(username, compteId);
+	}
 }

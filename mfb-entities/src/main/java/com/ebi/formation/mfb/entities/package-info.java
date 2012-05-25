@@ -2,6 +2,7 @@
 @NamedQueries({
 		@NamedQuery(name = "findUserDetailsByUsername", query = "SELECT p FROM Person p WHERE p.username = :username"),
 		@NamedQuery(name = "findComptesByUsername", query = "SELECT p.comptes FROM Person p WHERE p.username = :username"),
+		@NamedQuery(name = "checkCompteOwnershipByUsernameAndCompteId", query = "SELECT c FROM Person p, Compte c WHERE p.username = :username AND c.id = :compteId AND c MEMBER OF p.comptes"),
 		@NamedQuery(name = "findPersonByUsername", query = "SELECT p FROM Person p WHERE p.username = :username"),
 		@NamedQuery(name = "findTotalOperationsCarteByMonth", query = "SELECT SUM(o.montant) FROM Operation o WHERE o.type.label = :type AND o.compte.id = :idcompte "
 				+ "and o.dateEffet BETWEEN :dateEffet AND :datePlusUnMois"),

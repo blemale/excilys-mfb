@@ -19,4 +19,6 @@ public interface ICompteService {
 	 * @return
 	 */
 	List<Compte> findComptesByUsername(String username);
+
+	boolean checkCompteOwnershipByUsernameAndCompteId(String username, Long compteId);
 }
