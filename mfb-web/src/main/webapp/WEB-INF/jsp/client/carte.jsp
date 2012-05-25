@@ -23,7 +23,7 @@
 		<div class="span4 alignCenter">
 			<c:if test="${previousMonth eq true}">
 				<a class="btn"
-					href="${contextPath}/client/compte/${idCompte}/${currentYear}/${(currentMonth -1)%12}/carte/detail.html"><i
+					href="${contextPath}/client/compte/${idCompte}/${currentYear}/${currentMonth - 1}/carte/detail.html"><i
 					class="icon-chevron-left"></i> <spring:message
 						code="compte.month.previous" /> </a>
 			</c:if>
@@ -35,7 +35,7 @@
 		<div class="span4 alignCenter">
 			<c:if test="${nextMonth eq true}">
 				<a class="btn"
-					href="${contextPath}/client/compte/${idCompte}/${currentYear}/${(currentMonth+1)%12}/carte/detail.html">
+					href="${contextPath}/client/compte/${idCompte}/${currentYear}/${currentMonth + 1}/carte/detail.html">
 					<spring:message code="compte.month.next" /> <i
 					class="icon-chevron-right"></i>
 				</a>
@@ -53,9 +53,9 @@
 						${currentMonth} / ${currentYear} <span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu">
-						<c:forEach var="i" begin="0" end="${numMonthHistory-1}">
+						<c:forEach items="${monthHistory}" var="i">
 							<li><a
-								href="${contextPath}/client/compte/${idCompte}/${currentYear}/${currentMonth-i}/carte/detail.html">${currentMonth-i}
+								href="${contextPath}/client/compte/${idCompte}/${currentYear}/${i}/detail.html">${i}
 									/ ${currentYear}</a></li>
 						</c:forEach>
 					</ul>
