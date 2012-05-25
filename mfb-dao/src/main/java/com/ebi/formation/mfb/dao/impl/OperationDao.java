@@ -69,7 +69,8 @@ public class OperationDao implements IOperationDao {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Operation> findOperationsWithoutCarteByMonthPaginated(long idCompte, int month, int year, int offset) {
+	public List<Operation> findOperationsWithoutCarteByMonthPaginated(long idCompte, int month, int year, int offset,
+			int numberOfResults) {
 		DateTime date = new DateTime(year, month, 1, 0, 0);
 		DateTime datePlusUnMois;
 		if (month == 12) {
@@ -80,9 +81,8 @@ public class OperationDao implements IOperationDao {
 		System.out.println(date.toString());
 		System.out.println(datePlusUnMois.toString());
 		return em.createNamedQuery("findOperationsWithoutCarteByMonthPaginated").setParameter("idcompte", idCompte)
-				.setParameter("dateEffet", date).setParameter("datePlusUnMois", datePlusUnMois)
-				.setFirstResult(offset * NUMBER_OF_OPERATIONS_BY_PAGE)
-				.setMaxResults((offset + 1) * NUMBER_OF_OPERATIONS_BY_PAGE).getResultList();
+				.setParameter("dateEffet", date).setParameter("datePlusUnMois", datePlusUnMois).setFirstResult(offset)
+				.setMaxResults(offset + numberOfResults).getResultList();
 	}
 
 	/*
@@ -91,7 +91,8 @@ public class OperationDao implements IOperationDao {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Operation> findOperationsCarteByMonthPaginated(long idCompte, int month, int year, int offset) {
+	public List<Operation> findOperationsCarteByMonthPaginated(long idCompte, int month, int year, int offset,
+			int numberOfResults) {
 		DateTime date = new DateTime(year, month, 1, 0, 0);
 		DateTime datePlusUnMois;
 		if (month == 12) {
@@ -100,8 +101,7 @@ public class OperationDao implements IOperationDao {
 			datePlusUnMois = new DateTime(year, month + 1, 1, 0, 0);
 		}
 		return em.createNamedQuery("findOperationsCarteByMonthPaginated").setParameter("idcompte", idCompte)
-				.setParameter("dateEffet", date).setParameter("datePlusUnMois", datePlusUnMois)
-				.setFirstResult(offset * NUMBER_OF_OPERATIONS_BY_PAGE)
-				.setMaxResults((offset + 1) * NUMBER_OF_OPERATIONS_BY_PAGE).getResultList();
+				.setParameter("dateEffet", date).setParameter("datePlusUnMois", datePlusUnMois).setFirstResult(offset)
+				.setMaxResults(offset + numberOfResults).getResultList();
 	}
 }
