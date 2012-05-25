@@ -45,5 +45,11 @@
 		<put-attribute name="title" value="title.compte" />
 		<put-attribute name="body" value="/WEB-INF/jsp/client/compte.jsp" />
 	</definition>
+	
+	<!-- Page de details des operations CARTE -->
+	<definition name="detailCompteCarte" extends="baseLayout">
+		<put-attribute name="title" value="title.compte" />
+		<put-attribute name="body" value="/WEB-INF/jsp/client/carte.jsp" />
+	</definition>
 
 </tiles-definitions>
