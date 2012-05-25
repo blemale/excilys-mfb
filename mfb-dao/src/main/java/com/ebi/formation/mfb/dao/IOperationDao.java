@@ -36,7 +36,8 @@ public interface IOperationDao {
 	 * @param username
 	 * @return
 	 */
-	public List<Operation> findOperationsWithoutCarteByMonthPaginated(long idCompte, int month, int year, int offset);
+	public List<Operation> findOperationsWithoutCarteByMonthPaginated(long idCompte, int month, int year, int offset,
+			int numberOfResults);
 
 	/**
 	 * Recherche la liste des operations carte d'un compte pour un mois donné et paginé suivant un offset
@@ -44,5 +45,6 @@ public interface IOperationDao {
 	 * @param username
 	 * @return
 	 */
-	public List<Operation> findOperationsCarteByMonthPaginated(long idCompte, int month, int year, int offset);
+	public List<Operation> findOperationsCarteByMonthPaginated(long idCompte, int month, int year, int offset,
+			int numberOfResults);
 }
