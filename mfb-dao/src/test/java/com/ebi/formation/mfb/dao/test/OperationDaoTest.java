@@ -65,7 +65,7 @@ public class OperationDaoTest {
 	@DataSet("dataSet-OperationDaoTest.xml")
 	@Test
 	public void testFindOperationsWithoutCartesByMonthPaginated() {
-		List<Operation> operations = operationDao.findOperationsWithoutCarteByMonthPaginated(1, 5, 2012, 0);
+		List<Operation> operations = operationDao.findOperationsWithoutCarteByMonthPaginated(1, 5, 2012, 0, 20);
 		BigDecimal i = new BigDecimal(0);
 		for (Operation operation : operations) {
 			i = i.add(operation.getMontant());
@@ -79,7 +79,7 @@ public class OperationDaoTest {
 	@DataSet("dataSet-OperationDaoTest.xml")
 	@Test
 	public void testFindOperationsWithoutCartesByMonthPaginatedUn() {
-		List<Operation> operations = operationDao.findOperationsWithoutCarteByMonthPaginated(1, 5, 2012, 1);
+		List<Operation> operations = operationDao.findOperationsWithoutCarteByMonthPaginated(1, 5, 2012, 20, 20);
 		BigDecimal i = new BigDecimal(0);
 		for (Operation operation : operations) {
 			i = i.add(operation.getMontant());
@@ -93,7 +93,7 @@ public class OperationDaoTest {
 	@DataSet("dataSet-OperationDaoTest.xml")
 	@Test
 	public void testFindOperationsCarteByMonthPaginated() {
-		List<Operation> operations = operationDao.findOperationsCarteByMonthPaginated(1, 5, 2012, 0);
+		List<Operation> operations = operationDao.findOperationsCarteByMonthPaginated(1, 5, 2012, 0, 20);
 		BigDecimal i = new BigDecimal(0);
 		for (Operation operation : operations) {
 			i = i.add(operation.getMontant());
@@ -107,7 +107,7 @@ public class OperationDaoTest {
 	@DataSet("dataSet-OperationDaoTest.xml")
 	@Test
 	public void testFindOperationsCarteByMonthPaginatedUn() {
-		List<Operation> operations = operationDao.findOperationsCarteByMonthPaginated(1, 5, 2012, 1);
+		List<Operation> operations = operationDao.findOperationsCarteByMonthPaginated(1, 5, 2012, 20, 20);
 		BigDecimal i = new BigDecimal(0);
 		for (Operation operation : operations) {
 			i = i.add(operation.getMontant());
