@@ -1,6 +1,7 @@
 package com.ebi.formation.mfb.dao.test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
@@ -66,5 +67,14 @@ public class CompteDaoTest {
 	public void testMultiplesAccounts() {
 		List<Compte> accounts = compteDao.findComptesByUsername("bastou");
 		assertEquals(2, accounts.size());
+	}
+
+	@DataSet("dataSet-CompteDaoTest.xml")
+	@Test
+	public void testCompteOwnership() {
+		assertFalse(compteDao.checkCompteOwnershipByUsernameAndCompteId("toto", 1L));
+		assertTrue(compteDao.checkCompteOwnershipByUsernameAndCompteId("foo", 1L));
+		assertTrue(compteDao.checkCompteOwnershipByUsernameAndCompteId("bastou", 2L));
+		assertTrue(compteDao.checkCompteOwnershipByUsernameAndCompteId("bastou", 3L));
 	}
 }

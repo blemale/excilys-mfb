@@ -22,12 +22,20 @@ public interface IOperationDao {
 	public BigDecimal findTotalOperationsCarteByMonth(long idCompte, int month, int year);
 
 	/**
-	 * Retourne le nombre d'operations d'un compte pour un mois donné
+	 * Retourne le nombre d'operations carte d'un compte pour un mois donné
 	 * 
 	 * @param username
 	 * @return
 	 */
 	public long findNumbreOfOperationsCarteByMonth(long idCompte, int month, int year);
+
+	/**
+	 * Retourne le nombre d'operations excepté les opérations carte d'un compte pour un mois donné
+	 * 
+	 * @param username
+	 * @return
+	 */
+	public long findNumbreOfOperationsWhithoutCarteByMonth(long idCompte, int month, int year);
 
 	/**
 	 * Recherche la liste des operations d'un compte (sauf les opérations par carte) pour un mois donné et paginé

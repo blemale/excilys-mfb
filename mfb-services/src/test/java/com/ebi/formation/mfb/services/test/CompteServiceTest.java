@@ -1,6 +1,8 @@
 package com.ebi.formation.mfb.services.test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -59,5 +61,17 @@ public class CompteServiceTest {
 		when(compteDao.findComptesByUsername("foo")).thenReturn(comptes);
 		List<Compte> result = compteService.findComptesByUsername("foo");
 		assertEquals(2, result.size());
+	}
+
+	@Test
+	public void testOwnership() {
+		when(compteDao.checkCompteOwnershipByUsernameAndCompteId("toto", 1L)).thenReturn(false);
+		when(compteDao.checkCompteOwnershipByUsernameAndCompteId("foo", 1L)).thenReturn(true);
+		when(compteDao.checkCompteOwnershipByUsernameAndCompteId("bastou", 2L)).thenReturn(true);
+		when(compteDao.checkCompteOwnershipByUsernameAndCompteId("bastou", 3L)).thenReturn(true);
+		assertFalse(compteDao.checkCompteOwnershipByUsernameAndCompteId("toto", 1L));
+		assertTrue(compteDao.checkCompteOwnershipByUsernameAndCompteId("foo", 1L));
+		assertTrue(compteDao.checkCompteOwnershipByUsernameAndCompteId("bastou", 2L));
+		assertTrue(compteDao.checkCompteOwnershipByUsernameAndCompteId("bastou", 3L));
 	}
 }

@@ -23,7 +23,6 @@ import com.ebi.formation.mfb.entities.OperationType;
 @Repository
 public class OperationDao implements IOperationDao {
 
-	public static final int NUMBER_OF_OPERATIONS_BY_PAGE = 20;
 	@PersistenceContext
 	private EntityManager em;
 
@@ -58,7 +57,7 @@ public class OperationDao implements IOperationDao {
 		} else {
 			datePlusUnMois = new DateTime(year, month + 1, 1, 0, 0);
 		}
-		return (Long) em.createNamedQuery("findNumberOfOperationsCarteByMonth").setParameter("idcompte", idCompte)
+		return (Long) em.createNamedQuery("findNumberOfOperationsByTypeByMonth").setParameter("idcompte", idCompte)
 				.setParameter("dateEffet", date).setParameter("datePlusUnMois", datePlusUnMois)
 				.setParameter("type", OperationType.Type.CARTE).getSingleResult();
 	}
@@ -103,5 +102,20 @@ public class OperationDao implements IOperationDao {
 		return em.createNamedQuery("findOperationsCarteByMonthPaginated").setParameter("idcompte", idCompte)
 				.setParameter("dateEffet", date).setParameter("datePlusUnMois", datePlusUnMois).setFirstResult(offset)
 				.setMaxResults(offset + numberOfResults).getResultList();
+	}
+
+	@Override
+	public long findNumbreOfOperationsWhithoutCarteByMonth(long idCompte, int month, int year) {
+		DateTime date = new DateTime(year, month, 1, 0, 0);
+		DateTime datePlusUnMois;
+		if (month == 12) {
+			datePlusUnMois = new DateTime(year + 1, 1, 1, 0, 0);
+		} else {
+			datePlusUnMois = new DateTime(year, month + 1, 1, 0, 0);
+		}
+		return (Long) em.createNamedQuery("findNumberOfOperationsWithoutTypeByMonth")
+				.setParameter("idcompte", idCompte).setParameter("dateEffet", date)
+				.setParameter("datePlusUnMois", datePlusUnMois).setParameter("type", OperationType.Type.CARTE)
+				.getSingleResult();
 	}
 }
