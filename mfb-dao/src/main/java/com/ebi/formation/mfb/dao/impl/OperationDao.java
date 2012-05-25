@@ -29,7 +29,7 @@ public class OperationDao implements IOperationDao {
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.ebi.formation.mfb.dao.IOperationDao#getTotalOperationsCarteByMonth(long, int, int)
+	 * @see com.ebi.formation.mfb.dao.IOperationDao#findTotalOperationsCarteByMonth(long, int, int)
 	 */
 	@Override
 	public BigDecimal findTotalOperationsCarteByMonth(long idCompte, int month, int year) {
@@ -47,7 +47,7 @@ public class OperationDao implements IOperationDao {
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.ebi.formation.mfb.dao.IOperationDao#getTotalOperationsCarteByMonth(long, int, int)
+	 * @see com.ebi.formation.mfb.dao.IOperationDao#findNumbreOfOperationsCarteByMonth(long, int, int)
 	 */
 	@Override
 	public long findNumbreOfOperationsCarteByMonth(long idCompte, int month, int year) {
@@ -65,7 +65,7 @@ public class OperationDao implements IOperationDao {
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.ebi.formation.mfb.dao.IOperationDao#getOperationsWithoutCarteByMonthPaginated(long, int, int, int)
+	 * @see com.ebi.formation.mfb.dao.IOperationDao#findOperationsWithoutCarteByMonthPaginated(long, int, int, int)
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
@@ -87,7 +87,7 @@ public class OperationDao implements IOperationDao {
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.ebi.formation.mfb.dao.IOperationDao#getOperationsCarteByMonthPaginated(long, int, int, int)
+	 * @see com.ebi.formation.mfb.dao.IOperationDao#findOperationsCarteByMonthPaginated(long, int, int, int)
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
