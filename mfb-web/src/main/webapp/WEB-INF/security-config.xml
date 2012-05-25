@@ -15,7 +15,7 @@
 		<intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
 		<intercept-url pattern="/client/**" access="ROLE_CLIENT" />
 		<form-login login-page="/login.html" default-target-url="/home.html"
-			always-use-default-target="true" />
+			always-use-default-target="true" authentication-failure-url="/login.html" />
 		<logout logout-success-url="/login.html" />
 		
 		<session-management>

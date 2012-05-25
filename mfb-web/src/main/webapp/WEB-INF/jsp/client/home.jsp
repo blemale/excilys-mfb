@@ -24,7 +24,7 @@
 							<th><spring:message code="home.accountNumber" /></th>
 							<th><spring:message code="home.label" /></th>
 							<th><spring:message code="home.solde" /></th>
-							<th>:-)</th>
+							<th>&nbsp;</th>
 						</tr>
 					</thead>
 					<tbody>

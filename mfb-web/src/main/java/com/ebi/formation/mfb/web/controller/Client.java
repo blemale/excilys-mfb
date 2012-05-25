@@ -32,7 +32,7 @@ public class Client {
 	 * @param principal
 	 * @return ModelAndView
 	 */
-	@RequestMapping("home.html")
+	@RequestMapping(value = "home.html", method = RequestMethod.GET)
 	public ModelAndView redirect(Principal principal) {
 		return new ModelAndView("home", "comptes", compteService.findComptesByUsername(principal.getName()));
 	}
