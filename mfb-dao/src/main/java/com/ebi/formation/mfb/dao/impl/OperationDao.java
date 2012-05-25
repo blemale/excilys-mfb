@@ -23,7 +23,6 @@ import com.ebi.formation.mfb.entities.OperationType;
 @Repository
 public class OperationDao implements IOperationDao {
 
-	public static final int NUMBER_OF_OPERATIONS_BY_PAGE = 20;
 	@PersistenceContext
 	private EntityManager em;
 

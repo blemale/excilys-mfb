@@ -10,9 +10,9 @@
 		@NamedQuery(name = "findNumberOfOperationsWithoutTypeByMonth", query = "SELECT COUNT(o) FROM Operation o WHERE o.type.label != :type AND o.compte.id = :idcompte "
 				+ "and o.dateEffet BETWEEN :dateEffet AND :datePlusUnMois"),
 		@NamedQuery(name = "findOperationsWithoutCarteByMonthPaginated", query = "SELECT o FROM Operation o WHERE o.type.label <> 'CARTE' AND o.compte.id = :idcompte "
-				+ "and o.dateEffet BETWEEN :dateEffet AND :datePlusUnMois ORDER BY o.dateEffet"),
+				+ "and o.dateEffet BETWEEN :dateEffet AND :datePlusUnMois ORDER BY o.dateEffet DESC"),
 		@NamedQuery(name = "findOperationsCarteByMonthPaginated", query = "SELECT o FROM Operation o WHERE o.type.label = 'CARTE' AND o.compte.id = :idcompte "
-				+ "and o.dateEffet BETWEEN :dateEffet AND :datePlusUnMois ORDER BY o.dateEffet") })
+				+ "and o.dateEffet BETWEEN :dateEffet AND :datePlusUnMois ORDER BY o.dateEffet DESC") })
 package com.ebi.formation.mfb.entities;
 
 import org.hibernate.annotations.NamedQueries;
