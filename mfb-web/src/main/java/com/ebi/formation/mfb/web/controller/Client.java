@@ -1,5 +1,6 @@
 package com.ebi.formation.mfb.web.controller;
 
+import java.math.BigDecimal;
 import java.security.Principal;
 import java.util.ArrayList;
 
@@ -69,8 +70,7 @@ public class Client {
 		mv.addObject("nextMonth", false);
 		mv.addObject("numMonthHistory", 5);
 		mv.addObject("numPageMonth", 5);
-		mv.addObject("carte", true);
-		mv.addObject("soldeCarte", 123.456);
+		mv.addObject("soldeCarte", new BigDecimal(123.456));
 		mv.addObject("operations", new ArrayList<Object>());
 		mv.addObject("idCompte", idCompte);
 		mv.addObject("currentYear", DateTime.now().getYear());
@@ -98,8 +98,7 @@ public class Client {
 		mv.addObject("nextMonth", false);
 		mv.addObject("numMonthHistory", 5);
 		mv.addObject("numPageMonth", 5);
-		mv.addObject("carte", true);
-		mv.addObject("soldeCarte", 123.456);
+		mv.addObject("soldeCarte", new BigDecimal(123.456));
 		mv.addObject("operations", new ArrayList<Object>());
 		mv.addObject("idCompte", idCompte);
 		mv.addObject("currentYear", year);
@@ -127,8 +126,7 @@ public class Client {
 		mv.addObject("nextMonth", true);
 		mv.addObject("numMonthHistory", 5);
 		mv.addObject("numPageMonth", 5);
-		mv.addObject("carte", true);
-		mv.addObject("soldeCarte", 123.456);
+		mv.addObject("soldeCarte", new BigDecimal(123.456));
 		mv.addObject("operations", new ArrayList<Object>());
 		mv.addObject("idCompte", idCompte);
 		mv.addObject("currentYear", year);

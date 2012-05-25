@@ -69,7 +69,7 @@
 	<div class="row">
 		<div class="span8 offset2">
 			<!-- Tableau d'affichage du cumul carte -->
-			<c:if test="${carte eq true}">
+			<c:if test="${soldeCarte ne null}">
 				<h2>
 					<spring:message code="compte.operationsCarte.title" />
 				</h2>
@@ -82,7 +82,7 @@
 					</thead>
 					<tbody>
 						<tr class="clickLine"
-							onclick="lienCompte('${contextPath}/client/compte/${idCompte}/carte/detail.html')">
+							onclick="lienCompte('${contextPath}/client/compte/${idCompte}/${currentYear}/${currentMonth}/carte/detail.html')">
 							<c:if test="${soldeCarte >= 0}">
 								<td class="aligneSolde coloreVert">+ <fmt:formatNumber
 										value="${soldeCarte}" minFractionDigits="2" pattern="#,###.##" />
@@ -102,7 +102,7 @@
 					</tbody>
 				</table>
 			</c:if>
-			<c:if test="${carte eq false}">
+			<c:if test="${soldeCarte eq null}">
 				<div class="alert alert-info">
 					<spring:message code="compte.noCarteOperation" />
 				</div>
