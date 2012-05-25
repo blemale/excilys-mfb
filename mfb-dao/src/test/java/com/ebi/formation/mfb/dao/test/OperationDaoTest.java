@@ -60,6 +60,16 @@ public class OperationDaoTest {
 	}
 
 	/**
+	 * Test nombre d'opérations non carte pour un mois donné
+	 */
+	@DataSet("dataSet-OperationDaoTest.xml")
+	@Test
+	public void testfindNumberOfOperationsWithoutCarteByMonth() {
+		long total = operationDao.findNumbreOfOperationsWhithoutCarteByMonth(1, 5, 2012);
+		assertEquals(21, total);
+	}
+
+	/**
 	 * Test liste des opérations non carte pour un mois et un offset donnés
 	 */
 	@DataSet("dataSet-OperationDaoTest.xml")
