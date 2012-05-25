@@ -38,6 +38,24 @@ public class Client {
 	}
 
 	/**
+	 * 
+	 * 
+	 * @param month
+	 * @return
+	 */
+	private int[] calcTabMonthHistory(int month) {
+		int currentMonth = DateTime.now().getMonthOfYear();
+		int tabMonthHistory[] = new int[6];
+		for (int i = 0; i < 6; i++) {
+			tabMonthHistory[i] = currentMonth - i;
+			if (tabMonthHistory[i] <= 0) {
+				tabMonthHistory[i] = tabMonthHistory[i] + 12;
+			}
+		}
+		return tabMonthHistory;
+	}
+
+	/**
 	 * Par défaut
 	 * 
 	 * @param principal
@@ -56,7 +74,9 @@ public class Client {
 		mv.addObject("operations", new ArrayList<Object>());
 		mv.addObject("idCompte", idCompte);
 		mv.addObject("currentYear", DateTime.now().getYear());
-		mv.addObject("currentMonth", DateTime.now().getMonthOfYear());
+		int currentMonth = DateTime.now().getMonthOfYear();
+		mv.addObject("currentMonth", currentMonth);
+		mv.addObject("monthHistory", calcTabMonthHistory(currentMonth));
 		mv.addObject("currentPage", 0);
 		return mv;
 	}
@@ -84,6 +104,7 @@ public class Client {
 		mv.addObject("idCompte", idCompte);
 		mv.addObject("currentYear", year);
 		mv.addObject("currentMonth", month);
+		mv.addObject("monthHistory", calcTabMonthHistory(month));
 		mv.addObject("currentPage", 0);
 		return mv;
 	}
@@ -112,6 +133,7 @@ public class Client {
 		mv.addObject("idCompte", idCompte);
 		mv.addObject("currentYear", year);
 		mv.addObject("currentMonth", month);
+		mv.addObject("monthHistory", calcTabMonthHistory(month));
 		mv.addObject("currentPage", page);
 		return mv;
 	}
@@ -132,7 +154,9 @@ public class Client {
 		mv.addObject("numPageMonth", 5);
 		mv.addObject("idCompte", idCompte);
 		mv.addObject("currentYear", DateTime.now().getYear());
-		mv.addObject("currentMonth", DateTime.now().getMonthOfYear());
+		int currentMonth = DateTime.now().getMonthOfYear();
+		mv.addObject("currentMonth", currentMonth);
+		mv.addObject("monthHistory", calcTabMonthHistory(currentMonth));
 		mv.addObject("currentPage", 0);
 		mv.addObject("cartes", new ArrayList<Object>());
 		return mv;
@@ -161,6 +185,7 @@ public class Client {
 		mv.addObject("idCompte", idCompte);
 		mv.addObject("currentYear", year);
 		mv.addObject("currentMonth", month);
+		mv.addObject("monthHistory", calcTabMonthHistory(month));
 		mv.addObject("currentPage", 0);
 		return mv;
 	}
@@ -189,6 +214,7 @@ public class Client {
 		mv.addObject("idCompte", idCompte);
 		mv.addObject("currentYear", year);
 		mv.addObject("currentMonth", month);
+		mv.addObject("monthHistory", calcTabMonthHistory(month));
 		mv.addObject("currentPage", page);
 		return mv;
 	}
