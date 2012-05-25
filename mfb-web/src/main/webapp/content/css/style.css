@@ -23,6 +23,7 @@
     color: #BBBBBB;
     text-decoration: none;
 }
+
 .clickLine {
 	cursor: pointer;
 }
@@ -36,4 +37,12 @@
 }
 .coloreRouge {
 	color: #5f0101;
+}
+
+.alignCenter {
+	text-align : center;
+}
+
+.row, .row-fluid {
+	margin : 20px 0px;
 }
