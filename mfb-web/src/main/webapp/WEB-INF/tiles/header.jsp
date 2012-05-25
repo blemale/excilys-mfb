@@ -15,19 +15,6 @@
 					<li class="divider-vertical"></li>
 					<sec:authorize access="isAuthenticated()">
 						<li class=""><a href="${contextPath}/home.html"><spring:message code="header.link.home" /></a></li>
-						<li>
-							<div class="btn-group">
-	  							<button class="btn">Action</button>
-	  							<button class="btn dropdown-toggle" data-toggle="dropdown">
-	    							<span class="caret"></span>
-	  							</button>
-	  							<ul class="dropdown-menu">
-									<li>toto</li>
-									<li>titi</li>
-									<li>tutu</li>
-	  							</ul>
-							</div>
-						</li>
 					</sec:authorize>
 					<sec:authorize access="hasRole('ROLE_ADMIN') and hasRole('ROLE_CLIENT')">
 						<li class=""><a href="${contextPath}/admin/home.html"><spring:message code="header.link.admin" /></a></li>
