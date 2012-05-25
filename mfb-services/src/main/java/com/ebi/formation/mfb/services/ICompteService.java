@@ -2,6 +2,8 @@ package com.ebi.formation.mfb.services;
 
 import java.util.List;
 
+import org.springframework.security.access.annotation.Secured;
+
 import com.ebi.formation.mfb.entities.Compte;
 
 /**
@@ -18,7 +20,9 @@ public interface ICompteService {
 	 * @param username
 	 * @return
 	 */
+	@Secured("ROLE_CLIENT")
 	List<Compte> findComptesByUsername(String username);
 
+	@Secured("ROLE_CLIENT")
 	boolean checkCompteOwnershipByUsernameAndCompteId(String username, Long compteId);
 }

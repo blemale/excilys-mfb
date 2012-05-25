@@ -55,7 +55,7 @@ public class OperationDaoTest {
 	@DataSet("dataSet-OperationDaoTest.xml")
 	@Test
 	public void testfindNumberOfOperationsCarteByMonth() {
-		long total = operationDao.findNumbreOfOperationsCarteByMonth(1, 5, 2012);
+		long total = operationDao.findNumberOfOperationsCarteByMonth(1, 5, 2012);
 		assertEquals(22, total);
 	}
 
@@ -65,7 +65,7 @@ public class OperationDaoTest {
 	@DataSet("dataSet-OperationDaoTest.xml")
 	@Test
 	public void testfindNumberOfOperationsWithoutCarteByMonth() {
-		long total = operationDao.findNumbreOfOperationsWhithoutCarteByMonth(1, 5, 2012);
+		long total = operationDao.findNumberOfOperationsWithoutCarteByMonth(1, 5, 2012);
 		assertEquals(21, total);
 	}
 
