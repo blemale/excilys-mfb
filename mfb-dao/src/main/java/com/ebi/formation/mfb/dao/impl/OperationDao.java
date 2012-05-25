@@ -33,12 +33,7 @@ public class OperationDao implements IOperationDao {
 	@Override
 	public BigDecimal findTotalOperationsCarteByMonth(long idCompte, int month, int year) {
 		DateTime date = new DateTime(year, month, 1, 0, 0);
-		DateTime datePlusUnMois;
-		if (month == 12) {
-			datePlusUnMois = new DateTime(year + 1, 1, 1, 0, 0);
-		} else {
-			datePlusUnMois = new DateTime(year, month + 1, 1, 0, 0);
-		}
+		DateTime datePlusUnMois = date.plusMonths(1);
 		return (BigDecimal) em.createNamedQuery("findTotalOperationsCarteByMonth").setParameter("idcompte", idCompte)
 				.setParameter("dateEffet", date).setParameter("datePlusUnMois", datePlusUnMois)
 				.setParameter("type", OperationType.Type.CARTE).getSingleResult();
@@ -51,12 +46,7 @@ public class OperationDao implements IOperationDao {
 	@Override
 	public long findNumbreOfOperationsCarteByMonth(long idCompte, int month, int year) {
 		DateTime date = new DateTime(year, month, 1, 0, 0);
-		DateTime datePlusUnMois;
-		if (month == 12) {
-			datePlusUnMois = new DateTime(year + 1, 1, 1, 0, 0);
-		} else {
-			datePlusUnMois = new DateTime(year, month + 1, 1, 0, 0);
-		}
+		DateTime datePlusUnMois = date.plusMonths(1);
 		return (Long) em.createNamedQuery("findNumberOfOperationsByTypeByMonth").setParameter("idcompte", idCompte)
 				.setParameter("dateEffet", date).setParameter("datePlusUnMois", datePlusUnMois)
 				.setParameter("type", OperationType.Type.CARTE).getSingleResult();
@@ -71,14 +61,7 @@ public class OperationDao implements IOperationDao {
 	public List<Operation> findOperationsWithoutCarteByMonthPaginated(long idCompte, int month, int year, int offset,
 			int numberOfResults) {
 		DateTime date = new DateTime(year, month, 1, 0, 0);
-		DateTime datePlusUnMois;
-		if (month == 12) {
-			datePlusUnMois = new DateTime(year + 1, 1, 1, 0, 0);
-		} else {
-			datePlusUnMois = new DateTime(year, month + 1, 1, 0, 0);
-		}
-		System.out.println(date.toString());
-		System.out.println(datePlusUnMois.toString());
+		DateTime datePlusUnMois = date.plusMonths(1);
 		return em.createNamedQuery("findOperationsWithoutCarteByMonthPaginated").setParameter("idcompte", idCompte)
 				.setParameter("dateEffet", date).setParameter("datePlusUnMois", datePlusUnMois).setFirstResult(offset)
 				.setMaxResults(offset + numberOfResults).getResultList();
@@ -93,12 +76,7 @@ public class OperationDao implements IOperationDao {
 	public List<Operation> findOperationsCarteByMonthPaginated(long idCompte, int month, int year, int offset,
 			int numberOfResults) {
 		DateTime date = new DateTime(year, month, 1, 0, 0);
-		DateTime datePlusUnMois;
-		if (month == 12) {
-			datePlusUnMois = new DateTime(year + 1, 1, 1, 0, 0);
-		} else {
-			datePlusUnMois = new DateTime(year, month + 1, 1, 0, 0);
-		}
+		DateTime datePlusUnMois = date.plusMonths(1);
 		return em.createNamedQuery("findOperationsCarteByMonthPaginated").setParameter("idcompte", idCompte)
 				.setParameter("dateEffet", date).setParameter("datePlusUnMois", datePlusUnMois).setFirstResult(offset)
 				.setMaxResults(offset + numberOfResults).getResultList();
@@ -107,12 +85,7 @@ public class OperationDao implements IOperationDao {
 	@Override
 	public long findNumbreOfOperationsWhithoutCarteByMonth(long idCompte, int month, int year) {
 		DateTime date = new DateTime(year, month, 1, 0, 0);
-		DateTime datePlusUnMois;
-		if (month == 12) {
-			datePlusUnMois = new DateTime(year + 1, 1, 1, 0, 0);
-		} else {
-			datePlusUnMois = new DateTime(year, month + 1, 1, 0, 0);
-		}
+		DateTime datePlusUnMois = date.plusMonths(1);
 		return (Long) em.createNamedQuery("findNumberOfOperationsWithoutTypeByMonth")
 				.setParameter("idcompte", idCompte).setParameter("dateEffet", date)
 				.setParameter("datePlusUnMois", datePlusUnMois).setParameter("type", OperationType.Type.CARTE)
