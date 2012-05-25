@@ -70,17 +70,19 @@
 		<div class="span8 offset2">
 			<!-- Tableau d'affichage du cumul carte -->
 			<c:if test="${carte eq true}">
+				<h2>
+					<spring:message code="compte.operationsCarte.title" />
+				</h2>
 				<table class="table table-striped table-bordered">
 					<thead>
 						<tr>
-							<th><spring:message code="compte.operationCarte" /></th>
-							<th></th>
+							<th><spring:message code="compte.soldeCarte" /></th>
+							<th>&nbsp;</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr class="clickLine"
 							onclick="lienCompte('${contextPath}/client/compte/${idCompte}/carte/detail.html')">
-							<td><spring:message code="compte.soldeCarte" /></td>
 							<c:if test="${soldeCarte >= 0}">
 								<td class="aligneSolde coloreVert">+ <fmt:formatNumber
 										value="${soldeCarte}" minFractionDigits="2" pattern="#,###.##" />
