@@ -5,9 +5,9 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-<header id="overview" class="span10 offset2">
+<header id="overview" class="span8 offset2">
 	<h1>
-		<spring:message code="compte.title" />
+		<spring:message code="compte.pageTitle" />
 	</h1>
 
 	<p align="right">
@@ -16,8 +16,9 @@
 	</p>
 </header>
 
-<section id="comptes">
+<section id="compte">
 
+	<!-- Div comprenant les liens pour changer de mois et afficher le mois courant -->
 	<div class="row-fluid">
 		<div class="span4 alignCenter">
 			<c:if test="${previousMonth eq true}">
@@ -42,6 +43,7 @@
 		</div>
 	</div>
 
+	<!-- Div comprenant une liste déroulante affichant les mois qu'on peut sélectionné -->
 	<div class="row-fluid">
 		<div class="span4"></div>
 		<div class="span4 alignCenter">
@@ -62,7 +64,8 @@
 		</div>
 		<div class="span4"></div>
 	</div>
-
+	
+	<!-- Div comprenant les différentes opérations -->
 	<div class="row">
 		<div class="span8 offset2">
 			<!-- Tableau d'affichage du cumul carte -->
@@ -75,7 +78,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr class="clickLine" onclick="lienCompte('${c.numeroCompte}')">
+						<tr class="clickLine" onclick="lienCompte('${contextPath}/client/compte/${idCompte}/carte/detail.html')">
 							<td><spring:message code="compte.soldeCarte" /></td>
 							<c:if test="${soldeCarte >= 0}">
 								<td class="aligneSolde coloreVert">+ <fmt:formatNumber
@@ -89,7 +92,7 @@
 								</td>
 							</c:if>
 							<!-- TODO -->
-							<td><a class="btn btn-mini btn-info" href="#"><spring:message
+							<td><a class="btn btn-mini btn-info" href="${contextPath}/client/compte/${idCompte}/carte/detail.html"><spring:message
 										code="home.account.details" /></a></td>
 						</tr>
 					</tbody>
@@ -148,6 +151,7 @@
 		</div>
 	</div>
 
+	<!-- Div comprenant la pagination -->
 	<div class="row-fluid">
 		<div class="span12">
 			<div class="pagination pagination-centered">

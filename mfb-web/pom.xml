@@ -59,6 +59,14 @@
 			<artifactId>jcl-over-slf4j</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>com.ebi.formation</groupId>
 			<artifactId>mfb-entities</artifactId>
 			<version>${project.version}</version>
@@ -73,4 +81,116 @@
 	<build>
 		<finalName>mfb</finalName>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>integration-test</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-failsafe-plugin</artifactId>
+						<version>2.12</version>
+						<configuration>
+							<includes>
+								<include>**/selenium/**IT.java</include>
+							</includes>
+							<systemPropertyVariables>
+								<jetty.port>${jetty.port}</jetty.port>
+								<jetty.context>${webapp.path}</jetty.context>
+							</systemPropertyVariables>
+						</configuration>
+						<executions>
+							<execution>
+								<id>integration-test</id>
+								<goals>
+									<goal>integration-test</goal>
+								</goals>
+								<inherited>false</inherited>
+								<configuration>
+								</configuration>
+							</execution>
+							<execution>
+								<id>verify</id>
+								<goals>
+									<goal>verify</goal>
+								</goals>
+								<inherited>false</inherited>
+								<configuration>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>selenium-maven-plugin</artifactId>
+						<version>2.3</version>
+						<executions>
+							<execution>
+								<id>start</id>
+								<phase>pre-integration-test</phase>
+								<goals>
+									<goal>start-server</goal>
+								</goals>
+								<configuration>
+									<background>true</background>
+								</configuration>
+							</execution>
+							<execution>
+								<id>stop</id>
+								<phase>post-integration-test</phase>
+								<goals>
+									<goal>stop-server</goal>
+								</goals>
+								<inherited>false</inherited>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.mortbay.jetty</groupId>
+						<artifactId>jetty-maven-plugin</artifactId>
+						<version>8.1.3.v20120416</version>
+						<configuration>
+							<stopPort>9966</stopPort>
+          					<stopKey>foo</stopKey>
+							<scanIntervalSeconds>30</scanIntervalSeconds>
+							<connectors>
+								<connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+									<port>${jetty.port}</port>
+									<maxIdleTime>60000</maxIdleTime>
+								</connector>
+							</connectors>
+							<useTestScope>true</useTestScope>
+							<webApp>
+									<contextPath>/mfb-web</contextPath>
+							</webApp>
+						</configuration>
+						<executions>
+							<execution>
+								<id>start-jetty</id>
+								<phase>pre-integration-test</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<configuration>
+									<scanIntervalSeconds>0</scanIntervalSeconds>
+									<daemon>true</daemon>
+								</configuration>
+							</execution>
+							<execution>
+								<id>stop-jetty</id>
+								<phase>post-integration-test</phase>
+								<goals>
+									<goal>stop</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
