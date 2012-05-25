@@ -32,11 +32,11 @@
 		<appender-ref ref="ROLLING_FILE" />
 	</logger>
 
-	<logger name="org.springframework" level="info">
+	<logger name="org.springframework">
 		<appender-ref ref="ROLLING_FILE" />
 	</logger>
 
-	<root level="debug">
+	<root level="INFO">
 		<appender-ref ref="STDOUT" />
 	</root>
 </configuration>
