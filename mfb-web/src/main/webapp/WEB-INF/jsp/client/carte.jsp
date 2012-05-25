@@ -5,7 +5,7 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-<header id="overview" class="span10 offset2">
+<header id="overview" class="span8 offset2">
 	<h1>
 		<spring:message code="carte.pageTitle" />
 	</h1>

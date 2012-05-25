@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.ebi.formation.mfb.entities.Person;
 import com.ebi.formation.mfb.entities.Role.Right;
 import com.ebi.formation.mfb.services.IPersonService;
-import com.ebi.formation.mfb.web.SessionAttributesNames;
+import com.ebi.formation.mfb.web.utils.SessionAttributesNames;
 
 /**
  * Controller qui gère l'accès aux différentes pages home.html suivant les droits de l'utilisateur.
