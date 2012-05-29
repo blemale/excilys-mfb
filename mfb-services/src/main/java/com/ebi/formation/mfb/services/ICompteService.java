@@ -23,6 +23,15 @@ public interface ICompteService {
 	@Secured("ROLE_CLIENT")
 	List<Compte> findComptesByUsername(String username);
 
+	/**
+	 * Vérifie si un compte donné appartient à un utilisateur donné
+	 * 
+	 * @param username
+	 *            login de l'utilisateur
+	 * @param compteId
+	 *            id du {@link Compte}
+	 * @return
+	 */
 	@Secured("ROLE_CLIENT")
 	boolean checkCompteOwnershipByUsernameAndCompteId(String username, Long compteId);
 }

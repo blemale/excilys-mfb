@@ -4,11 +4,15 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ebi.formation.mfb.dao.IOperationDao;
 import com.ebi.formation.mfb.entities.Operation;
 import com.ebi.formation.mfb.services.IOperationService;
 
+@Service
+@Transactional(readOnly = true)
 public class OperationService implements IOperationService {
 
 	public static final int NB_RESULT_BY_DEFAULT = 20;
