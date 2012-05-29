@@ -207,9 +207,9 @@
 				<scope>test</scope>
 			</dependency>
 			<dependency>
-   				<groupId>org.seleniumhq.selenium</groupId>
-    			<artifactId>selenium-java</artifactId>
-    			<version>2.21.0</version>
+				<groupId>org.seleniumhq.selenium</groupId>
+				<artifactId>selenium-java</artifactId>
+				<version>2.21.0</version>
 			</dependency>
 			<!-- Web dependencies -->
 			<dependency>
@@ -307,6 +307,11 @@
 				<groupId>joda-time</groupId>
 				<artifactId>joda-time</artifactId>
 				<version>2.1</version>
+			</dependency>
+			<dependency>
+				<groupId>joda-time</groupId>
+				<artifactId>joda-time-jsptags</artifactId>
+				<version>1.1.1</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
