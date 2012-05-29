@@ -79,7 +79,6 @@
 							<th><spring:message code="compte.typeOperation" /></th>
 							<th><spring:message code="compte.labelOperation" /></th>
 							<th><spring:message code="compte.montantOperation" /></th>
-							<th></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -95,7 +94,7 @@
 								</c:if>
 								<c:if test="${o.montant < 0}">
 									<td class="aligneSolde coloreRouge">- <fmt:formatNumber
-											value="${c.montant*-1}" minFractionDigits="2"
+											value="${o.montant * (-1)}" minFractionDigits="2"
 											pattern="#,###.##" />
 									</td>
 								</c:if>
