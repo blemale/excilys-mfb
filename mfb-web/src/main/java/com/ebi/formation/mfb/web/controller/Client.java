@@ -1,9 +1,7 @@
 package com.ebi.formation.mfb.web.controller;
 
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
 
@@ -97,25 +95,27 @@ public class Client {
 				operationService.getOperationsWithoutCarteByMonthPaginated(idCompte, month, year, page));
 		mv.addObject("soldeCarte", operationService.getTotalOperationsCarteByMonth(idCompte, month, year));
 		mv.addObject("compte", compteService.getCompteById(idCompte));
+		DateTime currentDate = new DateTime(year, month, 1, 0, 0);
 		if (hasPreviousMonth(month, year)) {
-			DateTime monthBefore = DateTime.now().minusMonths(1);
+			DateTime monthBefore = currentDate.minusMonths(1);
 			mv.addObject(
-					"previousMonth",
+					"urlPreviousMonth",
 					LinkBuilder.getLink("client", "compte", idCompte.longValue(), monthBefore.getYear(),
 							monthBefore.getMonthOfYear(), "detail.html"));
 		}
 		if (hasNextMonth(month, year)) {
-			DateTime monthBefore = DateTime.now().plusMonths(1);
+			DateTime monthBefore = currentDate.plusMonths(1);
 			mv.addObject(
-					"nextMonth",
+					"urlNextMonth",
 					LinkBuilder.getLink("client", "compte", idCompte.longValue(), monthBefore.getYear(),
 							monthBefore.getMonthOfYear(), "detail.html"));
 		}
-		mv.addObject("currentYear", year);
-		mv.addObject("currentMonth", month);
+		DateTimeFormatter fmt = DateTimeFormat.forPattern("MMMM YYYY");
+		DateTimeFormatter localeFmt = fmt.withLocale(locale);
+		mv.addObject("currentDate", localeFmt.print(currentDate));
 		long nbPages = operationService.getNumberOfPagesForOperationsWithoutCartesByMonth(idCompte, month, year);
 		mv.addObject("numPageMonth", nbPages);
-		mv.addObject("urlPages", getPagesUrlsWithoutCarte(idCompte, year, month, nbPages));
+		mv.addObject("mapUrlPages", getPagesUrlsWithoutCarte(idCompte, year, month, nbPages));
 		mv.addObject("currentPage", page);
 		mv.addObject("urlDetailCarte",
 				LinkBuilder.getLink("client", "compte", idCompte, year, month, "carte", "detail.html"));
@@ -172,25 +172,27 @@ public class Client {
 		mv.addObject("operations", operationService.getOperationsCarteByMonthPaginated(idCompte, month, year, page));
 		mv.addObject("soldeCarte", operationService.getTotalOperationsCarteByMonth(idCompte, month, year));
 		mv.addObject("compte", compteService.getCompteById(idCompte));
+		DateTime currentDate = new DateTime(year, month, 1, 0, 0);
 		if (hasPreviousMonth(month, year)) {
-			DateTime monthBefore = DateTime.now().minusMonths(1);
+			DateTime monthBefore = currentDate.minusMonths(1);
 			mv.addObject(
-					"previousMonth",
+					"urlPreviousMonth",
 					LinkBuilder.getLink("client", "compte", idCompte.longValue(), monthBefore.getYear(),
 							monthBefore.getMonthOfYear(), "carte", "detail.html"));
 		}
 		if (hasNextMonth(month, year)) {
-			DateTime monthBefore = DateTime.now().plusMonths(1);
+			DateTime monthBefore = currentDate.plusMonths(1);
 			mv.addObject(
-					"nextMonth",
+					"urlNextMonth",
 					LinkBuilder.getLink("client", "compte", idCompte.longValue(), monthBefore.getYear(),
 							monthBefore.getMonthOfYear(), "carte", "detail.html"));
 		}
-		mv.addObject("currentYear", year);
-		mv.addObject("currentMonth", month);
+		DateTimeFormatter fmt = DateTimeFormat.forPattern("MMMM YYYY");
+		DateTimeFormatter localeFmt = fmt.withLocale(locale);
+		mv.addObject("currentDate", localeFmt.print(currentDate));
 		long nbPages = operationService.getNumberOfPagesForOperationsCartesByMonth(idCompte, month, year);
 		mv.addObject("numPageMonth", nbPages);
-		mv.addObject("urlPages", getPagesUrlsCarte(idCompte, year, month, nbPages));
+		mv.addObject("mapUrlPages", getPagesUrlsCarte(idCompte, year, month, nbPages));
 		mv.addObject("currentPage", page);
 		mv.addObject("urlDetailCompte", LinkBuilder.getLink("client", "compte", idCompte, year, month, "detail.html"));
 		mv.addObject("mapNamesUrlsForMonths", getMonthUrlsCarte(locale, idCompte));
@@ -233,24 +235,25 @@ public class Client {
 		return 0L <= page && page <= operationService.getNumberOfPagesForOperationsCartesByMonth(idCompte, month, year);
 	}
 
-	private List<String> getPagesUrlsWithoutCarte(Long idCompte, int year, int month, long nbPages) {
-		List<String> urls = new ArrayList<String>();
+	private Map<Long, String> getPagesUrlsWithoutCarte(Long idCompte, int year, int month, long nbPages) {
+		Map<Long, String> map = new LinkedHashMap<Long, String>();
 		for (long indexPage = 0; indexPage < nbPages; indexPage++) {
-			urls.add(LinkBuilder.getLink("client", "compte", idCompte, year, month, indexPage, "detail.html"));
+			map.put(indexPage, LinkBuilder.getLink("client", "compte", idCompte, year, month, indexPage, "detail.html"));
 		}
-		return urls;
+		return map;
 	}
 
-	private List<String> getPagesUrlsCarte(Long idCompte, int year, int month, long nbPages) {
-		List<String> urls = new ArrayList<String>();
+	private Map<Long, String> getPagesUrlsCarte(Long idCompte, int year, int month, long nbPages) {
+		Map<Long, String> map = new LinkedHashMap<Long, String>();
 		for (long indexPage = 0; indexPage < nbPages; indexPage++) {
-			urls.add(LinkBuilder.getLink("client", "compte", idCompte, year, month, indexPage, "carte", "detail.html"));
+			map.put(indexPage,
+					LinkBuilder.getLink("client", "compte", idCompte, year, month, indexPage, "carte", "detail.html"));
 		}
-		return urls;
+		return map;
 	}
 
 	private Map<String, String> getMonthUrlsWithoutCarte(Locale locale, Long idCompte) {
-		Map<String, String> mapNamesUrls = new HashMap<String, String>();
+		Map<String, String> mapNamesUrls = new LinkedHashMap<String, String>();
 		DateTime now = DateTime.now();
 		for (int i = 0; i <= 5; i++) {
 			DateTime month = now.minusMonths(i);
@@ -263,7 +266,7 @@ public class Client {
 	}
 
 	private Map<String, String> getMonthUrlsCarte(Locale locale, Long idCompte) {
-		Map<String, String> mapNamesUrls = new HashMap<String, String>();
+		Map<String, String> mapNamesUrls = new LinkedHashMap<String, String>();
 		DateTime now = DateTime.now();
 		for (int i = 0; i <= 5; i++) {
 			DateTime month = now.minusMonths(i);

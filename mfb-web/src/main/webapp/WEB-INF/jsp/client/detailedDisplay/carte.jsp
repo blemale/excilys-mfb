@@ -11,7 +11,7 @@
 	</h1>
 
 	<p align="right">
-		<a href="${contextPath}/client/compte/${idCompte}/detail.html" class="btn btn-info"><spring:message
+		<a href="${contextPath}${urlDetailCompte}" class="btn btn-info"><spring:message
 				code="carte.home" /></a>
 	</p>
 </header>
@@ -21,21 +21,20 @@
 	<!-- Div comprenant les liens pour changer de mois et afficher le mois courant -->
 	<div class="row-fluid">
 		<div class="span4 alignCenter">
-			<c:if test="${previousMonth eq true}">
+			<c:if test="${urlPreviousMonth ne null}">
 				<a class="btn"
-					href="${contextPath}/client/compte/${idCompte}/${currentYear}/${currentMonth - 1}/carte/detail.html"><i
+					href="${contextPath}${urlPreviousMonth}"><i
 					class="icon-chevron-left"></i> <spring:message
 						code="compte.month.previous" /> </a>
 			</c:if>
 		</div>
 		<div class="span4 alignCenter">
-			<button class="btn disabled">${currentMonth} /
-				${currentYear}</button>
+			<button class="btn disabled">${currentDate}</button>
 		</div>
 		<div class="span4 alignCenter">
-			<c:if test="${nextMonth eq true}">
+			<c:if test="${urlNextMonth ne null}">
 				<a class="btn"
-					href="${contextPath}/client/compte/${idCompte}/${currentYear}/${currentMonth + 1}/carte/detail.html">
+					href="${contextPath}${urlNextMonth}">
 					<spring:message code="compte.month.next" /> <i
 					class="icon-chevron-right"></i>
 				</a>
@@ -50,13 +49,12 @@
 			<div class="btn-toolbar">
 				<div class="btn-group">
 					<button class="btn dropdown-toggle" data-toggle="dropdown">
-						${currentMonth} / ${currentYear} <span class="caret"></span>
+						${currentDate} <span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu">
-						<c:forEach items="${monthHistory}" var="i">
+						<c:forEach items="${mapNamesUrlsForMonths}" var="entry">
 							<li><a
-								href="${contextPath}/client/compte/${idCompte}/${currentYear}/${i}/carte/detail.html">${i}
-									/ ${currentYear}</a></li>
+								href="${contextPath}${entry.value}">${entry.key}</a></li>
 						</c:forEach>
 					</ul>
 				</div>
@@ -77,18 +75,18 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${cartes}" var="c">
+					<c:forEach items="${operations}" var="o">
 						<tr class="clickLine">
-							<td>${c.dateEffet}</td>
-							<td>${c.label}</td>
-							<c:if test="${c.montant >= 0}">
+							<td>${o.dateEffet}</td>
+							<td>${o.label}</td>
+							<c:if test="${o.montant >= 0}">
 								<td class="aligneSolde coloreVert">+ <fmt:formatNumber
-										value="${c.montant}" minFractionDigits="2" pattern="#,###.##" />
+										value="${o.montant}" minFractionDigits="2" pattern="#,###.##" />
 								</td>
 							</c:if>
-							<c:if test="${c.montant < 0}">
+							<c:if test="${o.montant < 0}">
 								<td class="aligneSolde coloreRouge">- <fmt:formatNumber
-										value="${c.montant*-1}" minFractionDigits="2"
+										value="${o.montant*-1}" minFractionDigits="2"
 										pattern="#,###.##" />
 								</td>
 							</c:if>
@@ -107,12 +105,12 @@
 			<div class="pagination pagination-centered">
 				<ul>
 					<li><a href="#">«</a></li>
-					<c:forEach var="i" begin="0" end="${numPageMonth-1}">
-						<c:if test="${currentPage eq i}">
-							<li class="active"><a href="#">${i}</a></li>
+					<c:forEach items="${mapUrlPages}" var="entry">
+						<c:if test="${currentPage eq entry.key}">
+							<li class="active"><a href="${contextPath}${entry.value}">${entry.key}</a></li>
 						</c:if>
-						<c:if test="${currentPage ne i}">
-							<li><a href="#">${i}</a></li>
+						<c:if test="${currentPage ne entry.key}">
+							<li><a href="${contextPath}${entry.value}">${entry.key}</a></li>
 						</c:if>
 					</c:forEach>
 					<li><a href="#">»</a></li>
@@ -120,5 +118,6 @@
 			</div>
 		</div>
 	</div>
+
 
 </section>
