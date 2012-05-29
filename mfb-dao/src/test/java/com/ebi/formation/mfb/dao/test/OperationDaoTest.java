@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.math.BigDecimal;
 import java.util.List;
 
+import org.joda.time.DateTime;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +46,9 @@ public class OperationDaoTest {
 	@DataSet("dataSet-OperationDaoTest.xml")
 	@Test
 	public void testFindTotalOperationsCartes() {
-		BigDecimal total = operationDao.findTotalOperationsCarteByMonth(1, 5, 2012);
+		DateTime date = new DateTime(2012, 5, 1, 0, 0);
+		DateTime datePlusUnMois = date.plusMonths(1);
+		BigDecimal total = operationDao.findTotalOperationsCarteByMonth(1, date, datePlusUnMois);
 		assertEquals(0, total.compareTo(new BigDecimal(4300)));
 	}
 
@@ -55,7 +58,9 @@ public class OperationDaoTest {
 	@DataSet("dataSet-OperationDaoTest.xml")
 	@Test
 	public void testfindNumberOfOperationsCarteByMonth() {
-		long total = operationDao.findNumberOfOperationsCarteByMonth(1, 5, 2012);
+		DateTime date = new DateTime(2012, 5, 1, 0, 0);
+		DateTime datePlusUnMois = date.plusMonths(1);
+		long total = operationDao.findNumberOfOperationsCarteByMonth(1, date, datePlusUnMois);
 		assertEquals(22, total);
 	}
 
@@ -65,7 +70,9 @@ public class OperationDaoTest {
 	@DataSet("dataSet-OperationDaoTest.xml")
 	@Test
 	public void testfindNumberOfOperationsWithoutCarteByMonth() {
-		long total = operationDao.findNumberOfOperationsWithoutCarteByMonth(1, 5, 2012);
+		DateTime date = new DateTime(2012, 5, 1, 0, 0);
+		DateTime datePlusUnMois = date.plusMonths(1);
+		long total = operationDao.findNumberOfOperationsWithoutCarteByMonth(1, date, datePlusUnMois);
 		assertEquals(21, total);
 	}
 
@@ -75,7 +82,10 @@ public class OperationDaoTest {
 	@DataSet("dataSet-OperationDaoTest.xml")
 	@Test
 	public void testFindOperationsWithoutCartesByMonthPaginated() {
-		List<Operation> operations = operationDao.findOperationsWithoutCarteByMonthPaginated(1, 5, 2012, 0, 20);
+		DateTime date = new DateTime(2012, 5, 1, 0, 0);
+		DateTime datePlusUnMois = date.plusMonths(1);
+		List<Operation> operations = operationDao.findOperationsWithoutCarteByMonthPaginated(1, date, datePlusUnMois,
+				0, 20);
 		BigDecimal i = new BigDecimal(0);
 		for (Operation operation : operations) {
 			i = i.add(operation.getMontant());
@@ -89,7 +99,10 @@ public class OperationDaoTest {
 	@DataSet("dataSet-OperationDaoTest.xml")
 	@Test
 	public void testFindOperationsWithoutCartesByMonthPaginatedUn() {
-		List<Operation> operations = operationDao.findOperationsWithoutCarteByMonthPaginated(1, 5, 2012, 20, 20);
+		DateTime date = new DateTime(2012, 5, 1, 0, 0);
+		DateTime datePlusUnMois = date.plusMonths(1);
+		List<Operation> operations = operationDao.findOperationsWithoutCarteByMonthPaginated(1, date, datePlusUnMois,
+				20, 20);
 		BigDecimal i = new BigDecimal(0);
 		for (Operation operation : operations) {
 			i = i.add(operation.getMontant());
@@ -103,7 +116,9 @@ public class OperationDaoTest {
 	@DataSet("dataSet-OperationDaoTest.xml")
 	@Test
 	public void testFindOperationsCarteByMonthPaginated() {
-		List<Operation> operations = operationDao.findOperationsCarteByMonthPaginated(1, 5, 2012, 0, 20);
+		DateTime date = new DateTime(2012, 5, 1, 0, 0);
+		DateTime datePlusUnMois = date.plusMonths(1);
+		List<Operation> operations = operationDao.findOperationsCarteByMonthPaginated(1, date, datePlusUnMois, 0, 20);
 		BigDecimal i = new BigDecimal(0);
 		for (Operation operation : operations) {
 			i = i.add(operation.getMontant());
@@ -117,7 +132,9 @@ public class OperationDaoTest {
 	@DataSet("dataSet-OperationDaoTest.xml")
 	@Test
 	public void testFindOperationsCarteByMonthPaginatedUn() {
-		List<Operation> operations = operationDao.findOperationsCarteByMonthPaginated(1, 5, 2012, 20, 20);
+		DateTime date = new DateTime(2012, 5, 1, 0, 0);
+		DateTime datePlusUnMois = date.plusMonths(1);
+		List<Operation> operations = operationDao.findOperationsCarteByMonthPaginated(1, date, datePlusUnMois, 20, 20);
 		BigDecimal i = new BigDecimal(0);
 		for (Operation operation : operations) {
 			i = i.add(operation.getMontant());
