@@ -32,8 +32,22 @@ public class CompteService implements ICompteService {
 		return compteDao.findComptesByUsername(username);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.services.ICompteService#checkCompteOwnershipByUsernameAndCompteId(java.lang.String,
+	 * java.lang.Long)
+	 */
 	@Override
 	public boolean checkCompteOwnershipByUsernameAndCompteId(String username, Long compteId) {
 		return compteDao.checkCompteOwnershipByUsernameAndCompteId(username, compteId);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.services.ICompteService#getCompteById(java.lang.Long)
+	 */
+	@Override
+	public Compte getCompteById(Long id) {
+		return compteDao.findCompteById(id);
 	}
 }
