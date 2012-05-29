@@ -43,13 +43,13 @@
 	<!-- Page de details d'un compte -->
 	<definition name="detailCompte" extends="baseLayout">
 		<put-attribute name="title" value="title.compte" />
-		<put-attribute name="body" value="/WEB-INF/jsp/client/compte.jsp" />
+		<put-attribute name="body" value="/WEB-INF/jsp/client/detailedDisplay/compte.jsp" />
 	</definition>
 	
 	<!-- Page de details des operations CARTE -->
 	<definition name="detailCompteCarte" extends="baseLayout">
 		<put-attribute name="title" value="title.compte" />
-		<put-attribute name="body" value="/WEB-INF/jsp/client/carte.jsp" />
+		<put-attribute name="body" value="/WEB-INF/jsp/client/detailedDisplay/carte.jsp" />
 	</definition>
 
 </tiles-definitions>
