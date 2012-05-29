@@ -43,4 +43,15 @@ public class CompteDao implements ICompteDao {
 		}
 		return true;
 	}
+
+	@Override
+	public Compte findCompteById(long id) {
+		Compte c = null;
+		try {
+			return em.createNamedQuery("findCompteById", Compte.class).setParameter("id", id).getSingleResult();
+		} catch (NoResultException nre) {
+			// TODO logger pour l'ecxeption
+		}
+		return c;
+	}
 }

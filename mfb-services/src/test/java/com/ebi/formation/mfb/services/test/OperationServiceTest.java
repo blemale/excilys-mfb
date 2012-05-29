@@ -30,26 +30,26 @@ public class OperationServiceTest {
 	@Test
 	public void testGetTotalOperationsCarteByMonthWithOperation() {
 		when(operationDao.findTotalOperationsCarteByMonth(1, 1, 2012)).thenReturn(new BigDecimal(1));
-		when(operationDao.findNumbreOfOperationsCarteByMonth(1, 1, 2012)).thenReturn(2L);
+		when(operationDao.findNumberOfOperationsCarteByMonth(1, 1, 2012)).thenReturn(2L);
 		assertEquals(0, operationService.getTotalOperationsCarteByMonth(1, 1, 2012).compareTo(new BigDecimal(1)));
 	}
 
 	@Test
 	public void testGetTotalOperationsCarteByMonthWithoutOperation() {
-		when(operationDao.findNumbreOfOperationsCarteByMonth(1, 1, 2012)).thenReturn(0L);
+		when(operationDao.findNumberOfOperationsCarteByMonth(1, 1, 2012)).thenReturn(0L);
 		assertEquals(null, operationService.getTotalOperationsCarteByMonth(1, 1, 2012));
 	}
 
 	@Test
 	public void testGetNumbreOfOperationsCarteByMonth() {
-		when(operationDao.findNumbreOfOperationsCarteByMonth(1, 1, 2012)).thenReturn(42L);
-		assertEquals(42L, operationService.getNumbreOfOperationsCarteByMonth(1, 1, 2012));
+		when(operationDao.findNumberOfOperationsCarteByMonth(1, 1, 2012)).thenReturn(42L);
+		assertEquals(42L, operationService.getNumberOfOperationsCarteByMonth(1, 1, 2012));
 	}
 
 	@Test
 	public void testGetNumbreOfOperationsWhithoutCarteByMonth() {
-		when(operationDao.findNumbreOfOperationsWhithoutCarteByMonth(1, 1, 2012)).thenReturn(42L);
-		assertEquals(42L, operationService.getNumbreOfOperationsWhithoutCarteByMonth(1, 1, 2012));
+		when(operationDao.findNumberOfOperationsWithoutCarteByMonth(1, 1, 2012)).thenReturn(42L);
+		assertEquals(42L, operationService.getNumberOfOperationsWithoutCarteByMonth(1, 1, 2012));
 	}
 
 	@Test
@@ -69,7 +69,7 @@ public class OperationServiceTest {
 	}
 
 	@Test
-	public void getOperationsCarteByMonthPaginated() {
+	public void testGetOperationsCarteByMonthPaginated() {
 		List<Operation> result = new ArrayList<Operation>();
 		result.add(new Operation());
 		when(operationDao.findOperationsCarteByMonthPaginated(1, 1, 2012, 0, 20)).thenReturn(result);
@@ -77,10 +77,42 @@ public class OperationServiceTest {
 	}
 
 	@Test
-	public void getOperationsCarteByMonthPaginatedWithPage() {
+	public void testGetOperationsCarteByMonthPaginatedWithPage() {
 		List<Operation> result = new ArrayList<Operation>();
 		result.add(new Operation());
 		when(operationDao.findOperationsCarteByMonthPaginated(1, 1, 2012, 0, 20)).thenReturn(result);
 		assertEquals(result, operationService.getOperationsCarteByMonthPaginated(1, 1, 2012, 0));
+	}
+
+	@Test
+	public void testGetNumberOfPagesForOperationsWithoutCartesByMonth() {
+		when(operationDao.findNumberOfOperationsWithoutCarteByMonth(1, 1, 2012)).thenReturn(400L);
+		when(operationDao.findNumberOfOperationsWithoutCarteByMonth(2, 1, 2012)).thenReturn(410L);
+		assertEquals(20, operationService.getNumberOfPagesForOperationsWithoutCartesByMonth(1, 1, 2012));
+		assertEquals(21, operationService.getNumberOfPagesForOperationsWithoutCartesByMonth(2, 1, 2012));
+	}
+
+	@Test
+	public void testGetNumberOfPagesForOperationsWithoutCartesByMonthWithCustom() {
+		when(operationDao.findNumberOfOperationsWithoutCarteByMonth(1, 1, 2012)).thenReturn(600L);
+		when(operationDao.findNumberOfOperationsWithoutCarteByMonth(2, 1, 2012)).thenReturn(620L);
+		assertEquals(20, operationService.getNumberOfPagesForOperationsWithoutCartesByMonth(1, 1, 2012, 30));
+		assertEquals(21, operationService.getNumberOfPagesForOperationsWithoutCartesByMonth(2, 1, 2012, 30));
+	}
+
+	@Test
+	public void testGetNumberOfPagesForOperationsCartesByMonth() {
+		when(operationDao.findNumberOfOperationsCarteByMonth(1, 1, 2012)).thenReturn(400L);
+		when(operationDao.findNumberOfOperationsCarteByMonth(2, 1, 2012)).thenReturn(410L);
+		assertEquals(20, operationService.getNumberOfPagesForOperationsCartesByMonth(1, 1, 2012));
+		assertEquals(21, operationService.getNumberOfPagesForOperationsCartesByMonth(2, 1, 2012));
+	}
+
+	@Test
+	public void testGetNumberOfPagesForOperationsCartesByMonthWithCustom() {
+		when(operationDao.findNumberOfOperationsWithoutCarteByMonth(1, 1, 2012)).thenReturn(900L);
+		when(operationDao.findNumberOfOperationsWithoutCarteByMonth(2, 1, 2012)).thenReturn(925L);
+		assertEquals(30, operationService.getNumberOfPagesForOperationsWithoutCartesByMonth(1, 1, 2012, 30));
+		assertEquals(31, operationService.getNumberOfPagesForOperationsWithoutCartesByMonth(2, 1, 2012, 30));
 	}
 }

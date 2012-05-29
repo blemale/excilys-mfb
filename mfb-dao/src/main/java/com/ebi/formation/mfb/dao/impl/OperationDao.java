@@ -44,7 +44,7 @@ public class OperationDao implements IOperationDao {
 	 * @see com.ebi.formation.mfb.dao.IOperationDao#findNumbreOfOperationsCarteByMonth(long, int, int)
 	 */
 	@Override
-	public long findNumbreOfOperationsCarteByMonth(long idCompte, int month, int year) {
+	public long findNumberOfOperationsCarteByMonth(long idCompte, int month, int year) {
 		DateTime date = new DateTime(year, month, 1, 0, 0);
 		DateTime datePlusUnMois = date.plusMonths(1);
 		return (Long) em.createNamedQuery("findNumberOfOperationsByTypeByMonth").setParameter("idcompte", idCompte)
@@ -83,7 +83,7 @@ public class OperationDao implements IOperationDao {
 	}
 
 	@Override
-	public long findNumbreOfOperationsWhithoutCarteByMonth(long idCompte, int month, int year) {
+	public long findNumberOfOperationsWithoutCarteByMonth(long idCompte, int month, int year) {
 		DateTime date = new DateTime(year, month, 1, 0, 0);
 		DateTime datePlusUnMois = date.plusMonths(1);
 		return (Long) em.createNamedQuery("findNumberOfOperationsWithoutTypeByMonth")

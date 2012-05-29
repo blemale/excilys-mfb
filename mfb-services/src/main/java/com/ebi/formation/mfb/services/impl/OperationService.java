@@ -4,11 +4,15 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ebi.formation.mfb.dao.IOperationDao;
 import com.ebi.formation.mfb.entities.Operation;
 import com.ebi.formation.mfb.services.IOperationService;
 
+@Service
+@Transactional(readOnly = true)
 public class OperationService implements IOperationService {
 
 	public static final int NB_RESULT_BY_DEFAULT = 20;
@@ -22,7 +26,7 @@ public class OperationService implements IOperationService {
 	@Override
 	public BigDecimal getTotalOperationsCarteByMonth(long idCompte, int month, int year) {
 		BigDecimal result = null;
-		if (operationDao.findNumbreOfOperationsCarteByMonth(idCompte, month, year) != 0) {
+		if (operationDao.findNumberOfOperationsCarteByMonth(idCompte, month, year) != 0) {
 			result = operationDao.findTotalOperationsCarteByMonth(idCompte, month, year);
 		}
 		return result;
@@ -33,8 +37,8 @@ public class OperationService implements IOperationService {
 	 * @see com.ebi.formation.mfb.services.IOperationService#getNumbreOfOperationsCarteByMonth(long, int, int)
 	 */
 	@Override
-	public long getNumbreOfOperationsCarteByMonth(long idCompte, int month, int year) {
-		return operationDao.findNumbreOfOperationsCarteByMonth(idCompte, month, year);
+	public long getNumberOfOperationsCarteByMonth(long idCompte, int month, int year) {
+		return operationDao.findNumberOfOperationsCarteByMonth(idCompte, month, year);
 	}
 
 	/*
@@ -42,8 +46,8 @@ public class OperationService implements IOperationService {
 	 * @see com.ebi.formation.mfb.services.IOperationService#getNumbreOfOperationsWhithoutCarteByMonth(long, int, int)
 	 */
 	@Override
-	public long getNumbreOfOperationsWhithoutCarteByMonth(long idCompte, int month, int year) {
-		return operationDao.findNumbreOfOperationsWhithoutCarteByMonth(idCompte, month, year);
+	public long getNumberOfOperationsWithoutCarteByMonth(long idCompte, int month, int year) {
+		return operationDao.findNumberOfOperationsWithoutCarteByMonth(idCompte, month, year);
 	}
 
 	/*
@@ -87,5 +91,48 @@ public class OperationService implements IOperationService {
 	public List<Operation> getOperationsCarteByMonthPaginated(long idCompte, int month, int year, int page) {
 		return getOperationsCarteByMonthPaginated(idCompte, month, year, page * NB_RESULT_BY_DEFAULT,
 				NB_RESULT_BY_DEFAULT);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.services.IOperationService#getNumberOfPagesForOperationsWithoutCartesByMonth(long,
+	 * int, int)
+	 */
+	@Override
+	public long getNumberOfPagesForOperationsWithoutCartesByMonth(long idCompte, int month, int year) {
+		return getNumberOfPagesForOperationsWithoutCartesByMonth(idCompte, month, year, NB_RESULT_BY_DEFAULT);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.services.IOperationService#getNumberOfPagesForOperationsWithoutCartesByMonth(long,
+	 * int, int, int)
+	 */
+	@Override
+	public long getNumberOfPagesForOperationsWithoutCartesByMonth(long idCompte, int month, int year,
+			int numberOfResults) {
+		int extraPageIfNeeded = getNumberOfOperationsWithoutCarteByMonth(idCompte, month, year) % numberOfResults == 0 ? 0
+				: 1;
+		return (getNumberOfOperationsWithoutCarteByMonth(idCompte, month, year) / numberOfResults) + extraPageIfNeeded;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.services.IOperationService#getNumberOfPagesForOperationsCartesByMonth(long, int, int)
+	 */
+	@Override
+	public long getNumberOfPagesForOperationsCartesByMonth(long idCompte, int month, int year) {
+		return getNumberOfPagesForOperationsCartesByMonth(idCompte, month, year, NB_RESULT_BY_DEFAULT);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.services.IOperationService#getNumberOfPagesForOperationsCartesByMonth(long, int, int,
+	 * int)
+	 */
+	@Override
+	public long getNumberOfPagesForOperationsCartesByMonth(long idCompte, int month, int year, int numberOfResults) {
+		int extraPageIfNeeded = getNumberOfOperationsCarteByMonth(idCompte, month, year) % numberOfResults == 0 ? 0 : 1;
+		return (getNumberOfOperationsCarteByMonth(idCompte, month, year) / numberOfResults) + extraPageIfNeeded;
 	}
 }

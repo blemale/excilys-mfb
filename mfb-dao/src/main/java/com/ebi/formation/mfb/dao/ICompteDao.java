@@ -18,7 +18,16 @@ public interface ICompteDao {
 	 * @param username
 	 * @return
 	 */
-	List<Compte> findComptesByUsername(String username);
+	public List<Compte> findComptesByUsername(String username);
 
-	boolean checkCompteOwnershipByUsernameAndCompteId(String username, Long compteId);
+	public boolean checkCompteOwnershipByUsernameAndCompteId(String username, Long compteId);
+
+	/**
+	 * Retourne un compte grâce à son id.
+	 * 
+	 * @param id
+	 *            un id donné
+	 * @return un compte
+	 */
+	public Compte findCompteById(long id);
 }
