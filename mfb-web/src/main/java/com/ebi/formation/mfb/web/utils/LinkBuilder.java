@@ -1,0 +1,28 @@
+package com.ebi.formation.mfb.web.utils;
+
+/**
+ * Classe qui construit des liens
+ * 
+ * @author excilys
+ * 
+ */
+public class LinkBuilder {
+
+	/**
+	 * Retourne une URL comme ceci : /arg1/arg2/arg3/arg4...
+	 * 
+	 * @param params
+	 * @return
+	 */
+	public static String getLink(String... params) {
+		if (params != null) {
+			StringBuilder sb = new StringBuilder();
+			for (String param : params) {
+				sb.append("/").append(param);
+			}
+			return sb.toString();
+		} else {
+			return "";
+		}
+	}
+}
