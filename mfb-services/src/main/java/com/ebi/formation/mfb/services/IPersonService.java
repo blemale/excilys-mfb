@@ -1,5 +1,7 @@
 package com.ebi.formation.mfb.services;
 
+import org.springframework.security.access.annotation.Secured;
+
 import com.ebi.formation.mfb.entities.Person;
 
 /**
@@ -16,5 +18,6 @@ public interface IPersonService {
 	 * @param username
 	 * @return
 	 */
+	@Secured("IS_AUTHENTICATED_ANONYMOUSLY")
 	Person findPersonByUsername(String username);
 }

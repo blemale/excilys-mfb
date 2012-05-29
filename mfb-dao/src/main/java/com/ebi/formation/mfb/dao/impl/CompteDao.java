@@ -35,13 +35,14 @@ public class CompteDao implements ICompteDao {
 
 	@Override
 	public boolean checkCompteOwnershipByUsernameAndCompteId(String username, Long compteId) {
+		long result = 0;
 		try {
-			em.createNamedQuery("checkCompteOwnershipByUsernameAndCompteId", Compte.class)
+			result = em.createNamedQuery("checkCompteOwnershipByUsernameAndCompteId", Long.class)
 					.setParameter("username", username).setParameter("compteId", compteId).getSingleResult();
 		} catch (NoResultException nre) {
 			return false;
 		}
-		return true;
+		return result == 0L ? false : true;
 	}
 
 	@Override
