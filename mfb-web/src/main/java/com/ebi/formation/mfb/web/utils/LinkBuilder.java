@@ -14,10 +14,10 @@ public class LinkBuilder {
 	 * @param params
 	 * @return
 	 */
-	public static String getLink(String... params) {
+	public static String getLink(Object... params) {
 		if (params != null) {
 			StringBuilder sb = new StringBuilder();
-			for (String param : params) {
+			for (Object param : params) {
 				sb.append("/").append(param);
 			}
 			return sb.toString();

@@ -13,7 +13,8 @@
 		@NamedQuery(name = "findOperationsWithoutCarteByMonthPaginated", query = "SELECT o FROM Operation o WHERE o.type.label <> 'CARTE' AND o.compte.id = :idcompte "
 				+ "and o.dateEffet BETWEEN :dateEffet AND :datePlusUnMois ORDER BY o.dateEffet DESC"),
 		@NamedQuery(name = "findOperationsCarteByMonthPaginated", query = "SELECT o FROM Operation o WHERE o.type.label = 'CARTE' AND o.compte.id = :idcompte "
-				+ "and o.dateEffet BETWEEN :dateEffet AND :datePlusUnMois ORDER BY o.dateEffet DESC") })
+				+ "and o.dateEffet BETWEEN :dateEffet AND :datePlusUnMois ORDER BY o.dateEffet DESC"),
+		@NamedQuery(name = "findCompteById", query = "SELECT c FROM Compte c WHERE c.id = :id") })
 package com.ebi.formation.mfb.entities;
 
 import org.hibernate.annotations.NamedQueries;

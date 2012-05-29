@@ -30,8 +30,18 @@ public interface ICompteService {
 	 *            login de l'utilisateur
 	 * @param compteId
 	 *            id du {@link Compte}
-	 * @return
+	 * @return vrai si le compte appartient bien à l'utilisateur, faux sinon.
 	 */
 	@Secured("ROLE_CLIENT")
 	boolean checkCompteOwnershipByUsernameAndCompteId(String username, Long compteId);
+
+	/**
+	 * Récupère un compte par son id.
+	 * 
+	 * @param compteId
+	 *            l'id du {@link Compte}
+	 * @return un {@link Compte}.
+	 */
+	@Secured("ROLE_CLIENT")
+	Compte getCompteById(Long compteId);
 }

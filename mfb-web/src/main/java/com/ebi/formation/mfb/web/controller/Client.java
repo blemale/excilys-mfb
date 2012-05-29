@@ -1,10 +1,13 @@
 package com.ebi.formation.mfb.web.controller;
 
-import java.math.BigDecimal;
 import java.security.Principal;
-import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Locale;
+import java.util.Map;
 
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ebi.formation.mfb.services.ICompteService;
+import com.ebi.formation.mfb.services.IOperationService;
+import com.ebi.formation.mfb.web.exception.ResourceNotFoundException;
+import com.ebi.formation.mfb.web.utils.LinkBuilder;
 
 /**
  * Controller gérant l'accès à la partie client de l'application.
@@ -26,6 +32,8 @@ public class Client {
 
 	@Autowired
 	ICompteService compteService;
+	@Autowired
+	IOperationService operationService;
 
 	/**
 	 * Retourne une vue associée à la liste des comptes d'un utilisateur via son username
@@ -39,24 +47,6 @@ public class Client {
 	}
 
 	/**
-	 * 
-	 * 
-	 * @param month
-	 * @return
-	 */
-	private int[] calcTabMonthHistory(int month) {
-		int currentMonth = DateTime.now().getMonthOfYear();
-		int tabMonthHistory[] = new int[6];
-		for (int i = 0; i < 6; i++) {
-			tabMonthHistory[i] = currentMonth - i;
-			if (tabMonthHistory[i] <= 0) {
-				tabMonthHistory[i] = tabMonthHistory[i] + 12;
-			}
-		}
-		return tabMonthHistory;
-	}
-
-	/**
 	 * Par défaut
 	 * 
 	 * @param principal
@@ -64,21 +54,8 @@ public class Client {
 	 * @return
 	 */
 	@RequestMapping(value = "/compte/{idCompte:\\d+}/detail.html", method = RequestMethod.GET)
-	public ModelAndView detailCompte(Principal principal, @PathVariable Long idCompte) {
-		ModelAndView mv = new ModelAndView("detailCompte");
-		mv.addObject("previousMonth", true);
-		mv.addObject("nextMonth", false);
-		mv.addObject("numMonthHistory", 5);
-		mv.addObject("numPageMonth", 5);
-		mv.addObject("soldeCarte", new BigDecimal(123.456));
-		mv.addObject("operations", new ArrayList<Object>());
-		mv.addObject("idCompte", idCompte);
-		mv.addObject("currentYear", DateTime.now().getYear());
-		int currentMonth = DateTime.now().getMonthOfYear();
-		mv.addObject("currentMonth", currentMonth);
-		mv.addObject("monthHistory", calcTabMonthHistory(currentMonth));
-		mv.addObject("currentPage", 0);
-		return mv;
+	public ModelAndView detailCompte(Principal principal, Locale locale, @PathVariable Long idCompte) {
+		return detailCompteMois(principal, locale, idCompte, DateTime.now().getYear(), DateTime.now().getMonthOfYear());
 	}
 
 	/**
@@ -91,21 +68,9 @@ public class Client {
 	 * @return
 	 */
 	@RequestMapping(value = "/compte/{idCompte:\\d+}/{year:20\\d{2}}/{month:[1-9]|1[012]}/detail.html", method = RequestMethod.GET)
-	public ModelAndView detailCompteMois(Principal principal, @PathVariable Long idCompte, @PathVariable int year,
-			@PathVariable int month) {
-		ModelAndView mv = new ModelAndView("detailCompte");
-		mv.addObject("previousMonth", true);
-		mv.addObject("nextMonth", false);
-		mv.addObject("numMonthHistory", 5);
-		mv.addObject("numPageMonth", 5);
-		mv.addObject("soldeCarte", new BigDecimal(123.456));
-		mv.addObject("operations", new ArrayList<Object>());
-		mv.addObject("idCompte", idCompte);
-		mv.addObject("currentYear", year);
-		mv.addObject("currentMonth", month);
-		mv.addObject("monthHistory", calcTabMonthHistory(month));
-		mv.addObject("currentPage", 0);
-		return mv;
+	public ModelAndView detailCompteMois(Principal principal, Locale locale, @PathVariable Long idCompte,
+			@PathVariable int year, @PathVariable int month) {
+		return detailCompteMoisAndPage(principal, locale, idCompte, year, month, 0);
 	}
 
 	/**
@@ -119,20 +84,42 @@ public class Client {
 	 * @return
 	 */
 	@RequestMapping(value = "/compte/{idCompte:\\d+}/{year}/{month:[1-9]|1[012]}/{page:[0-9]+}/detail.html", method = RequestMethod.GET)
-	public ModelAndView detailCompteMoisAndPage(Principal principal, @PathVariable Long idCompte,
+	public ModelAndView detailCompteMoisAndPage(Principal principal, Locale locale, @PathVariable Long idCompte,
 			@PathVariable int year, @PathVariable int month, @PathVariable int page) {
+		if (!compteService.checkCompteOwnershipByUsernameAndCompteId(principal.getName(), idCompte)
+				|| !monthInHistory(month, year) || !pageExistWithoutCarte(idCompte, year, month, page)) {
+			throw new ResourceNotFoundException();
+		}
 		ModelAndView mv = new ModelAndView("detailCompte");
-		mv.addObject("previousMonth", true);
-		mv.addObject("nextMonth", true);
-		mv.addObject("numMonthHistory", 5);
-		mv.addObject("numPageMonth", 5);
-		mv.addObject("soldeCarte", new BigDecimal(123.456));
-		mv.addObject("operations", new ArrayList<Object>());
-		mv.addObject("idCompte", idCompte);
-		mv.addObject("currentYear", year);
-		mv.addObject("currentMonth", month);
-		mv.addObject("monthHistory", calcTabMonthHistory(month));
+		mv.addObject("operations",
+				operationService.getOperationsWithoutCarteByMonthPaginated(idCompte, month, year, page));
+		mv.addObject("soldeCarte", operationService.getTotalOperationsCarteByMonth(idCompte, month, year));
+		mv.addObject("compte", compteService.getCompteById(idCompte));
+		DateTime currentDate = new DateTime(year, month, 1, 0, 0);
+		if (hasPreviousMonth(month, year)) {
+			DateTime monthBefore = currentDate.minusMonths(1);
+			mv.addObject(
+					"urlPreviousMonth",
+					LinkBuilder.getLink("client", "compte", idCompte.longValue(), monthBefore.getYear(),
+							monthBefore.getMonthOfYear(), "detail.html"));
+		}
+		if (hasNextMonth(month, year)) {
+			DateTime monthBefore = currentDate.plusMonths(1);
+			mv.addObject(
+					"urlNextMonth",
+					LinkBuilder.getLink("client", "compte", idCompte.longValue(), monthBefore.getYear(),
+							monthBefore.getMonthOfYear(), "detail.html"));
+		}
+		DateTimeFormatter fmt = DateTimeFormat.forPattern("MMMM YYYY");
+		DateTimeFormatter localeFmt = fmt.withLocale(locale);
+		mv.addObject("currentDate", localeFmt.print(currentDate));
+		long nbPages = operationService.getNumberOfPagesForOperationsWithoutCartesByMonth(idCompte, month, year);
+		mv.addObject("numPageMonth", nbPages);
+		mv.addObject("mapUrlPages", getPagesUrlsWithoutCarte(idCompte, year, month, nbPages));
 		mv.addObject("currentPage", page);
+		mv.addObject("urlDetailCarte",
+				LinkBuilder.getLink("client", "compte", idCompte, year, month, "carte", "detail.html"));
+		mv.addObject("mapNamesUrlsForMonths", getMonthUrlsWithoutCarte(locale, idCompte));
 		return mv;
 	}
 
@@ -144,20 +131,9 @@ public class Client {
 	 * @return
 	 */
 	@RequestMapping(value = "/compte/{idCompte:\\d+}/carte/detail.html", method = RequestMethod.GET)
-	public ModelAndView detailCompteCarte(Principal principal, @PathVariable Long idCompte) {
-		ModelAndView mv = new ModelAndView("detailCompteCarte");
-		mv.addObject("previousMonth", true);
-		mv.addObject("nextMonth", true);
-		mv.addObject("numMonthHistory", 5);
-		mv.addObject("numPageMonth", 5);
-		mv.addObject("idCompte", idCompte);
-		mv.addObject("currentYear", DateTime.now().getYear());
-		int currentMonth = DateTime.now().getMonthOfYear();
-		mv.addObject("currentMonth", currentMonth);
-		mv.addObject("monthHistory", calcTabMonthHistory(currentMonth));
-		mv.addObject("currentPage", 0);
-		mv.addObject("cartes", new ArrayList<Object>());
-		return mv;
+	public ModelAndView detailCompteCarte(Principal principal, Locale locale, @PathVariable Long idCompte) {
+		return detailCompteCarteMois(principal, locale, idCompte, DateTime.now().getYear(), DateTime.now()
+				.getMonthOfYear());
 	}
 
 	/**
@@ -170,22 +146,9 @@ public class Client {
 	 * @return
 	 */
 	@RequestMapping(value = "/compte/{idCompte:\\d+}/{year:20\\d{2}}/{month:[1-9]|1[012]}/carte/detail.html", method = RequestMethod.GET)
-	public ModelAndView detailCompteCarteMois(Principal principal, @PathVariable Long idCompte, @PathVariable int year,
-			@PathVariable int month) {
-		ModelAndView mv = new ModelAndView("detailCompteCarte");
-		mv.addObject("previousMonth", true);
-		mv.addObject("nextMonth", true);
-		mv.addObject("numMonthHistory", 5);
-		mv.addObject("numPageMonth", 5);
-		mv.addObject("carte", true);
-		mv.addObject("soldeCarte", 123.456);
-		mv.addObject("operations", new ArrayList<Object>());
-		mv.addObject("idCompte", idCompte);
-		mv.addObject("currentYear", year);
-		mv.addObject("currentMonth", month);
-		mv.addObject("monthHistory", calcTabMonthHistory(month));
-		mv.addObject("currentPage", 0);
-		return mv;
+	public ModelAndView detailCompteCarteMois(Principal principal, Locale locale, @PathVariable Long idCompte,
+			@PathVariable int year, @PathVariable int month) {
+		return detailCompteCarteMoisAndPage(principal, locale, idCompte, year, month, 0);
 	}
 
 	/**
@@ -199,21 +162,119 @@ public class Client {
 	 * @return
 	 */
 	@RequestMapping(value = "/compte/{idCompte:\\d+}/{year}/{month:[1-9]|1[012]}/{page:[0-9]+}/carte/detail.html", method = RequestMethod.GET)
-	public ModelAndView detailCompteCarteMoisAndPage(Principal principal, @PathVariable Long idCompte,
+	public ModelAndView detailCompteCarteMoisAndPage(Principal principal, Locale locale, @PathVariable Long idCompte,
 			@PathVariable int year, @PathVariable int month, @PathVariable int page) {
+		if (!compteService.checkCompteOwnershipByUsernameAndCompteId(principal.getName(), idCompte)
+				|| !monthInHistory(month, year) || !pageExistCarte(idCompte, year, month, page)) {
+			throw new ResourceNotFoundException();
+		}
 		ModelAndView mv = new ModelAndView("detailCompteCarte");
-		mv.addObject("previousMonth", true);
-		mv.addObject("nextMonth", true);
-		mv.addObject("numMonthHistory", 5);
-		mv.addObject("numPageMonth", 5);
-		mv.addObject("carte", true);
-		mv.addObject("soldeCarte", 123.456);
-		mv.addObject("operations", new ArrayList<Object>());
-		mv.addObject("idCompte", idCompte);
-		mv.addObject("currentYear", year);
-		mv.addObject("currentMonth", month);
-		mv.addObject("monthHistory", calcTabMonthHistory(month));
+		mv.addObject("operations", operationService.getOperationsCarteByMonthPaginated(idCompte, month, year, page));
+		mv.addObject("soldeCarte", operationService.getTotalOperationsCarteByMonth(idCompte, month, year));
+		mv.addObject("compte", compteService.getCompteById(idCompte));
+		DateTime currentDate = new DateTime(year, month, 1, 0, 0);
+		if (hasPreviousMonth(month, year)) {
+			DateTime monthBefore = currentDate.minusMonths(1);
+			mv.addObject(
+					"urlPreviousMonth",
+					LinkBuilder.getLink("client", "compte", idCompte.longValue(), monthBefore.getYear(),
+							monthBefore.getMonthOfYear(), "carte", "detail.html"));
+		}
+		if (hasNextMonth(month, year)) {
+			DateTime monthBefore = currentDate.plusMonths(1);
+			mv.addObject(
+					"urlNextMonth",
+					LinkBuilder.getLink("client", "compte", idCompte.longValue(), monthBefore.getYear(),
+							monthBefore.getMonthOfYear(), "carte", "detail.html"));
+		}
+		DateTimeFormatter fmt = DateTimeFormat.forPattern("MMMM YYYY");
+		DateTimeFormatter localeFmt = fmt.withLocale(locale);
+		mv.addObject("currentDate", localeFmt.print(currentDate));
+		long nbPages = operationService.getNumberOfPagesForOperationsCartesByMonth(idCompte, month, year);
+		mv.addObject("numPageMonth", nbPages);
+		mv.addObject("mapUrlPages", getPagesUrlsCarte(idCompte, year, month, nbPages));
 		mv.addObject("currentPage", page);
+		mv.addObject("urlDetailCompte", LinkBuilder.getLink("client", "compte", idCompte, year, month, "detail.html"));
+		mv.addObject("mapNamesUrlsForMonths", getMonthUrlsCarte(locale, idCompte));
 		return mv;
+	}
+
+	private boolean hasPreviousMonth(int month, int year) {
+		boolean result = false;
+		DateTime currentMonth = new DateTime(year, month, 1, 0, 0);
+		if (currentMonth.plusMonths(5).isAfterNow()) {
+			result = true;
+		}
+		return result;
+	}
+
+	private boolean hasNextMonth(int month, int year) {
+		boolean result = false;
+		DateTime currentMonth = new DateTime(year, month, 1, 0, 0);
+		if (currentMonth.plusMonths(1).isBeforeNow()) {
+			result = true;
+		}
+		return result;
+	}
+
+	private boolean monthInHistory(int month, int year) {
+		boolean result = false;
+		DateTime currentMonth = new DateTime(year, month, 1, 0, 0);
+		if (currentMonth.plusMonths(6).isAfterNow() && currentMonth.isBeforeNow()) {
+			result = true;
+		}
+		return result;
+	}
+
+	private boolean pageExistWithoutCarte(Long idCompte, int year, int month, int page) {
+		return 0L <= page
+				&& page <= operationService.getNumberOfPagesForOperationsWithoutCartesByMonth(idCompte, month, year);
+	}
+
+	private boolean pageExistCarte(Long idCompte, int year, int month, int page) {
+		return 0L <= page && page <= operationService.getNumberOfPagesForOperationsCartesByMonth(idCompte, month, year);
+	}
+
+	private Map<Long, String> getPagesUrlsWithoutCarte(Long idCompte, int year, int month, long nbPages) {
+		Map<Long, String> map = new LinkedHashMap<Long, String>();
+		for (long indexPage = 0; indexPage < nbPages; indexPage++) {
+			map.put(indexPage, LinkBuilder.getLink("client", "compte", idCompte, year, month, indexPage, "detail.html"));
+		}
+		return map;
+	}
+
+	private Map<Long, String> getPagesUrlsCarte(Long idCompte, int year, int month, long nbPages) {
+		Map<Long, String> map = new LinkedHashMap<Long, String>();
+		for (long indexPage = 0; indexPage < nbPages; indexPage++) {
+			map.put(indexPage,
+					LinkBuilder.getLink("client", "compte", idCompte, year, month, indexPage, "carte", "detail.html"));
+		}
+		return map;
+	}
+
+	private Map<String, String> getMonthUrlsWithoutCarte(Locale locale, Long idCompte) {
+		Map<String, String> mapNamesUrls = new LinkedHashMap<String, String>();
+		DateTime now = DateTime.now();
+		for (int i = 0; i <= 5; i++) {
+			DateTime month = now.minusMonths(i);
+			DateTimeFormatter fmt = DateTimeFormat.forPattern("MMMM YYYY");
+			DateTimeFormatter localeFmt = fmt.withLocale(locale);
+			mapNamesUrls.put(localeFmt.print(month), LinkBuilder.getLink("client", "compte", idCompte, month.getYear(),
+					month.getMonthOfYear(), "detail.html"));
+		}
+		return mapNamesUrls;
+	}
+
+	private Map<String, String> getMonthUrlsCarte(Locale locale, Long idCompte) {
+		Map<String, String> mapNamesUrls = new LinkedHashMap<String, String>();
+		DateTime now = DateTime.now();
+		for (int i = 0; i <= 5; i++) {
+			DateTime month = now.minusMonths(i);
+			DateTimeFormatter fmt = DateTimeFormat.forPattern("MMMM YYYY");
+			DateTimeFormatter localeFmt = fmt.withLocale(locale);
+			mapNamesUrls.put(localeFmt.print(month), LinkBuilder.getLink("client", "compte", idCompte, month.getYear(),
+					month.getMonthOfYear(), "carte", "detail.html"));
+		}
+		return mapNamesUrls;
 	}
 }
