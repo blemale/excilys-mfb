@@ -84,7 +84,7 @@
 					<tbody>
 						<c:forEach items="${operations}" var="o">
 							<tr class="clickLine">
-								<td><joda:format value="${o.dateEffet}" style="SS" /></td>
+								<td><joda:format value="${o.dateValeur}" style="SS" /></td>
 								<td><spring:message code="operationType.${o.type.label}"/></td>
 								<td>${o.label}</td>
 								<c:if test="${o.montant >= 0}">
