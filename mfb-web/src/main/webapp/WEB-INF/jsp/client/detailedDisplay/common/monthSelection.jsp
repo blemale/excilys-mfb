@@ -11,21 +11,6 @@
 		</c:if>
 	</div>
 	<div class="span4 alignCenter">
-		<button class="btn disabled">${currentDate}</button>
-	</div>
-	<div class="span4 alignCenter">
-		<c:if test="${urlNextMonth ne null}">
-			<a class="btn" href="${contextPath}${urlNextMonth}"> <spring:message
-					code="compte.month.next" /> <i class="icon-chevron-right"></i>
-			</a>
-		</c:if>
-	</div>
-</div>
-
-<!-- Div comprenant une liste déroulante affichant les mois qu'on peut sélectionner -->
-<div class="row-fluid">
-	<div class="span4"></div>
-	<div class="span4 alignCenter">
 		<div class="btn-toolbar">
 			<div class="btn-group">
 				<button class="btn dropdown-toggle" data-toggle="dropdown">
@@ -39,5 +24,11 @@
 			</div>
 		</div>
 	</div>
-	<div class="span4"></div>
+	<div class="span4 alignCenter">
+		<c:if test="${urlNextMonth ne null}">
+			<a class="btn" href="${contextPath}${urlNextMonth}"> <spring:message
+					code="compte.month.next" /> <i class="icon-chevron-right"></i>
+			</a>
+		</c:if>
+	</div>
 </div>
