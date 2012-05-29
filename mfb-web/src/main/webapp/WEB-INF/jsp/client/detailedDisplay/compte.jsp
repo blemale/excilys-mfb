@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://www.joda.org/joda/time/tags" prefix="joda"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
@@ -19,49 +20,7 @@
 <section id="compte">
 
 	<!-- Div comprenant les liens pour changer de mois et afficher le mois courant -->
-	<div class="row-fluid">
-		<div class="span4 alignCenter">
-			<c:if test="${urlPreviousMonth ne null}">
-				<a class="btn"
-					href="${contextPath}${urlPreviousMonth}"><i
-					class="icon-chevron-left"></i> <spring:message
-						code="compte.month.previous" /> </a>
-			</c:if>
-		</div>
-		<div class="span4 alignCenter">
-			<button class="btn disabled">${currentDate}</button>
-		</div>
-		<div class="span4 alignCenter">
-			<c:if test="${urlNextMonth ne null}">
-				<a class="btn"
-					href="${contextPath}${urlNextMonth}">
-					<spring:message code="compte.month.next" /> <i
-					class="icon-chevron-right"></i>
-				</a>
-			</c:if>
-		</div>
-	</div>
-
-	<!-- Div comprenant une liste déroulante affichant les mois qu'on peut sélectionner -->
-	<div class="row-fluid">
-		<div class="span4"></div>
-		<div class="span4 alignCenter">
-			<div class="btn-toolbar">
-				<div class="btn-group">
-					<button class="btn dropdown-toggle" data-toggle="dropdown">
-						${currentDate} <span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu">
-						<c:forEach items="${mapNamesUrlsForMonths}" var="entry">
-							<li><a
-								href="${contextPath}${entry.value}">${entry.key}</a></li>
-						</c:forEach>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div class="span4"></div>
-	</div>
+	<%@ include file="common/monthSelection.jsp" %>
 
 	<!-- Div comprenant les différentes opérations -->
 	<div class="row">
@@ -120,13 +79,12 @@
 							<th><spring:message code="compte.typeOperation" /></th>
 							<th><spring:message code="compte.labelOperation" /></th>
 							<th><spring:message code="compte.montantOperation" /></th>
-							<th></th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${operations}" var="o">
 							<tr class="clickLine">
-								<td>${o.dateEffet}</td>
+								<td><joda:format value="${o.dateEffet}" style="SS" /></td>
 								<td><spring:message code="operationType.${o.type.label}"/></td>
 								<td>${o.label}</td>
 								<c:if test="${o.montant >= 0}">
@@ -136,7 +94,7 @@
 								</c:if>
 								<c:if test="${o.montant < 0}">
 									<td class="aligneSolde coloreRouge">- <fmt:formatNumber
-											value="${c.montant*-1}" minFractionDigits="2"
+											value="${o.montant * (-1)}" minFractionDigits="2"
 											pattern="#,###.##" />
 									</td>
 								</c:if>
@@ -152,26 +110,8 @@
 			</c:if>
 		</div>
 	</div>
-
+	
 	<!-- Div comprenant la pagination -->
-	<div class="row-fluid">
-		<div class="span12">
-			<div class="pagination pagination-centered">
-				<ul>
-					<li><a href="#">«</a></li>
-					<c:forEach items="${mapUrlPages}" var="entry">
-						<c:if test="${currentPage eq entry.key}">
-							<li class="active"><a href="${contextPath}${entry.value}">${entry.key}</a></li>
-						</c:if>
-						<c:if test="${currentPage ne entry.key}">
-							<li><a href="${contextPath}${entry.value}">${entry.key}</a></li>
-						</c:if>
-					</c:forEach>
-					<li><a href="#">»</a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-
+	<%@ include file="common/pageSelection.jsp" %>
 
 </section>
