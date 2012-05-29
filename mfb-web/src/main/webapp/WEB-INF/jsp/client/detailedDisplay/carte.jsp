@@ -55,7 +55,7 @@
 					<ul class="dropdown-menu">
 						<c:forEach items="${monthHistory}" var="i">
 							<li><a
-								href="${contextPath}/client/compte/${idCompte}/${currentYear}/${i}/detail.html">${i}
+								href="${contextPath}/client/compte/${idCompte}/${currentYear}/${i}/carte/detail.html">${i}
 									/ ${currentYear}</a></li>
 						</c:forEach>
 					</ul>
