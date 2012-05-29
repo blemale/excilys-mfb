@@ -76,6 +76,10 @@
 			<artifactId>mfb-services</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time-jsptags</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -155,7 +159,7 @@
 						<version>8.1.3.v20120416</version>
 						<configuration>
 							<stopPort>9966</stopPort>
-          					<stopKey>foo</stopKey>
+							<stopKey>foo</stopKey>
 							<scanIntervalSeconds>30</scanIntervalSeconds>
 							<connectors>
 								<connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
@@ -165,7 +169,7 @@
 							</connectors>
 							<useTestScope>true</useTestScope>
 							<webApp>
-									<contextPath>/mfb-web</contextPath>
+								<contextPath>/mfb-web</contextPath>
 							</webApp>
 						</configuration>
 						<executions>

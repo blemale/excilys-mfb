@@ -19,6 +19,8 @@
 		<property name="defaultAutoCommit" value="false" />
 		<property name="jdbcInterceptors"
 			value="org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer" />
+		<property name="maxActive" value="30"/>
+		<property name="maxIdle" value="30"/>
 	</bean>
 
 	<bean id="entityManagerFactory"
