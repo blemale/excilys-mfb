@@ -57,4 +57,10 @@ public interface IOperationDao {
 	 */
 	public List<Operation> findOperationsCarteByMonthPaginated(long idCompte, DateTime date, DateTime datePlusUnMois,
 			int offset, int numberOfResults);
+
+	/**
+	 * Met à jour les comptes à partir des opérations.
+	 * 
+	 */
+	public void updateCompteQuotidient();
 }

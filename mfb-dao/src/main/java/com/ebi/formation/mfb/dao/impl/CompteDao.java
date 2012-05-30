@@ -1,5 +1,6 @@
 package com.ebi.formation.mfb.dao.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -54,5 +55,14 @@ public class CompteDao implements ICompteDao {
 			// TODO logger pour l'ecxeption
 		}
 		return c;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.dao.ICompteDao#findMontantCompteById(java.lang.Long)
+	 */
+	@Override
+	public BigDecimal findMontantCompteById(Long id) {
+		return (BigDecimal) em.createNamedQuery("findSoldeCompte").setParameter("id", id).getSingleResult();
 	}
 }
