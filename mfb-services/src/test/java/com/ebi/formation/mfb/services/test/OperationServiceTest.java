@@ -94,6 +94,16 @@ public class OperationServiceTest {
 	}
 
 	@Test
+	public void testGetVirementsByMonthPaginated() {
+		DateTime date = new DateTime(2012, 1, 1, 0, 0);
+		DateTime datePlusUnMois = date.plusMonths(1);
+		List<Operation> result = new ArrayList<Operation>();
+		result.add(new Operation());
+		when(operationDao.findVirementsByMonthPaginated(1, date, datePlusUnMois, 0, 20)).thenReturn(result);
+		assertEquals(result, operationService.getVirementsByMonthPaginated(1, 1, 2012, 0, 20));
+	}
+
+	@Test
 	public void testGetOperationsCarteByMonthPaginatedWithPage() {
 		DateTime date = new DateTime(2012, 1, 1, 0, 0);
 		DateTime datePlusUnMois = date.plusMonths(1);

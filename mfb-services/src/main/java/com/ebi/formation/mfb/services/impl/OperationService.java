@@ -167,4 +167,25 @@ public class OperationService implements IOperationService {
 		int extraPageIfNeeded = getNumberOfOperationsCarteByMonth(idCompte, month, year) % numberOfResults == 0 ? 0 : 1;
 		return (getNumberOfOperationsCarteByMonth(idCompte, month, year) / numberOfResults) + extraPageIfNeeded;
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.services.IOperationService#getVirementsByMonthPaginated(long, int, int, int, int)
+	 */
+	@Override
+	public List<Operation> getVirementsByMonthPaginated(long idCompte, int month, int year, int offset,
+			int numberOfResults) {
+		DateTime date = new DateTime(year, month, 1, 0, 0);
+		DateTime datePlusUnMois = date.plusMonths(1);
+		return operationDao.findVirementsByMonthPaginated(idCompte, date, datePlusUnMois, offset, numberOfResults);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.services.IOperationService#getVirementsByMonthPaginated(long, int, int, int)
+	 */
+	@Override
+	public List<Operation> getVirementsByMonthPaginated(long idCompte, int month, int year, int page) {
+		return getVirementsByMonthPaginated(idCompte, month, year, page * NB_RESULT_BY_DEFAULT, NB_RESULT_BY_DEFAULT);
+	}
 }
