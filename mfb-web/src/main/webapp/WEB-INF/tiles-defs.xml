@@ -52,4 +52,16 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/client/detailedDisplay/carte.jsp" />
 	</definition>
 
+	<!-- Page de l'historique des virements -->
+	<definition name="historiqueVirement" extends="baseLayout">
+		<put-attribute name="title" value="title.historiqueVirement" />
+		<put-attribute name="body" value="/WEB-INF/jsp/client/virement.jsp" />
+	</definition>
+	
+	<!-- Page de l'historique des virements -->
+	<definition name="listCompteHistorique" extends="baseLayout">
+		<put-attribute name="title" value="title.historiqueVirement" />
+		<put-attribute name="body" value="/WEB-INF/jsp/client/detailedDisplay/virement.jsp" />
+	</definition>
+		
 </tiles-definitions>
