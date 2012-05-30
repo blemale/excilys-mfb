@@ -11,7 +11,7 @@
 	<context:component-scan base-package="com.ebi.formation.mfb.dao" />
 	<util:properties id="dataSourceProperties" location="classpath:dataSource.properties" />
 
-	<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource">
+	<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource" destroy-method="close">
 		<property name="driverClassName" value="#{dataSourceProperties.driverClassName}" />
 		<property name="url" value="#{dataSourceProperties.url}" />
 		<property name="username" value="#{dataSourceProperties.username}" />
