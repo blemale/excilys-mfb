@@ -9,7 +9,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
@@ -34,15 +33,15 @@ public class UserAdminLoginIT {
 		driver.findElement(By.name("j_password")).clear();
 		driver.findElement(By.name("j_password")).sendKeys("useradmin");
 		driver.findElement(By.cssSelector("button.btn")).click();
-		assertEquals("http://localhost:8082/mfb-web/client/home.html", driver.getCurrentUrl());
+		assertEquals(baseUrl + "/mfb-web/client/home.html", driver.getCurrentUrl());
 		driver.findElement(By.linkText("Home")).click();
-		assertEquals("http://localhost:8082/mfb-web/client/home.html", driver.getCurrentUrl());
+		assertEquals(baseUrl + "/mfb-web/client/home.html", driver.getCurrentUrl());
 		driver.findElement(By.linkText("Administration")).click();
-		assertEquals("http://localhost:8082/mfb-web/admin/home.html", driver.getCurrentUrl());
+		assertEquals(baseUrl + "/mfb-web/admin/home.html", driver.getCurrentUrl());
 		driver.findElement(By.linkText("Home")).click();
-		assertEquals("http://localhost:8082/mfb-web/client/home.html", driver.getCurrentUrl());
+		assertEquals(baseUrl + "/mfb-web/client/home.html", driver.getCurrentUrl());
 		driver.findElement(By.cssSelector("button.btn")).click();
-		assertEquals("http://localhost:8082/mfb-web/login.html", driver.getCurrentUrl());
+		assertEquals(baseUrl + "/mfb-web/login.html", driver.getCurrentUrl());
 	}
 
 	@After
@@ -51,15 +50,6 @@ public class UserAdminLoginIT {
 		String verificationErrorString = verificationErrors.toString();
 		if (!"".equals(verificationErrorString)) {
 			fail(verificationErrorString);
-		}
-	}
-
-	private boolean isElementPresent(By by) {
-		try {
-			driver.findElement(by);
-			return true;
-		} catch (NoSuchElementException e) {
-			return false;
 		}
 	}
 }
