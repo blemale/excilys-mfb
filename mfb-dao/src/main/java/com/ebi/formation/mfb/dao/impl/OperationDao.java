@@ -97,12 +97,12 @@ public class OperationDao implements IOperationDao {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Operation> findVirementsByMonthPaginated(long idCompte, DateTime date, DateTime datePlusUnMois,
+	public List<Operation> findVirementsByMonthPaginated(String username, DateTime date, DateTime datePlusUnMois,
 			int offset, int numberOfResults) {
 		logger.debug(
-				"findVirementsByMonthPaginated(idCompte:{}, date:{}, datePlusUnMois:{}, offset:{}, numberOfResults:{})",
-				new Object[] { idCompte, date, datePlusUnMois, offset, numberOfResults });
-		return em.createNamedQuery("findVirementByMonthPaginated").setParameter("idcompte", idCompte)
+				"findVirementsByMonthPaginated(username:{}, date:{}, datePlusUnMois:{}, offset:{}, numberOfResults:{})",
+				new Object[] { username, date, datePlusUnMois, offset, numberOfResults });
+		return em.createNamedQuery("findVirementByMonthPaginated").setParameter("username", username)
 				.setParameter("dateValeur", date).setParameter("datePlusUnMois", datePlusUnMois).setFirstResult(offset)
 				.setMaxResults(offset + numberOfResults).getResultList();
 	}

@@ -14,7 +14,7 @@
 				+ "and o.dateValeur BETWEEN :dateValeur AND :datePlusUnMois ORDER BY o.dateValeur DESC"),
 		@NamedQuery(name = "findOperationsCarteByMonthPaginated", query = "SELECT o FROM Operation o WHERE o.type.label = 'CARTE' AND o.compte.id = :idcompte "
 				+ "and o.dateValeur BETWEEN :dateValeur AND :datePlusUnMois ORDER BY o.dateValeur DESC"),
-		@NamedQuery(name = "findVirementByMonthPaginated", query = "SELECT o FROM Operation o WHERE o.type.label = 'VIREMENT' AND o.compte.id = :idcompte "
+		@NamedQuery(name = "findVirementByMonthPaginated", query = "SELECT o FROM Operation o, Person p, Compte c WHERE p.username = :username AND o.type.label = 'VIREMENT' AND o.compte.id = c.id AND c MEMBER OF p.comptes "
 				+ "and o.dateValeur BETWEEN :dateValeur AND :datePlusUnMois ORDER BY o.dateValeur DESC"),
 		@NamedQuery(name = "findCompteById", query = "SELECT c FROM Compte c WHERE c.id = :id"),
 		@NamedQuery(name = "findOperationsBeforeDate", query = "SELECT o FROM Operation o WHERE o.dateValeur < :today"),

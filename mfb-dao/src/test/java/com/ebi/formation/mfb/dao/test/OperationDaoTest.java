@@ -156,12 +156,11 @@ public class OperationDaoTest {
 	public void testfindVirementsByMonthPaginated() {
 		DateTime date = new DateTime(2012, 5, 1, 0, 0);
 		DateTime datePlusUnMois = date.plusMonths(1);
-		List<Operation> operations = operationDao.findVirementsByMonthPaginated(2, date, datePlusUnMois, 20, 20);
+		List<Operation> operations = operationDao.findVirementsByMonthPaginated("bastou", date, datePlusUnMois, 20, 20);
 		BigDecimal i = new BigDecimal(0);
 		for (Operation operation : operations) {
 			i = i.add(operation.getMontant());
 			assertEquals(OperationType.Type.VIREMENT.name(), operation.getType().getLabel());
-			assertEquals(new Long(2), operation.getCompte().getId());
 		}
 		assertEquals(0, i.compareTo(new BigDecimal(1600)));
 		assertEquals(2, operations.size());
