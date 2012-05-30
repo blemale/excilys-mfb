@@ -46,6 +46,16 @@ public interface IOperationDao {
 	public long findNumberOfOperationsWithoutCarteByMonth(long idCompte, DateTime date, DateTime datePlusUnMois);
 
 	/**
+	 * Retourne le nombre d'operations excepté les opérations carte d'un compte pour un mois donné
+	 * 
+	 * @param idCompte
+	 * @param date
+	 * @param datePlusUnMois
+	 * @return
+	 */
+	public long findNumberOfVirementsByMonth(String username, DateTime date, DateTime datePlusUnMois);
+
+	/**
 	 * Recherche la liste des operations d'un compte (sauf les opérations par carte) pour un mois donné et paginé
 	 * suivant un offset
 	 * 

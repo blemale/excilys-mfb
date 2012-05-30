@@ -139,4 +139,15 @@ public class OperationDao implements IOperationDao {
 					.setParameter("operation", o.getCompte()).executeUpdate();
 		}
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.dao.IOperationDao#findNumberOfVirementsByMonth(java.lang.String,
+	 * org.joda.time.DateTime, org.joda.time.DateTime)
+	 */
+	@Override
+	public long findNumberOfVirementsByMonth(String username, DateTime date, DateTime datePlusUnMois) {
+		return (Long) em.createNamedQuery("findNumberOfVirementByMonth").setParameter("username", username)
+				.setParameter("dateValeur", date).setParameter("datePlusUnMois", datePlusUnMois).getSingleResult();
+	}
 }

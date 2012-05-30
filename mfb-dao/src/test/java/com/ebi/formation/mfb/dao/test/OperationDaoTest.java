@@ -153,16 +153,27 @@ public class OperationDaoTest {
 		assertEquals(0, compteDao.findMontantCompteById(1L).compareTo(new BigDecimal(21500)));
 	}
 
-	public void testfindVirementsByMonthPaginated() {
+	@DataSet("dataSet-OperationDaoTest.xml")
+	@Test
+	public void testFindVirementsByMonthPaginated() {
 		DateTime date = new DateTime(2012, 5, 1, 0, 0);
 		DateTime datePlusUnMois = date.plusMonths(1);
-		List<Operation> operations = operationDao.findVirementsByMonthPaginated("bastou", date, datePlusUnMois, 20, 20);
+		List<Operation> operations = operationDao.findVirementsByMonthPaginated("bastou", date, datePlusUnMois, 0, 20);
 		BigDecimal i = new BigDecimal(0);
 		for (Operation operation : operations) {
 			i = i.add(operation.getMontant());
-			assertEquals(OperationType.Type.VIREMENT.name(), operation.getType().getLabel());
+			assertEquals(OperationType.Type.VIREMENT.name(), operation.getType().getLabel().name());
 		}
 		assertEquals(0, i.compareTo(new BigDecimal(1600)));
 		assertEquals(2, operations.size());
+	}
+
+	@DataSet("dataSet-OperationDaoTest.xml")
+	@Test
+	public void testFindNumberOfVirementsByMonth() {
+		DateTime date = new DateTime(2012, 5, 1, 0, 0);
+		DateTime datePlusUnMois = date.plusMonths(1);
+		long result = operationDao.findNumberOfVirementsByMonth("bastou", date, datePlusUnMois);
+		assertEquals(2, result);
 	}
 }
