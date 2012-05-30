@@ -17,8 +17,10 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ebi.formation.mfb.dao.ICompteDao;
 import com.ebi.formation.mfb.dao.IOperationDao;
 import com.ebi.formation.mfb.entities.Operation;
+import com.ebi.formation.mfb.entities.OperationType;
 import com.excilys.ebi.spring.dbunit.test.DataSet;
 import com.excilys.ebi.spring.dbunit.test.RollbackTransactionalDataSetTestExecutionListener;
 
@@ -39,6 +41,8 @@ public class OperationDaoTest {
 
 	@Autowired
 	private IOperationDao operationDao;
+	@Autowired
+	private ICompteDao compteDao;
 
 	/**
 	 * Test somme des opérations carte pour un mois donné
@@ -140,5 +144,26 @@ public class OperationDaoTest {
 			i = i.add(operation.getMontant());
 		}
 		assertEquals(0, i.compareTo(new BigDecimal(400)));
+	}
+
+	@DataSet("dataSet-OperationDaoTest.xml")
+	@Test
+	public void testUpdateCompteQuotidient() {
+		operationDao.updateCompteQuotidient();
+		assertEquals(0, compteDao.findMontantCompteById(1L).compareTo(new BigDecimal(21500)));
+	}
+
+	public void testfindVirementsByMonthPaginated() {
+		DateTime date = new DateTime(2012, 5, 1, 0, 0);
+		DateTime datePlusUnMois = date.plusMonths(1);
+		List<Operation> operations = operationDao.findVirementsByMonthPaginated(2, date, datePlusUnMois, 20, 20);
+		BigDecimal i = new BigDecimal(0);
+		for (Operation operation : operations) {
+			i = i.add(operation.getMontant());
+			assertEquals(OperationType.Type.VIREMENT.name(), operation.getType().getLabel());
+			assertEquals(new Long(2), operation.getCompte().getId());
+		}
+		assertEquals(0, i.compareTo(new BigDecimal(1600)));
+		assertEquals(2, operations.size());
 	}
 }
