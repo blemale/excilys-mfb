@@ -130,6 +130,41 @@ public interface IOperationService {
 	public List<Operation> getOperationsCarteByMonthPaginated(long idCompte, int month, int year, int page);
 
 	/**
+	 * Renvoie la liste des virements ordonnées par date descendante pour un mois donné de façon paginée.
+	 * 
+	 * @param idCompte
+	 *            id du {@link Compte}.
+	 * @param month
+	 *            un mois donné (1 = janvier, ...)
+	 * @param year
+	 *            une année donnée (yyyy)
+	 * @param offset
+	 *            l'offset de départ en nombre de ligne(0, ...)
+	 * @param numberOfResults
+	 *            le nombre d'opérations retournées
+	 * @return la liste des {@link Operation}
+	 */
+	@Secured("ROLE_CLIENT")
+	public List<Operation> getVirementsByMonthPaginated(long idCompte, int month, int year, int offset,
+			int numberOfResults);
+
+	/**
+	 * Renvoie la liste des virements ordonnées par date descendante pour un mois donné de façon paginée.
+	 * 
+	 * @param idCompte
+	 *            id du {@link Compte}.
+	 * @param month
+	 *            un mois donné (1 = janvier, ...)
+	 * @param year
+	 *            une année donnée (yyyy)
+	 * @param page
+	 *            la page à afficher avec le nombre de résultats par défaut. Commence à 0.
+	 * @return la liste des {@link Operation}
+	 */
+	@Secured("ROLE_CLIENT")
+	public List<Operation> getVirementsByMonthPaginated(long idCompte, int month, int year, int page);
+
+	/**
 	 * Renvoie le nombres de pages nécessaires pour afficher toutes les opérations non carte d'un mois donné
 	 * 
 	 * @param idCompte

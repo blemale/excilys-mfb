@@ -7,6 +7,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -26,6 +28,7 @@ import com.ebi.formation.mfb.entities.Role;
 @Repository
 public class PersonDao implements IPersonDao {
 
+	private final Logger logger = LoggerFactory.getLogger(PersonDao.class);
 	@PersistenceContext
 	private EntityManager em;
 
@@ -35,6 +38,7 @@ public class PersonDao implements IPersonDao {
 	 */
 	@Override
 	public UserDetails findUserDetailsByUsername(String username) {
+		logger.debug("findUserDetailsByUsername(username:{})", username);
 		UserDetails user = null;
 		try {
 			Person p = em.createNamedQuery("findUserDetailsByUsername", Person.class)
@@ -55,6 +59,7 @@ public class PersonDao implements IPersonDao {
 	 */
 	@Override
 	public Person findPersonByUsername(String username) {
+		logger.debug("findPersonByUsername(username:{})", username);
 		return em.createNamedQuery("findPersonByUsername", Person.class).setParameter("username", username)
 				.getSingleResult();
 	}

@@ -7,6 +7,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.ebi.formation.mfb.dao.ICompteDao;
@@ -21,6 +23,7 @@ import com.ebi.formation.mfb.entities.Compte;
 @Repository
 public class CompteDao implements ICompteDao {
 
+	private final Logger logger = LoggerFactory.getLogger(CompteDao.class);
 	@PersistenceContext
 	private EntityManager em;
 
@@ -31,11 +34,18 @@ public class CompteDao implements ICompteDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Compte> findComptesByUsername(String username) {
+		logger.debug("findComptesByUsername(username:{})", username);
 		return em.createNamedQuery("findComptesByUsername").setParameter("username", username).getResultList();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.dao.ICompteDao#checkCompteOwnershipByUsernameAndCompteId(java.lang.String,
+	 * java.lang.Long)
+	 */
 	@Override
 	public boolean checkCompteOwnershipByUsernameAndCompteId(String username, Long compteId) {
+		logger.debug("checkCompteOwnershipByUsernameAndCompteId(username:{},compteId:{})", username, compteId);
 		long result = 0;
 		try {
 			result = em.createNamedQuery("checkCompteOwnershipByUsernameAndCompteId", Long.class)
@@ -46,13 +56,18 @@ public class CompteDao implements ICompteDao {
 		return result == 0L ? false : true;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.dao.ICompteDao#findCompteById(long)
+	 */
 	@Override
 	public Compte findCompteById(long id) {
+		logger.debug("findCompteById(id:{})", id);
 		Compte c = null;
 		try {
 			return em.createNamedQuery("findCompteById", Compte.class).setParameter("id", id).getSingleResult();
 		} catch (NoResultException nre) {
-			// TODO logger pour l'ecxeption
+			logger.debug("findCompteById(id:{}) : Compte not found.", id);
 		}
 		return c;
 	}
@@ -63,6 +78,7 @@ public class CompteDao implements ICompteDao {
 	 */
 	@Override
 	public BigDecimal findMontantCompteById(Long id) {
+		logger.debug("findMontantCompteById(id:{})", id);
 		return (BigDecimal) em.createNamedQuery("findSoldeCompte").setParameter("id", id).getSingleResult();
 	}
 }
