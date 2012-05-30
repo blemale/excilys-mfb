@@ -99,8 +99,8 @@ public class OperationServiceTest {
 		DateTime datePlusUnMois = date.plusMonths(1);
 		List<Operation> result = new ArrayList<Operation>();
 		result.add(new Operation());
-		when(operationDao.findVirementsByMonthPaginated(1, date, datePlusUnMois, 0, 20)).thenReturn(result);
-		assertEquals(result, operationService.getVirementsByMonthPaginated(1, 1, 2012, 0, 20));
+		when(operationDao.findVirementsByMonthPaginated("foo", date, datePlusUnMois, 0, 20)).thenReturn(result);
+		assertEquals(result, operationService.getVirementsByMonthPaginated("foo", 1, 2012, 0, 20));
 	}
 
 	@Test

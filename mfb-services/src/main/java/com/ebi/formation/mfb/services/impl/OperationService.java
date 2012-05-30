@@ -173,11 +173,11 @@ public class OperationService implements IOperationService {
 	 * @see com.ebi.formation.mfb.services.IOperationService#getVirementsByMonthPaginated(long, int, int, int, int)
 	 */
 	@Override
-	public List<Operation> getVirementsByMonthPaginated(long idCompte, int month, int year, int offset,
+	public List<Operation> getVirementsByMonthPaginated(String username, int month, int year, int offset,
 			int numberOfResults) {
 		DateTime date = new DateTime(year, month, 1, 0, 0);
 		DateTime datePlusUnMois = date.plusMonths(1);
-		return operationDao.findVirementsByMonthPaginated(idCompte, date, datePlusUnMois, offset, numberOfResults);
+		return operationDao.findVirementsByMonthPaginated(username, date, datePlusUnMois, offset, numberOfResults);
 	}
 
 	/*
@@ -185,7 +185,7 @@ public class OperationService implements IOperationService {
 	 * @see com.ebi.formation.mfb.services.IOperationService#getVirementsByMonthPaginated(long, int, int, int)
 	 */
 	@Override
-	public List<Operation> getVirementsByMonthPaginated(long idCompte, int month, int year, int page) {
-		return getVirementsByMonthPaginated(idCompte, month, year, page * NB_RESULT_BY_DEFAULT, NB_RESULT_BY_DEFAULT);
+	public List<Operation> getVirementsByMonthPaginated(String username, int month, int year, int page) {
+		return getVirementsByMonthPaginated(username, month, year, page * NB_RESULT_BY_DEFAULT, NB_RESULT_BY_DEFAULT);
 	}
 }
