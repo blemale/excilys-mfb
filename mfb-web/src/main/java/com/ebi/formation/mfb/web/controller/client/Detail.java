@@ -244,7 +244,7 @@ public class Detail {
 		boolean result = false;
 		YearMonth currentMonth = new YearMonth(year, month);
 		// DateTime currentMonth = new DateTime(year, month, 1, 0, 0);
-		if (currentMonth.plusMonths(1).isBefore(YearMonth.now())) {
+		if (currentMonth.isBefore(YearMonth.now())) {
 			result = true;
 		}
 		return result;
