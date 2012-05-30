@@ -3,6 +3,7 @@ package com.ebi.formation.mfb.services.impl;
 import java.math.BigDecimal;
 import java.util.List;
 
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,9 +26,11 @@ public class OperationService implements IOperationService {
 	 */
 	@Override
 	public BigDecimal getTotalOperationsCarteByMonth(long idCompte, int month, int year) {
+		DateTime date = new DateTime(year, month, 1, 0, 0);
+		DateTime datePlusUnMois = date.plusMonths(1);
 		BigDecimal result = null;
-		if (operationDao.findNumberOfOperationsCarteByMonth(idCompte, month, year) != 0) {
-			result = operationDao.findTotalOperationsCarteByMonth(idCompte, month, year);
+		if (operationDao.findNumberOfOperationsCarteByMonth(idCompte, date, datePlusUnMois) != 0) {
+			result = operationDao.findTotalOperationsCarteByMonth(idCompte, date, datePlusUnMois);
 		}
 		return result;
 	}
@@ -38,7 +41,9 @@ public class OperationService implements IOperationService {
 	 */
 	@Override
 	public long getNumberOfOperationsCarteByMonth(long idCompte, int month, int year) {
-		return operationDao.findNumberOfOperationsCarteByMonth(idCompte, month, year);
+		DateTime date = new DateTime(year, month, 1, 0, 0);
+		DateTime datePlusUnMois = date.plusMonths(1);
+		return operationDao.findNumberOfOperationsCarteByMonth(idCompte, date, datePlusUnMois);
 	}
 
 	/*
@@ -47,7 +52,9 @@ public class OperationService implements IOperationService {
 	 */
 	@Override
 	public long getNumberOfOperationsWithoutCarteByMonth(long idCompte, int month, int year) {
-		return operationDao.findNumberOfOperationsWithoutCarteByMonth(idCompte, month, year);
+		DateTime date = new DateTime(year, month, 1, 0, 0);
+		DateTime datePlusUnMois = date.plusMonths(1);
+		return operationDao.findNumberOfOperationsWithoutCarteByMonth(idCompte, date, datePlusUnMois);
 	}
 
 	/*
@@ -58,7 +65,10 @@ public class OperationService implements IOperationService {
 	@Override
 	public List<Operation> getOperationsWithoutCarteByMonthPaginated(long idCompte, int month, int year, int offset,
 			int numberOfResults) {
-		return operationDao.findOperationsWithoutCarteByMonthPaginated(idCompte, month, year, offset, numberOfResults);
+		DateTime date = new DateTime(year, month, 1, 0, 0);
+		DateTime datePlusUnMois = date.plusMonths(1);
+		return operationDao.findOperationsWithoutCarteByMonthPaginated(idCompte, date, datePlusUnMois, offset,
+				numberOfResults);
 	}
 
 	/*
@@ -80,7 +90,10 @@ public class OperationService implements IOperationService {
 	@Override
 	public List<Operation> getOperationsCarteByMonthPaginated(long idCompte, int month, int year, int offset,
 			int numberOfResults) {
-		return operationDao.findOperationsCarteByMonthPaginated(idCompte, month, year, offset, numberOfResults);
+		DateTime date = new DateTime(year, month, 1, 0, 0);
+		DateTime datePlusUnMois = date.plusMonths(1);
+		return operationDao
+				.findOperationsCarteByMonthPaginated(idCompte, date, datePlusUnMois, offset, numberOfResults);
 	}
 
 	/*
