@@ -7,7 +7,6 @@
 		<c:if test="${fn:length(mapUrlPages) gt 1}">
 			<div class="pagination pagination-centered">
 				<ul>
-					<li><a href="#">«</a></li>
 					<c:forEach items="${mapUrlPages}" var="entry">
 						<c:if test="${currentPage eq entry.key}">
 							<li class="active"><a href="${contextPath}${entry.value}">${entry.key +1}</a></li>
@@ -16,7 +15,6 @@
 							<li><a href="${contextPath}${entry.value}">${entry.key + 1}</a></li>
 						</c:if>
 					</c:forEach>
-					<li><a href="#">»</a></li>
 				</ul>
 			</div>
 		</c:if>
