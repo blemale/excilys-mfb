@@ -188,4 +188,36 @@ public class OperationService implements IOperationService {
 	public List<Operation> getVirementsByMonthPaginated(String username, int month, int year, int page) {
 		return getVirementsByMonthPaginated(username, month, year, page * NB_RESULT_BY_DEFAULT, NB_RESULT_BY_DEFAULT);
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.services.IOperationService#getNumberOfPagesForVirementByMonth(java.lang.String, int,
+	 * int)
+	 */
+	@Override
+	public long getNumberOfPagesForVirementByMonth(String username, int month, int year) {
+		return getNumberOfPagesForVirementByMonth(username, month, year, NB_RESULT_BY_DEFAULT);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.services.IOperationService#getNumberOfPagesForVirementByMonth(java.lang.String, int,
+	 * int, int)
+	 */
+	@Override
+	public long getNumberOfPagesForVirementByMonth(String username, int month, int year, int numberOfResults) {
+		int extraPageIfNeeded = getNumberOfVirementByMonth(username, month, year) % numberOfResults == 0 ? 0 : 1;
+		return (getNumberOfVirementByMonth(username, month, year) / numberOfResults) + extraPageIfNeeded;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.services.IOperationService#getNumberOfVirementByMonth(java.lang.String, int, int)
+	 */
+	@Override
+	public long getNumberOfVirementByMonth(String username, int month, int year) {
+		DateTime date = new DateTime(year, month, 1, 0, 0);
+		DateTime datePlusUnMois = date.plusMonths(1);
+		return operationDao.findNumberOfVirementsByMonth(username, date, datePlusUnMois);
+	}
 }
