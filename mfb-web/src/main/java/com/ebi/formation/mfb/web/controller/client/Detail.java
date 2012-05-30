@@ -6,10 +6,12 @@ import java.util.Locale;
 import java.util.Map;
 
 import org.joda.time.DateTime;
+import org.joda.time.YearMonth;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -85,45 +87,31 @@ public class Detail {
 			throw new ResourceNotFoundException();
 		}
 		ModelAndView mv = new ModelAndView("detailCompte");
+		YearMonth currentMonth = new YearMonth(year, month);
+		long nbPages = operationService.getNumberOfPagesForOperationsWithoutCartesByMonth(idCompte, month, year);
+		addToModelCommonObjects(mv, locale, idCompte, currentMonth, page, nbPages, false);
 		// Ajout des opérations dans le modèle
 		mv.addObject("operations",
 				operationService.getOperationsWithoutCarteByMonthPaginated(idCompte, month, year, page));
 		// Ajout du solde carte dans le modèle
 		mv.addObject("soldeCarte", operationService.getTotalOperationsCarteByMonth(idCompte, month, year));
-		// Ajout du compte courrant dans le modèle
-		mv.addObject("compte", compteService.getCompteById(idCompte));
-		// Ajout de la date courrante dans le modèle
-		DateTime currentDate = new DateTime(year, month, 1, 0, 0);
-		DateTimeFormatter fmt = DateTimeFormat.forPattern("MMMM YYYY");
-		DateTimeFormatter localeFmt = fmt.withLocale(locale);
-		mv.addObject("currentDate", localeFmt.print(currentDate));
 		// Ajout de des urls pour aller au mois suivant et précédent dans le modèle si ils existent
 		if (hasPreviousMonth(month, year)) {
-			DateTime monthBefore = currentDate.minusMonths(1);
+			YearMonth monthBefore = currentMonth.minusMonths(1);
 			mv.addObject(
 					"urlPreviousMonth",
 					LinkBuilder.getLink("client", "compte", idCompte.longValue(), monthBefore.getYear(),
 							monthBefore.getMonthOfYear(), "detail.html"));
 		}
 		if (hasNextMonth(month, year)) {
-			DateTime monthBefore = currentDate.plusMonths(1);
+			YearMonth monthBefore = currentMonth.plusMonths(1);
 			mv.addObject(
 					"urlNextMonth",
 					LinkBuilder.getLink("client", "compte", idCompte.longValue(), monthBefore.getYear(),
 							monthBefore.getMonthOfYear(), "detail.html"));
 		}
-		long nbPages = operationService.getNumberOfPagesForOperationsWithoutCartesByMonth(idCompte, month, year);
-		// Ajout du nombre de page du détail dans le modèle
-		mv.addObject("numPageMonth", nbPages);
-		// Ajout des urls pour aller sur les différentes pages du détails
-		mv.addObject("mapUrlPages", getPagesUrls(idCompte, year, month, nbPages, false));
-		// Ajout du numéro de la page courrante dans le modèle
-		mv.addObject("currentPage", page);
-		// Ajout de l'url pour aller au détail carte du compte dans le modèle
 		mv.addObject("urlDetailCarte",
 				LinkBuilder.getLink("client", "compte", idCompte, year, month, "carte", "detail.html"));
-		// Ajout de l'url pour aller dans les différents mois de l'historique dans le modèle
-		mv.addObject("mapNamesUrlsForMonths", getMonthUrls(locale, idCompte, false));
 		return mv;
 	}
 
@@ -176,41 +164,28 @@ public class Detail {
 			throw new ResourceNotFoundException();
 		}
 		ModelAndView mv = new ModelAndView("detailCompteCarte");
+		long nbPages = operationService.getNumberOfPagesForOperationsCartesByMonth(idCompte, month, year);
+		YearMonth currentMonth = new YearMonth(year, month);
+		addToModelCommonObjects(mv, locale, idCompte, currentMonth, page, nbPages, true);
 		// Ajout des opérations carte dans le modèle
 		mv.addObject("operations", operationService.getOperationsCarteByMonthPaginated(idCompte, month, year, page));
-		// Ajout du compte courrant dans le modèle
-		mv.addObject("compte", compteService.getCompteById(idCompte));
-		// Ajout de la date courrante dans le modèle
-		DateTime currentDate = new DateTime(year, month, 1, 0, 0);
-		DateTimeFormatter fmt = DateTimeFormat.forPattern("MMMM YYYY");
-		DateTimeFormatter localeFmt = fmt.withLocale(locale);
-		mv.addObject("currentDate", localeFmt.print(currentDate));
 		// Ajout de des urls pour aller au mois suivant et précédent dans le modèle si ils existent
 		if (hasPreviousMonth(month, year)) {
-			DateTime monthBefore = currentDate.minusMonths(1);
+			YearMonth monthBefore = currentMonth.minusMonths(1);
 			mv.addObject(
 					"urlPreviousMonth",
 					LinkBuilder.getLink("client", "compte", idCompte.longValue(), monthBefore.getYear(),
 							monthBefore.getMonthOfYear(), "carte", "detail.html"));
 		}
 		if (hasNextMonth(month, year)) {
-			DateTime monthBefore = currentDate.plusMonths(1);
+			YearMonth monthBefore = currentMonth.plusMonths(1);
 			mv.addObject(
 					"urlNextMonth",
 					LinkBuilder.getLink("client", "compte", idCompte.longValue(), monthBefore.getYear(),
 							monthBefore.getMonthOfYear(), "carte", "detail.html"));
 		}
-		long nbPages = operationService.getNumberOfPagesForOperationsCartesByMonth(idCompte, month, year);
-		// Ajout du nombre de page du détail dans le modèle
-		mv.addObject("numPageMonth", nbPages);
-		// Ajout des urls pour aller sur les différentes pages du détails
-		mv.addObject("mapUrlPages", getPagesUrls(idCompte, year, month, nbPages, true));
-		// Ajout du numéro de la page courrante dans le modèle
-		mv.addObject("currentPage", page);
 		// Ajout de l'url pour revenir au détail du compte dans le modèle
 		mv.addObject("urlDetailCompte", LinkBuilder.getLink("client", "compte", idCompte, year, month, "detail.html"));
-		// Ajout de l'url pour aller dans les différents mois de l'historique dans le modèle
-		mv.addObject("mapNamesUrlsForMonths", getMonthUrls(locale, idCompte, true));
 		return mv;
 	}
 
@@ -223,8 +198,9 @@ public class Detail {
 	 */
 	private boolean hasPreviousMonth(int month, int year) {
 		boolean result = false;
-		DateTime currentMonth = new DateTime(year, month, 1, 0, 0);
-		if (currentMonth.plusMonths(NB_MONTH_HISTORY - 1).isAfterNow()) {
+		YearMonth currentMonth = new YearMonth(year, month);
+		// DateTime currentMonth = new DateTime(year, month, 1, 0, 0);
+		if (currentMonth.plusMonths(NB_MONTH_HISTORY - 1).isAfter(YearMonth.now())) {
 			result = true;
 		}
 		return result;
@@ -239,8 +215,9 @@ public class Detail {
 	 */
 	private boolean hasNextMonth(int month, int year) {
 		boolean result = false;
-		DateTime currentMonth = new DateTime(year, month, 1, 0, 0);
-		if (currentMonth.plusMonths(1).isBeforeNow()) {
+		YearMonth currentMonth = new YearMonth(year, month);
+		// DateTime currentMonth = new DateTime(year, month, 1, 0, 0);
+		if (currentMonth.isBefore(YearMonth.now())) {
 			result = true;
 		}
 		return result;
@@ -255,8 +232,10 @@ public class Detail {
 	 */
 	private boolean monthInHistory(int month, int year) {
 		boolean result = false;
-		DateTime currentMonth = new DateTime(year, month, 1, 0, 0);
-		if (currentMonth.plusMonths(NB_MONTH_HISTORY).isAfterNow() && currentMonth.isBeforeNow()) {
+		YearMonth currentMonth = new YearMonth(year, month);
+		// DateTime currentMonth = new DateTime(year, month, 1, 0, 0);
+		if (currentMonth.plusMonths(NB_MONTH_HISTORY).isAfter(YearMonth.now())
+				&& (currentMonth.isBefore(YearMonth.now()) || currentMonth.isEqual(YearMonth.now()))) {
 			result = true;
 		}
 		return result;
@@ -320,10 +299,12 @@ public class Detail {
 	 */
 	private Map<String, String> getMonthUrls(Locale locale, Long idCompte, boolean cardDetail) {
 		Map<String, String> mapNamesUrls = new LinkedHashMap<String, String>();
-		DateTime now = DateTime.now();
+		YearMonth now = YearMonth.now();
+		// DateTime now = DateTime.now();
 		for (int i = 0; i <= 5; i++) {
-			DateTime month = now.minusMonths(i);
-			DateTimeFormatter fmt = DateTimeFormat.forPattern("MMMM YYYY");
+			// DateTime month = now.minusMonths(i);
+			YearMonth month = now.minusMonths(i);
+			DateTimeFormatter fmt = DateTimeFormat.forPattern("MMMM yyyy");
 			DateTimeFormatter localeFmt = fmt.withLocale(locale);
 			if (cardDetail) {
 				mapNamesUrls.put(localeFmt.print(month), LinkBuilder.getLink("client", "compte", idCompte,
@@ -334,5 +315,35 @@ public class Detail {
 			}
 		}
 		return mapNamesUrls;
+	}
+
+	/**
+	 * Ajout au {@link Model} des objets communs au détail compte et détail carte.
+	 * 
+	 * @param mv
+	 * @param locale
+	 * @param idCompte
+	 * @param currentMonth
+	 * @param page
+	 * @param nbPages
+	 * @param cardDetail
+	 */
+	private void addToModelCommonObjects(ModelAndView mv, Locale locale, Long idCompte, YearMonth currentMonth,
+			int page, long nbPages, boolean cardDetail) {
+		// Ajout du compte courrant dans le modèle
+		mv.addObject("compte", compteService.getCompteById(idCompte));
+		// Ajout de la date courrante dans le modèle
+		DateTimeFormatter fmt = DateTimeFormat.forPattern("MMMM yyyy");
+		DateTimeFormatter localeFmt = fmt.withLocale(locale);
+		mv.addObject("currentDate", localeFmt.print(currentMonth));
+		// Ajout du nombre de page du détail dans le modèle
+		mv.addObject("numPageMonth", nbPages);
+		// Ajout des urls pour aller sur les différentes pages du détails
+		mv.addObject("mapUrlPages",
+				getPagesUrls(idCompte, currentMonth.getYear(), currentMonth.getMonthOfYear(), nbPages, cardDetail));
+		// Ajout du numéro de la page courrante dans le modèle
+		mv.addObject("currentPage", page);
+		// Ajout de l'url pour aller dans les différents mois de l'historique dans le modèle
+		mv.addObject("mapNamesUrlsForMonths", getMonthUrls(locale, idCompte, cardDetail));
 	}
 }

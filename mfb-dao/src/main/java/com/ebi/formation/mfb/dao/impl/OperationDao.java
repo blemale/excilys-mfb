@@ -20,6 +20,10 @@ import com.ebi.formation.mfb.entities.OperationType;
  * @author tbakir
  * 
  */
+/**
+ * @author excilys
+ * 
+ */
 @Repository
 public class OperationDao implements IOperationDao {
 
@@ -74,11 +78,33 @@ public class OperationDao implements IOperationDao {
 				.setMaxResults(offset + numberOfResults).getResultList();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.dao.IOperationDao#findNumberOfOperationsWithoutCarteByMonth(long,
+	 * org.joda.time.DateTime, org.joda.time.DateTime)
+	 */
 	@Override
 	public long findNumberOfOperationsWithoutCarteByMonth(long idCompte, DateTime date, DateTime datePlusUnMois) {
 		return (Long) em.createNamedQuery("findNumberOfOperationsWithoutTypeByMonth")
 				.setParameter("idcompte", idCompte).setParameter("dateValeur", date)
 				.setParameter("datePlusUnMois", datePlusUnMois).setParameter("type", OperationType.Type.CARTE)
 				.getSingleResult();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.dao.IOperationDao#updateCompteQuotidient()
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public void updateCompteQuotidient() {
+		DateTime today = new DateTime();
+		List<Operation> l = em.createNamedQuery("findOperationsBeforeDate").setParameter("today", today)
+				.getResultList();
+		// TODO : Modifier la requête quand il y aura les flags dans les opérations.
+		for (Operation o : l) {
+			em.createNamedQuery("updateCompteWithValue").setParameter("valeur", o.getMontant())
+					.setParameter("operation", o.getCompte()).executeUpdate();
+		}
 	}
 }

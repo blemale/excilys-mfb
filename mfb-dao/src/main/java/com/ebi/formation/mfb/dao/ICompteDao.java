@@ -1,5 +1,6 @@
 package com.ebi.formation.mfb.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.ebi.formation.mfb.entities.Compte;
@@ -30,4 +31,12 @@ public interface ICompteDao {
 	 * @return un compte
 	 */
 	public Compte findCompteById(long id);
+
+	/**
+	 * Retourne le solde d'un compte depuis son id.
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public BigDecimal findMontantCompteById(Long id);
 }
