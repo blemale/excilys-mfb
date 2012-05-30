@@ -2,6 +2,8 @@ package com.ebi.formation.mfb.services.impl;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +22,7 @@ import com.ebi.formation.mfb.services.ICompteService;
 @Transactional(readOnly = true)
 public class CompteService implements ICompteService {
 
+	private final Logger logger = LoggerFactory.getLogger(CompteService.class);
 	@Autowired
 	ICompteDao compteDao;
 
@@ -29,6 +32,7 @@ public class CompteService implements ICompteService {
 	 */
 	@Override
 	public List<Compte> findComptesByUsername(String username) {
+		logger.debug("findComptesByUsername(username:{})", username);
 		return compteDao.findComptesByUsername(username);
 	}
 
@@ -39,6 +43,7 @@ public class CompteService implements ICompteService {
 	 */
 	@Override
 	public boolean checkCompteOwnershipByUsernameAndCompteId(String username, Long compteId) {
+		logger.debug("checkCompteOwnershipByUsernameAndCompteId(username:{},compteId:{})", username, compteId);
 		return compteDao.checkCompteOwnershipByUsernameAndCompteId(username, compteId);
 	}
 
@@ -48,6 +53,7 @@ public class CompteService implements ICompteService {
 	 */
 	@Override
 	public Compte getCompteById(Long id) {
+		logger.debug("getCompteById(id:{})", id);
 		return compteDao.findCompteById(id);
 	}
 }

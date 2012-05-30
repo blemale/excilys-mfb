@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import org.joda.time.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +18,7 @@ import com.ebi.formation.mfb.services.IOperationService;
 @Transactional(readOnly = true)
 public class OperationService implements IOperationService {
 
+	private final Logger logger = LoggerFactory.getLogger(OperationService.class);
 	public static final int NB_RESULT_BY_DEFAULT = 20;
 	@Autowired
 	private IOperationDao operationDao;
@@ -26,6 +29,8 @@ public class OperationService implements IOperationService {
 	 */
 	@Override
 	public BigDecimal getTotalOperationsCarteByMonth(long idCompte, int month, int year) {
+		logger.debug("getTotalOperationsCarteByMonth(idCompte:{}, month:{}, year:{})", new Object[] { idCompte, month,
+				year });
 		DateTime date = new DateTime(year, month, 1, 0, 0);
 		DateTime datePlusUnMois = date.plusMonths(1);
 		BigDecimal result = null;
@@ -41,6 +46,8 @@ public class OperationService implements IOperationService {
 	 */
 	@Override
 	public long getNumberOfOperationsCarteByMonth(long idCompte, int month, int year) {
+		logger.debug("getNumberOfOperationsCarteByMonth(idCompte:{}, month:{}, year:{})", new Object[] { idCompte,
+				month, year });
 		DateTime date = new DateTime(year, month, 1, 0, 0);
 		DateTime datePlusUnMois = date.plusMonths(1);
 		return operationDao.findNumberOfOperationsCarteByMonth(idCompte, date, datePlusUnMois);
@@ -52,6 +59,8 @@ public class OperationService implements IOperationService {
 	 */
 	@Override
 	public long getNumberOfOperationsWithoutCarteByMonth(long idCompte, int month, int year) {
+		logger.debug("getNumberOfOperationsWithoutCarteByMonth(idCompte:{}, month:{}, year:{})", new Object[] {
+				idCompte, month, year });
 		DateTime date = new DateTime(year, month, 1, 0, 0);
 		DateTime datePlusUnMois = date.plusMonths(1);
 		return operationDao.findNumberOfOperationsWithoutCarteByMonth(idCompte, date, datePlusUnMois);
@@ -65,6 +74,9 @@ public class OperationService implements IOperationService {
 	@Override
 	public List<Operation> getOperationsWithoutCarteByMonthPaginated(long idCompte, int month, int year, int offset,
 			int numberOfResults) {
+		logger.debug(
+				"getOperationsWithoutCarteByMonthPaginated(idCompte:{}, month:{}, year:{}, offset:{}, numberOfResults:{})",
+				new Object[] { idCompte, month, year, offset, numberOfResults });
 		DateTime date = new DateTime(year, month, 1, 0, 0);
 		DateTime datePlusUnMois = date.plusMonths(1);
 		return operationDao.findOperationsWithoutCarteByMonthPaginated(idCompte, date, datePlusUnMois, offset,
@@ -78,6 +90,8 @@ public class OperationService implements IOperationService {
 	 */
 	@Override
 	public List<Operation> getOperationsWithoutCarteByMonthPaginated(long idCompte, int month, int year, int page) {
+		logger.debug("getOperationsWithoutCarteByMonthPaginated(idCompte:{}, month:{}, year:{}, page:{})",
+				new Object[] { idCompte, month, year, page });
 		return getOperationsWithoutCarteByMonthPaginated(idCompte, month, year, page * NB_RESULT_BY_DEFAULT,
 				NB_RESULT_BY_DEFAULT);
 	}
@@ -90,6 +104,9 @@ public class OperationService implements IOperationService {
 	@Override
 	public List<Operation> getOperationsCarteByMonthPaginated(long idCompte, int month, int year, int offset,
 			int numberOfResults) {
+		logger.debug(
+				"getOperationsCarteByMonthPaginated(idCompte:{}, month:{}, year:{}, offset:{}, numberOfResults:{})",
+				new Object[] { idCompte, month, year, offset, numberOfResults });
 		DateTime date = new DateTime(year, month, 1, 0, 0);
 		DateTime datePlusUnMois = date.plusMonths(1);
 		return operationDao
@@ -102,6 +119,8 @@ public class OperationService implements IOperationService {
 	 */
 	@Override
 	public List<Operation> getOperationsCarteByMonthPaginated(long idCompte, int month, int year, int page) {
+		logger.debug("getOperationsCarteByMonthPaginated(idCompte:{}, month:{}, year:{}, page:{})", new Object[] {
+				idCompte, month, year, page });
 		return getOperationsCarteByMonthPaginated(idCompte, month, year, page * NB_RESULT_BY_DEFAULT,
 				NB_RESULT_BY_DEFAULT);
 	}
