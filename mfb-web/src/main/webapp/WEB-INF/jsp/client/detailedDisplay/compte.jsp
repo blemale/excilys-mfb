@@ -13,7 +13,7 @@
 	</h1>
 
 	<p align="right">
-		<a class="btn btn-success myBouton" href="export.html"><spring:message
+		<a class="btn btn-success" href="export.html"><spring:message
 				code="home.account.exportExcel" /></a>
 		<a href="${contextPath}/client/home.html" class="btn btn-info"><spring:message
 				code="compte.home" /></a>
