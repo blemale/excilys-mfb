@@ -162,7 +162,7 @@ public class OperationDaoTest {
 	public void testFindVirementsByMonthPaginated() {
 		DateTime date = new DateTime(2012, 5, 1, 0, 0);
 		DateTime datePlusUnMois = date.plusMonths(1);
-		List<Operation> operations = operationDao.findVirementsByMonthPaginated("bastou", date, datePlusUnMois, 0, 20);
+		List<Operation> operations = operationDao.findVirementsByMonthPaginated(2L, date, datePlusUnMois, 0, 20);
 		BigDecimal i = new BigDecimal(0);
 		for (Operation operation : operations) {
 			i = i.add(operation.getMontant());
@@ -177,7 +177,7 @@ public class OperationDaoTest {
 	public void testFindNumberOfVirementsByMonth() {
 		DateTime date = new DateTime(2012, 5, 1, 0, 0);
 		DateTime datePlusUnMois = date.plusMonths(1);
-		long result = operationDao.findNumberOfVirementsByMonth("bastou", date, datePlusUnMois);
+		long result = operationDao.findNumberOfVirementsByMonth(2L, date, datePlusUnMois);
 		assertEquals(2, result);
 	}
 
@@ -186,16 +186,16 @@ public class OperationDaoTest {
 	public void testSaveOperation() {
 		DateTime date = DateTime.now();
 		DateTime datePlusUnMois = date.plusMonths(1);
-		long nbVirement = operationDao.findNumberOfVirementsByMonth("bastou", date, datePlusUnMois);
+		long nbVirement = operationDao.findNumberOfVirementsByMonth(2L, date, datePlusUnMois);
 		Operation operation = new Operation();
-		operation.setCompte(compteDao.findCompteById(3L));
+		operation.setCompte(compteDao.findCompteById(2L));
 		operation.setDateEffet(date);
 		operation.setDateValeur(date);
 		operation.setLabel("Ceci est un nouveau virement");
 		operation.setMontant(new BigDecimal(130.0));
 		operation.setType(operationTypeDao.getOperationTypeByType(Type.VIREMENT));
 		operationDao.save(operation);
-		long result = operationDao.findNumberOfVirementsByMonth("bastou", date, datePlusUnMois);
+		long result = operationDao.findNumberOfVirementsByMonth(2L, date, datePlusUnMois);
 		assertEquals(nbVirement + 1, result);
 	}
 }

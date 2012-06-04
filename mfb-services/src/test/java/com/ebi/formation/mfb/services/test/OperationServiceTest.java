@@ -75,8 +75,8 @@ public class OperationServiceTest {
 	public void testGetNumbreOfVirementByMonth() {
 		DateTime date = new DateTime(2012, 1, 1, 0, 0);
 		DateTime datePlusUnMois = date.plusMonths(1);
-		when(operationDao.findNumberOfVirementsByMonth("foo", date, datePlusUnMois)).thenReturn(42L);
-		assertEquals(42L, operationService.getNumberOfVirementByMonth("foo", 1, 2012));
+		when(operationDao.findNumberOfVirementsByMonth(0L, date, datePlusUnMois)).thenReturn(42L);
+		assertEquals(42L, operationService.getNumberOfVirementByMonth(0L, 1, 2012));
 	}
 
 	@Test
@@ -117,8 +117,8 @@ public class OperationServiceTest {
 		DateTime datePlusUnMois = date.plusMonths(1);
 		List<Operation> result = new ArrayList<Operation>();
 		result.add(new Operation());
-		when(operationDao.findVirementsByMonthPaginated("foo", date, datePlusUnMois, 0, 20)).thenReturn(result);
-		assertEquals(result, operationService.getVirementsByMonthPaginated("foo", 1, 2012, 0, 20));
+		when(operationDao.findVirementsByMonthPaginated(0L, date, datePlusUnMois, 0, 20)).thenReturn(result);
+		assertEquals(result, operationService.getVirementsByMonthPaginated(0L, 1, 2012, 0, 20));
 	}
 
 	@Test
@@ -175,20 +175,20 @@ public class OperationServiceTest {
 	public void testGetNumberOfPagesForVirementByMonth() {
 		DateTime date = new DateTime(2012, 1, 1, 0, 0);
 		DateTime datePlusUnMois = date.plusMonths(1);
-		when(operationDao.findNumberOfVirementsByMonth("foo", date, datePlusUnMois)).thenReturn(400L);
-		when(operationDao.findNumberOfVirementsByMonth("bar", date, datePlusUnMois)).thenReturn(410L);
-		assertEquals(20, operationService.getNumberOfPagesForVirementByMonth("foo", 1, 2012));
-		assertEquals(21, operationService.getNumberOfPagesForVirementByMonth("bar", 1, 2012));
+		when(operationDao.findNumberOfVirementsByMonth(0L, date, datePlusUnMois)).thenReturn(400L);
+		when(operationDao.findNumberOfVirementsByMonth(1L, date, datePlusUnMois)).thenReturn(410L);
+		assertEquals(20, operationService.getNumberOfPagesForVirementByMonth(0L, 1, 2012));
+		assertEquals(21, operationService.getNumberOfPagesForVirementByMonth(1L, 1, 2012));
 	}
 
 	@Test
 	public void testGetNumberOfPagesForVirementByMonthWithCustom() {
 		DateTime date = new DateTime(2012, 1, 1, 0, 0);
 		DateTime datePlusUnMois = date.plusMonths(1);
-		when(operationDao.findNumberOfVirementsByMonth("foo", date, datePlusUnMois)).thenReturn(900L);
-		when(operationDao.findNumberOfVirementsByMonth("bar", date, datePlusUnMois)).thenReturn(925L);
-		assertEquals(30, operationService.getNumberOfPagesForVirementByMonth("foo", 1, 2012, 30));
-		assertEquals(31, operationService.getNumberOfPagesForVirementByMonth("bar", 1, 2012, 30));
+		when(operationDao.findNumberOfVirementsByMonth(0L, date, datePlusUnMois)).thenReturn(900L);
+		when(operationDao.findNumberOfVirementsByMonth(1L, date, datePlusUnMois)).thenReturn(925L);
+		assertEquals(30, operationService.getNumberOfPagesForVirementByMonth(0L, 1, 2012, 30));
+		assertEquals(31, operationService.getNumberOfPagesForVirementByMonth(1L, 1, 2012, 30));
 	}
 
 	@Test
