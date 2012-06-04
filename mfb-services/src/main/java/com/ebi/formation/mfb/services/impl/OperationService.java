@@ -31,6 +31,10 @@ public class OperationService implements IOperationService {
 	@Autowired
 	private IOperationTypeDao operationTypeDao;
 
+	public enum ReturnCodeVirement {
+		OK, IDENTICAL_COMPTES, DECOUVERT, COMPTE_DEBIT_INEXISTANT, COMPTE_CREDIT_INEXISTANT, MONTANT_INCORRECT
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see com.ebi.formation.mfb.services.IOperationService#getTotalOperationsCarteByMonth(long, int, int)
@@ -236,23 +240,23 @@ public class OperationService implements IOperationService {
 	 */
 	@Override
 	@Transactional
-	public int doVirement(long idCompteADebiter, long idCompteACrediter, String label, BigDecimal montant) {
+	public ReturnCodeVirement doVirement(long idCompteADebiter, long idCompteACrediter, String label, BigDecimal montant) {
 		if (montant.signum() == -1 || montant.signum() == 0) {
-			return 5;
+			return ReturnCodeVirement.MONTANT_INCORRECT;
 		}
 		if (idCompteADebiter == idCompteACrediter) {
-			return 1;
+			return ReturnCodeVirement.IDENTICAL_COMPTES;
 		}
 		Compte compteADebiter = compteDao.findCompteById(idCompteADebiter);
 		Compte compteACrediter = compteDao.findCompteById(idCompteACrediter);
 		if (compteADebiter == null) {
-			return 3;
+			return ReturnCodeVirement.COMPTE_DEBIT_INEXISTANT;
 		}
 		if (compteACrediter == null) {
-			return 4;
+			return ReturnCodeVirement.COMPTE_CREDIT_INEXISTANT;
 		}
 		if (compteADebiter.getSolde().add(montant.negate()).signum() == -1) {
-			return 2;
+			return ReturnCodeVirement.DECOUVERT;
 		}
 		Operation debit = new Operation();
 		debit.setCompte(compteADebiter);
@@ -276,6 +280,6 @@ public class OperationService implements IOperationService {
 		BigDecimal newSoldeCredit = compteACrediter.getSolde().add(montant);
 		compteADebiter.setSolde(newSoldeDebit);
 		compteACrediter.setSolde(newSoldeCredit);
-		return 0;
+		return ReturnCodeVirement.OK;
 	}
 }

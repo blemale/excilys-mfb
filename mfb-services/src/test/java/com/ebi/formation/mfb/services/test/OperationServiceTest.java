@@ -23,6 +23,7 @@ import com.ebi.formation.mfb.entities.Operation;
 import com.ebi.formation.mfb.entities.OperationType;
 import com.ebi.formation.mfb.entities.OperationType.Type;
 import com.ebi.formation.mfb.services.impl.OperationService;
+import com.ebi.formation.mfb.services.impl.OperationService.ReturnCodeVirement;
 
 @RunWith(MockitoJUnitRunner.class)
 @ContextConfiguration(locations = "classpath:/services-config.xml")
@@ -201,8 +202,8 @@ public class OperationServiceTest {
 		when(operationTypeDao.getOperationTypeByType(Type.VIREMENT)).thenReturn(new OperationType());
 		when(compteDao.findCompteById(0)).thenReturn(compteADebiter);
 		when(compteDao.findCompteById(1)).thenReturn(compteACrediter);
-		int result = operationService.doVirement(0L, 1L, "", new BigDecimal(200));
-		assertEquals(0, result);
+		ReturnCodeVirement result = operationService.doVirement(0L, 1L, "", new BigDecimal(200));
+		assertEquals(ReturnCodeVirement.OK, result);
 		assertEquals(0, compteADebiter.getSolde().compareTo(new BigDecimal(100)));
 		assertEquals(0, compteACrediter.getSolde().compareTo(new BigDecimal(600)));
 	}
@@ -211,8 +212,8 @@ public class OperationServiceTest {
 	public void testVirementComptesIdentiques() {
 		Compte compteADebiter = new Compte();
 		compteADebiter.setId(0L);
-		int result = operationService.doVirement(0L, 0L, "", new BigDecimal(200));
-		assertEquals(1, result);
+		ReturnCodeVirement result = operationService.doVirement(0L, 0L, "", new BigDecimal(200));
+		assertEquals(ReturnCodeVirement.IDENTICAL_COMPTES, result);
 	}
 
 	@Test
@@ -225,8 +226,8 @@ public class OperationServiceTest {
 		compteACrediter.setSolde(new BigDecimal(400));
 		when(compteDao.findCompteById(0)).thenReturn(compteADebiter);
 		when(compteDao.findCompteById(1)).thenReturn(compteACrediter);
-		int result = operationService.doVirement(0L, 1L, "", new BigDecimal(200));
-		assertEquals(2, result);
+		ReturnCodeVirement result = operationService.doVirement(0L, 1L, "", new BigDecimal(200));
+		assertEquals(ReturnCodeVirement.DECOUVERT, result);
 	}
 
 	@Test
@@ -236,8 +237,8 @@ public class OperationServiceTest {
 		compteACrediter.setSolde(new BigDecimal(400));
 		when(compteDao.findCompteById(0)).thenReturn(null);
 		when(compteDao.findCompteById(1)).thenReturn(compteACrediter);
-		int result = operationService.doVirement(0L, 1L, "", new BigDecimal(200));
-		assertEquals(3, result);
+		ReturnCodeVirement result = operationService.doVirement(0L, 1L, "", new BigDecimal(200));
+		assertEquals(ReturnCodeVirement.COMPTE_DEBIT_INEXISTANT, result);
 	}
 
 	@Test
@@ -247,15 +248,15 @@ public class OperationServiceTest {
 		compteADebiter.setSolde(new BigDecimal(100));
 		when(compteDao.findCompteById(0)).thenReturn(compteADebiter);
 		when(compteDao.findCompteById(1)).thenReturn(null);
-		int result = operationService.doVirement(0L, 1L, "", new BigDecimal(200));
-		assertEquals(4, result);
+		ReturnCodeVirement result = operationService.doVirement(0L, 1L, "", new BigDecimal(200));
+		assertEquals(ReturnCodeVirement.COMPTE_CREDIT_INEXISTANT, result);
 	}
 
 	@Test
 	public void testVirementValeurMontant() {
-		int result = operationService.doVirement(0L, 1L, "", new BigDecimal(-200));
-		assertEquals(5, result);
-		int result2 = operationService.doVirement(0L, 1L, "", new BigDecimal(0));
-		assertEquals(5, result2);
+		ReturnCodeVirement result = operationService.doVirement(0L, 1L, "", new BigDecimal(-200));
+		assertEquals(ReturnCodeVirement.MONTANT_INCORRECT, result);
+		ReturnCodeVirement result2 = operationService.doVirement(0L, 1L, "", new BigDecimal(0));
+		assertEquals(ReturnCodeVirement.MONTANT_INCORRECT, result2);
 	}
 }

@@ -7,6 +7,7 @@ import org.springframework.security.access.annotation.Secured;
 
 import com.ebi.formation.mfb.entities.Compte;
 import com.ebi.formation.mfb.entities.Operation;
+import com.ebi.formation.mfb.services.impl.OperationService.ReturnCodeVirement;
 
 /**
  * Interface du service associé à {@link Operation}
@@ -278,5 +279,6 @@ public interface IOperationService {
 	 *         découvert; 3 si le compte à débiter n'existe pas; 4 si le compte à créditer n'existe pas; 5 si le montant
 	 *         est négatif ou nul
 	 */
-	public int doVirement(long idCompteADebiter, long idCompteACrediter, String label, BigDecimal montant);
+	@Secured("ROLE_CLIENT")
+	public ReturnCodeVirement doVirement(long idCompteADebiter, long idCompteACrediter, String label, BigDecimal montant);
 }
