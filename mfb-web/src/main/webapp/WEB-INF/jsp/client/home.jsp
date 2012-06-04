@@ -17,7 +17,7 @@
 <section id="comptes">
 	<div class="row">
 		<div class="span8 offset2">
-			<c:if test="${fn:length(comptes) ne 0}">
+			<c:if test="${fn:length(linksAndComptes) ne 0}">
 				<table class="table table-striped table-bordered">
 					<thead>
 						<tr>
@@ -28,28 +28,28 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${comptes}" var="c">
-							<tr class="clickLine" onclick="lienCompte('${contextPath}/client/compte/${c.id}/detail.html')">
-								<td>${c.numeroCompte}</td>
-								<td>${c.label}</td>
-								<c:if test="${c.solde >= 0}">
+						<c:forEach items="${linksAndComptes}" var="c">
+							<tr class="clickLine" onclick="lienCompte('${contextPath}${c.key}')">
+								<td>${c.value.numeroCompte}</td>
+								<td>${c.value.label}</td>
+								<c:if test="${c.value.solde >= 0}">
 									<td class="aligneSolde coloreVert">+ <fmt:formatNumber
-											value="${c.solde}" minFractionDigits="2" pattern="#,###.##" />
+											value="${c.value.solde}" minFractionDigits="2" pattern="#,###.##" />
 									</td>
 								</c:if>
-								<c:if test="${c.solde < 0}">
+								<c:if test="${c.value.solde < 0}">
 									<td class="aligneSolde coloreRouge">- <fmt:formatNumber
-											value="${c.solde*-1}" minFractionDigits="2"
+											value="${c.value.solde*-1}" minFractionDigits="2"
 											pattern="#,###.##" />
 									</td>
 								</c:if>
-								<td><a class="btn btn-mini btn-info" href="${contextPath}/client/compte/${c.id}/detail.html"><spring:message code="home.account.details"/></a></td>
+								<td><a class="btn btn-mini btn-info" href="${contextPath}${c.key}"><spring:message code="home.account.details"/></a></td>
 							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
 			</c:if>
-			<c:if test="${fn:length(comptes) eq 0}">
+			<c:if test="${fn:length(linksAndComptes) eq 0}">
 				<div class="alert alert-info">
 					<spring:message code="home.emptyCompte" />
 				</div>
