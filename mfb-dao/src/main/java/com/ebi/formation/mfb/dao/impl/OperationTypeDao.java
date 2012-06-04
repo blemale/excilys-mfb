@@ -18,6 +18,12 @@ public class OperationTypeDao implements IOperationTypeDao {
 	@PersistenceContext
 	private EntityManager em;
 
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.ebi.formation.mfb.dao.IOperationTypeDao#getOperationTypeByType(com.ebi.formation.mfb.entities.OperationType
+	 * .Type)
+	 */
 	@Override
 	public OperationType getOperationTypeByType(Type type) {
 		return (OperationType) em.createNamedQuery("findOperationTypeByType").setParameter("type", type)

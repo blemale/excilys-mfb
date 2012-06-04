@@ -150,4 +150,13 @@ public class OperationDao implements IOperationDao {
 		return (Long) em.createNamedQuery("findNumberOfVirementByMonth").setParameter("username", username)
 				.setParameter("dateValeur", date).setParameter("datePlusUnMois", datePlusUnMois).getSingleResult();
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.dao.IOperationDao#save(com.ebi.formation.mfb.entities.Operation)
+	 */
+	@Override
+	public void save(Operation operation) {
+		em.persist(operation);
+	}
 }

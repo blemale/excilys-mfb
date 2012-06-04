@@ -100,4 +100,12 @@ public interface IOperationDao {
 	 */
 	public List<Operation> findVirementsByMonthPaginated(String username, DateTime date, DateTime datePlusUnMois,
 			int offset, int numberOfResults);
+
+	/**
+	 * Méthode permettant de persister en base une nouvelle opération.
+	 * 
+	 * @param operation
+	 *            l'opération à persister
+	 */
+	public void save(Operation operation);
 }
