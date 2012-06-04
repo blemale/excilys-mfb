@@ -235,6 +235,19 @@ public class OperationService implements IOperationService {
 
 	/*
 	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.services.IOperationService#getAllOperationsByMonthByCompte(long, int, int)
+	 */
+	@Override
+	public List<Operation> getAllOperationsByMonthByCompte(long idCompte, int month, int year) {
+		logger.debug("getAllOperationsByMonthByCompte(idCompte:{}, month:{}, year:{})", new Object[] { idCompte, month,
+				year });
+		DateTime date = new DateTime(year, month, 1, 0, 0);
+		DateTime datePlusUnMois = date.plusMonths(1);
+		return operationDao.findAllOperationsByMonthByCompte(idCompte, date, datePlusUnMois);
+	}
+
+	/*
+	 * (non-Javadoc)
 	 * @see com.ebi.formation.mfb.services.IOperationService#doVirement(long, long, java.lang.String,
 	 * java.math.BigDecimal)
 	 */

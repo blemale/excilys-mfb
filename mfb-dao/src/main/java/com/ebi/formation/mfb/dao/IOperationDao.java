@@ -102,6 +102,16 @@ public interface IOperationDao {
 			int offset, int numberOfResults);
 
 	/**
+	 * Récupère la liste des opérations pour un mois donné.
+	 * 
+	 * @param idCompte
+	 * @param date
+	 * @param datePlusUnMois
+	 * @return
+	 */
+	public List<Operation> findAllOperationsByMonthByCompte(long idCompte, DateTime date, DateTime datePlusUnMois);
+
+	/**
 	 * Méthode permettant de persister en base une nouvelle opération.
 	 * 
 	 * @param operation

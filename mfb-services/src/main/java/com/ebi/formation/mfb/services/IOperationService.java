@@ -271,6 +271,18 @@ public interface IOperationService {
 	public long getNumberOfPagesForVirementByMonth(long idCompte, int month, int years, int numberOfResults);
 
 	/**
+	 * <<<<<<< HEAD
+	 * 
+	 * Renvoie toutes les opérations d'un compte pour un mois donné.
+	 * 
+	 * @param idCompte
+	 * @param month
+	 * @param year
+	 * @return
+	 */
+	List<Operation> getAllOperationsByMonthByCompte(long idCompte, int month, int year);
+
+	/**
 	 * @param idCompteADebiter
 	 * @param idCompteACrediter
 	 * @param label
