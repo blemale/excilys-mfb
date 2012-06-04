@@ -19,8 +19,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ebi.formation.mfb.dao.ICompteDao;
 import com.ebi.formation.mfb.dao.IOperationDao;
+import com.ebi.formation.mfb.dao.IOperationTypeDao;
 import com.ebi.formation.mfb.entities.Operation;
 import com.ebi.formation.mfb.entities.OperationType;
+import com.ebi.formation.mfb.entities.OperationType.Type;
 import com.excilys.ebi.spring.dbunit.test.DataSet;
 import com.excilys.ebi.spring.dbunit.test.RollbackTransactionalDataSetTestExecutionListener;
 
@@ -43,6 +45,8 @@ public class OperationDaoTest {
 	private IOperationDao operationDao;
 	@Autowired
 	private ICompteDao compteDao;
+	@Autowired
+	private IOperationTypeDao operationTypeDao;
 
 	/**
 	 * Test somme des opérations carte pour un mois donné
@@ -175,5 +179,23 @@ public class OperationDaoTest {
 		DateTime datePlusUnMois = date.plusMonths(1);
 		long result = operationDao.findNumberOfVirementsByMonth("bastou", date, datePlusUnMois);
 		assertEquals(2, result);
+	}
+
+	@DataSet("dataSet-OperationDaoTest.xml")
+	@Test
+	public void testSaveOperation() {
+		DateTime date = DateTime.now();
+		DateTime datePlusUnMois = date.plusMonths(1);
+		long nbVirement = operationDao.findNumberOfVirementsByMonth("bastou", date, datePlusUnMois);
+		Operation operation = new Operation();
+		operation.setCompte(compteDao.findCompteById(3L));
+		operation.setDateEffet(date);
+		operation.setDateValeur(date);
+		operation.setLabel("Ceci est un nouveau virement");
+		operation.setMontant(new BigDecimal(130.0));
+		operation.setType(operationTypeDao.getOperationTypeByType(Type.VIREMENT));
+		operationDao.save(operation);
+		long result = operationDao.findNumberOfVirementsByMonth("bastou", date, datePlusUnMois);
+		assertEquals(nbVirement + 1, result);
 	}
 }

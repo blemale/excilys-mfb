@@ -91,4 +91,46 @@ public class Operation {
 	public Compte getCompte() {
 		return compte;
 	}
+
+	/**
+	 * @param type
+	 */
+	public void setType(OperationType type) {
+		this.type = type;
+	}
+
+	/**
+	 * @param montant
+	 */
+	public void setMontant(BigDecimal montant) {
+		this.montant = montant;
+	}
+
+	/**
+	 * @param dateValeur
+	 */
+	public void setDateValeur(DateTime dateValeur) {
+		this.dateValeur = dateValeur;
+	}
+
+	/**
+	 * @param dateEffet
+	 */
+	public void setDateEffet(DateTime dateEffet) {
+		this.dateEffet = dateEffet;
+	}
+
+	/**
+	 * @param label
+	 */
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
+	/**
+	 * @param compte
+	 */
+	public void setCompte(Compte compte) {
+		this.compte = compte;
+	}
 }

@@ -21,7 +21,8 @@
 		@NamedQuery(name = "findCompteById", query = "SELECT c FROM Compte c WHERE c.id = :id"),
 		@NamedQuery(name = "findOperationsBeforeDate", query = "SELECT o FROM Operation o WHERE o.dateValeur < :today"),
 		@NamedQuery(name = "updateCompteWithValue", query = "UPDATE Compte c SET c.solde=c.solde+:valeur WHERE c=:operation"),
-		@NamedQuery(name = "findSoldeCompte", query = "SELECT c.solde FROM Compte c WHERE c.id = :id") })
+		@NamedQuery(name = "findSoldeCompte", query = "SELECT c.solde FROM Compte c WHERE c.id = :id"),
+		@NamedQuery(name = "findOperationTypeByType", query = "SELECT ot FROM OperationType ot WHERE ot.label = :type") })
 package com.ebi.formation.mfb.entities;
 
 import org.hibernate.annotations.NamedQueries;
