@@ -60,6 +60,20 @@ public interface IOperationService {
 	public long getNumberOfOperationsWithoutCarteByMonth(long idCompte, int month, int year);
 
 	/**
+	 * Renvoie le nombre de virement effectuées pour un mois donnée.
+	 * 
+	 * @param username
+	 *            username d'une personne donnée.
+	 * @param month
+	 *            un mois donné (1 = janvier, ...)
+	 * @param year
+	 *            une année donnée (yyyy)
+	 * @return le nombre d'opération carte
+	 */
+	@Secured("ROLE_CLIENT")
+	public long getNumberOfVirementByMonth(String username, int month, int year);
+
+	/**
 	 * Renvoie la liste des opérations non carte ordonnées par date descendante pour un mois donné de façon paginée.
 	 * 
 	 * @param idCompte
@@ -132,8 +146,8 @@ public interface IOperationService {
 	/**
 	 * Renvoie la liste des virements ordonnées par date descendante pour un mois donné de façon paginée.
 	 * 
-	 * @param idCompte
-	 *            id du {@link Compte}.
+	 * @param username
+	 *            username d'une personne donnée.
 	 * @param month
 	 *            un mois donné (1 = janvier, ...)
 	 * @param year
@@ -145,14 +159,14 @@ public interface IOperationService {
 	 * @return la liste des {@link Operation}
 	 */
 	@Secured("ROLE_CLIENT")
-	public List<Operation> getVirementsByMonthPaginated(long idCompte, int month, int year, int offset,
+	public List<Operation> getVirementsByMonthPaginated(String username, int month, int year, int offset,
 			int numberOfResults);
 
 	/**
 	 * Renvoie la liste des virements ordonnées par date descendante pour un mois donné de façon paginée.
 	 * 
-	 * @param idCompte
-	 *            id du {@link Compte}.
+	 * @param username
+	 *            username d'une personne donnée.
 	 * @param month
 	 *            un mois donné (1 = janvier, ...)
 	 * @param year
@@ -162,7 +176,7 @@ public interface IOperationService {
 	 * @return la liste des {@link Operation}
 	 */
 	@Secured("ROLE_CLIENT")
-	public List<Operation> getVirementsByMonthPaginated(long idCompte, int month, int year, int page);
+	public List<Operation> getVirementsByMonthPaginated(String username, int month, int year, int page);
 
 	/**
 	 * Renvoie le nombres de pages nécessaires pour afficher toutes les opérations non carte d'un mois donné
@@ -224,4 +238,34 @@ public interface IOperationService {
 	 */
 	@Secured("ROLE_CLIENT")
 	public long getNumberOfPagesForOperationsCartesByMonth(long idCompte, int month, int years, int numberOfResults);
+
+	/**
+	 * Renvoie le nombres de pages nécessaires pour afficher tous les virements d'un mois donné
+	 * 
+	 * @param username
+	 *            username d'une personne donnée.
+	 * @param month
+	 *            un mois donné (1 = janvier, ...)
+	 * @param year
+	 *            une année donnée (yyyy)
+	 * @return le nombre de pages à afficher
+	 */
+	@Secured("ROLE_CLIENT")
+	public long getNumberOfPagesForVirementByMonth(String username, int month, int year);
+
+	/**
+	 * Renvoie le nombres de pages nécessaires pour afficher toutes les opérations non carte d'un mois donné
+	 * 
+	 * @param username
+	 *            username d'une personne donnée.
+	 * @param month
+	 *            un mois donné (1 = janvier, ...)
+	 * @param year
+	 *            une année donnée (yyyy)
+	 * @param numberOfResults
+	 *            le nombre de résultats par page
+	 * @return le nombre de pages à afficher
+	 */
+	@Secured("ROLE_CLIENT")
+	public long getNumberOfPagesForVirementByMonth(String username, int month, int years, int numberOfResults);
 }

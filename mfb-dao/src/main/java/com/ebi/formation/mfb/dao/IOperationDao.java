@@ -46,6 +46,16 @@ public interface IOperationDao {
 	public long findNumberOfOperationsWithoutCarteByMonth(long idCompte, DateTime date, DateTime datePlusUnMois);
 
 	/**
+	 * Retourne le nombre d'operations excepté les opérations carte d'un compte pour un mois donné
+	 * 
+	 * @param idCompte
+	 * @param date
+	 * @param datePlusUnMois
+	 * @return
+	 */
+	public long findNumberOfVirementsByMonth(String username, DateTime date, DateTime datePlusUnMois);
+
+	/**
 	 * Recherche la liste des operations d'un compte (sauf les opérations par carte) pour un mois donné et paginé
 	 * suivant un offset
 	 * 
@@ -79,15 +89,15 @@ public interface IOperationDao {
 	public void updateCompteQuotidient();
 
 	/**
-	 * Recherche la liste des virements d'un compte pour un mois donné et paginé suivant un offset
+	 * Recherche la liste des virements d'une personne pour un mois donné et paginé suivant un offset
 	 * 
-	 * @param idCompte
+	 * @param username
 	 * @param date
 	 * @param datePlusUnMois
 	 * @param offset
 	 * @param numberOfResults
 	 * @return
 	 */
-	public List<Operation> findVirementsByMonthPaginated(long idCompte, DateTime date, DateTime datePlusUnMois,
+	public List<Operation> findVirementsByMonthPaginated(String username, DateTime date, DateTime datePlusUnMois,
 			int offset, int numberOfResults);
 }
