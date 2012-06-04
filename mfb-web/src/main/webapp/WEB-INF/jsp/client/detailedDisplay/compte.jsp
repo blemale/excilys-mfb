@@ -6,18 +6,22 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-<header id="overview" class="span10 offset1">
-	<h1>
-		<spring:message code="compte.pageTitle" />
-		"${compte.label}" (${compte.id})
-	</h1>
+<header id="overview">
+	<div class="row-fluid">
+		<div class="span12">
+			<h1 align="center">
+				<spring:message code="compte.pageTitle" />
+				"${compte.label}" (${compte.numeroCompte})
+			</h1>
 
-	<p align="right">
-		<a class="btn btn-success" href="export.html"><spring:message
-				code="home.account.exportExcel" /></a>
-		<a href="${contextPath}/client/home.html" class="btn btn-info"><spring:message
-				code="compte.home" /></a>
-	</p>
+			<p align="right">
+				<a class="btn btn-success" href="export.html"><spring:message
+						code="home.account.exportExcel" /></a> <a
+					href="${contextPath}/client/home.html" class="btn btn-info"><spring:message
+						code="compte.home" /></a>
+			</p>
+		</div>
+	</div>
 </header>
 
 <section id="compte">
@@ -78,10 +82,13 @@
 				<table class="table table-striped table-bordered">
 					<thead>
 						<tr>
-							<th><spring:message code="compte.dateOperation" /></th>
-							<th><spring:message code="compte.typeOperation" /></th>
+							<th class="fixedCol"><spring:message
+									code="compte.dateOperation" /></th>
+							<th class="fixedCol"><spring:message
+									code="compte.typeOperation" /></th>
 							<th><spring:message code="compte.labelOperation" /></th>
-							<th><spring:message code="compte.montantOperation" /></th>
+							<th class="colMontant"><spring:message
+									code="compte.montantOperation" /></th>
 						</tr>
 					</thead>
 					<tbody>

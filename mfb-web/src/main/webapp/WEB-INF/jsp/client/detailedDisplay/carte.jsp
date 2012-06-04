@@ -6,15 +6,19 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-<header id="overview" class="span10 offset1">
-	<h1>
-		<spring:message code="carte.pageTitle" />
-	</h1>
+<header id="overview">
+	<div class="row-fluid">
+		<div class="span12">
+			<h1 align="center">
+				<spring:message code="carte.pageTitle" />
+			</h1>
 
-	<p align="right">
-		<a href="${contextPath}${urlDetailCompte}" class="btn btn-info myBouton"><spring:message
-				code="carte.home" /></a>
-	</p>
+			<p align="right">
+				<a href="${contextPath}${urlDetailCompte}" class="btn btn-info"><spring:message
+						code="carte.home" /></a>
+			</p>
+		</div>
+	</div>
 </header>
 
 <section id="carte">
@@ -29,9 +33,10 @@
 				<table class="table table-striped table-bordered">
 					<thead>
 						<tr>
-							<th><spring:message code="carte.dateOperation" /></th>
+							<th class="fixedCol"><spring:message
+									code="carte.dateOperation" /></th>
 							<th><spring:message code="carte.labelOperation" /></th>
-							<th><spring:message code="carte.montantOperation" /></th>
+							<th class="colMontant"><spring:message code="carte.montantOperation" /></th>
 						</tr>
 					</thead>
 					<tbody>

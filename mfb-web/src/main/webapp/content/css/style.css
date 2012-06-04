@@ -57,7 +57,16 @@
 	padding: 15px 0px 15px 0px ;
 }
 
-.myBouton{
-	/*margin-top: -32px;
-	margin-bottom: 32px;*/	
+.fixedCol {
+	width : 110px;
+	min-width: 110px;
+}
+
+.colLabel {
+	max-width: 200px;
+}
+
+.colMontant {
+	min-width: 220px;
+	width : 220px;
 }
