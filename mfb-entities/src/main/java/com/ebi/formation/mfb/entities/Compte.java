@@ -72,4 +72,20 @@ public class Compte implements Serializable {
 	public String getNumeroCompte() {
 		return numeroCompte;
 	}
+
+	/**
+	 * @param id
+	 *            the id to set
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	/**
+	 * @param solde
+	 *            the solde to set
+	 */
+	public void setSolde(BigDecimal solde) {
+		this.solde = solde;
+	}
 }

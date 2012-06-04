@@ -15,8 +15,13 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.test.context.ContextConfiguration;
 
+import com.ebi.formation.mfb.dao.ICompteDao;
 import com.ebi.formation.mfb.dao.IOperationDao;
+import com.ebi.formation.mfb.dao.IOperationTypeDao;
+import com.ebi.formation.mfb.entities.Compte;
 import com.ebi.formation.mfb.entities.Operation;
+import com.ebi.formation.mfb.entities.OperationType;
+import com.ebi.formation.mfb.entities.OperationType.Type;
 import com.ebi.formation.mfb.services.impl.OperationService;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -25,6 +30,10 @@ public class OperationServiceTest {
 
 	@Mock
 	IOperationDao operationDao;
+	@Mock
+	IOperationTypeDao operationTypeDao;
+	@Mock
+	ICompteDao compteDao;
 	@InjectMocks
 	OperationService operationService;
 
@@ -179,5 +188,74 @@ public class OperationServiceTest {
 		when(operationDao.findNumberOfVirementsByMonth("bar", date, datePlusUnMois)).thenReturn(925L);
 		assertEquals(30, operationService.getNumberOfPagesForVirementByMonth("foo", 1, 2012, 30));
 		assertEquals(31, operationService.getNumberOfPagesForVirementByMonth("bar", 1, 2012, 30));
+	}
+
+	@Test
+	public void testVirementOk() {
+		Compte compteADebiter = new Compte();
+		compteADebiter.setId(0L);
+		compteADebiter.setSolde(new BigDecimal(300));
+		Compte compteACrediter = new Compte();
+		compteACrediter.setId(1L);
+		compteACrediter.setSolde(new BigDecimal(400));
+		when(operationTypeDao.getOperationTypeByType(Type.VIREMENT)).thenReturn(new OperationType());
+		when(compteDao.findCompteById(0)).thenReturn(compteADebiter);
+		when(compteDao.findCompteById(1)).thenReturn(compteACrediter);
+		int result = operationService.doVirement(0L, 1L, "", new BigDecimal(200));
+		assertEquals(0, result);
+		assertEquals(0, compteADebiter.getSolde().compareTo(new BigDecimal(100)));
+		assertEquals(0, compteACrediter.getSolde().compareTo(new BigDecimal(600)));
+	}
+
+	@Test
+	public void testVirementComptesIdentiques() {
+		Compte compteADebiter = new Compte();
+		compteADebiter.setId(0L);
+		int result = operationService.doVirement(0L, 0L, "", new BigDecimal(200));
+		assertEquals(1, result);
+	}
+
+	@Test
+	public void testVirementDecouvert() {
+		Compte compteADebiter = new Compte();
+		compteADebiter.setId(0L);
+		compteADebiter.setSolde(new BigDecimal(100));
+		Compte compteACrediter = new Compte();
+		compteACrediter.setId(1L);
+		compteACrediter.setSolde(new BigDecimal(400));
+		when(compteDao.findCompteById(0)).thenReturn(compteADebiter);
+		when(compteDao.findCompteById(1)).thenReturn(compteACrediter);
+		int result = operationService.doVirement(0L, 1L, "", new BigDecimal(200));
+		assertEquals(2, result);
+	}
+
+	@Test
+	public void testVirementCompteDebitNonExistant() {
+		Compte compteACrediter = new Compte();
+		compteACrediter.setId(1L);
+		compteACrediter.setSolde(new BigDecimal(400));
+		when(compteDao.findCompteById(0)).thenReturn(null);
+		when(compteDao.findCompteById(1)).thenReturn(compteACrediter);
+		int result = operationService.doVirement(0L, 1L, "", new BigDecimal(200));
+		assertEquals(3, result);
+	}
+
+	@Test
+	public void testVirementCompteCreditNonExistant() {
+		Compte compteADebiter = new Compte();
+		compteADebiter.setId(0L);
+		compteADebiter.setSolde(new BigDecimal(100));
+		when(compteDao.findCompteById(0)).thenReturn(compteADebiter);
+		when(compteDao.findCompteById(1)).thenReturn(null);
+		int result = operationService.doVirement(0L, 1L, "", new BigDecimal(200));
+		assertEquals(4, result);
+	}
+
+	@Test
+	public void testVirementValeurMontant() {
+		int result = operationService.doVirement(0L, 1L, "", new BigDecimal(-200));
+		assertEquals(5, result);
+		int result2 = operationService.doVirement(0L, 1L, "", new BigDecimal(0));
+		assertEquals(5, result2);
 	}
 }
