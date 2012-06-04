@@ -40,6 +40,10 @@ import com.ebi.formation.mfb.web.utils.LinkBuilder;
 @RequestMapping("/client/compte/{idCompte:\\d+}/")
 public class Detail {
 
+	private enum TypeDetail {
+		COMPTE, CARTE, VIREMENT
+	};
+
 	private static final int NB_MONTH_HISTORY = 6;
 	@Autowired
 	ICompteService compteService;
@@ -91,13 +95,13 @@ public class Detail {
 			@PathVariable int year, @PathVariable int month, @PathVariable int page) {
 		// Vérifie que le compte appartient au user connecté, que le mois demandé existe, que la page demandée existe.
 		if (!compteService.checkCompteOwnershipByUsernameAndCompteId(principal.getName(), idCompte)
-				|| !monthInHistory(month, year) || !pageExist(idCompte, year, month, page, false)) {
+				|| !monthInHistory(month, year) || !pageExist(idCompte, year, month, page, TypeDetail.COMPTE)) {
 			throw new ResourceNotFoundException();
 		}
 		ModelAndView mv = new ModelAndView("detailCompte");
 		YearMonth currentMonth = new YearMonth(year, month);
 		long nbPages = operationService.getNumberOfPagesForOperationsWithoutCartesByMonth(idCompte, month, year);
-		addToModelCommonObjects(mv, locale, idCompte, currentMonth, page, nbPages, false);
+		addToModelCommonObjects(mv, locale, idCompte, currentMonth, page, nbPages, TypeDetail.COMPTE);
 		// Ajout des opérations dans le modèle
 		mv.addObject("operations",
 				operationService.getOperationsWithoutCarteByMonthPaginated(idCompte, month, year, page));
@@ -112,11 +116,11 @@ public class Detail {
 							monthBefore.getMonthOfYear(), "detail.html"));
 		}
 		if (hasNextMonth(month, year)) {
-			YearMonth monthBefore = currentMonth.plusMonths(1);
+			YearMonth monthAfter = currentMonth.plusMonths(1);
 			mv.addObject(
 					"urlNextMonth",
-					LinkBuilder.getLink("client", "compte", idCompte.longValue(), monthBefore.getYear(),
-							monthBefore.getMonthOfYear(), "detail.html"));
+					LinkBuilder.getLink("client", "compte", idCompte.longValue(), monthAfter.getYear(),
+							monthAfter.getMonthOfYear(), "detail.html"));
 		}
 		mv.addObject("urlDetailCarte",
 				LinkBuilder.getLink("client", "compte", idCompte, year, month, "carte", "detail.html"));
@@ -132,9 +136,8 @@ public class Detail {
 	 * @return
 	 */
 	@RequestMapping(value = "carte/detail.html", method = RequestMethod.GET)
-	public ModelAndView detailCompteCarte(Principal principal, Locale locale, @PathVariable Long idCompte) {
-		return detailCompteCarteMois(principal, locale, idCompte, DateTime.now().getYear(), DateTime.now()
-				.getMonthOfYear());
+	public ModelAndView detailCarte(Principal principal, Locale locale, @PathVariable Long idCompte) {
+		return detailCarteMois(principal, locale, idCompte, DateTime.now().getYear(), DateTime.now().getMonthOfYear());
 	}
 
 	/**
@@ -148,9 +151,9 @@ public class Detail {
 	 * @return
 	 */
 	@RequestMapping(value = "{year:20\\d{2}}/{month:[1-9]|1[012]}/carte/detail.html", method = RequestMethod.GET)
-	public ModelAndView detailCompteCarteMois(Principal principal, Locale locale, @PathVariable Long idCompte,
+	public ModelAndView detailCarteMois(Principal principal, Locale locale, @PathVariable Long idCompte,
 			@PathVariable int year, @PathVariable int month) {
-		return detailCompteCarteMoisAndPage(principal, locale, idCompte, year, month, 0);
+		return detailCarteMoisAndPage(principal, locale, idCompte, year, month, 0);
 	}
 
 	/**
@@ -165,16 +168,16 @@ public class Detail {
 	 * @return
 	 */
 	@RequestMapping(value = "{year}/{month:[1-9]|1[012]}/{page:[0-9]+}/carte/detail.html", method = RequestMethod.GET)
-	public ModelAndView detailCompteCarteMoisAndPage(Principal principal, Locale locale, @PathVariable Long idCompte,
+	public ModelAndView detailCarteMoisAndPage(Principal principal, Locale locale, @PathVariable Long idCompte,
 			@PathVariable int year, @PathVariable int month, @PathVariable int page) {
 		if (!compteService.checkCompteOwnershipByUsernameAndCompteId(principal.getName(), idCompte)
-				|| !monthInHistory(month, year) || !pageExist(idCompte, year, month, page, true)) {
+				|| !monthInHistory(month, year) || !pageExist(idCompte, year, month, page, TypeDetail.CARTE)) {
 			throw new ResourceNotFoundException();
 		}
 		ModelAndView mv = new ModelAndView("detailCompteCarte");
 		long nbPages = operationService.getNumberOfPagesForOperationsCartesByMonth(idCompte, month, year);
 		YearMonth currentMonth = new YearMonth(year, month);
-		addToModelCommonObjects(mv, locale, idCompte, currentMonth, page, nbPages, true);
+		addToModelCommonObjects(mv, locale, idCompte, currentMonth, page, nbPages, TypeDetail.CARTE);
 		// Ajout des opérations carte dans le modèle
 		mv.addObject("operations", operationService.getOperationsCarteByMonthPaginated(idCompte, month, year, page));
 		// Ajout de des urls pour aller au mois suivant et précédent dans le modèle si ils existent
@@ -186,11 +189,11 @@ public class Detail {
 							monthBefore.getMonthOfYear(), "carte", "detail.html"));
 		}
 		if (hasNextMonth(month, year)) {
-			YearMonth monthBefore = currentMonth.plusMonths(1);
+			YearMonth monthAfter = currentMonth.plusMonths(1);
 			mv.addObject(
 					"urlNextMonth",
-					LinkBuilder.getLink("client", "compte", idCompte.longValue(), monthBefore.getYear(),
-							monthBefore.getMonthOfYear(), "carte", "detail.html"));
+					LinkBuilder.getLink("client", "compte", idCompte.longValue(), monthAfter.getYear(),
+							monthAfter.getMonthOfYear(), "carte", "detail.html"));
 		}
 		// Ajout de l'url pour revenir au détail du compte dans le modèle
 		mv.addObject("urlDetailCompte", LinkBuilder.getLink("client", "compte", idCompte, year, month, "detail.html"));
@@ -198,11 +201,85 @@ public class Detail {
 	}
 
 	/**
-	 * Retourne une feuille excel générée.
+	 * Retourne la première page du détail d'un compte pour le mois en cours.
 	 * 
 	 * @param principal
 	 * @param locale
 	 * @param idCompte
+	 * @return
+	 */
+	@RequestMapping(value = "virement/history.html", method = RequestMethod.GET)
+	public ModelAndView virementHistory(Principal principal, Locale locale, @PathVariable Long idCompte) {
+		return virementHistoryByMonth(principal, locale, idCompte, DateTime.now().getYear(), DateTime.now()
+				.getMonthOfYear());
+	}
+
+	/**
+	 * Retourne la première page du détail d'un compte pour un mois donné
+	 * 
+	 * @param principal
+	 * @param locale
+	 * @param idCompte
+	 * @param year
+	 * @param month
+	 * @return
+	 */
+	@RequestMapping(value = "{year:20\\d{2}}/{month:[1-9]|1[012]}/virement/history.html", method = RequestMethod.GET)
+	public ModelAndView virementHistoryByMonth(Principal principal, Locale locale, @PathVariable Long idCompte,
+			@PathVariable int year, @PathVariable int month) {
+		return virementHistoryByMonthAndPage(principal, locale, idCompte, year, month, 0);
+	}
+
+	/**
+	 * Retourne le détail d'un compte pour un mois donné et pour une page donnée
+	 * 
+	 * @param principal
+	 * @param locale
+	 * @param idCompte
+	 * @param year
+	 * @param month
+	 * @param page
+	 * @return
+	 */
+	@RequestMapping(value = "{year}/{month:[1-9]|1[012]}/{page:[0-9]+}/virement/history.html", method = RequestMethod.GET)
+	public ModelAndView virementHistoryByMonthAndPage(Principal principal, Locale locale, @PathVariable Long idCompte,
+			@PathVariable int year, @PathVariable int month, @PathVariable int page) {
+		// Vérifie que le mois demandé existe, que la page demandée existe.
+		if (!monthInHistory(month, year) || !pageExist(idCompte, year, month, page, TypeDetail.VIREMENT)) {
+			throw new ResourceNotFoundException();
+		}
+		ModelAndView mv = new ModelAndView("historiqueVirement");
+		YearMonth currentMonth = new YearMonth(year, month);
+		long nbPages = operationService.getNumberOfPagesForVirementByMonth(idCompte, month, year);
+		addToModelCommonObjects(mv, locale, idCompte, currentMonth, page, nbPages, TypeDetail.VIREMENT);
+		// Ajout des virements dans le modèle
+		mv.addObject("virements", operationService.getVirementsByMonthPaginated(idCompte, month, year, page));
+		// Ajout de des urls pour aller au mois suivant et précédent dans le modèle si ils existent
+		if (hasPreviousMonth(month, year)) {
+			YearMonth monthBefore = currentMonth.minusMonths(1);
+			mv.addObject(
+					"urlPreviousMonth",
+					LinkBuilder.getLink("client", "compte", idCompte, monthBefore.getYear(),
+							monthBefore.getMonthOfYear(), "virement", "history.html"));
+		}
+		if (hasNextMonth(month, year)) {
+			YearMonth monthAfter = currentMonth.plusMonths(1);
+			mv.addObject("urlNextMonth", LinkBuilder.getLink("client", "compte", idCompte, monthAfter.getYear(),
+					monthAfter.getMonthOfYear(), "virement", "history.html"));
+		}
+		return mv;
+	}
+
+	/**
+	 * Retourne une feuille excel générée.
+	 * 
+	 * @param request
+	 * @param response
+	 * @param principal
+	 * @param locale
+	 * @param idCompte
+	 * @param year
+	 * @param month
 	 * @return
 	 */
 	@RequestMapping(value = "{year}/{month:[1-9]|1[012]}/export.html", method = RequestMethod.GET)
@@ -253,7 +330,6 @@ public class Detail {
 	private boolean hasPreviousMonth(int month, int year) {
 		boolean result = false;
 		YearMonth currentMonth = new YearMonth(year, month);
-		// DateTime currentMonth = new DateTime(year, month, 1, 0, 0);
 		if (currentMonth.plusMonths(NB_MONTH_HISTORY - 1).isAfter(YearMonth.now())) {
 			result = true;
 		}
@@ -270,7 +346,6 @@ public class Detail {
 	private boolean hasNextMonth(int month, int year) {
 		boolean result = false;
 		YearMonth currentMonth = new YearMonth(year, month);
-		// DateTime currentMonth = new DateTime(year, month, 1, 0, 0);
 		if (currentMonth.isBefore(YearMonth.now())) {
 			result = true;
 		}
@@ -287,7 +362,6 @@ public class Detail {
 	private boolean monthInHistory(int month, int year) {
 		boolean result = false;
 		YearMonth currentMonth = new YearMonth(year, month);
-		// DateTime currentMonth = new DateTime(year, month, 1, 0, 0);
 		if (currentMonth.plusMonths(NB_MONTH_HISTORY).isAfter(YearMonth.now())
 				&& (currentMonth.isBefore(YearMonth.now()) || currentMonth.isEqual(YearMonth.now()))) {
 			result = true;
@@ -306,14 +380,19 @@ public class Detail {
 	 *            vrai si détail opération carte, faux sinon
 	 * @return
 	 */
-	private boolean pageExist(Long idCompte, int year, int month, int page, boolean cardDetail) {
-		if (cardDetail) {
-			return 0L <= page
-					&& page <= operationService.getNumberOfPagesForOperationsCartesByMonth(idCompte, month, year);
-		} else {
-			return 0L <= page
-					&& page <= operationService
-							.getNumberOfPagesForOperationsWithoutCartesByMonth(idCompte, month, year);
+	private boolean pageExist(Long idCompte, int year, int month, int page, TypeDetail typeDetail) {
+		switch (typeDetail) {
+			case COMPTE:
+				return 0L <= page
+						&& page <= operationService.getNumberOfPagesForOperationsWithoutCartesByMonth(idCompte, month,
+								year);
+			case CARTE:
+				return 0L <= page
+						&& page <= operationService.getNumberOfPagesForOperationsCartesByMonth(idCompte, month, year);
+			case VIREMENT:
+				return 0L <= page && page <= operationService.getNumberOfPagesForVirementByMonth(idCompte, month, year);
+			default:
+				return false;
 		}
 	}
 
@@ -328,15 +407,24 @@ public class Detail {
 	 *            vrai si détail opération carte, faux sinon
 	 * @return
 	 */
-	private Map<Long, String> getPagesUrls(Long idCompte, int year, int month, long nbPages, boolean cardDetail) {
+	private Map<Long, String> getPagesUrls(Long idCompte, int year, int month, long nbPages, TypeDetail typeDetail) {
 		Map<Long, String> map = new LinkedHashMap<Long, String>();
 		for (long indexPage = 0; indexPage < nbPages; indexPage++) {
-			if (cardDetail) {
-				map.put(indexPage, LinkBuilder.getLink("client", "compte", idCompte, year, month, indexPage, "carte",
-						"detail.html"));
-			} else {
-				map.put(indexPage,
-						LinkBuilder.getLink("client", "compte", idCompte, year, month, indexPage, "detail.html"));
+			switch (typeDetail) {
+				case COMPTE:
+					map.put(indexPage,
+							LinkBuilder.getLink("client", "compte", idCompte, year, month, indexPage, "detail.html"));
+					break;
+				case CARTE:
+					map.put(indexPage, LinkBuilder.getLink("client", "compte", idCompte, year, month, indexPage,
+							"carte", "detail.html"));
+					break;
+				case VIREMENT:
+					map.put(indexPage, LinkBuilder.getLink("client", "compte", idCompte, year, month, indexPage,
+							"virement", "history.html"));
+					break;
+				default:
+					break;
 			}
 		}
 		return map;
@@ -351,7 +439,7 @@ public class Detail {
 	 *            vrai si détail opération carte, faux sinon
 	 * @return
 	 */
-	private Map<String, String> getMonthUrls(Locale locale, Long idCompte, boolean cardDetail) {
+	private Map<String, String> getMonthUrls(Locale locale, Long idCompte, TypeDetail typeDetail) {
 		Map<String, String> mapNamesUrls = new LinkedHashMap<String, String>();
 		YearMonth now = YearMonth.now();
 		// DateTime now = DateTime.now();
@@ -360,12 +448,21 @@ public class Detail {
 			YearMonth month = now.minusMonths(i);
 			DateTimeFormatter fmt = DateTimeFormat.forPattern("MMMM yyyy");
 			DateTimeFormatter localeFmt = fmt.withLocale(locale);
-			if (cardDetail) {
-				mapNamesUrls.put(localeFmt.print(month), LinkBuilder.getLink("client", "compte", idCompte,
-						month.getYear(), month.getMonthOfYear(), "carte", "detail.html"));
-			} else {
-				mapNamesUrls.put(localeFmt.print(month), LinkBuilder.getLink("client", "compte", idCompte,
-						month.getYear(), month.getMonthOfYear(), "detail.html"));
+			switch (typeDetail) {
+				case COMPTE:
+					mapNamesUrls.put(localeFmt.print(month), LinkBuilder.getLink("client", "compte", idCompte,
+							month.getYear(), month.getMonthOfYear(), "detail.html"));
+					break;
+				case CARTE:
+					mapNamesUrls.put(localeFmt.print(month), LinkBuilder.getLink("client", "compte", idCompte,
+							month.getYear(), month.getMonthOfYear(), "carte", "detail.html"));
+					break;
+				case VIREMENT:
+					mapNamesUrls.put(localeFmt.print(month), LinkBuilder.getLink("client", "compte", idCompte,
+							month.getYear(), month.getMonthOfYear(), "virement", "history.html"));
+					break;
+				default:
+					break;
 			}
 		}
 		return mapNamesUrls;
@@ -383,7 +480,7 @@ public class Detail {
 	 * @param cardDetail
 	 */
 	private void addToModelCommonObjects(ModelAndView mv, Locale locale, Long idCompte, YearMonth currentMonth,
-			int page, long nbPages, boolean cardDetail) {
+			int page, long nbPages, TypeDetail typeDetail) {
 		// Ajout du compte courrant dans le modèle
 		mv.addObject("compte", compteService.getCompteById(idCompte));
 		// Ajout de la date courrante dans le modèle
@@ -394,10 +491,10 @@ public class Detail {
 		mv.addObject("numPageMonth", nbPages);
 		// Ajout des urls pour aller sur les différentes pages du détails
 		mv.addObject("mapUrlPages",
-				getPagesUrls(idCompte, currentMonth.getYear(), currentMonth.getMonthOfYear(), nbPages, cardDetail));
+				getPagesUrls(idCompte, currentMonth.getYear(), currentMonth.getMonthOfYear(), nbPages, typeDetail));
 		// Ajout du numéro de la page courrante dans le modèle
 		mv.addObject("currentPage", page);
 		// Ajout de l'url pour aller dans les différents mois de l'historique dans le modèle
-		mv.addObject("mapNamesUrlsForMonths", getMonthUrls(locale, idCompte, cardDetail));
+		mv.addObject("mapNamesUrlsForMonths", getMonthUrls(locale, idCompte, typeDetail));
 	}
 }

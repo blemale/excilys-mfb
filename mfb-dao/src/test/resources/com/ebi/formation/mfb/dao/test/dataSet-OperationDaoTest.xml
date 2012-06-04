@@ -169,5 +169,8 @@
 		compte="2" />
 	<operation id="47" label="ma quatrieme operation" montant="800"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="0"
+		compte="2" />
+	<operation id="48" label="ma quatrieme operation" montant="800"
+		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="0"
 		compte="3" />
 </dataset>
