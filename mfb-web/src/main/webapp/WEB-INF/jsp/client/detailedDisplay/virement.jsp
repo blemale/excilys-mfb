@@ -1,68 +1,64 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://www.joda.org/joda/time/tags" prefix="joda"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <header id="overview" class="span10 offset2">
 	<h1>
 		<spring:message code="historiqueVirement.pageTitle" />
-		<spring:message code="historiqueVirement.accountNumber" />	: 123456789	
 	</h1>
 </header>
 
 <section id="virements">
+	<!-- Div comprenant les liens pour changer de mois et afficher le mois courant -->
+	<%@ include file="common/monthSelection.jsp"%>
+
+	<!-- Div comprenant le détails des virements -->
 	<div class="row">
 		<div class="span10 offset1">
-			<table class="table table-striped table-bordered">
-				<thead>
-					<tr>
-						<th><spring:message code="historiqueVirement.dateEffet" /></th>
-						<th><spring:message code="historiqueVirement.dateValeur" /></th>
-						<th><spring:message code="historiqueVirement.label" /></th>
-						<th><spring:message code="historiqueVirement.montant" /></th>
-					</tr>
-				</thead>
-				<tbody>
-				<tr>
-					<td>23 / 02 / 1923</td>
-					<td>23 / 02 / 1923</td>
-					<td>Rembourser roger. Compte 265846731</td>
-					<td class="aligneSolde coloreRouge">-452,00</td>	
-				</tr>
-				<tr>
-					<td>12 / 02 / 1987</td>
-					<td>24 / 02 / 1992</td>
-					<td>Remboursement de christophe. Compte 197566783</td>
-					<td class="aligneSolde coloreVert">187,00</td>	
-				</tr>
-				<tr>
-					<td>12 / 02 / 1986</td>
-					<td>12 / 02 / 1986</td>
-					<td>Achat de diamant. Compte 138459721</td>
-					<td class="aligneSolde coloreRouge">-1000,00</td>	
-				</tr>
-				<tr>
-					<td>03 / 04 / 2012</td>
-					<td>04 / 04 / 2012</td>
-					<td>APL. Compte 587463259</td>
-					<td class="aligneSolde coloreVert">1000,00</td>	
-				</tr>
-				<tr>
-					<td>03 / 04 / 2012</td>
-					<td>04 / 04 / 2012</td>
-					<td>IPOd. Compte 796542389</td>
-					<td class="aligneSolde coloreVert">1000,00</td>	
-				</tr>
-				<tr>
-					<td>08 / 07 / 2011</td>
-					<td>09 / 07 / 2011</td>
-					<td>Loyer de mon apparteme. Compte 467692132</td>
-					<td class="aligneSolde coloreRouge">-86542,10</td>
-				</tr>
-				</tbody>
-			</table>
+			<c:if test="${fn:length(virements) ne 0}">
+				<table class="table table-striped table-bordered">
+					<thead>
+						<tr>
+							<th><spring:message code="historiqueVirement.dateEffet" /></th>
+							<th><spring:message code="historiqueVirement.dateValeur" /></th>
+							<th><spring:message code="historiqueVirement.label" /></th>
+							<th><spring:message code="historiqueVirement.montant" /></th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${virements}" var="o">
+							<tr class="clickLine">
+								<td><joda:format value="${o.dateEffet}" style="SS" /></td>
+								<td><joda:format value="${o.dateValeur}" style="SS" /></td>								
+								<td>${o.label}</td>
+								<c:if test="${o.montant >= 0}">
+									<td class="aligneSolde coloreVert">+ <fmt:formatNumber
+											value="${o.montant}" minFractionDigits="2" pattern="#,###.##" />
+									</td>
+								</c:if>
+								<c:if test="${o.montant < 0}">
+									<td class="aligneSolde coloreRouge">- <fmt:formatNumber
+											value="${o.montant*-1}" minFractionDigits="2"
+											pattern="#,###.##" />
+									</td>
+								</c:if>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</c:if>
+			<c:if test="${fn:length(virements) eq 0}">
+				<div class="alert alert-info">
+					<spring:message code="historiqueVirement.noOperation" />
+				</div>
+			</c:if>
 		</div>
 	</div>
+
+	<!-- Div comprenant la pagination -->
+	<%@ include file="common/pageSelection.jsp"%>
 </section>

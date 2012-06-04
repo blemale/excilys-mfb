@@ -26,7 +26,7 @@
 											code="header.link.virementInterne" /></a></li>
 								<li><a href="#"><spring:message
 											code="header.link.virementExterne" /></a></li>
-								<li><a href="#"><spring:message
+								<li><a href="${contextPath}/client/virement/history.html"><spring:message
 											code="header.link.historiqVirement" /></a></li>
 							</ul></li>
 					</sec:authorize>
