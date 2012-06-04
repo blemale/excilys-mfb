@@ -10,8 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ebi.formation.mfb.dao.ICompteDao;
 import com.ebi.formation.mfb.dao.IOperationDao;
+import com.ebi.formation.mfb.dao.IOperationTypeDao;
+import com.ebi.formation.mfb.entities.Compte;
 import com.ebi.formation.mfb.entities.Operation;
+import com.ebi.formation.mfb.entities.OperationType.Type;
 import com.ebi.formation.mfb.services.IOperationService;
 
 @Service
@@ -22,6 +26,14 @@ public class OperationService implements IOperationService {
 	public static final int NB_RESULT_BY_DEFAULT = 20;
 	@Autowired
 	private IOperationDao operationDao;
+	@Autowired
+	private ICompteDao compteDao;
+	@Autowired
+	private IOperationTypeDao operationTypeDao;
+
+	public enum ReturnCodeVirement {
+		OK, IDENTICAL_COMPTES, DECOUVERT, COMPTE_DEBIT_INEXISTANT, COMPTE_CREDIT_INEXISTANT, MONTANT_INCORRECT
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -219,5 +231,55 @@ public class OperationService implements IOperationService {
 		DateTime date = new DateTime(year, month, 1, 0, 0);
 		DateTime datePlusUnMois = date.plusMonths(1);
 		return operationDao.findNumberOfVirementsByMonth(username, date, datePlusUnMois);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.services.IOperationService#doVirement(long, long, java.lang.String,
+	 * java.math.BigDecimal)
+	 */
+	@Override
+	@Transactional
+	public ReturnCodeVirement doVirement(long idCompteADebiter, long idCompteACrediter, String label, BigDecimal montant) {
+		if (montant.signum() == -1 || montant.signum() == 0) {
+			return ReturnCodeVirement.MONTANT_INCORRECT;
+		}
+		if (idCompteADebiter == idCompteACrediter) {
+			return ReturnCodeVirement.IDENTICAL_COMPTES;
+		}
+		Compte compteADebiter = compteDao.findCompteById(idCompteADebiter);
+		Compte compteACrediter = compteDao.findCompteById(idCompteACrediter);
+		if (compteADebiter == null) {
+			return ReturnCodeVirement.COMPTE_DEBIT_INEXISTANT;
+		}
+		if (compteACrediter == null) {
+			return ReturnCodeVirement.COMPTE_CREDIT_INEXISTANT;
+		}
+		if (compteADebiter.getSolde().add(montant.negate()).signum() == -1) {
+			return ReturnCodeVirement.DECOUVERT;
+		}
+		Operation debit = new Operation();
+		debit.setCompte(compteADebiter);
+		DateTime now = DateTime.now();
+		debit.setDateEffet(now);
+		debit.setDateValeur(now);
+		debit.setLabel(label);
+		debit.setMontant(montant.negate());
+		debit.setType(operationTypeDao.getOperationTypeByType(Type.VIREMENT));
+		Operation credit = new Operation();
+		credit.setCompte(compteACrediter);
+		credit.setDateEffet(now);
+		credit.setDateValeur(now);
+		credit.setLabel(label);
+		credit.setMontant(montant);
+		credit.setType(operationTypeDao.getOperationTypeByType(Type.VIREMENT));
+		operationDao.save(debit);
+		operationDao.save(credit);
+		// TODO demander à Stéphane pour l'isolation des données
+		BigDecimal newSoldeDebit = compteADebiter.getSolde().add(montant.negate());
+		BigDecimal newSoldeCredit = compteACrediter.getSolde().add(montant);
+		compteADebiter.setSolde(newSoldeDebit);
+		compteACrediter.setSolde(newSoldeCredit);
+		return ReturnCodeVirement.OK;
 	}
 }

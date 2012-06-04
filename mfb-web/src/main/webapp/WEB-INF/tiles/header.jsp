@@ -24,8 +24,7 @@
 							<ul class="dropdown-menu">
 								<li><a href="${contextPath}/client/virement.html"><spring:message
 											code="header.link.virementInterne" /></a></li>
-								<li><a href="#"><spring:message
-											code="header.link.historiqVirement" /></a></li>
+								<li><a href="#"><spring:message	code="header.link.historiqVirement" /></a></li>
 							</ul></li>
 					</sec:authorize>
 					<sec:authorize

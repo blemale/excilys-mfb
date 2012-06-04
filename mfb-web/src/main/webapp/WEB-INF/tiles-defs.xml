@@ -52,6 +52,7 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/client/detailedDisplay/carte.jsp" />
 	</definition>
 
+<<<<<<< HEAD
 	<!-- Formulaire virement interne -->
 	<definition name="virementInterne" extends="baseLayout">
 		<put-attribute name="title" value="title.virement" />
@@ -64,4 +65,12 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/client/virement/confirmVirement.jsp" />
 	</definition>
 	
+=======
+	<!-- Page de l'historique des virements -->
+	<definition name="historiqueVirement" extends="baseLayout">
+		<put-attribute name="title" value="title.historiqueVirement" />
+		<put-attribute name="body" value="/WEB-INF/jsp/client/detailedDisplay/virement.jsp" />
+	</definition>
+		
+>>>>>>> 5095a97529613cac7433db38f549132ea8608b02
 </tiles-definitions>

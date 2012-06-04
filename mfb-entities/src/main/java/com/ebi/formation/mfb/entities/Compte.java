@@ -78,4 +78,20 @@ public class Compte implements Serializable {
 		return new StringBuilder(label).append(" / ").append(NumberFormat.getCurrencyInstance().format(solde))
 				.toString();
 	}
+
+	/**
+	 * @param id
+	 *            the id to set
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	/**
+	 * @param solde
+	 *            the solde to set
+	 */
+	public void setSolde(BigDecimal solde) {
+		this.solde = solde;
+	}
 }

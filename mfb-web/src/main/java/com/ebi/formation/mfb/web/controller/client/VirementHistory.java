@@ -84,7 +84,7 @@ public class VirementHistory {
 		if (!monthInHistory(month, year) || !pageExist(principal.getName(), year, month, page)) {
 			throw new ResourceNotFoundException();
 		}
-		ModelAndView mv = new ModelAndView("detailCompte");
+		ModelAndView mv = new ModelAndView("historiqueVirement");
 		YearMonth currentMonth = new YearMonth(year, month);
 		long nbPages = operationService.getNumberOfPagesForVirementByMonth(principal.getName(), month, year);
 		// Ajout de la date courrante dans le modèle

@@ -7,6 +7,7 @@ import org.springframework.security.access.annotation.Secured;
 
 import com.ebi.formation.mfb.entities.Compte;
 import com.ebi.formation.mfb.entities.Operation;
+import com.ebi.formation.mfb.services.impl.OperationService.ReturnCodeVirement;
 
 /**
  * Interface du service associé à {@link Operation}
@@ -268,4 +269,16 @@ public interface IOperationService {
 	 */
 	@Secured("ROLE_CLIENT")
 	public long getNumberOfPagesForVirementByMonth(String username, int month, int years, int numberOfResults);
+
+	/**
+	 * @param idCompteADebiter
+	 * @param idCompteACrediter
+	 * @param label
+	 * @param montant
+	 * @return 0 si tout s'est bien passé; 1 si les deux comptes sont identiques; 2 si le virement entraîne un
+	 *         découvert; 3 si le compte à débiter n'existe pas; 4 si le compte à créditer n'existe pas; 5 si le montant
+	 *         est négatif ou nul
+	 */
+	@Secured("ROLE_CLIENT")
+	public ReturnCodeVirement doVirement(long idCompteADebiter, long idCompteACrediter, String label, BigDecimal montant);
 }
