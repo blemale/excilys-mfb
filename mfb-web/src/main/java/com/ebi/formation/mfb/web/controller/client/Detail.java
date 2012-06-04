@@ -1,10 +1,16 @@
 package com.ebi.formation.mfb.web.controller.client;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.poi.ss.usermodel.Workbook;
 import org.joda.time.DateTime;
 import org.joda.time.YearMonth;
 import org.joda.time.format.DateTimeFormat;
@@ -17,9 +23,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ebi.formation.mfb.entities.Operation;
 import com.ebi.formation.mfb.services.ICompteService;
 import com.ebi.formation.mfb.services.IOperationService;
 import com.ebi.formation.mfb.web.exception.ResourceNotFoundException;
+import com.ebi.formation.mfb.web.utils.ExcelGenerator;
 import com.ebi.formation.mfb.web.utils.LinkBuilder;
 
 /**
@@ -187,6 +195,52 @@ public class Detail {
 		// Ajout de l'url pour revenir au détail du compte dans le modèle
 		mv.addObject("urlDetailCompte", LinkBuilder.getLink("client", "compte", idCompte, year, month, "detail.html"));
 		return mv;
+	}
+
+	/**
+	 * Retourne une feuille excel générée.
+	 * 
+	 * @param principal
+	 * @param locale
+	 * @param idCompte
+	 * @return
+	 */
+	@RequestMapping(value = "{year}/{month:[1-9]|1[012]}/export.html", method = RequestMethod.GET)
+	public ModelAndView exportExcel(HttpServletRequest request, HttpServletResponse response, Principal principal,
+			Locale locale, @PathVariable Long idCompte, @PathVariable int year, @PathVariable int month) {
+		String nomCompte = compteService.getCompteById(idCompte).getLabel();
+		List<Operation> listeOperations = operationService.getAllOperationsByMonthByCompte(idCompte, month, year);
+		Workbook wb = ExcelGenerator.getWorkBook(nomCompte, month, year, listeOperations);
+		/****/
+		response.reset();
+		response.setContentType("application/vnd.ms-excel");
+		response.setHeader("Content-Disposition", "attachment; filename=\"compte_" + idCompte + "(" + year + "-"
+				+ month + ")" + "\"");
+		try {
+			wb.write(response.getOutputStream());
+			response.getOutputStream().flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
+	 * Retourne une feuille excel générée.
+	 * 
+	 * @param request
+	 * @param response
+	 * @param principal
+	 * @param locale
+	 * @param idCompte
+	 * @return
+	 */
+	@RequestMapping(value = "export.html", method = RequestMethod.GET)
+	public ModelAndView exportExcel(HttpServletRequest request, HttpServletResponse response, Principal principal,
+			Locale locale, @PathVariable Long idCompte) {
+		int month = DateTime.now().getMonthOfYear();
+		int year = DateTime.now().getYear();
+		return exportExcel(request, response, principal, locale, idCompte, year, month);
 	}
 
 	/**

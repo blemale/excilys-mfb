@@ -220,4 +220,13 @@ public class OperationService implements IOperationService {
 		DateTime datePlusUnMois = date.plusMonths(1);
 		return operationDao.findNumberOfVirementsByMonth(username, date, datePlusUnMois);
 	}
+
+	@Override
+	public List<Operation> getAllOperationsByMonthByCompte(long idCompte, int month, int year) {
+		logger.debug("getAllOperationsByMonthByCompte(idCompte:{}, month:{}, year:{})", new Object[] { idCompte, month,
+				year });
+		DateTime date = new DateTime(year, month, 1, 0, 0);
+		DateTime datePlusUnMois = date.plusMonths(1);
+		return operationDao.findAllOperationsByMonthByCompte(idCompte, date, datePlusUnMois);
+	}
 }

@@ -9,9 +9,12 @@
 <header id="overview" class="span8 offset2">
 	<h1>
 		<spring:message code="compte.pageTitle" />
+		"${compte.label}" (${compte.id})
 	</h1>
 
 	<p align="right">
+		<a class="btn btn-success" href="export.html"><spring:message
+				code="home.account.exportExcel" /></a>
 		<a href="${contextPath}/client/home.html" class="btn btn-info"><spring:message
 				code="compte.home" /></a>
 	</p>
@@ -20,7 +23,7 @@
 <section id="compte">
 
 	<!-- Div comprenant les liens pour changer de mois et afficher le mois courant -->
-	<%@ include file="common/monthSelection.jsp" %>
+	<%@ include file="common/monthSelection.jsp"%>
 
 	<!-- Div comprenant les différentes opérations -->
 	<div class="row">
@@ -85,7 +88,7 @@
 						<c:forEach items="${operations}" var="o">
 							<tr class="clickLine">
 								<td><joda:format value="${o.dateValeur}" style="SS" /></td>
-								<td><spring:message code="operationType.${o.type.label}"/></td>
+								<td><spring:message code="operationType.${o.type.label}" /></td>
 								<td>${o.label}</td>
 								<c:if test="${o.montant >= 0}">
 									<td class="aligneSolde coloreVert">+ <fmt:formatNumber
@@ -110,8 +113,10 @@
 			</c:if>
 		</div>
 	</div>
-	
+
+
+
 	<!-- Div comprenant la pagination -->
-	<%@ include file="common/pageSelection.jsp" %>
+	<%@ include file="common/pageSelection.jsp"%>
 
 </section>

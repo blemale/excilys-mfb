@@ -268,4 +268,15 @@ public interface IOperationService {
 	 */
 	@Secured("ROLE_CLIENT")
 	public long getNumberOfPagesForVirementByMonth(String username, int month, int years, int numberOfResults);
+
+	/**
+	 * 
+	 * Renvoie toutes les opérations d'un compte pour un mois donné.
+	 * 
+	 * @param idCompte
+	 * @param month
+	 * @param year
+	 * @return
+	 */
+	List<Operation> getAllOperationsByMonthByCompte(long idCompte, int month, int year);
 }

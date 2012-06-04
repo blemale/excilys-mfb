@@ -150,4 +150,18 @@ public class OperationDao implements IOperationDao {
 		return (Long) em.createNamedQuery("findNumberOfVirementByMonth").setParameter("username", username)
 				.setParameter("dateValeur", date).setParameter("datePlusUnMois", datePlusUnMois).getSingleResult();
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.dao.IOperationDao#findOperationsCarteByMonthPaginated(long, int, int, int)
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Operation> findAllOperationsByMonthByCompte(long idCompte, DateTime date, DateTime datePlusUnMois) {
+		logger.debug(
+				"findOperationsCarteByMonthPaginated(idCompte:{}, date:{}, datePlusUnMois:{}, offset:{}, numberOfResults:{})",
+				new Object[] { idCompte, date, datePlusUnMois });
+		return em.createNamedQuery("findAllOperationsByMonthByCompte").setParameter("idcompte", idCompte)
+				.setParameter("dateValeur", date).setParameter("datePlusUnMois", datePlusUnMois).getResultList();
+	}
 }
