@@ -2,6 +2,7 @@ package com.ebi.formation.mfb.entities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -71,5 +72,10 @@ public class Compte implements Serializable {
 	 */
 	public String getNumeroCompte() {
 		return numeroCompte;
+	}
+
+	public String getFullLabel() {
+		return new StringBuilder(label).append(" / ").append(NumberFormat.getCurrencyInstance().format(solde))
+				.toString();
 	}
 }

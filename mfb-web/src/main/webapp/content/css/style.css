@@ -46,3 +46,9 @@
 .row, .row-fluid {
 	margin : 20px 0px;
 }
+
+.colorError {
+	color : #B94A48;
+	font-weight: bold;
+	
+}

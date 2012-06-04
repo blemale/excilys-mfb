@@ -52,4 +52,16 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/client/detailedDisplay/carte.jsp" />
 	</definition>
 
+	<!-- Formulaire virement interne -->
+	<definition name="virementInterne" extends="baseLayout">
+		<put-attribute name="title" value="title.virement" />
+		<put-attribute name="body" value="/WEB-INF/jsp/client/virement/virementInterneForm.jsp" />
+	</definition>
+
+	<!-- Confirmation virement interne -->
+	<definition name="confirmVirement" extends="baseLayout">
+		<put-attribute name="title" value="title.confirmVirement" />
+		<put-attribute name="body" value="/WEB-INF/jsp/client/virement/confirmVirement.jsp" />
+	</definition>
+	
 </tiles-definitions>
