@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<dataset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="dataset.xsd">
+
+	<operationtype id="1" label="CARTE" />
+	<operationtype id="3" label="CHEQUE" />
+	<operationtype id="0" label="VIREMENT" />
+	<operationtype id="2" label="ESPECE" />
+	
+</dataset>
