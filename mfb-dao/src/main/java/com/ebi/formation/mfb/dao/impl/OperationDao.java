@@ -164,4 +164,12 @@ public class OperationDao implements IOperationDao {
 		return em.createNamedQuery("findAllOperationsByMonthByCompte").setParameter("idcompte", idCompte)
 				.setParameter("dateValeur", date).setParameter("datePlusUnMois", datePlusUnMois).getResultList();
 	}
+
+	/*
+	 * @see com.ebi.formation.mfb.dao.IOperationDao#save(com.ebi.formation.mfb.entities.Operation)
+	 */
+	@Override
+	public void save(Operation operation) {
+		em.persist(operation);
+	}
 }

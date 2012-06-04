@@ -23,7 +23,8 @@
 		@NamedQuery(name = "updateCompteWithValue", query = "UPDATE Compte c SET c.solde=c.solde+:valeur WHERE c=:operation"),
 		@NamedQuery(name = "findSoldeCompte", query = "SELECT c.solde FROM Compte c WHERE c.id = :id"),
 		@NamedQuery(name = "findAllOperationsByMonthByCompte", query = "SELECT o FROM Operation o WHERE o.compte.id = :idcompte "
-				+ "and o.dateValeur BETWEEN :dateValeur AND :datePlusUnMois ORDER BY o.dateValeur DESC") })
+				+ "and o.dateValeur BETWEEN :dateValeur AND :datePlusUnMois ORDER BY o.dateValeur DESC"),
+		@NamedQuery(name = "findOperationTypeByType", query = "SELECT ot FROM OperationType ot WHERE ot.label = :type") })
 package com.ebi.formation.mfb.entities;
 
 import org.hibernate.annotations.NamedQueries;

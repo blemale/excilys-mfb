@@ -110,4 +110,12 @@ public interface IOperationDao {
 	 * @return
 	 */
 	public List<Operation> findAllOperationsByMonthByCompte(long idCompte, DateTime date, DateTime datePlusUnMois);
+
+	/**
+	 * Méthode permettant de persister en base une nouvelle opération.
+	 * 
+	 * @param operation
+	 *            l'opération à persister
+	 */
+	public void save(Operation operation);
 }

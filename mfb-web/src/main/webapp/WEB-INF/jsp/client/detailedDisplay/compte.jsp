@@ -6,14 +6,14 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-<header id="overview" class="span8 offset2">
+<header id="overview" class="span10 offset1">
 	<h1>
 		<spring:message code="compte.pageTitle" />
 		"${compte.label}" (${compte.id})
 	</h1>
 
 	<p align="right">
-		<a class="btn btn-success" href="export.html"><spring:message
+		<a class="btn btn-success myBouton" href="export.html"><spring:message
 				code="home.account.exportExcel" /></a>
 		<a href="${contextPath}/client/home.html" class="btn btn-info"><spring:message
 				code="compte.home" /></a>
@@ -27,7 +27,7 @@
 
 	<!-- Div comprenant les différentes opérations -->
 	<div class="row">
-		<div class="span8 offset2">
+		<div class="span10 offset1">
 			<!-- Tableau d'affichage du cumul carte -->
 			<c:if test="${soldeCarte ne null}">
 				<h2>
