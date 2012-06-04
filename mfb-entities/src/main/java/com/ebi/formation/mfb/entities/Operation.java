@@ -2,6 +2,7 @@ package com.ebi.formation.mfb.entities;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -38,6 +39,7 @@ public class Operation {
 	private BigDecimal montant;
 	private DateTime dateValeur;
 	private DateTime dateEffet;
+	@Column(length = 64)
 	private String label;
 	@OneToOne
 	@JoinColumn(name = "COMPTE")
