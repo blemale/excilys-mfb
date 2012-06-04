@@ -5,7 +5,7 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
-<header id="overview" class="span10 offset2">
+<header id="overview" class="span10 offset1">
 	<h1>
 		<spring:message code="home.title" />
 	</h1>
@@ -24,6 +24,7 @@
 							<th><spring:message code="home.accountNumber" /></th>
 							<th><spring:message code="home.label" /></th>
 							<th><spring:message code="home.solde" /></th>
+							<th>&nbsp;</th>
 							<th>&nbsp;</th>
 						</tr>
 					</thead>
@@ -44,6 +45,7 @@
 									</td>
 								</c:if>
 								<td><a class="btn btn-mini btn-info" href="${contextPath}${c.key}"><spring:message code="home.account.details"/></a></td>
+								<td><a class="btn btn-mini btn-info" href="/mfb/client/virement/history.html"><spring:message code="home.virement.hitory"/></a></td>
 							</tr>
 						</c:forEach>
 					</tbody>

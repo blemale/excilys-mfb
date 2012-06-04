@@ -43,6 +43,21 @@
 	text-align : center;
 }
 
-.row, .row-fluid {
-	margin : 20px 0px;
+.alignRight {
+	text-align : right;
+}
+
+.alignLeft {
+	text-align : left;
+}
+
+
+.row {
+	margin-left : -20px;
+	padding: 15px 0px 15px 0px ;
+}
+
+.myBouton{
+	margin-top: -32px;
+	margin-bottom: 32px;	
 }

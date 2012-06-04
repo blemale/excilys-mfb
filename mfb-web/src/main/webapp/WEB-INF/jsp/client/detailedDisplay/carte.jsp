@@ -6,13 +6,13 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-<header id="overview" class="span8 offset2">
+<header id="overview" class="span10 offset1">
 	<h1>
 		<spring:message code="carte.pageTitle" />
 	</h1>
 
 	<p align="right">
-		<a href="${contextPath}${urlDetailCompte}" class="btn btn-info"><spring:message
+		<a href="${contextPath}${urlDetailCompte}" class="btn btn-info myBouton"><spring:message
 				code="carte.home" /></a>
 	</p>
 </header>
@@ -24,7 +24,7 @@
 
 	<!-- Div comprenant le détails des opérations CARTE -->
 	<div class="row">
-		<div class="span8 offset2">
+		<div class="span10 offset1">
 			<c:if test="${fn:length(operations) ne 0}">
 				<table class="table table-striped table-bordered">
 					<thead>

@@ -6,10 +6,15 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-<header id="overview" class="span10 offset2">
+<header id="overview" class="span10 offset1">
 	<h1>
 		<spring:message code="historiqueVirement.pageTitle" />
 	</h1>
+
+	<p align="right">
+		<a href="${contextPath}/client/home.html" class="btn btn-info myBouton"><spring:message
+				code="compte.home" /></a>
+	</p>
 </header>
 
 <section id="virements">
@@ -33,7 +38,7 @@
 						<c:forEach items="${virements}" var="o">
 							<tr class="clickLine">
 								<td><joda:format value="${o.dateEffet}" style="SS" /></td>
-								<td><joda:format value="${o.dateValeur}" style="SS" /></td>								
+								<td><joda:format value="${o.dateValeur}" style="SS" /></td>
 								<td>${o.label}</td>
 								<c:if test="${o.montant >= 0}">
 									<td class="aligneSolde coloreVert">+ <fmt:formatNumber

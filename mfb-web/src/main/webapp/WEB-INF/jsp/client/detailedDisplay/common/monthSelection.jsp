@@ -3,7 +3,7 @@
 
 <!-- Div comprenant les liens pour changer de mois et afficher le mois courant -->
 <div class="row-fluid">
-	<div class="span4 alignCenter">
+	<div class="span4 alignLeft">
 		<c:if test="${urlPreviousMonth ne null}">
 			<a class="btn" href="${contextPath}${urlPreviousMonth}"><i
 				class="icon-chevron-left"></i> <spring:message
@@ -24,7 +24,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="span4 alignCenter">
+	<div class="span4 alignRight">
 		<c:if test="${urlNextMonth ne null}">
 			<a class="btn" href="${contextPath}${urlNextMonth}"> <spring:message
 					code="compte.month.next" /> <i class="icon-chevron-right"></i>
