@@ -215,7 +215,7 @@ public class Detail {
 		response.reset();
 		response.setContentType("application/vnd.ms-excel");
 		response.setHeader("Content-Disposition", "attachment; filename=\"compte_" + idCompte + "(" + year + "-"
-				+ month + ")" + "\"");
+				+ month + ")" + ".xls\"");
 		try {
 			wb.write(response.getOutputStream());
 			response.getOutputStream().flush();
