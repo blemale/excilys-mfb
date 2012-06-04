@@ -6,15 +6,19 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-<header id="overview" class="span10 offset1">
-	<h1>
-		<spring:message code="historiqueVirement.pageTitle" />
-	</h1>
+<header id="overview">
+	<div class="row-fluid">
+		<div class="span12">
+			<h1 align="center">
+				<spring:message code="historiqueVirement.pageTitle" />
+			</h1>
 
-	<p align="right">
-		<a href="${contextPath}/client/home.html" class="btn btn-info myBouton"><spring:message
-				code="compte.home" /></a>
-	</p>
+			<p align="right">
+				<a href="${contextPath}/client/home.html" class="btn btn-info"><spring:message
+						code="compte.home" /></a>
+			</p>
+		</div>
+	</div>
 </header>
 
 <section id="virements">
@@ -28,10 +32,12 @@
 				<table class="table table-striped table-bordered">
 					<thead>
 						<tr>
-							<th><spring:message code="historiqueVirement.dateEffet" /></th>
-							<th><spring:message code="historiqueVirement.dateValeur" /></th>
+							<th class="fixedCol"><spring:message
+									code="historiqueVirement.dateEffet" /></th>
+							<th class="fixedCol"><spring:message
+									code="historiqueVirement.dateValeur" /></th>
 							<th><spring:message code="historiqueVirement.label" /></th>
-							<th><spring:message code="historiqueVirement.montant" /></th>
+							<th class="colMontant"><spring:message code="historiqueVirement.montant" /></th>
 						</tr>
 					</thead>
 					<tbody>
