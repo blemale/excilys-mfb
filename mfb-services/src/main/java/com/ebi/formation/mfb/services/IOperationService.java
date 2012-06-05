@@ -7,7 +7,6 @@ import org.springframework.security.access.annotation.Secured;
 
 import com.ebi.formation.mfb.entities.Compte;
 import com.ebi.formation.mfb.entities.Operation;
-import com.ebi.formation.mfb.services.impl.OperationService.ReturnCodeVirement;
 
 /**
  * Interface du service associé à {@link Operation}
@@ -16,6 +15,10 @@ import com.ebi.formation.mfb.services.impl.OperationService.ReturnCodeVirement;
  * 
  */
 public interface IOperationService {
+
+	public enum ReturnCodeVirement {
+		OK, IDENTICAL_COMPTES, DECOUVERT, COMPTE_DEBIT_INEXISTANT, COMPTE_CREDIT_INEXISTANT, MONTANT_INCORRECT
+	}
 
 	/**
 	 * Renvoie le total des opérations carte pour un mois donné. Renvoie null s'il n'y a pas d'opération carte durant ce

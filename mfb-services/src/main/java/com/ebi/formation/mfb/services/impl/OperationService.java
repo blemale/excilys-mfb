@@ -31,10 +31,6 @@ public class OperationService implements IOperationService {
 	@Autowired
 	private IOperationTypeDao operationTypeDao;
 
-	public enum ReturnCodeVirement {
-		OK, IDENTICAL_COMPTES, DECOUVERT, COMPTE_DEBIT_INEXISTANT, COMPTE_CREDIT_INEXISTANT, MONTANT_INCORRECT
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * @see com.ebi.formation.mfb.services.IOperationService#getTotalOperationsCarteByMonth(long, int, int)

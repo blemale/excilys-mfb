@@ -20,7 +20,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.ebi.formation.mfb.services.ICompteService;
 import com.ebi.formation.mfb.services.IOperationService;
-import com.ebi.formation.mfb.services.impl.OperationService.ReturnCodeVirement;
+import com.ebi.formation.mfb.services.IOperationService.ReturnCodeVirement;
 import com.ebi.formation.mfb.web.forms.VirementInterneForm;
 
 @Controller
