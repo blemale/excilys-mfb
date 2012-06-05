@@ -287,7 +287,7 @@ public class Detail {
 			Locale locale, @PathVariable Long idCompte, @PathVariable int year, @PathVariable int month) {
 		String nomCompte = compteService.getCompteById(idCompte).getLabel();
 		List<Operation> listeOperations = operationService.getAllOperationsByMonthByCompte(idCompte, month, year);
-		Workbook wb = ExcelGenerator.getWorkBook(nomCompte, month, year, listeOperations);
+		Workbook wb = ExcelGenerator.getWorkBook(idCompte, nomCompte, month, year, listeOperations);
 		/****/
 		response.reset();
 		response.setContentType("application/vnd.ms-excel");
