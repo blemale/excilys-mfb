@@ -28,9 +28,9 @@ import com.ebi.formation.mfb.web.forms.VirementInterneForm;
 public class Virement {
 
 	@Autowired
-	ICompteService compteService;
+	private ICompteService compteService;
 	@Autowired
-	IOperationService operationService;
+	private IOperationService operationService;
 
 	/**
 	 * Affiche le formulaire permettant de saisir un virement
@@ -56,7 +56,7 @@ public class Virement {
 	 */
 	@RequestMapping(value = "doVirement.html", method = RequestMethod.POST)
 	public ModelAndView doVirement(Principal principal, @ModelAttribute @Valid VirementInterneForm virementInterneForm,
-			BindingResult result, RedirectAttributes redirectAttrs) {
+			BindingResult result, RedirectAttributes redirectAttrs, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
 		boolean isCompteIdentiques = virementInterneForm.getCompteACrediter().equals(
 				virementInterneForm.getCompteADebiter());
