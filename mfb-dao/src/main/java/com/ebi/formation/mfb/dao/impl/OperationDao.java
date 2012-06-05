@@ -97,12 +97,12 @@ public class OperationDao implements IOperationDao {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Operation> findVirementsByMonthPaginated(String username, DateTime date, DateTime datePlusUnMois,
+	public List<Operation> findVirementsByMonthPaginated(long idCompte, DateTime date, DateTime datePlusUnMois,
 			int offset, int numberOfResults) {
 		logger.debug(
 				"findVirementsByMonthPaginated(username:{}, date:{}, datePlusUnMois:{}, offset:{}, numberOfResults:{})",
-				new Object[] { username, date, datePlusUnMois, offset, numberOfResults });
-		return em.createNamedQuery("findVirementByMonthPaginated").setParameter("username", username)
+				new Object[] { idCompte, date, datePlusUnMois, offset, numberOfResults });
+		return em.createNamedQuery("findVirementByMonthPaginated").setParameter("idCompte", idCompte)
 				.setParameter("dateValeur", date).setParameter("datePlusUnMois", datePlusUnMois).setFirstResult(offset)
 				.setMaxResults(offset + numberOfResults).getResultList();
 	}
@@ -146,13 +146,27 @@ public class OperationDao implements IOperationDao {
 	 * org.joda.time.DateTime, org.joda.time.DateTime)
 	 */
 	@Override
-	public long findNumberOfVirementsByMonth(String username, DateTime date, DateTime datePlusUnMois) {
-		return (Long) em.createNamedQuery("findNumberOfVirementByMonth").setParameter("username", username)
-				.setParameter("dateValeur", date).setParameter("datePlusUnMois", datePlusUnMois).getSingleResult();
+	public long findNumberOfVirementsByMonth(long idCompte, DateTime date, DateTime datePlusUnMois) {
+		return (Long) em.createNamedQuery("findNumberOfOperationsByTypeByMonth").setParameter("idcompte", idCompte)
+				.setParameter("dateValeur", date).setParameter("datePlusUnMois", datePlusUnMois)
+				.setParameter("type", OperationType.Type.VIREMENT).getSingleResult();
 	}
 
 	/*
 	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.dao.IOperationDao#findOperationsCarteByMonthPaginated(long, int, int, int)
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Operation> findAllOperationsByMonthByCompte(long idCompte, DateTime date, DateTime datePlusUnMois) {
+		logger.debug(
+				"findOperationsCarteByMonthPaginated(idCompte:{}, date:{}, datePlusUnMois:{}, offset:{}, numberOfResults:{})",
+				new Object[] { idCompte, date, datePlusUnMois });
+		return em.createNamedQuery("findAllOperationsByMonthByCompte").setParameter("idcompte", idCompte)
+				.setParameter("dateValeur", date).setParameter("datePlusUnMois", datePlusUnMois).getResultList();
+	}
+
+	/*
 	 * @see com.ebi.formation.mfb.dao.IOperationDao#save(com.ebi.formation.mfb.entities.Operation)
 	 */
 	@Override

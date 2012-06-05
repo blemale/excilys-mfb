@@ -43,12 +43,35 @@
 	text-align : center;
 }
 
-.row, .row-fluid {
-	margin : 20px 0px;
-}
-
 .colorError {
 	color : #B94A48;
 	font-weight: bold;
-	
+}
+
+.alignRight {
+	text-align : right;
+}
+
+.alignLeft {
+	text-align : left;
+}
+
+
+.row {
+	margin-left : -20px;
+	padding: 15px 0px 15px 0px ;
+}
+
+.fixedCol {
+	width : 110px;
+	min-width: 110px;
+}
+
+.colLabel {
+	max-width: 200px;
+}
+
+.colMontant {
+	min-width: 220px;
+	width : 220px;
 }
