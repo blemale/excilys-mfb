@@ -153,7 +153,7 @@ public class OperationDaoTest {
 	@DataSet("dataSet-OperationDaoTest.xml")
 	@Test
 	public void testUpdateCompteQuotidient() {
-		operationDao.updateCompteQuotidient();
+		operationDao.updateCompteQuotidien();
 		assertEquals(0, compteDao.findMontantCompteById(1L).compareTo(new BigDecimal(21500)));
 	}
 

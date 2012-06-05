@@ -26,7 +26,7 @@ import com.ebi.formation.mfb.web.utils.LinkBuilder;
 public class Dashboard {
 
 	@Autowired
-	ICompteService compteService;
+	private ICompteService compteService;
 
 	/**
 	 * Retourne une vue associée à la liste des comptes d'un utilisateur via son username
