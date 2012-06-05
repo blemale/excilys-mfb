@@ -1,7 +1,3 @@
-﻿-- Table ROLE
-INSERT INTO role VALUES(DEFAULT,'ROLE_CLIENT');
-INSERT INTO role VALUES(DEFAULT,'ROLE_ADMIN');
-
 -- Table PERSON
 INSERT INTO person VALUES(DEFAULT, 'user','b14361404c078ffd549c03db443c3fede2f3e534d73f78f77301ed97d4a436a9fd9db05ee8b325c0ad36438b43fec8510c204fc1c1edb21d0941c00e9e2c1ce2','Tahar', 'Bakir');
 INSERT INTO person VALUES(DEFAULT, 'admin','c7ad44cbad762a5da0a452f9e854fdc1e0e7a52a38015f23f3eab1d80b931dd472634dfac71cd34ebc35d16ab7fb8a90c81f975113d6c7538dc69dd8de9077ec','Bastien', 'Lemale');
@@ -34,12 +30,6 @@ INSERT INTO person_compte VALUES(5,1);
 INSERT INTO person_compte VALUES(6,1);
 INSERT INTO person_compte VALUES(7,1);
 INSERT INTO person_compte VALUES(8,1);
-
--- Table OPERATIONTYPE
-INSERT INTO operationtype VALUES(1,'VIREMENT');
-INSERT INTO operationtype VALUES(2,'CARTE');
-INSERT INTO operationtype VALUES(3,'ESPECE');
-INSERT INTO operationtype VALUES(4,'CHEQUE');
 
 -- Table OPERATION
 INSERT INTO operation VALUES(DEFAULT, 'une opération', 150.56, '2012-05-15 11:27:00', '2012-05-17 11:29:00', 2, 6);
