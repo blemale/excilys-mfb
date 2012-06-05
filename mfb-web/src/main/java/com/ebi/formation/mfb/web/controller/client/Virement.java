@@ -27,6 +27,12 @@ public class Virement {
 	@Autowired
 	IOperationService operationService;
 
+	/**
+	 * Affiche le formulaire permettant de saisir un virement
+	 * 
+	 * @param principal
+	 * @return
+	 */
 	@RequestMapping(value = "virement.html")
 	public ModelAndView virementInterneForm(Principal principal) {
 		ModelAndView mv = new ModelAndView("virementInterne");
@@ -35,6 +41,14 @@ public class Virement {
 		return mv;
 	}
 
+	/**
+	 * Traite les erreurs du formulaire du virement et affiche la page de confirmation du virement
+	 * 
+	 * @param principal
+	 * @param virementInterneForm
+	 * @param result
+	 * @return
+	 */
 	@RequestMapping(value = "doVirement.html", method = RequestMethod.POST)
 	public ModelAndView doVirement(Principal principal, @ModelAttribute @Valid VirementInterneForm virementInterneForm,
 			BindingResult result) {

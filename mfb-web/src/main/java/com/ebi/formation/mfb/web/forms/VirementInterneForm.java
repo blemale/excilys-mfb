@@ -45,6 +45,9 @@ public class VirementInterneForm {
 		return compteADebiter;
 	}
 
+	/**
+	 * @return
+	 */
 	public String getMotif() {
 		return motif;
 	}
@@ -70,6 +73,9 @@ public class VirementInterneForm {
 		this.montant = montant;
 	}
 
+	/**
+	 * @param motif
+	 */
 	public void setMotif(String motif) {
 		this.motif = motif;
 	}
