@@ -7,6 +7,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
@@ -27,10 +28,14 @@ public class ExcelGenerator {
 	private static CellStyle styleAlligneDroite;
 	private static CellStyle styleAlligneGauche;
 	private static CellStyle styleCentreGras;
+	private static CellStyle styleBorderEncadreHaut;
+	private static CellStyle styleFondColore;
 	private static int i;
 
 	/**
 	 * Méthode statique renvoyant la feuille excel générée.
+	 * 
+	 * @param idCompte
 	 * 
 	 * @param nomCompte
 	 * @param month
@@ -39,12 +44,13 @@ public class ExcelGenerator {
 	 * @param owners
 	 * @return
 	 */
-	public static Workbook getWorkBook(String nomCompte, int month, int year, List<Operation> listeOperations) {
+	public static Workbook getWorkBook(Long idCompte, String nomCompte, int month, int year,
+			List<Operation> listeOperations) {
 		Workbook wb = new HSSFWorkbook();
 		Sheet sheet = wb.createSheet("Compte");
 		i = 0;
 		definitStyles(wb);
-		creeTitrePageEtTitresColonnes(sheet, nomCompte, month, year);
+		creeTitrePageEtTitresColonnes(idCompte, sheet, nomCompte, month, year);
 		remplitTableau(sheet, listeOperations);
 		/****/
 		return wb;
@@ -61,15 +67,22 @@ public class ExcelGenerator {
 		fontVert.setColor(HSSFColor.GREEN.index);
 		styleVert.setAlignment(CellStyle.ALIGN_RIGHT);
 		styleVert.setFont(fontVert);
+		styleVert.setBorderTop(CellStyle.BORDER_THIN);
 		/**/
 		styleRouge = wb.createCellStyle();
 		Font fontRouge = wb.createFont();
 		fontRouge.setColor(HSSFColor.RED.index);
 		styleRouge.setAlignment(CellStyle.ALIGN_RIGHT);
 		styleRouge.setFont(fontRouge);
+		styleRouge.setBorderTop(CellStyle.BORDER_THIN);
 		/**/
 		styleCentre = wb.createCellStyle();
 		styleCentre.setAlignment(CellStyle.ALIGN_CENTER);
+		styleCentre.setFillForegroundColor(IndexedColors.BLUE.getIndex());
+		styleCentre.setFillPattern(CellStyle.BIG_SPOTS);
+		Font fontBlanc = wb.createFont();
+		fontBlanc.setColor(HSSFColor.WHITE.index);
+		styleCentre.setFont(fontBlanc);
 		/**/
 		styleAlligneDroite = wb.createCellStyle();
 		styleAlligneDroite.setAlignment(CellStyle.ALIGN_RIGHT);
@@ -83,10 +96,15 @@ public class ExcelGenerator {
 		fontGras.setBoldweight(Font.BOLDWEIGHT_BOLD);
 		fontGras.setFontHeight((short) 200);
 		styleCentreGras.setFont(fontGras);
+		/**/
+		styleBorderEncadreHaut = wb.createCellStyle();
+		styleBorderEncadreHaut.setBorderTop(CellStyle.BORDER_THIN);
 	}
 
 	/**
 	 * Explicite.
+	 * 
+	 * @param idCompte
 	 * 
 	 * @param sheet
 	 * @param nomCompte
@@ -94,9 +112,9 @@ public class ExcelGenerator {
 	 * @param year
 	 * @param owners
 	 */
-	private static void creeTitrePageEtTitresColonnes(Sheet sheet, String nomCompte, int month, int year) {
+	private static void creeTitrePageEtTitresColonnes(Long idCompte, Sheet sheet, String nomCompte, int month, int year) {
 		sheet.createRow(i).createCell(0)
-				.setCellValue("Relevé du compte \"" + nomCompte + "\" de " + month + "/" + year);
+				.setCellValue("Relevé du compte n°" + idCompte + " \"" + nomCompte + "\" de " + month + "/" + year);
 		sheet.addMergedRegion(new CellRangeAddress(i, i, 0, 4));
 		sheet.getRow(i).getCell(0).setCellStyle(styleCentreGras);
 		i += 2;
@@ -136,6 +154,10 @@ public class ExcelGenerator {
 									+ operation.getDateValeur().getYear());
 			sheet.getRow(i).createCell(2).setCellValue(operation.getType().getLabel().name());
 			sheet.getRow(i).createCell(3).setCellValue(operation.getLabel());
+			sheet.getRow(i).getCell(0).setCellStyle(styleBorderEncadreHaut);
+			sheet.getRow(i).getCell(1).setCellStyle(styleBorderEncadreHaut);
+			sheet.getRow(i).getCell(2).setCellStyle(styleBorderEncadreHaut);
+			sheet.getRow(i).getCell(3).setCellStyle(styleBorderEncadreHaut);
 			if (operation.getMontant().compareTo(new BigDecimal(0)) == 1) {
 				sheet.getRow(i).createCell(4).setCellValue("+ " + operation.getMontant().doubleValue());
 				sheet.getRow(i).getCell(4).setCellStyle(styleVert);

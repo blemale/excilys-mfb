@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+	<changeSet id="3.1" author="excilys-gvaroquaux">
+		<insert tableName="ROLE">
+			<column name="ID" valueNumeric="1" />
+			<column name="NAME" value="ROLE_CLIENT" />
+		</insert>
+		<insert tableName="ROLE">
+			<column name="ID" valueNumeric="2" />
+			<column name="NAME" value="ROLE_ADMIN" />
+		</insert>
+		<insert tableName="OPERATIONTYPE">
+			<column name="ID" valueNumeric="1" />
+			<column name="LABEL" value="VIREMENT" />
+		</insert>
+		<insert tableName="OPERATIONTYPE">
+			<column name="ID" valueNumeric="2" />
+			<column name="LABEL" value="CARTE" />
+		</insert>
+		<insert tableName="OPERATIONTYPE">
+			<column name="ID" valueNumeric="3" />
+			<column name="LABEL" value="ESPECE" />
+		</insert>
+		<insert tableName="OPERATIONTYPE">
+			<column name="ID" valueNumeric="4" />
+			<column name="LABEL" value="CHEQUE" />
+		</insert>
+	</changeSet>
+</databaseChangeLog>
