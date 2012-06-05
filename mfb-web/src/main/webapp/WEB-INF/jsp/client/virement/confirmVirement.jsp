@@ -12,4 +12,24 @@
 	<p class="lead">
 		<spring:message code="home.welcome" />
 	</p>
+
 </header>
+
+<section id="confirmVirement">
+	<div class="row">
+		<div class="span4 offset4 alignCenter">
+			<c:choose>
+				<c:when test="${not empty isOK }">
+					<div class="alert alert-info">
+						<spring:message code="${message}" />
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div class="alert alert-error">
+						<spring:message code="${message}" />
+					</div>
+				</c:otherwise>
+			</c:choose>
+		</div>
+	</div>
+</section>

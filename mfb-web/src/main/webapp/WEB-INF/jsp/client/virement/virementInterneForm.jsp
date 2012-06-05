@@ -23,14 +23,14 @@
 				commandName="virementInterneForm">
 				<fieldset>
 					<div class="control-group">
-						<label class="control-label" for="montant">Montant</label>
+						<label class="control-label" for="montant"><spring:message code="virementInterneForm.montant"/></label>
 						<div class="controls">
 							<form:input path="montant" cssClass="input-xlarge focused" />
 							<form:errors path="montant" cssClass="colorError"/>
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label" for="debit">Compte à débiter</label>
+						<label class="control-label" for="debit"><spring:message code="virementInterneForm.compteDebit"/></label>
 						<div class="controls">
 							<form:select path="compteADebiter">
 								<form:options items="${comptesList}" itemLabel="fullLabel"
@@ -39,8 +39,7 @@
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label" for="credit">Compte à
-							créditer</label>
+						<label class="control-label" for="credit"><spring:message code="virementInterneForm.compteCredit"/></label>
 						<div class="controls">
 							<form:select path="compteACrediter">
 								<form:options items="${comptesList}" itemLabel="fullLabel"
@@ -51,17 +50,16 @@
 						
 					</div>
 					<div class="control-group">
-						<label class="control-label" for="motif">Motif</label>
+						<label class="control-label" for="motif"><spring:message code="virementInterneForm.label"/></label>
 						<div class="controls">
 							<input id="motif" class="input-xlarge focused" type="text"
 								name="motif">
+							<form:errors path="motif" cssClass="colorError"/>
 						</div>
 					</div>
 					<div class="form-actions alignCenter">
-						<button class="btn btn-success" type="submit">Faire
-							virement</button>
-						<a class="btn" href="${contextPath}/client/home.html">Annuler
-							virement</a>
+						<button class="btn btn-success" type="submit"><spring:message code="virementInterneForm.doVirement"/></button>
+						<a class="btn" href="${contextPath}/client/home.html"><spring:message code="virementInterneForm.cancel"/></a>
 					</div>
 				</fieldset>
 			</form:form>
