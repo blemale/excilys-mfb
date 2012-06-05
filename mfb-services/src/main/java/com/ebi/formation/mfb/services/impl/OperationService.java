@@ -267,19 +267,25 @@ public class OperationService implements IOperationService {
 		if (compteADebiter.getSolde().add(montant.negate()).signum() == -1) {
 			return ReturnCodeVirement.DECOUVERT;
 		}
+		String labelDebit = label;
+		String labelCredit = label;
+		if (label == null) {
+			labelDebit = "Virement à " + compteACrediter.getLabel();
+			labelCredit = "Virement de " + compteADebiter.getLabel();
+		}
 		Operation debit = new Operation();
 		debit.setCompte(compteADebiter);
 		DateTime now = DateTime.now();
 		debit.setDateEffet(now);
 		debit.setDateValeur(now);
-		debit.setLabel(label);
+		debit.setLabel(labelDebit);
 		debit.setMontant(montant.negate());
 		debit.setType(operationTypeDao.getOperationTypeByType(Type.VIREMENT));
 		Operation credit = new Operation();
 		credit.setCompte(compteACrediter);
 		credit.setDateEffet(now);
 		credit.setDateValeur(now);
-		credit.setLabel(label);
+		credit.setLabel(labelCredit);
 		credit.setMontant(montant);
 		credit.setType(operationTypeDao.getOperationTypeByType(Type.VIREMENT));
 		operationDao.save(debit);
