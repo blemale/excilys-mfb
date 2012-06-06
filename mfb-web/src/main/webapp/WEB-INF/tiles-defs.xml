@@ -64,6 +64,12 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/client/virement/confirmVirement.jsp" />
 	</definition>
 	
+	<!-- erreur virement interne -->
+	<definition name="erreurVirement" extends="baseLayout">
+		<put-attribute name="title" value="title.erreurVirement" />
+		<put-attribute name="body" value="/WEB-INF/jsp/client/virement/erreurVirement.jsp" />
+	</definition>
+	
 	<!-- Page de l'historique des virements -->
 	<definition name="historiqueVirement" extends="baseLayout">
 		<put-attribute name="title" value="title.historiqueVirement" />

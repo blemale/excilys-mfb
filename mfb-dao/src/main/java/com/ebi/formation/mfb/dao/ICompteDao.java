@@ -19,9 +19,16 @@ public interface ICompteDao {
 	 * @param username
 	 * @return
 	 */
-	public List<Compte> findComptesByUsername(String username);
+	List<Compte> findComptesByUsername(String username);
 
-	public boolean checkCompteOwnershipByUsernameAndCompteId(String username, Long compteId);
+	/**
+	 * Vérifie si un compte appartient bien à une personne donnée
+	 * 
+	 * @param username
+	 * @param compteId
+	 * @return
+	 */
+	boolean checkCompteOwnershipByUsernameAndCompteId(String username, Long compteId);
 
 	/**
 	 * Retourne un compte grâce à son id.
@@ -30,7 +37,7 @@ public interface ICompteDao {
 	 *            un id donné
 	 * @return un compte
 	 */
-	public Compte findCompteById(long id);
+	Compte findCompteById(long id);
 
 	/**
 	 * Retourne le solde d'un compte depuis son id.
@@ -38,5 +45,5 @@ public interface ICompteDao {
 	 * @param id
 	 * @return
 	 */
-	public BigDecimal findMontantCompteById(Long id);
+	BigDecimal findMontantCompteById(Long id);
 }

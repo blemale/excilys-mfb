@@ -1,9 +1,12 @@
 package com.ebi.formation.mfb.web.controller.client;
 
 import java.security.Principal;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -12,10 +15,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.support.RequestContextUtils;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.ebi.formation.mfb.services.ICompteService;
 import com.ebi.formation.mfb.services.IOperationService;
-import com.ebi.formation.mfb.services.impl.OperationService.ReturnCodeVirement;
+import com.ebi.formation.mfb.services.IOperationService.ReturnCodeVirement;
 import com.ebi.formation.mfb.web.forms.VirementInterneForm;
 
 @Controller
@@ -23,9 +29,9 @@ import com.ebi.formation.mfb.web.forms.VirementInterneForm;
 public class Virement {
 
 	@Autowired
-	ICompteService compteService;
+	private ICompteService compteService;
 	@Autowired
-	IOperationService operationService;
+	private IOperationService operationService;
 
 	/**
 	 * Affiche le formulaire permettant de saisir un virement
@@ -51,7 +57,7 @@ public class Virement {
 	 */
 	@RequestMapping(value = "doVirement.html", method = RequestMethod.POST)
 	public ModelAndView doVirement(Principal principal, @ModelAttribute @Valid VirementInterneForm virementInterneForm,
-			BindingResult result) {
+			BindingResult result, RedirectAttributes redirectAttrs, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
 		boolean isCompteIdentiques = virementInterneForm.getCompteACrediter().equals(
 				virementInterneForm.getCompteADebiter());
@@ -65,9 +71,9 @@ public class Virement {
 			return mv;
 		}
 		ReturnCodeVirement returnCode = operationService.doVirement(virementInterneForm.getCompteADebiter(),
-				virementInterneForm.getCompteACrediter(), virementInterneForm.getMotif(),
+				virementInterneForm.getCompteACrediter(), StringUtils.trimToNull(virementInterneForm.getMotif()),
 				virementInterneForm.getMontant());
-		mv.setViewName("confirmVirement");
+		mv.setViewName("redirect:erreurVirement.html");
 		String message = null;
 		switch (returnCode) {
 			case COMPTE_CREDIT_INEXISTANT:
@@ -81,10 +87,46 @@ public class Virement {
 				break;
 			case OK:
 				message = "virement.ok";
-				mv.addObject("isOK", new Object());
+				mv.setViewName("redirect:confirmVirement.html");
 				break;
 		}
-		mv.addObject("message", message);
+		redirectAttrs.addFlashAttribute("message", message);
+		return mv;
+	}
+
+	/**
+	 * Affiche la page confirmant que le virement a bien été effectué
+	 * 
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "confirmVirement.html", method = RequestMethod.GET)
+	public ModelAndView confirmVirement(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView();
+		Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+		if (flashMap == null) {
+			mv.setView(new RedirectView(request.getContextPath() + "/client/home.html"));
+		} else {
+			mv.setViewName("confirmVirement");
+		}
+		return mv;
+	}
+
+	/**
+	 * Affiche la page confirmant que le virement n'a pas pu être effectué
+	 * 
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = "erreurVirement.html", method = RequestMethod.GET)
+	public ModelAndView erreurVirement(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView();
+		Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+		if (flashMap == null) {
+			mv.setView(new RedirectView(request.getContextPath() + "/client/home.html"));
+		} else {
+			mv.setViewName("erreurVirement");
+		}
 		return mv;
 	}
 }

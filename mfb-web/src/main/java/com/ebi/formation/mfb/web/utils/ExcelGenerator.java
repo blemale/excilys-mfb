@@ -29,8 +29,13 @@ public class ExcelGenerator {
 	private static CellStyle styleAlligneGauche;
 	private static CellStyle styleCentreGras;
 	private static CellStyle styleBorderEncadreHaut;
-	private static CellStyle styleFondColore;
 	private static int i;
+
+	/**
+	 * Constructeur empechant la classe ExcelGenerator d'être instanciée
+	 */
+	private ExcelGenerator() {
+	}
 
 	/**
 	 * Méthode statique renvoyant la feuille excel générée.
@@ -138,8 +143,8 @@ public class ExcelGenerator {
 	 */
 	private static void remplitTableau(Sheet sheet, List<Operation> listeOperations) {
 		i++;
-		BigDecimal in = new BigDecimal(0);
-		BigDecimal out = new BigDecimal(0);
+		BigDecimal in = BigDecimal.ZERO;
+		BigDecimal out = BigDecimal.ZERO;
 		for (Operation operation : listeOperations) {
 			sheet.createRow(i)
 					.createCell(0)
@@ -158,7 +163,7 @@ public class ExcelGenerator {
 			sheet.getRow(i).getCell(1).setCellStyle(styleBorderEncadreHaut);
 			sheet.getRow(i).getCell(2).setCellStyle(styleBorderEncadreHaut);
 			sheet.getRow(i).getCell(3).setCellStyle(styleBorderEncadreHaut);
-			if (operation.getMontant().compareTo(new BigDecimal(0)) == 1) {
+			if (operation.getMontant().compareTo(BigDecimal.ZERO) == 1) {
 				sheet.getRow(i).createCell(4).setCellValue("+ " + operation.getMontant().doubleValue());
 				sheet.getRow(i).getCell(4).setCellStyle(styleVert);
 				in = in.add(operation.getMontant());
@@ -172,12 +177,12 @@ public class ExcelGenerator {
 		out = out.multiply(new BigDecimal(-1));
 		i = i + 2;
 		sheet.createRow(i).createCell(3).setCellValue("Crédits : ");
-		sheet.getRow(i).createCell(4).setCellValue("+ " + in.toString());
+		sheet.getRow(i).createCell(4).setCellValue("+ " + in.doubleValue());
 		sheet.getRow(i).getCell(3).setCellStyle(styleAlligneDroite);
 		sheet.getRow(i).getCell(4).setCellStyle(styleAlligneDroite);
 		i++;
 		sheet.createRow(i).createCell(3).setCellValue("Débits : ");
-		sheet.getRow(i).createCell(4).setCellValue("- " + out.toString());
+		sheet.getRow(i).createCell(4).setCellValue("- " + out.doubleValue());
 		sheet.getRow(i).getCell(3).setCellStyle(styleAlligneDroite);
 		sheet.getRow(i).getCell(4).setCellStyle(styleAlligneDroite);
 		/****/
