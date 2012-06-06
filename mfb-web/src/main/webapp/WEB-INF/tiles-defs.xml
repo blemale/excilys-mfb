@@ -39,41 +39,54 @@
 		<put-attribute name="title" value="title.home" />
 		<put-attribute name="body" value="/WEB-INF/jsp/client/home.jsp" />
 	</definition>
-	
+
 	<!-- Page de details d'un compte -->
 	<definition name="detailCompte" extends="baseLayout">
 		<put-attribute name="title" value="title.compte" />
-		<put-attribute name="body" value="/WEB-INF/jsp/client/detailedDisplay/compte.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/client/detailedDisplay/compte.jsp" />
 	</definition>
-	
+
 	<!-- Page de details des operations CARTE -->
 	<definition name="detailCompteCarte" extends="baseLayout">
 		<put-attribute name="title" value="title.compte" />
-		<put-attribute name="body" value="/WEB-INF/jsp/client/detailedDisplay/carte.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/client/detailedDisplay/carte.jsp" />
 	</definition>
 
 	<!-- Formulaire virement interne -->
 	<definition name="virementInterne" extends="baseLayout">
 		<put-attribute name="title" value="title.virement" />
-		<put-attribute name="body" value="/WEB-INF/jsp/client/virement/virementInterneForm.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/client/virement/virementInterneForm.jsp" />
+	</definition>
+
+	<!-- Formulaire virement externe -->
+	<definition name="virementExterne" extends="baseLayout">
+		<put-attribute name="title" value="title.virement" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/client/virement/virementExterneForm.jsp" />
 	</definition>
 
 	<!-- Confirmation virement interne -->
 	<definition name="confirmVirement" extends="baseLayout">
 		<put-attribute name="title" value="title.confirmVirement" />
-		<put-attribute name="body" value="/WEB-INF/jsp/client/virement/confirmVirement.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/client/virement/confirmVirement.jsp" />
 	</definition>
-	
+
 	<!-- erreur virement interne -->
 	<definition name="erreurVirement" extends="baseLayout">
 		<put-attribute name="title" value="title.erreurVirement" />
-		<put-attribute name="body" value="/WEB-INF/jsp/client/virement/erreurVirement.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/client/virement/erreurVirement.jsp" />
 	</definition>
-	
+
 	<!-- Page de l'historique des virements -->
 	<definition name="historiqueVirement" extends="baseLayout">
 		<put-attribute name="title" value="title.historiqueVirement" />
-		<put-attribute name="body" value="/WEB-INF/jsp/client/detailedDisplay/virement.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/client/detailedDisplay/virement.jsp" />
 	</definition>
-		
+
 </tiles-definitions>

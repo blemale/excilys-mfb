@@ -56,4 +56,14 @@ public class CompteService implements ICompteService {
 		logger.debug("getCompteById(id:{})", id);
 		return compteDao.findCompteById(id);
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.services.ICompteService#getCompteByNumeroCompte(java.lang.String)
+	 */
+	@Override
+	public Compte getCompteByNumeroCompte(String numeroCompte) {
+		logger.debug("getCompteByNumeroCompte(numeroCompte:{})", numeroCompte);
+		return compteDao.findCompteByNumeroCompte(numeroCompte);
+	}
 }

@@ -80,6 +80,23 @@ public class CompteDao implements ICompteDao {
 
 	/*
 	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.dao.ICompteDao#findCompteByNumeroCompte(java.lang.String)
+	 */
+	@Override
+	public Compte findCompteByNumeroCompte(String numeroCompte) {
+		logger.debug("findCompteByNumeroCompte(numeroCompte:{})", numeroCompte);
+		Compte c = null;
+		try {
+			return em.createNamedQuery("findCompteByNumeroCompte", Compte.class)
+					.setParameter("numeroCompte", numeroCompte).getSingleResult();
+		} catch (NoResultException nre) {
+			logger.debug("findCompteByNumeroCompte(numeroCompte:{}) : Compte not found.", numeroCompte);
+		}
+		return c;
+	}
+
+	/*
+	 * (non-Javadoc)
 	 * @see com.ebi.formation.mfb.dao.ICompteDao#findEncoursCarteCompteById(java.lang.Long)
 	 */
 	@Override

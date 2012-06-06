@@ -3,6 +3,7 @@ package com.ebi.formation.mfb.services.test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
@@ -85,6 +86,19 @@ public class CompteServiceTest {
 	@Test
 	public void testGetCompteById() {
 		when(compteDao.findCompteById(1)).thenReturn(new Compte());
+		when(compteDao.findCompteById(0)).thenReturn(null);
 		assertNotNull(compteService.getCompteById(1L));
+		assertNull(compteService.getCompteById(0L));
+	}
+
+	/**
+	 * Test la récupération d'un compte par son numeroCompte.
+	 */
+	@Test
+	public void testGetCompteByNumeroCompte() {
+		when(compteDao.findCompteByNumeroCompte("foo")).thenReturn(new Compte());
+		when(compteDao.findCompteByNumeroCompte("bar")).thenReturn(null);
+		assertNotNull(compteService.getCompteByNumeroCompte("foo"));
+		assertNull(compteService.getCompteByNumeroCompte("bar"));
 	}
 }

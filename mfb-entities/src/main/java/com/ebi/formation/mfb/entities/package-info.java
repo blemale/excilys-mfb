@@ -17,6 +17,7 @@
 		@NamedQuery(name = "findVirementByMonthPaginated", query = "SELECT o FROM Operation o WHERE o.type.label = 'VIREMENT' AND o.compte.id = :idCompte "
 				+ "and o.dateValeur BETWEEN :dateValeur AND :datePlusUnMois ORDER BY o.dateValeur DESC"),
 		@NamedQuery(name = "findCompteById", query = "SELECT c FROM Compte c WHERE c.id = :id"),
+		@NamedQuery(name = "findCompteByNumeroCompte", query = "SELECT c FROM Compte c WHERE c.numeroCompte = :numeroCompte"),
 		@NamedQuery(name = "findOperationsNotDone", query = "SELECT o FROM Operation o WHERE o.operationDone = false AND o.dateValeur <= :today"),
 		@NamedQuery(name = "updateCompteNotDone", query = "UPDATE Compte c SET c.solde = c.solde+ :valeur WHERE c.id = :compteOperationId"),
 		@NamedQuery(name = "updateCompteNotDoneWithOperationTypeCarte", query = "UPDATE Compte c SET c.solde = c.solde+ :valeur, c.encoursCarte = c.encoursCarte + :valeur WHERE c.id = :compteOperationId"),

@@ -209,6 +209,24 @@ public class OperationServiceTest {
 	}
 
 	@Test
+	public void testVirementExterneOk() {
+		Compte compteADebiter = new Compte();
+		compteADebiter.setId(0L);
+		compteADebiter.setSolde(new BigDecimal(300));
+		Compte compteACrediter = new Compte();
+		compteACrediter.setId(1L);
+		compteACrediter.setSolde(new BigDecimal(400));
+		when(operationTypeDao.getOperationTypeByType(Type.VIREMENT)).thenReturn(new OperationType());
+		when(compteDao.findCompteByNumeroCompte("foo")).thenReturn(compteACrediter);
+		when(compteDao.findCompteById(0)).thenReturn(compteADebiter);
+		when(compteDao.findCompteById(1)).thenReturn(compteACrediter);
+		ReturnCodeVirement result = operationService.doVirement(0L, "foo", "", new BigDecimal(200));
+		assertEquals(ReturnCodeVirement.OK, result);
+		assertEquals(0, compteADebiter.getSolde().compareTo(new BigDecimal(100)));
+		assertEquals(0, compteACrediter.getSolde().compareTo(new BigDecimal(600)));
+	}
+
+	@Test
 	public void testVirementComptesIdentiques() {
 		Compte compteADebiter = new Compte();
 		compteADebiter.setId(0L);
@@ -249,6 +267,16 @@ public class OperationServiceTest {
 		when(compteDao.findCompteById(0)).thenReturn(compteADebiter);
 		when(compteDao.findCompteById(1)).thenReturn(null);
 		ReturnCodeVirement result = operationService.doVirement(0L, 1L, "", new BigDecimal(200));
+		assertEquals(ReturnCodeVirement.COMPTE_CREDIT_INEXISTANT, result);
+	}
+
+	@Test
+	public void testVirementExterneCompteCreditNonExistant() {
+		Compte compteADebiter = new Compte();
+		compteADebiter.setId(0L);
+		compteADebiter.setSolde(new BigDecimal(100));
+		when(compteDao.findCompteByNumeroCompte("foo")).thenReturn(null);
+		ReturnCodeVirement result = operationService.doVirement(0L, "foo", "", new BigDecimal(200));
 		assertEquals(ReturnCodeVirement.COMPTE_CREDIT_INEXISTANT, result);
 	}
 

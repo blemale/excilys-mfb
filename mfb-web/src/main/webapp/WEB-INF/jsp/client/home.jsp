@@ -34,14 +34,14 @@
 							<tr class="clickLine" onclick="lienCompte('${contextPath}${linksDetail[c.id]}')">
 								<td class="aligneGauche">${c.numeroCompte} - ${c.label}</td>
 								<c:if test="${c.solde >= 0}">
-									<td class="aligneSolde coloreVert">+ <fmt:formatNumber
-											value="${c.solde}" minFractionDigits="2" pattern="#,###.##" />
+									<td class="aligneSolde coloreVert"><b>+ <fmt:formatNumber
+											value="${c.solde}" minFractionDigits="2" pattern="#,###.##" /></b>
 									</td>
 								</c:if>
 								<c:if test="${c.solde < 0}">
-									<td class="aligneSolde coloreRouge">- <fmt:formatNumber
+									<td class="aligneSolde coloreRouge"><b>- <fmt:formatNumber
 											value="${c.solde*-1}" minFractionDigits="2"
-											pattern="#,###.##" />
+											pattern="#,###.##" /></b>
 									</td>
 								</c:if>
 								<!--  -->

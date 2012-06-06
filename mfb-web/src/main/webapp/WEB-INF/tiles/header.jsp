@@ -28,6 +28,10 @@
 											code="header.link.virementExterne" /></a></li>
 							</ul></li>
 					</sec:authorize>
+					<sec:authorize access="hasRole('ROLE_CLIENT')">
+						<li><a href="${contextPath}/client/virementExterne.html"><spring:message
+									code="header.link.virementExterne" /></a></li>
+					</sec:authorize>
 					<sec:authorize
 						access="hasRole('ROLE_ADMIN') and hasRole('ROLE_CLIENT')">
 						<li><a href="${contextPath}/admin/home.html"><spring:message
