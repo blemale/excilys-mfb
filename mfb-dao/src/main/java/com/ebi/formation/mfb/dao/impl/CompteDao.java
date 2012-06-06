@@ -78,6 +78,10 @@ public class CompteDao implements ICompteDao {
 		return (BigDecimal) em.createNamedQuery("findSoldeCompte").setParameter("id", id).getSingleResult();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.dao.ICompteDao#findCompteByNumeroCompte(java.lang.String)
+	 */
 	@Override
 	public Compte findCompteByNumeroCompte(String numeroCompte) {
 		logger.debug("findCompteByNumeroCompte(numeroCompte:{})", numeroCompte);
@@ -89,5 +93,15 @@ public class CompteDao implements ICompteDao {
 			logger.debug("findCompteByNumeroCompte(numeroCompte:{}) : Compte not found.", numeroCompte);
 		}
 		return c;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.dao.ICompteDao#findEncoursCarteCompteById(java.lang.Long)
+	 */
+	@Override
+	public BigDecimal findEncoursCarteCompteById(Long id) {
+		logger.debug("findEncoursCarteCompteById(id:{})", id);
+		return (BigDecimal) em.createNamedQuery("findEncoursCarteCompte").setParameter("id", id).getSingleResult();
 	}
 }
