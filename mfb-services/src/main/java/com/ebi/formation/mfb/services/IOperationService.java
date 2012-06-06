@@ -280,7 +280,7 @@ public interface IOperationService {
 	 * @param year
 	 * @return
 	 */
-	List<Operation> getAllOperationsByMonthByCompte(long idCompte, int month, int year);
+	public List<Operation> getAllOperationsByMonthByCompte(long idCompte, int month, int year);
 
 	/**
 	 * Permet d'effectuer un virement entre deux comptes, et d'ajouter un motif de virement facultatif.

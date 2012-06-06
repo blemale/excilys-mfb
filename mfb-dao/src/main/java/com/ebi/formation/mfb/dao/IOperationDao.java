@@ -86,7 +86,7 @@ public interface IOperationDao {
 	 * Met à jour les comptes à partir des opérations.
 	 * 
 	 */
-	public void updateCompteQuotidient();
+	public void updateCompte();
 
 	/**
 	 * Recherche la liste des virements d'une personne pour un mois donné et paginé suivant un offset

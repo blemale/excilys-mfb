@@ -32,7 +32,7 @@ public class Role {
 	@Id
 	@GeneratedValue
 	private Long id;
-	@Column(name = "NAME", length = 25)
+	@Column(name = "NAME", length = 25, nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Right right;
 	@ManyToMany(mappedBy = "authorities")

@@ -31,7 +31,7 @@ public class Compte implements Serializable {
 	private Long id;
 	@Column(nullable = false, length = 64, unique = true)
 	private String label;
-	@Column(nullable = false)
+	@Column(nullable = false, length = 30, precision = 4)
 	private BigDecimal solde;
 	@ManyToMany
 	@JoinTable(name = "PERSON_COMPTE", joinColumns = @JoinColumn(name = "COMPTE_ID"), inverseJoinColumns = @JoinColumn(name = "PERSON_ID"))
