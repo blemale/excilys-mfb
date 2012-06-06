@@ -22,6 +22,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.ebi.formation.mfb.services.ICompteService;
 import com.ebi.formation.mfb.services.IOperationService;
 import com.ebi.formation.mfb.services.IOperationService.ReturnCodeVirement;
+import com.ebi.formation.mfb.web.forms.VirementExterneForm;
 import com.ebi.formation.mfb.web.forms.VirementInterneForm;
 
 @Controller
@@ -48,6 +49,20 @@ public class Virement {
 	}
 
 	/**
+	 * Affiche le formulaire permettant de saisir un virement externe
+	 * 
+	 * @param principal
+	 * @return
+	 */
+	@RequestMapping(value = "virementExterne.html")
+	public ModelAndView virementExterneForm(Principal principal) {
+		ModelAndView mv = new ModelAndView("virementExterne");
+		mv.addObject("comptesList", compteService.findComptesByUsername(principal.getName()));
+		mv.addObject(new VirementExterneForm());
+		return mv;
+	}
+
+	/**
 	 * Traite les erreurs du formulaire du virement et affiche la page de confirmation du virement
 	 * 
 	 * @param principal
@@ -57,7 +72,7 @@ public class Virement {
 	 */
 	@RequestMapping(value = "doVirement.html", method = RequestMethod.POST)
 	public ModelAndView doVirement(Principal principal, @ModelAttribute @Valid VirementInterneForm virementInterneForm,
-			BindingResult result, RedirectAttributes redirectAttrs, HttpServletRequest request) {
+			BindingResult result, RedirectAttributes redirectAttrs) {
 		ModelAndView mv = new ModelAndView();
 		boolean isCompteIdentiques = virementInterneForm.getCompteACrediter().equals(
 				virementInterneForm.getCompteADebiter());
@@ -72,6 +87,48 @@ public class Virement {
 		}
 		ReturnCodeVirement returnCode = operationService.doVirement(virementInterneForm.getCompteADebiter(),
 				virementInterneForm.getCompteACrediter(), StringUtils.trimToNull(virementInterneForm.getMotif()),
+				virementInterneForm.getMontant());
+		mv.setViewName("redirect:erreurVirement.html");
+		String message = null;
+		switch (returnCode) {
+			case COMPTE_CREDIT_INEXISTANT:
+				message = "virement.noCompteCredit";
+				break;
+			case COMPTE_DEBIT_INEXISTANT:
+				message = "virement.noCompteDebit";
+				break;
+			case DECOUVERT:
+				message = "virement.decouvert";
+				break;
+			case OK:
+				message = "virement.ok";
+				mv.setViewName("redirect:confirmVirement.html");
+				break;
+		}
+		redirectAttrs.addFlashAttribute("message", message);
+		return mv;
+	}
+
+	/**
+	 * Traite les erreurs du formulaire du virement et affiche la page de confirmation du virement
+	 * 
+	 * @param principal
+	 * @param virementInterneForm
+	 * @param result
+	 * @return
+	 */
+	@RequestMapping(value = "doVirementExterne.html", method = RequestMethod.POST)
+	public ModelAndView doVirementExterne(Principal principal,
+			@ModelAttribute @Valid VirementExterneForm virementInterneForm, BindingResult result,
+			RedirectAttributes redirectAttrs) {
+		ModelAndView mv = new ModelAndView();
+		if (result.hasErrors()) {
+			mv.addObject("comptesList", compteService.findComptesByUsername(principal.getName()));
+			mv.setViewName("virementExterne");
+			return mv;
+		}
+		ReturnCodeVirement returnCode = operationService.doVirement(virementInterneForm.getCompteADebiter(),
+				virementInterneForm.getNumeroCompteACrediter(), StringUtils.trimToNull(virementInterneForm.getMotif()),
 				virementInterneForm.getMontant());
 		mv.setViewName("redirect:erreurVirement.html");
 		String message = null;
