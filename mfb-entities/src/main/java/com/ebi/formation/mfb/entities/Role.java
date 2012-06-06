@@ -1,14 +1,11 @@
 package com.ebi.formation.mfb.entities;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 
 /**
  * Classe répresentant un rôle en base (ROLE_ADMIN ou ROLE_CLIENT)
@@ -35,8 +32,6 @@ public class Role {
 	@Column(name = "NAME", length = 25, nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Right right;
-	@ManyToMany(mappedBy = "authorities")
-	private List<Person> persons;
 
 	/**
 	 * @return l'id du rôle

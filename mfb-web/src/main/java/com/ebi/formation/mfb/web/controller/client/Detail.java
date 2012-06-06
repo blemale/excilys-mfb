@@ -15,6 +15,8 @@ import org.joda.time.DateTime;
 import org.joda.time.YearMonth;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,6 +46,7 @@ public class Detail {
 		COMPTE, CARTE, VIREMENT
 	};
 
+	private final Logger logger = LoggerFactory.getLogger(Detail.class);
 	private static final int NB_MONTH_HISTORY = 6;
 	@Autowired
 	ICompteService compteService;
@@ -297,7 +300,7 @@ public class Detail {
 			wb.write(response.getOutputStream());
 			response.getOutputStream().flush();
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.debug("Erreur export Excel", e);
 		}
 		return null;
 	}
@@ -442,9 +445,7 @@ public class Detail {
 	private Map<String, String> getMonthUrls(Locale locale, Long idCompte, TypeDetail typeDetail) {
 		Map<String, String> mapNamesUrls = new LinkedHashMap<String, String>();
 		YearMonth now = YearMonth.now();
-		// DateTime now = DateTime.now();
-		for (int i = 0; i <= 5; i++) {
-			// DateTime month = now.minusMonths(i);
+		for (int i = 0; i <= NB_MONTH_HISTORY - 1; i++) {
 			YearMonth month = now.minusMonths(i);
 			DateTimeFormatter fmt = DateTimeFormat.forPattern("MMMM yyyy");
 			DateTimeFormatter localeFmt = fmt.withLocale(locale);

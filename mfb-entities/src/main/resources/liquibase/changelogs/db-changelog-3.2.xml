@@ -16,5 +16,11 @@
 				<constraints nullable="false" />
 			</column>
 		</addColumn>
+		<addColumn tableName="COMPTE">
+			<column name="ENCOURSCARTE" type="numeric(30,4)"
+				defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+		</addColumn>
 	</changeSet>
 </databaseChangeLog>

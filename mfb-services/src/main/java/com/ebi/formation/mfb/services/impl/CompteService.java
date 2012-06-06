@@ -24,7 +24,7 @@ public class CompteService implements ICompteService {
 
 	private final Logger logger = LoggerFactory.getLogger(CompteService.class);
 	@Autowired
-	ICompteDao compteDao;
+	private ICompteDao compteDao;
 
 	/*
 	 * (non-Javadoc)

@@ -23,7 +23,7 @@ public interface IOperationDao {
 	 * @param datePlusUnMois
 	 * @return
 	 */
-	public BigDecimal findTotalOperationsCarteByMonth(long idCompte, DateTime date, DateTime datePlusUnMois);
+	BigDecimal findTotalOperationsCarteByMonth(long idCompte, DateTime date, DateTime datePlusUnMois);
 
 	/**
 	 * Retourne le nombre d'operations carte d'un compte pour un mois donné
@@ -33,7 +33,7 @@ public interface IOperationDao {
 	 * @param datePlusUnMois
 	 * @return
 	 */
-	public long findNumberOfOperationsCarteByMonth(long idCompte, DateTime date, DateTime datePlusUnMois);
+	long findNumberOfOperationsCarteByMonth(long idCompte, DateTime date, DateTime datePlusUnMois);
 
 	/**
 	 * Retourne le nombre d'operations excepté les opérations carte d'un compte pour un mois donné
@@ -43,7 +43,7 @@ public interface IOperationDao {
 	 * @param datePlusUnMois
 	 * @return
 	 */
-	public long findNumberOfOperationsWithoutCarteByMonth(long idCompte, DateTime date, DateTime datePlusUnMois);
+	long findNumberOfOperationsWithoutCarteByMonth(long idCompte, DateTime date, DateTime datePlusUnMois);
 
 	/**
 	 * Retourne le nombre d'operations excepté les opérations carte d'un compte pour un mois donné
@@ -53,7 +53,7 @@ public interface IOperationDao {
 	 * @param datePlusUnMois
 	 * @return
 	 */
-	public long findNumberOfVirementsByMonth(long idCompte, DateTime date, DateTime datePlusUnMois);
+	long findNumberOfVirementsByMonth(long idCompte, DateTime date, DateTime datePlusUnMois);
 
 	/**
 	 * Recherche la liste des operations d'un compte (sauf les opérations par carte) pour un mois donné et paginé
@@ -66,8 +66,8 @@ public interface IOperationDao {
 	 * @param numberOfResults
 	 * @return
 	 */
-	public List<Operation> findOperationsWithoutCarteByMonthPaginated(long idCompte, DateTime date,
-			DateTime datePlusUnMois, int offset, int numberOfResults);
+	List<Operation> findOperationsWithoutCarteByMonthPaginated(long idCompte, DateTime date, DateTime datePlusUnMois,
+			int offset, int numberOfResults);
 
 	/**
 	 * Recherche la liste des operations carte d'un compte pour un mois donné et paginé suivant un offset
@@ -79,14 +79,14 @@ public interface IOperationDao {
 	 * @param numberOfResults
 	 * @return
 	 */
-	public List<Operation> findOperationsCarteByMonthPaginated(long idCompte, DateTime date, DateTime datePlusUnMois,
+	List<Operation> findOperationsCarteByMonthPaginated(long idCompte, DateTime date, DateTime datePlusUnMois,
 			int offset, int numberOfResults);
 
 	/**
 	 * Met à jour les comptes à partir des opérations.
 	 * 
 	 */
-	public void updateCompte();
+	void updateCompte();
 
 	/**
 	 * Recherche la liste des virements d'une personne pour un mois donné et paginé suivant un offset
@@ -98,8 +98,8 @@ public interface IOperationDao {
 	 * @param numberOfResults
 	 * @return
 	 */
-	public List<Operation> findVirementsByMonthPaginated(long idCompte, DateTime date, DateTime datePlusUnMois,
-			int offset, int numberOfResults);
+	List<Operation> findVirementsByMonthPaginated(long idCompte, DateTime date, DateTime datePlusUnMois, int offset,
+			int numberOfResults);
 
 	/**
 	 * Récupère la liste des opérations pour un mois donné.
@@ -109,7 +109,7 @@ public interface IOperationDao {
 	 * @param datePlusUnMois
 	 * @return
 	 */
-	public List<Operation> findAllOperationsByMonthByCompte(long idCompte, DateTime date, DateTime datePlusUnMois);
+	List<Operation> findAllOperationsByMonthByCompte(long idCompte, DateTime date, DateTime datePlusUnMois);
 
 	/**
 	 * Méthode permettant de persister en base une nouvelle opération.
@@ -117,5 +117,5 @@ public interface IOperationDao {
 	 * @param operation
 	 *            l'opération à persister
 	 */
-	public void save(Operation operation);
+	void save(Operation operation);
 }

@@ -47,12 +47,8 @@ public class CompteDao implements ICompteDao {
 	public boolean checkCompteOwnershipByUsernameAndCompteId(String username, Long compteId) {
 		logger.debug("checkCompteOwnershipByUsernameAndCompteId(username:{},compteId:{})", username, compteId);
 		long result = 0;
-		try {
-			result = em.createNamedQuery("checkCompteOwnershipByUsernameAndCompteId", Long.class)
-					.setParameter("username", username).setParameter("compteId", compteId).getSingleResult();
-		} catch (NoResultException nre) {
-			return false;
-		}
+		result = em.createNamedQuery("checkCompteOwnershipByUsernameAndCompteId", Long.class)
+				.setParameter("username", username).setParameter("compteId", compteId).getSingleResult();
 		return result == 0L ? false : true;
 	}
 

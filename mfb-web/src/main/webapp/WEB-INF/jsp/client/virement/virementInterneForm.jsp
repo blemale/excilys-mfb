@@ -11,7 +11,7 @@
 		<spring:message code="home.title" />
 	</h1>
 	<p class="lead">
-		<spring:message code="home.welcome" />
+		<spring:message code="home.virementInterneForm" />
 	</p>
 </header>
 

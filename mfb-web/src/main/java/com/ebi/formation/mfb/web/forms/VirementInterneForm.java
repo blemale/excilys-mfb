@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
  */
 public class VirementInterneForm {
 
-	@DecimalMin("10")
+	@DecimalMin("1")
 	@NotNull
 	private BigDecimal montant;
 	@NotNull

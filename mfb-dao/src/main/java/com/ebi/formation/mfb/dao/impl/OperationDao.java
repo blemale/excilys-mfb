@@ -136,10 +136,8 @@ public class OperationDao implements IOperationDao {
 		List<Operation> l = em.createNamedQuery("findOperationsNotDone").setParameter("today", today).getResultList();
 		for (Operation o : l) {
 			logger.debug(new StringBuilder("Operation : ").append(o.getId()).toString());
-			// o.getCompte().setSolde(o.getMontant().add(o.getCompte().getSolde()));
 			em.createNamedQuery("updateCompteNotDone").setParameter("valeur", o.getMontant())
 					.setParameter("compteOperationId", o.getCompte().getId()).executeUpdate();
-			// o.setOperationDone(true);
 			em.createNamedQuery("updateOperationNotDone").setParameter("operationId", o.getId()).executeUpdate();
 		}
 		em.clear();

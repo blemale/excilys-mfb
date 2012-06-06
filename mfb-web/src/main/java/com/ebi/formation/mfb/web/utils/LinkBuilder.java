@@ -9,6 +9,12 @@ package com.ebi.formation.mfb.web.utils;
 public class LinkBuilder {
 
 	/**
+	 * Constructeur empechant la classe LinkBuilder d'être instanciée
+	 */
+	private LinkBuilder() {
+	}
+
+	/**
 	 * Retourne une URL comme ceci : /arg1/arg2/arg3/arg4...
 	 * 
 	 * @param params
