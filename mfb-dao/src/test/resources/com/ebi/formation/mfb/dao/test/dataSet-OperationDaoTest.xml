@@ -31,146 +31,153 @@
 
 	<operation id="1" label="ma premiere operation" montant="100"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="1"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="2" label="ma deuxieme operation" montant="200"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="1"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="3" label="ma troisieme operation" montant="400"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="2"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="4" label="ma quatrieme operation" montant="800"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="3"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="5" label="ma quatrieme operation" montant="800"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="3"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="6" label="ma quatrieme operation" montant="800"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="3"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="7" label="ma quatrieme operation" montant="800"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="3"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="8" label="ma quatrieme operation" montant="800"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="3"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="9" label="ma quatrieme operation" montant="800"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="3"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="10" label="ma quatrieme operation" montant="800"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="0"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="11" label="ma quatrieme operation" montant="800"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="3"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="12" label="ma quatrieme operation" montant="800"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="3"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="13" label="ma quatrieme operation" montant="800"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="3"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="14" label="ma quatrieme operation" montant="800"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="3"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="15" label="ma quatrieme operation" montant="800"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="3"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="16" label="ma quatrieme operation" montant="800"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="3"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="17" label="ma quatrieme operation" montant="800"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="3"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="18" label="ma quatrieme operation" montant="800"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="3"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="19" label="ma quatrieme operation" montant="800"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="3"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="20" label="ma quatrieme operation" montant="800"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="3"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="21" label="ma quatrieme operation" montant="800"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="3"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="22" label="ma quatrieme operation" montant="800"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="3"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="23" label="ma quatrieme operation" montant="800"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="3"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="24" label="ma deuxieme operation" montant="200"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="1"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="25" label="ma deuxieme operation" montant="200"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="1"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="26" label="ma deuxieme operation" montant="200"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="1"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="27" label="ma deuxieme operation" montant="200"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="1"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="28" label="ma deuxieme operation" montant="200"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="1"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="29" label="ma deuxieme operation" montant="200"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="1"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="30" label="ma deuxieme operation" montant="200"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="1"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="31" label="ma deuxieme operation" montant="200"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="1"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="32" label="ma deuxieme operation" montant="200"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="1"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="33" label="ma deuxieme operation" montant="200"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="1"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="34" label="ma deuxieme operation" montant="200"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="1"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="35" label="ma deuxieme operation" montant="200"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="1"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="36" label="ma deuxieme operation" montant="200"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="1"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="37" label="ma deuxieme operation" montant="200"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="1"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="38" label="ma deuxieme operation" montant="200"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="1"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="39" label="ma deuxieme operation" montant="200"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="1"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="40" label="ma deuxieme operation" montant="200"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="1"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="41" label="ma deuxieme operation" montant="200"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="1"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="42" label="ma deuxieme operation" montant="200"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="1"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="43" label="ma deuxieme operation" montant="200"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="1"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="44" label="ma quatrieme operation" montant="800"
 		dateeffet="2012-04-17 12:21:00" datevaleur="2012-04-23 12:21:00" type="3"
-		compte="1" />
+		compte="1" operationdone="true" />
 	<operation id="45" label="ma quatrieme operation" montant="800"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="3"
-		compte="2" />
+		compte="2" operationdone="true" />
 	<operation id="46" label="ma quatrieme operation" montant="800"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="0"
-		compte="2" />
+		compte="2" operationdone="true" />
 	<operation id="47" label="ma quatrieme operation" montant="800"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="0"
-		compte="2" />
+		compte="2" operationdone="true" />
 	<operation id="48" label="ma quatrieme operation" montant="800"
 		dateeffet="2012-05-17 12:21:00" datevaleur="2012-05-23 12:21:00" type="0"
-		compte="3" />
+		compte="3" operationdone="true" />
+	
+	<operation id="49" label="test update compte" montant="250"
+		dateeffet="2012-06-03 12:21:00" datevaleur="2012-06-03 12:21:00" type="1"
+		compte="1" operationdone="false" />
+	<operation id="50" label="test update compte" montant="-50"
+		dateeffet="2012-06-03 14:21:00" datevaleur="2012-06-03 14:21:00" type="1"
+		compte="1" operationdone="false" />
 </dataset>

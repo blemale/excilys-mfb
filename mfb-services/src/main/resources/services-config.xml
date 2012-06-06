@@ -1,12 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
-	
-	<context:annotation-config/>
-	
-	<context:component-scan base-package="com.ebi.formation.mfb.services"/>
-	
+
+	<context:annotation-config />
+
+	<context:component-scan base-package="com.ebi.formation.mfb.services" />
+	<util:properties id="batchProperties" location="classpath:batch.properties" />
+
+
+
+	<!-- Declaration du bean job -->
+	<bean name="runMeJob" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass"
+			value="com.ebi.formation.mfb.services.impl.OperationServiceBatch" />
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="operationDao" value-ref="operationDao" />
+			</map>
+		</property>
+	</bean>
+
+	<!-- Cron Trigger -->
+	<bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="runMeJob" />
+		<property name="cronExpression" value="#{batchProperties.cronExpression}" />
+	</bean>
+
+	<!-- Declaration du bean sheduler -->
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="jobDetails">
+			<list>
+				<ref bean="runMeJob" />
+			</list>
+		</property>
+		<property name="triggers">
+			<list>
+				<ref bean="cronTrigger" />
+			</list>
+		</property>
+	</bean>
+
 </beans>

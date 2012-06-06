@@ -10,6 +10,7 @@ import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ebi.formation.mfb.dao.IOperationDao;
 import com.ebi.formation.mfb.entities.Operation;
@@ -26,7 +27,7 @@ import com.ebi.formation.mfb.entities.OperationType;
  * @author excilys
  * 
  */
-@Repository
+@Repository("operationDao")
 public class OperationDao implements IOperationDao {
 
 	private final Logger logger = LoggerFactory.getLogger(OperationDao.class);
@@ -128,16 +129,18 @@ public class OperationDao implements IOperationDao {
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
-	public void updateCompteQuotidien() {
-		logger.debug("updateCompteQuotidient()");
+	@Transactional
+	public void updateCompte() {
+		logger.debug("updateCompte()");
 		DateTime today = new DateTime();
-		List<Operation> l = em.createNamedQuery("findOperationsBeforeDate").setParameter("today", today)
-				.getResultList();
-		// TODO : Modifier la requête quand il y aura les flags dans les opérations.
+		List<Operation> l = em.createNamedQuery("findOperationsNotDone").setParameter("today", today).getResultList();
 		for (Operation o : l) {
-			em.createNamedQuery("updateCompteWithValue").setParameter("valeur", o.getMontant())
-					.setParameter("operation", o.getCompte()).executeUpdate();
+			logger.debug(new StringBuilder("Operation : ").append(o.getId()).toString());
+			em.createNamedQuery("updateCompteNotDone").setParameter("valeur", o.getMontant())
+					.setParameter("compteOperationId", o.getCompte().getId()).executeUpdate();
+			em.createNamedQuery("updateOperationNotDone").setParameter("operationId", o.getId()).executeUpdate();
 		}
+		em.clear();
 	}
 
 	/*

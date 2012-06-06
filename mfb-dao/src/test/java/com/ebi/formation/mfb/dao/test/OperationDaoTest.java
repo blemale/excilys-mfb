@@ -1,6 +1,7 @@
 package com.ebi.formation.mfb.dao.test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -31,6 +32,7 @@ import com.excilys.ebi.spring.dbunit.test.RollbackTransactionalDataSetTestExecut
  * 
  * @author kpogorzelski
  * @author tbakir
+ * @author fguillain
  * 
  */
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -65,7 +67,7 @@ public class OperationDaoTest {
 	 */
 	@DataSet("dataSet-OperationDaoTest.xml")
 	@Test
-	public void testfindNumberOfOperationsCarteByMonth() {
+	public void testFindNumberOfOperationsCarteByMonth() {
 		DateTime date = new DateTime(2012, 5, 1, 0, 0);
 		DateTime datePlusUnMois = date.plusMonths(1);
 		long total = operationDao.findNumberOfOperationsCarteByMonth(1, date, datePlusUnMois);
@@ -77,7 +79,7 @@ public class OperationDaoTest {
 	 */
 	@DataSet("dataSet-OperationDaoTest.xml")
 	@Test
-	public void testfindNumberOfOperationsWithoutCarteByMonth() {
+	public void testFindNumberOfOperationsWithoutCarteByMonth() {
 		DateTime date = new DateTime(2012, 5, 1, 0, 0);
 		DateTime datePlusUnMois = date.plusMonths(1);
 		long total = operationDao.findNumberOfOperationsWithoutCarteByMonth(1, date, datePlusUnMois);
@@ -150,13 +152,25 @@ public class OperationDaoTest {
 		assertEquals(0, i.compareTo(new BigDecimal(400)));
 	}
 
+	/**
+	 * Test la mise à jour d'un compte par rapport aux operations effecutées
+	 */
 	@DataSet("dataSet-OperationDaoTest.xml")
 	@Test
-	public void testUpdateCompteQuotidient() {
-		operationDao.updateCompteQuotidien();
-		assertEquals(0, compteDao.findMontantCompteById(1L).compareTo(new BigDecimal(21500)));
+	public void testUpdateCompte() {
+		operationDao.updateCompte();
+		assertEquals(0, compteDao.findMontantCompteById(1L).compareTo(new BigDecimal(200)));
+		DateTime date = new DateTime(2012, 6, 1, 0, 0);
+		DateTime datePlusUnMois = date.plusMonths(1);
+		List<Operation> l = operationDao.findAllOperationsByMonthByCompte(1L, date, datePlusUnMois);
+		for (Operation o : l) {
+			assertTrue(o.getOperationDone());
+		}
 	}
 
+	/**
+	 * 
+	 */
 	@DataSet("dataSet-OperationDaoTest.xml")
 	@Test
 	public void testFindVirementsByMonthPaginated() {
@@ -172,6 +186,9 @@ public class OperationDaoTest {
 		assertEquals(2, operations.size());
 	}
 
+	/**
+	 * 
+	 */
 	@DataSet("dataSet-OperationDaoTest.xml")
 	@Test
 	public void testFindNumberOfVirementsByMonth() {
@@ -181,6 +198,9 @@ public class OperationDaoTest {
 		assertEquals(2, result);
 	}
 
+	/**
+	 * 
+	 */
 	@DataSet("dataSet-OperationDaoTest.xml")
 	@Test
 	public void testSaveOperation() {
