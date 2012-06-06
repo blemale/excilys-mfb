@@ -35,6 +35,8 @@ public class Compte implements Serializable {
 	private BigDecimal solde;
 	@Column(nullable = false)
 	private BigDecimal soldePrevisionnel;
+	@Column(nullable = false)
+	private BigDecimal encoursCarte;
 	@ManyToMany
 	@JoinTable(name = "PERSON_COMPTE", joinColumns = @JoinColumn(name = "COMPTE_ID"), inverseJoinColumns = @JoinColumn(name = "PERSON_ID"))
 	private List<Person> owners;
@@ -109,5 +111,13 @@ public class Compte implements Serializable {
 	 */
 	public void setSoldePrevisionnel(BigDecimal soldePrevisionnel) {
 		this.soldePrevisionnel = soldePrevisionnel;
+	}
+
+	public BigDecimal getEncoursCarte() {
+		return encoursCarte;
+	}
+
+	public void setEncoursCarte(BigDecimal encoursCarte) {
+		this.encoursCarte = encoursCarte;
 	}
 }

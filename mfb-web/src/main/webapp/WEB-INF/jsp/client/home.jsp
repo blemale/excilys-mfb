@@ -24,6 +24,7 @@
 							<th><spring:message code="home.accountNumber" /> - <spring:message code="home.label" /></th>
 							<th><spring:message code="home.solde" /></th>
 							<th><spring:message code="home.soldePrevisionnel" /></th>
+							<th><spring:message code="home.encoursCarte" /></th>
 							<th>&nbsp;</th>
 							<th>&nbsp;</th>
 						</tr>
@@ -43,6 +44,7 @@
 											pattern="#,###.##" />
 									</td>
 								</c:if>
+								<!--  -->
 								<c:if test="${c.soldePrevisionnel >= 0}">
 									<td class="aligneSolde coloreVert">+ <fmt:formatNumber
 											value="${c.soldePrevisionnel}" minFractionDigits="2" pattern="#,###.##" />
@@ -51,6 +53,18 @@
 								<c:if test="${c.soldePrevisionnel < 0}">
 									<td class="aligneSolde coloreRouge">- <fmt:formatNumber
 											value="${c.soldePrevisionnel*-1}" minFractionDigits="2"
+											pattern="#,###.##" />
+									</td>
+								</c:if>
+								<!--  -->
+								<c:if test="${c.encoursCarte >= 0}">
+									<td class="aligneSolde coloreVert">+ <fmt:formatNumber
+											value="${c.encoursCarte}" minFractionDigits="2" pattern="#,###.##" />
+									</td>
+								</c:if>
+								<c:if test="${c.encoursCarte < 0}">
+									<td class="aligneSolde coloreRouge">- <fmt:formatNumber
+											value="${c.encoursCarte*-1}" minFractionDigits="2"
 											pattern="#,###.##" />
 									</td>
 								</c:if>
