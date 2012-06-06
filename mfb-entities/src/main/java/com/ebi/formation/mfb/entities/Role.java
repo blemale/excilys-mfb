@@ -7,6 +7,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 /**
  * Classe répresentant un rôle en base (ROLE_ADMIN ou ROLE_CLIENT)
  * 
@@ -14,6 +17,7 @@ import javax.persistence.Id;
  * 
  */
 @Entity
+@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 public class Role {
 
 	/**

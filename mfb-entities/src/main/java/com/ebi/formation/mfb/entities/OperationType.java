@@ -6,12 +6,14 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 @Entity
+@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 public class OperationType {
 
 	public enum Type {
-		// VIREMENT_ENTREE, VIREMENT_SORTIE, PAIEMENT_CARTE, RETRAIT_CARTE, DEPOT_ESPECE, RETRAIT_ESPECE,
-		// PAIEMENT_CHEQUE, DEPOT_CHEQUE
 		VIREMENT, CARTE, ESPECE, CHEQUE
 	}
 
