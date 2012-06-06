@@ -290,6 +290,16 @@
 				<artifactId>usertype.core</artifactId>
 				<version>3.0.0.CR1</version>
 			</dependency>
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-ehcache</artifactId>
+				<version>4.1.4.Final</version>
+			</dependency>
+			<dependency>
+				<groupId>net.sf.ehcache</groupId>
+				<artifactId>ehcache-core</artifactId>
+				<version>2.5.2</version>
+			</dependency>
 			<!-- Logging dependencies -->
 			<dependency>
 				<groupId>commons-logging</groupId>
