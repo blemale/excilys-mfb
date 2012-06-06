@@ -12,11 +12,15 @@ INSERT INTO authority VALUES(3,2);
 -- Table COMPTE
 INSERT INTO compte VALUES(DEFAULT, 'COMPTE 1 user', 1000, '00-000-01');
 INSERT INTO compte VALUES(DEFAULT, 'COMPTE 2 user', 2000, '00-000-02');
-INSERT INTO compte VALUES(DEFAULT, 'COMPTE 1 useradmin', 3000, '00-000-03');
+INSERT INTO compte VALUES(DEFAULT, 'COMPTE 3 user', 1500, '00-000-03');
+INSERT INTO compte VALUES(DEFAULT, 'COMPTE 4 user', 2500, '00-000-04');
+INSERT INTO compte VALUES(DEFAULT, 'COMPTE 1 useradmin', 3000, '00-000-05');
 
 -- Table PERSON_COMPTE
 INSERT INTO person_compte VALUES(1,1);
 INSERT INTO person_compte VALUES(2,1);
+INSERT INTO person_compte VALUES(3,1);
+INSERT INTO person_compte VALUES(4,1);
 INSERT INTO person_compte VALUES(3,2);
 
 -- Table OPERATION
@@ -42,7 +46,7 @@ INSERT INTO operation VALUES(DEFAULT, 'un virement', 10, current_timestamp, curr
 INSERT INTO operation VALUES(DEFAULT, 'un virement', 10, current_timestamp, current_timestamp, 1, 1);
 INSERT INTO operation VALUES(DEFAULT, 'un virement', 10, current_timestamp, current_timestamp, 1, 1);
 INSERT INTO operation VALUES(DEFAULT, 'un virement', 10, current_timestamp, current_timestamp, 1, 1);
-
+-- 21 opérations cartes dans le compte "2" appartenant à l'utilisateur "user"
 INSERT INTO operation VALUES(DEFAULT, 'une opération carte', 10, current_timestamp, current_timestamp, 2, 2);
 INSERT INTO operation VALUES(DEFAULT, 'une opération carte', 10, current_timestamp, current_timestamp, 2, 2);
 INSERT INTO operation VALUES(DEFAULT, 'une opération carte', 10, current_timestamp, current_timestamp, 2, 2);
