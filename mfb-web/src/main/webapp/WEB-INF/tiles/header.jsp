@@ -19,12 +19,14 @@
 									code="header.link.home" /></a></li>
 					</sec:authorize>
 					<sec:authorize access="hasRole('ROLE_CLIENT')">
-						<li><a href="${contextPath}/client/virement.html"><spring:message
-									code="header.link.virementInterne" /></a></li>
-					</sec:authorize>
-					<sec:authorize access="hasRole('ROLE_CLIENT')">
-						<li><a href="${contextPath}/client/virementExterne.html"><spring:message
-									code="header.link.virementExterne" /></a></li>
+						<li class="dropdown"><a href="#" data-toggle="dropdown"
+							class="dropdown-toggle"><spring:message code="header.button.virement" /> <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="${contextPath}/client/virementInterne.html"><spring:message
+											code="header.link.virementInterne" /></a></li>
+								<li><a href="${contextPath}/client/virementExterne.html"><spring:message
+											code="header.link.virementExterne" /></a></li>
+							</ul></li>
 					</sec:authorize>
 					<sec:authorize
 						access="hasRole('ROLE_ADMIN') and hasRole('ROLE_CLIENT')">

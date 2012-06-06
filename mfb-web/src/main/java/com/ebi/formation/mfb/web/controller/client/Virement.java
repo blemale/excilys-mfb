@@ -40,7 +40,7 @@ public class Virement {
 	 * @param principal
 	 * @return
 	 */
-	@RequestMapping(value = "virement.html")
+	@RequestMapping(value = "virementInterne.html")
 	public ModelAndView virementInterneForm(Principal principal) {
 		ModelAndView mv = new ModelAndView("virementInterne");
 		mv.addObject("comptesList", compteService.findComptesByUsername(principal.getName()));
@@ -70,7 +70,7 @@ public class Virement {
 	 * @param result
 	 * @return
 	 */
-	@RequestMapping(value = "doVirement.html", method = RequestMethod.POST)
+	@RequestMapping(value = "doVirementInterne.html", method = RequestMethod.POST)
 	public ModelAndView doVirement(Principal principal, @ModelAttribute @Valid VirementInterneForm virementInterneForm,
 			BindingResult result, RedirectAttributes redirectAttrs) {
 		ModelAndView mv = new ModelAndView();
