@@ -89,4 +89,14 @@ public class CompteDaoTest {
 		assertEquals(new Long(1L), result1.getId());
 		assertNull(result2);
 	}
+
+	@DataSet("dataSet-CompteDaoTest.xml")
+	@Test
+	public void testFindCompteByNumeroCompte() {
+		Compte result1 = compteDao.findCompteByNumeroCompte("0001");
+		Compte result2 = compteDao.findCompteByNumeroCompte("ABC");
+		assertNotNull(result1);
+		assertEquals(new Long(1L), result1.getId());
+		assertNull(result2);
+	}
 }

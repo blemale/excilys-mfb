@@ -40,6 +40,15 @@ public interface ICompteDao {
 	Compte findCompteById(long id);
 
 	/**
+	 * Retourne un compte grâce à son numero de compte.
+	 * 
+	 * @param numeroCompte
+	 *            un numero de compte donné
+	 * @return un compte ou null si le compte n'est pas trouvé
+	 */
+	Compte findCompteByNumeroCompte(String numeroCompte);
+
+	/**
 	 * Retourne le solde d'un compte depuis son id.
 	 * 
 	 * @param id

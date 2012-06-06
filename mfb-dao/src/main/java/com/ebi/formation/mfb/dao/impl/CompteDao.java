@@ -77,4 +77,17 @@ public class CompteDao implements ICompteDao {
 		logger.debug("findMontantCompteById(id:{})", id);
 		return (BigDecimal) em.createNamedQuery("findSoldeCompte").setParameter("id", id).getSingleResult();
 	}
+
+	@Override
+	public Compte findCompteByNumeroCompte(String numeroCompte) {
+		logger.debug("findCompteByNumeroCompte(numeroCompte:{})", numeroCompte);
+		Compte c = null;
+		try {
+			return em.createNamedQuery("findCompteByNumeroCompte", Compte.class)
+					.setParameter("numeroCompte", numeroCompte).getSingleResult();
+		} catch (NoResultException nre) {
+			logger.debug("findCompteByNumeroCompte(numeroCompte:{}) : Compte not found.", numeroCompte);
+		}
+		return c;
+	}
 }
