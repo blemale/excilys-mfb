@@ -27,7 +27,7 @@ public class ConsultationVirementIT {
 	}
 
 	@Test
-	public void testPlop() throws Exception {
+	public void testConsultationVirement() throws Exception {
 		selenium.open(baseUrl + "mfb-web/login.html?lang=fr");
 		selenium.type("id=form-top", "user");
 		selenium.type("name=j_password", "user");
