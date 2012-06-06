@@ -33,6 +33,8 @@ public class Compte implements Serializable {
 	private String label;
 	@Column(nullable = false)
 	private BigDecimal solde;
+	@Column(nullable = false)
+	private BigDecimal soldePrevisionnel;
 	@ManyToMany
 	@JoinTable(name = "PERSON_COMPTE", joinColumns = @JoinColumn(name = "COMPTE_ID"), inverseJoinColumns = @JoinColumn(name = "PERSON_ID"))
 	private List<Person> owners;
@@ -93,5 +95,19 @@ public class Compte implements Serializable {
 	 */
 	public void setSolde(BigDecimal solde) {
 		this.solde = solde;
+	}
+
+	/**
+	 * @return solde prévisonnel
+	 */
+	public BigDecimal getSoldePrevisionnel() {
+		return soldePrevisionnel;
+	}
+
+	/**
+	 * @param soldePrevisionnel
+	 */
+	public void setSoldePrevisionnel(BigDecimal soldePrevisionnel) {
+		this.soldePrevisionnel = soldePrevisionnel;
 	}
 }

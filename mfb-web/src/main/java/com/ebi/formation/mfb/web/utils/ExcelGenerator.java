@@ -29,7 +29,6 @@ public class ExcelGenerator {
 	private static CellStyle styleAlligneGauche;
 	private static CellStyle styleCentreGras;
 	private static CellStyle styleBorderEncadreHaut;
-	private static CellStyle styleFondColore;
 	private static int i;
 
 	/**

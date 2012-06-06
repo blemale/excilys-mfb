@@ -16,7 +16,7 @@
 
 <section id="comptes">
 	<div class="row">
-		<div class="span8 offset2">
+		<div class="span12">
 			<c:if test="${fn:length(comptes) ne 0}">
 				<table class="table table-striped table-bordered">
 					<thead>
@@ -24,6 +24,7 @@
 							<th><spring:message code="home.accountNumber" /></th>
 							<th><spring:message code="home.label" /></th>
 							<th><spring:message code="home.solde" /></th>
+							<th><spring:message code="home.soldePrevisionnel" /></th>
 							<th>&nbsp;</th>
 							<th>&nbsp;</th>
 						</tr>
@@ -41,6 +42,17 @@
 								<c:if test="${c.solde < 0}">
 									<td class="aligneSolde coloreRouge">- <fmt:formatNumber
 											value="${c.solde*-1}" minFractionDigits="2"
+											pattern="#,###.##" />
+									</td>
+								</c:if>
+								<c:if test="${c.soldePrevisionnel >= 0}">
+									<td class="aligneSolde coloreVert">+ <fmt:formatNumber
+											value="${c.soldePrevisionnel}" minFractionDigits="2" pattern="#,###.##" />
+									</td>
+								</c:if>
+								<c:if test="${c.soldePrevisionnel < 0}">
+									<td class="aligneSolde coloreRouge">- <fmt:formatNumber
+											value="${c.soldePrevisionnel*-1}" minFractionDigits="2"
 											pattern="#,###.##" />
 									</td>
 								</c:if>

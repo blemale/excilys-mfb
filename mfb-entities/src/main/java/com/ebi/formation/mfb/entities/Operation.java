@@ -37,14 +37,18 @@ public class Operation {
 	@OneToOne
 	@JoinColumn(name = "TYPE")
 	private OperationType type;
+	@Column(length = 30, precision = 4, nullable = false)
 	private BigDecimal montant;
+	@Column(nullable = false)
 	private DateTime dateValeur;
+	@Column(nullable = false)
 	private DateTime dateEffet;
-	@Column(length = 64)
+	@Column(length = 64, nullable = false)
 	private String label;
 	@OneToOne
 	@JoinColumn(name = "COMPTE")
 	private Compte compte;
+	private Boolean operationDone;
 
 	/**
 	 * @return the id
@@ -96,6 +100,13 @@ public class Operation {
 	}
 
 	/**
+	 * @return
+	 */
+	public Boolean getOperationDone() {
+		return operationDone;
+	}
+
+	/**
 	 * @param type
 	 */
 	public void setType(OperationType type) {
@@ -135,5 +146,12 @@ public class Operation {
 	 */
 	public void setCompte(Compte compte) {
 		this.compte = compte;
+	}
+
+	/**
+	 * @param operation_effectuee
+	 */
+	public void setOperationDone(Boolean operationDone) {
+		this.operationDone = operationDone;
 	}
 }
