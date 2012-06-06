@@ -19,7 +19,7 @@
 	<div class="row">
 		<div class="span8 offset2">
 			<form:form cssClass="form-horizontal" method="post"
-				action="${contextPath}/client/doVirement.html"
+				action="${contextPath}/client/doVirementInterne.html"
 				commandName="virementInterneForm">
 				<fieldset>
 					<div class="control-group">

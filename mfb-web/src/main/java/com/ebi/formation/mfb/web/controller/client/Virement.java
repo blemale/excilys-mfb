@@ -70,7 +70,7 @@ public class Virement {
 	 * @param result
 	 * @return
 	 */
-	@RequestMapping(value = "doVirement.html", method = RequestMethod.POST)
+	@RequestMapping(value = "doVirementInterne.html", method = RequestMethod.POST)
 	public ModelAndView doVirement(Principal principal, @ModelAttribute @Valid VirementInterneForm virementInterneForm,
 			BindingResult result, RedirectAttributes redirectAttrs) {
 		ModelAndView mv = new ModelAndView();
