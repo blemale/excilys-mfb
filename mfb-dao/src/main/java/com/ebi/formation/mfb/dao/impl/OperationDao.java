@@ -128,7 +128,7 @@ public class OperationDao implements IOperationDao {
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
-	public void updateCompteQuotidient() {
+	public void updateCompteQuotidien() {
 		logger.debug("updateCompteQuotidient()");
 		DateTime today = new DateTime();
 		List<Operation> l = em.createNamedQuery("findOperationsBeforeDate").setParameter("today", today)
