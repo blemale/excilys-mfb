@@ -114,10 +114,10 @@ public class Virement {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "doVirement.html", method = RequestMethod.GET)
+	@RequestMapping(value = "doVirementInterne.html", method = RequestMethod.GET)
 	public ModelAndView doVirement() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("redirect:virement.html");
+		mv.setViewName("redirect:virementInterne.html");
 		return mv;
 	}
 
