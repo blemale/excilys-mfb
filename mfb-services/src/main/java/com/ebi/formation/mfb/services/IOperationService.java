@@ -296,4 +296,18 @@ public interface IOperationService {
 	 */
 	@Secured("ROLE_CLIENT")
 	ReturnCodeVirement doVirement(long idCompteADebiter, long idCompteACrediter, String label, BigDecimal montant);
+
+	/**
+	 * Permet d'effectuer un virement entre deux comptes, et d'ajouter un motif de virement facultatif.
+	 * 
+	 * @param idCompteADebiter
+	 * @param numeroCompteACrediter
+	 * @param label
+	 * @param montant
+	 * @return 0 si tout s'est bien passé; 1 si les deux comptes sont identiques; 2 si le virement entraîne un
+	 *         découvert; 3 si le compte à débiter n'existe pas; 4 si le compte à créditer n'existe pas; 5 si le montant
+	 *         est négatif ou nul
+	 */
+	@Secured("ROLE_CLIENT")
+	ReturnCodeVirement doVirement(long idCompteADebiter, String numeroCompteACrediter, String label, BigDecimal montant);
 }

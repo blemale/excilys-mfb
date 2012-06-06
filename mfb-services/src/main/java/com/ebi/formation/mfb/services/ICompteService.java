@@ -40,8 +40,18 @@ public interface ICompteService {
 	 * 
 	 * @param compteId
 	 *            l'id du {@link Compte}
-	 * @return un {@link Compte}.
+	 * @return un {@link Compte} ou null s le compte n'existe pas.
 	 */
 	@Secured("ROLE_CLIENT")
 	Compte getCompteById(Long compteId);
+
+	/**
+	 * Récupère un compte par son numeroCompte.
+	 * 
+	 * @param numeroCompte
+	 *            le numeroCompte du {@link Compte}
+	 * @return un {@link Compte} ou null s le compte n'existe pas.
+	 */
+	@Secured("ROLE_CLIENT")
+	Compte getCompteByNumeroCompte(String numeroCompte);
 }

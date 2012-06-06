@@ -281,6 +281,7 @@ public class OperationService implements IOperationService {
 		debit.setLabel(labelDebit);
 		debit.setMontant(montant.negate());
 		debit.setType(operationTypeDao.getOperationTypeByType(Type.VIREMENT));
+		debit.setOperationDone(Boolean.TRUE);
 		Operation credit = new Operation();
 		credit.setCompte(compteACrediter);
 		credit.setDateEffet(now);
@@ -288,6 +289,7 @@ public class OperationService implements IOperationService {
 		credit.setLabel(labelCredit);
 		credit.setMontant(montant);
 		credit.setType(operationTypeDao.getOperationTypeByType(Type.VIREMENT));
+		credit.setOperationDone(Boolean.TRUE);
 		operationDao.save(debit);
 		operationDao.save(credit);
 		// TODO demander à Stéphane pour l'isolation des données
@@ -296,5 +298,21 @@ public class OperationService implements IOperationService {
 		compteADebiter.setSolde(newSoldeDebit);
 		compteACrediter.setSolde(newSoldeCredit);
 		return ReturnCodeVirement.OK;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.services.IOperationService#doVirement(long, java.lang.String, java.lang.String,
+	 * java.math.BigDecimal)
+	 */
+	@Override
+	@Transactional
+	public ReturnCodeVirement doVirement(long idCompteADebiter, String numeroCompteACrediter, String label,
+			BigDecimal montant) {
+		Compte compteACrediter = compteDao.findCompteByNumeroCompte(numeroCompteACrediter);
+		if (compteACrediter == null) {
+			return ReturnCodeVirement.COMPTE_CREDIT_INEXISTANT;
+		}
+		return doVirement(idCompteADebiter, compteACrediter.getId(), label, montant);
 	}
 }
