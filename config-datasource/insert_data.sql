@@ -12,7 +12,7 @@ INSERT INTO authority VALUES(3,2);
 INSERT INTO authority VALUES(4,1);
 
 -- Table COMPTE
-INSERT INTO compte VALUES(DEFAULT,'CSL A',1500.000, '00000001', 1523.50, 1500);
+INSERT INTO compte VALUES(DEFAULT,'CSL A',1500.000, '00000001', 1523.50, 295);
 INSERT INTO compte VALUES(DEFAULT,'CSL B',253.456, '00000002', 200.456, 0);
 INSERT INTO compte VALUES(DEFAULT,'CSL C',153.456, '00000003', 176.35, 0);
 INSERT INTO compte VALUES(DEFAULT,'CSL D',789.456, '00000004', 789.456, -45.25);
@@ -135,5 +135,6 @@ INSERT INTO operation VALUES(DEFAULT, 'une opération', -150.00, '2012-05-15 11:
 INSERT INTO operation VALUES(DEFAULT, 'une opération', 150.00, '2012-05-15 11:27:00', '2012-05-17 11:27:00', 4, 8, true);
 INSERT INTO operation VALUES(DEFAULT, 'une opération', 150.00, '2012-05-15 11:27:00', '2012-05-17 11:27:00', 1, 8, true);
 
-INSERT INTO operation VALUES(DEFAULT, 'test pour quartz', 353.00, '2012-06-05 11:30:00', '2012-06-05 11:30:00', 1, 1, false);
-INSERT INTO operation VALUES(DEFAULT, 'test pour quartz', 353.00, '2012-06-05 11:30:00', '2012-06-05 11:45:00', 1, 1, false);
+INSERT INTO operation VALUES(DEFAULT, 'test pour quartz', 355.00, '2012-06-05 11:30:00', '2012-06-05 11:30:00', 3, 1, false);
+INSERT INTO operation VALUES(DEFAULT, 'test pour quartz', 355.00, '2012-06-05 11:30:00', '2012-06-05 11:45:00', 4, 1, false);
+INSERT INTO operation VALUES(DEFAULT, 'test pour quartz avec operation type carte', -150.00, '2012-06-05 11:30:00', '2012-06-05 11:45:00', 2, 1, false);

@@ -77,4 +77,14 @@ public class CompteDao implements ICompteDao {
 		logger.debug("findMontantCompteById(id:{})", id);
 		return (BigDecimal) em.createNamedQuery("findSoldeCompte").setParameter("id", id).getSingleResult();
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.dao.ICompteDao#findEncoursCarteCompteById(java.lang.Long)
+	 */
+	@Override
+	public BigDecimal findEncoursCarteCompteById(Long id) {
+		logger.debug("findEncoursCarteCompteById(id:{})", id);
+		return (BigDecimal) em.createNamedQuery("findEncoursCarteCompte").setParameter("id", id).getSingleResult();
+	}
 }

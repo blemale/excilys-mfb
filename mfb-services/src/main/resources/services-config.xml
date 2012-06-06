@@ -12,7 +12,6 @@
 	<util:properties id="batchProperties" location="classpath:batch.properties" />
 
 
-
 	<!-- Declaration du bean job -->
 	<bean name="runMeJob" class="org.springframework.scheduling.quartz.JobDetailBean">
 		<property name="jobClass"

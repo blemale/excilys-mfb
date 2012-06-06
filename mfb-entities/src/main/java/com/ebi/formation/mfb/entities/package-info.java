@@ -19,9 +19,11 @@
 		@NamedQuery(name = "findCompteById", query = "SELECT c FROM Compte c WHERE c.id = :id"),
 		@NamedQuery(name = "findOperationsNotDone", query = "SELECT o FROM Operation o WHERE o.operationDone = false AND o.dateValeur <= :today"),
 		@NamedQuery(name = "updateCompteNotDone", query = "UPDATE Compte c SET c.solde = c.solde+ :valeur WHERE c.id = :compteOperationId"),
+		@NamedQuery(name = "updateCompteNotDoneWithOperationTypeCarte", query = "UPDATE Compte c SET c.solde = c.solde+ :valeur, c.encoursCarte = c.encoursCarte + :valeur WHERE c.id = :compteOperationId"),
 		@NamedQuery(name = "updateOperationNotDone", query = "UPDATE Operation o SET o.operationDone = true WHERE o.id = :operationId"),
 		@NamedQuery(name = "updateComptes", query = "UPDATE Compte c SET c.soldePrevisionnel=c.solde"),
 		@NamedQuery(name = "findSoldeCompte", query = "SELECT c.solde FROM Compte c WHERE c.id = :id"),
+		@NamedQuery(name = "findEncoursCarteCompte", query = "SELECT c.encoursCarte FROM Compte c WHERE c.id = :id"),
 		@NamedQuery(name = "findAllOperationsByMonthByCompte", query = "SELECT o FROM Operation o WHERE o.compte.id = :idcompte "
 				+ "and o.dateValeur BETWEEN :dateValeur AND :datePlusUnMois ORDER BY o.dateValeur DESC"),
 		@NamedQuery(name = "findOperationTypeByType", query = "SELECT ot FROM OperationType ot WHERE ot.label = :type") })

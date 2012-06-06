@@ -46,4 +46,12 @@ public interface ICompteDao {
 	 * @return
 	 */
 	BigDecimal findMontantCompteById(Long id);
+
+	/**
+	 * Retourne l'encours carte d'un compte depuis son id.
+	 * 
+	 * @param id
+	 * @return
+	 */
+	BigDecimal findEncoursCarteCompteById(Long id);
 }

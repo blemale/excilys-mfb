@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ebi.formation.mfb.dao.IOperationDao;
 import com.ebi.formation.mfb.entities.Operation;
 import com.ebi.formation.mfb.entities.OperationType;
+import com.ebi.formation.mfb.entities.OperationType.Type;
 
 /**
  * Implémentation de l'interface IOperationDao
@@ -135,10 +136,16 @@ public class OperationDao implements IOperationDao {
 		DateTime today = new DateTime();
 		List<Operation> l = em.createNamedQuery("findOperationsNotDone").setParameter("today", today).getResultList();
 		for (Operation o : l) {
-			logger.debug(new StringBuilder("Operation : ").append(o.getId()).toString());
-			em.createNamedQuery("updateCompteNotDone").setParameter("valeur", o.getMontant())
-					.setParameter("compteOperationId", o.getCompte().getId()).executeUpdate();
+			logger.debug(new StringBuilder("Operation : ").append(o.getId()).append(" ; Type : ")
+					.append(o.getType().getLabel()).append(" Montant : ").append(o.getMontant()).toString());
 			em.createNamedQuery("updateOperationNotDone").setParameter("operationId", o.getId()).executeUpdate();
+			if (o.getType().getLabel().equals(Type.CARTE)) {
+				em.createNamedQuery("updateCompteNotDoneWithOperationTypeCarte").setParameter("valeur", o.getMontant())
+						.setParameter("compteOperationId", o.getCompte().getId()).executeUpdate();
+			} else {
+				em.createNamedQuery("updateCompteNotDone").setParameter("valeur", o.getMontant())
+						.setParameter("compteOperationId", o.getCompte().getId()).executeUpdate();
+			}
 		}
 		em.clear();
 	}
