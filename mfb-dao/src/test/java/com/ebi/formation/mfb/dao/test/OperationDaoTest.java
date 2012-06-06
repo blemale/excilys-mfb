@@ -1,6 +1,7 @@
 package com.ebi.formation.mfb.dao.test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -152,9 +153,16 @@ public class OperationDaoTest {
 
 	@DataSet("dataSet-OperationDaoTest.xml")
 	@Test
-	public void testUpdateCompteQuotidient() {
+	public void testUpdateCompte() {
+		// TODO
 		operationDao.updateCompteQuotidien();
 		assertEquals(0, compteDao.findMontantCompteById(1L).compareTo(new BigDecimal(21500)));
+		DateTime date = new DateTime(2012, 6, 1, 0, 0);
+		DateTime datePlusUnMois = date.plusMonths(1);
+		List<Operation> l = operationDao.findAllOperationsByMonthByCompte(1L, date, datePlusUnMois);
+		for (Operation o : l) {
+			assertTrue(o.getOperationDone());
+		}
 	}
 
 	@DataSet("dataSet-OperationDaoTest.xml")

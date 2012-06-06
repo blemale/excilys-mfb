@@ -136,7 +136,8 @@ public class OperationDao implements IOperationDao {
 		// TODO : Modifier la requête quand il y aura les flags dans les opérations.
 		for (Operation o : l) {
 			em.createNamedQuery("updateCompteWithValue").setParameter("valeur", o.getMontant())
-					.setParameter("operation", o.getCompte()).executeUpdate();
+					.setParameter("compte", o.getCompte()).executeUpdate();
+			em.createNamedQuery("updateOperation").setParameter("compte", o.getCompte()).executeUpdate();
 		}
 	}
 

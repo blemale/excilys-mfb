@@ -19,6 +19,8 @@
 		@NamedQuery(name = "findCompteById", query = "SELECT c FROM Compte c WHERE c.id = :id"),
 		@NamedQuery(name = "findOperationsBeforeDate", query = "SELECT o FROM Operation o WHERE o.dateValeur < :today"),
 		@NamedQuery(name = "updateComptes", query = "UPDATE Compte c SET c.soldePrevisionnel=c.solde"),
+		@NamedQuery(name = "updateCompteWithValue", query = "UPDATE Compte c SET c.solde=c.solde+:valeur WHERE c=:compte"),
+		@NamedQuery(name = "updateOperation", query = "UPDATE Operation o SET o.operationDone='true' WHERE o.compte=:compte"),
 		@NamedQuery(name = "findOperationsNonTraitees", query = "SELECT o FROM Operation o WHERE o.operationDone = 'false'"),
 		@NamedQuery(name = "findSoldeCompte", query = "SELECT c.solde FROM Compte c WHERE c.id = :id"),
 		@NamedQuery(name = "findAllOperationsByMonthByCompte", query = "SELECT o FROM Operation o WHERE o.compte.id = :idcompte "
