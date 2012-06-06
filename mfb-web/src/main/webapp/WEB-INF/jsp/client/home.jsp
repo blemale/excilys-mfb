@@ -21,8 +21,7 @@
 				<table class="table table-striped table-bordered">
 					<thead>
 						<tr>
-							<th><spring:message code="home.accountNumber" /></th>
-							<th><spring:message code="home.label" /></th>
+							<th><spring:message code="home.accountNumber" /> - <spring:message code="home.label" /></th>
 							<th><spring:message code="home.solde" /></th>
 							<th><spring:message code="home.soldePrevisionnel" /></th>
 							<th>&nbsp;</th>
@@ -32,8 +31,7 @@
 					<tbody>
 						<c:forEach items="${comptes}" var="c">
 							<tr class="clickLine" onclick="lienCompte('${contextPath}${linksDetail[c.id]}')">
-								<td>${c.numeroCompte}</td>
-								<td>${c.label}</td>
+								<td class="aligneGauche">${c.numeroCompte} - ${c.label}</td>
 								<c:if test="${c.solde >= 0}">
 									<td class="aligneSolde coloreVert">+ <fmt:formatNumber
 											value="${c.solde}" minFractionDigits="2" pattern="#,###.##" />
