@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.junit.Test;
@@ -98,5 +99,20 @@ public class CompteDaoTest {
 		assertNotNull(result1);
 		assertEquals(new Long(1L), result1.getId());
 		assertNull(result2);
+	}
+
+	@DataSet("dataSet-CompteDaoTest.xml")
+	@Test
+	public void testSaveCompte() {
+		Compte compte = new Compte();
+		compte.setLabel("label");
+		compte.setNumeroCompte("123456789");
+		compte.setSolde(new BigDecimal(0));
+		compte.setEncoursCarte(new BigDecimal(0));
+		compte.setSoldePrevisionnel(new BigDecimal(0));
+		compteDao.save(compte);
+		Compte tmp = compteDao.findCompteById(4L);
+		assertNotNull(tmp);
+		assertEquals(compte, tmp);
 	}
 }

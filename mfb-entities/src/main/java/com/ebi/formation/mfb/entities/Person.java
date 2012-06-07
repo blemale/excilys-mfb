@@ -114,6 +114,14 @@ public class Person {
 	}
 
 	/**
+	 * @param password
+	 *            the password to set
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	/**
 	 * @return le username, le firstname et le lastname formaté
 	 */
 	public String getFullPerson() {

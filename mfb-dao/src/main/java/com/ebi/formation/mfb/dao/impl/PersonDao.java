@@ -63,4 +63,14 @@ public class PersonDao implements IPersonDao {
 		return em.createNamedQuery("findPersonByUsername", Person.class).setParameter("username", username)
 				.getSingleResult();
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.dao.IPersonDao#createPerson(com.ebi.formation.mfb.entities.Person)
+	 */
+	@Override
+	public void save(Person person) {
+		logger.debug("createPerson(person:{})");
+		em.persist(person);
+	}
 }

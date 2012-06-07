@@ -29,4 +29,11 @@ public interface IPersonDao {
 	 * @return une personne
 	 */
 	Person findPersonByUsername(String username);
+
+	/**
+	 * Méthode permettant de persister en base une nouvelle personne (partie admin).
+	 * 
+	 * @param person
+	 */
+	void save(Person person);
 }
