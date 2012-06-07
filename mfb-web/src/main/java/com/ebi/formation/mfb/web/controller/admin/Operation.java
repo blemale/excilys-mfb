@@ -4,6 +4,7 @@ import java.security.Principal;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ebi.formation.mfb.services.IOperationService;
+import com.ebi.formation.mfb.web.controller.Admin;
 import com.ebi.formation.mfb.web.forms.admin.OperationForm;
+import com.ebi.formation.mfb.web.utils.SessionAttributesNames;
 
 /**
  * Controller permettant de gérer une opération
@@ -23,6 +27,9 @@ import com.ebi.formation.mfb.web.forms.admin.OperationForm;
 @RequestMapping("/admin")
 public class Operation {
 
+	@Autowired
+	private IOperationService operationService;
+
 	/**
 	 * @param principal
 	 * @param operationForm
@@ -33,8 +40,7 @@ public class Operation {
 	public ModelAndView doCreateOperationForm(Principal principal, @ModelAttribute @Valid OperationForm operationForm,
 			BindingResult result) {
 		ModelAndView mv = new ModelAndView("admin");
-		String[] tabClassActive = { "", "", "active" };
-		mv.addObject("classActive", tabClassActive);
+		mv.addObject(SessionAttributesNames.CLASS_ACTIVE, Admin.getClassActive(2));
 		if (result.hasErrors()) {
 			mv.addObject("comptesList", null);
 			mv.addObject("typesList", null);
@@ -49,11 +55,20 @@ public class Operation {
 	@RequestMapping(value = "createOperation.html")
 	public ModelAndView createOperationForm() {
 		ModelAndView mv = new ModelAndView("createOperation");
-		String[] tabClassActive = { "", "", "active" };
-		mv.addObject("classActive", tabClassActive);
+		mv.addObject(SessionAttributesNames.CLASS_ACTIVE, Admin.getClassActive(2));
 		mv.addObject("comptesList", null);
 		mv.addObject("typesList", null);
 		mv.addObject(new OperationForm());
 		return mv;
+	}
+
+	/**
+	 * Bugfix du changement de locale sur la page doCreateOperation.html
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "doCreateOperation.html", method = RequestMethod.GET)
+	public ModelAndView doCreateOperationForm() {
+		return new ModelAndView("redirect:createOperation.html");
 	}
 }

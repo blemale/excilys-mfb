@@ -103,4 +103,18 @@ public class PersonDaoTest {
 		assertEquals("bastou1", p.getFirstName());
 		assertEquals("bastou2", p.getLastName());
 	}
+
+	@DataSet("dataSet-PersonDaoTest.xml")
+	@Test
+	public void testSavePerson() {
+		Person person = new Person();
+		person.setUsername("test");
+		person.setFirstName("test");
+		person.setLastName("test");
+		person.setPassword("test");
+		personDao.save(person);
+		Person tmp = personDao.findPersonByUsername("test");
+		assertNotNull(tmp);
+		assertEquals(tmp, person);
+	}
 }

@@ -104,4 +104,13 @@ public class CompteDao implements ICompteDao {
 		logger.debug("findEncoursCarteCompteById(id:{})", id);
 		return (BigDecimal) em.createNamedQuery("findEncoursCarteCompte").setParameter("id", id).getSingleResult();
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.dao.ICompteDao#save(com.ebi.formation.mfb.entities.Compte)
+	 */
+	@Override
+	public void save(Compte compte) {
+		em.persist(compte);
+	}
 }

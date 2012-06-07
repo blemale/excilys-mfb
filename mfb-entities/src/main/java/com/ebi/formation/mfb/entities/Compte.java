@@ -51,6 +51,14 @@ public class Compte implements Serializable {
 	}
 
 	/**
+	 * @param id
+	 *            the id to set
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	/**
 	 * @return the label
 	 */
 	public String getLabel() {
@@ -58,40 +66,18 @@ public class Compte implements Serializable {
 	}
 
 	/**
+	 * @param label
+	 *            the label to set
+	 */
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
+	/**
 	 * @return the solde
 	 */
 	public BigDecimal getSolde() {
 		return solde;
-	}
-
-	/**
-	 * @return the owners
-	 */
-	public List<Person> getOwners() {
-		return owners;
-	}
-
-	/**
-	 * @return the numeroCompte
-	 */
-	public String getNumeroCompte() {
-		return numeroCompte;
-	}
-
-	/**
-	 * @return le label et le solde du compte formaté
-	 */
-	public String getFullLabel() {
-		return new StringBuilder(label).append(" / ").append(NumberFormat.getCurrencyInstance().format(solde))
-				.toString();
-	}
-
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	/**
@@ -103,7 +89,7 @@ public class Compte implements Serializable {
 	}
 
 	/**
-	 * @return solde prévisonnel
+	 * @return the soldePrevisionnel
 	 */
 	public BigDecimal getSoldePrevisionnel() {
 		return soldePrevisionnel;
@@ -111,13 +97,14 @@ public class Compte implements Serializable {
 
 	/**
 	 * @param soldePrevisionnel
+	 *            the soldePrevisionnel to set
 	 */
 	public void setSoldePrevisionnel(BigDecimal soldePrevisionnel) {
 		this.soldePrevisionnel = soldePrevisionnel;
 	}
 
 	/**
-	 * @return
+	 * @return the encoursCarte
 	 */
 	public BigDecimal getEncoursCarte() {
 		return encoursCarte;
@@ -125,8 +112,47 @@ public class Compte implements Serializable {
 
 	/**
 	 * @param encoursCarte
+	 *            the encoursCarte to set
 	 */
 	public void setEncoursCarte(BigDecimal encoursCarte) {
 		this.encoursCarte = encoursCarte;
+	}
+
+	/**
+	 * @return the owners
+	 */
+	public List<Person> getOwners() {
+		return owners;
+	}
+
+	/**
+	 * @param owners
+	 *            the owners to set
+	 */
+	public void setOwners(List<Person> owners) {
+		this.owners = owners;
+	}
+
+	/**
+	 * @return the numeroCompte
+	 */
+	public String getNumeroCompte() {
+		return numeroCompte;
+	}
+
+	/**
+	 * @param numeroCompte
+	 *            the numeroCompte to set
+	 */
+	public void setNumeroCompte(String numeroCompte) {
+		this.numeroCompte = numeroCompte;
+	}
+
+	/**
+	 * @return le label et le solde du compte formaté
+	 */
+	public String getFullLabel() {
+		return new StringBuilder(label).append(" / ").append(NumberFormat.getCurrencyInstance().format(solde))
+				.toString();
 	}
 }

@@ -63,4 +63,11 @@ public interface ICompteDao {
 	 * @return
 	 */
 	BigDecimal findEncoursCarteCompteById(Long id);
+
+	/**
+	 * Méthode permettant de persister en base un nouveau compte (partie admin).
+	 * 
+	 * @param compte
+	 */
+	void save(Compte compte);
 }
