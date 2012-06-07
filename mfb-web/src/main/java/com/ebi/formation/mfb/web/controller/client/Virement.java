@@ -111,6 +111,30 @@ public class Virement {
 	}
 
 	/**
+	 * Bugfix du changement de locale sur la page doVirement.html
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "doVirementInterne.html", method = RequestMethod.GET)
+	public ModelAndView doVirement() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("redirect:virementInterne.html");
+		return mv;
+	}
+
+	/**
+	 * Bugfix du changement de locale sur la page doVirementExterne.html
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "doVirementExterne.html", method = RequestMethod.GET)
+	public ModelAndView doVirementExterne() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("redirect:virementExterne.html");
+		return mv;
+	}
+
+	/**
 	 * Traite les erreurs du formulaire du virement et affiche la page de confirmation du virement
 	 * 
 	 * @param principal
