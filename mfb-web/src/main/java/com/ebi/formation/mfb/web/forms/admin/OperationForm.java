@@ -27,9 +27,7 @@ public class OperationForm {
 	private OperationType type;
 	@Size(max = 64)
 	private String label;
-	@NotNull
 	private DateTime dateEffet;
-	@NotNull
 	private DateTime dateValeur;
 
 	/**

@@ -2,7 +2,7 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-	<div class="span10 offset2">
+	<div class="span12">
 		<ul class="nav nav-tabs">
 			<li class="${isClassActive[0]}"><a
 				href="${contextPath}/admin/createClient.html"><spring:message
