@@ -17,7 +17,7 @@
 	<div class="row">
 		<%@ include file="../common/formSelection.jsp"%>
 
-		<div class="span10 offset2">
+		<div class="span12">
 			<form:form cssClass="form-horizontal" method="post"
 				action="${contextPath}/admin/doCreateClient.html"
 				commandName="clientForm">
