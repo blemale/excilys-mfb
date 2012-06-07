@@ -10,11 +10,15 @@
 	</parent>
 	<artifactId>mfb-webservices</artifactId>
 	<packaging>war</packaging>
-	<name>mfb-webservices Maven Webapp</name>
+	<name>mfb-webservices</name>
 	<url>http://maven.apache.org</url>
 
 	<dependencies>
-		<dependency>
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-webmvc</artifactId>
+	</dependency>
+	<dependency>
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-rt-frontend-jaxws</artifactId>
 		</dependency>
