@@ -61,7 +61,7 @@
 							<!-- TODO -->
 							<td><a class="btn btn-mini btn-info"
 								href="${contextPath}${urlDetailCarte}"><spring:message
-										code="home.account.details" /></a></td>
+										code="home.account.carte.details" /></a></td>
 						</tr>
 					</tbody>
 				</table>

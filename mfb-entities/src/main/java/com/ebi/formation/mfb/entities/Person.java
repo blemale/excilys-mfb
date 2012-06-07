@@ -112,4 +112,12 @@ public class Person {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+
+	/**
+	 * @return le username, le firstname et le lastname formaté
+	 */
+	public String getFullPerson() {
+		return new StringBuilder(this.getUsername()).append(" - ").append(this.getFirstName()).append(" ")
+				.append(this.getLastName()).toString();
+	}
 }

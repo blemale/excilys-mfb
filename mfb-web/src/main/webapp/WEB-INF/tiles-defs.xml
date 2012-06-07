@@ -89,4 +89,26 @@
 			value="/WEB-INF/jsp/client/detailedDisplay/virement.jsp" />
 	</definition>
 
+	<!-- Page de creation d'un client (partie admin) -->
+	<definition name="createClient" extends="baseLayout">
+		<put-attribute name="title" value="title.createClient" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/admin/forms/createClientForm.jsp" />
+	</definition>
+
+	<!-- Page de creation d'un compte (partie admin) -->
+	<definition name="createCompte" extends="baseLayout">
+		<put-attribute name="title" value="title.createCompte" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/admin/forms/createCompteForm.jsp" />
+	</definition>
+
+	<!-- Page de creation d'une opération (partie admin) -->
+	<definition name="createOperation" extends="baseLayout">
+		<put-attribute name="title" value="title.createOperation" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/admin/forms/createOperationForm.jsp" />
+	</definition>
+
+
 </tiles-definitions>

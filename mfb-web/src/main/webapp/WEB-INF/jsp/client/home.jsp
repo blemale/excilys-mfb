@@ -69,7 +69,7 @@
 									</td>
 								</c:if>
 								<td><a class="btn btn-mini btn-info" href="${contextPath}${linksDetail[c.id]}"><spring:message code="home.account.details"/></a></td>
-								<td><a class="btn btn-mini btn-info" href="${contextPath}${linksVirement[c.id]}"><spring:message code="home.virement.hitory"/></a></td>
+								<td><a class="btn btn-mini btn-info" href="${contextPath}${linksVirement[c.id]}"><spring:message code="home.account.hitory"/></a></td>
 							</tr>
 						</c:forEach>
 					</tbody>

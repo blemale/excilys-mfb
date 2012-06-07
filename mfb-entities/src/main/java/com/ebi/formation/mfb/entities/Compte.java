@@ -78,6 +78,9 @@ public class Compte implements Serializable {
 		return numeroCompte;
 	}
 
+	/**
+	 * @return le label et le solde du compte formaté
+	 */
 	public String getFullLabel() {
 		return new StringBuilder(label).append(" / ").append(NumberFormat.getCurrencyInstance().format(solde))
 				.toString();
@@ -113,10 +116,16 @@ public class Compte implements Serializable {
 		this.soldePrevisionnel = soldePrevisionnel;
 	}
 
+	/**
+	 * @return
+	 */
 	public BigDecimal getEncoursCarte() {
 		return encoursCarte;
 	}
 
+	/**
+	 * @param encoursCarte
+	 */
 	public void setEncoursCarte(BigDecimal encoursCarte) {
 		this.encoursCarte = encoursCarte;
 	}

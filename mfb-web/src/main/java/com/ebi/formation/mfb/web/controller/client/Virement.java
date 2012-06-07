@@ -71,15 +71,16 @@ public class Virement {
 	 * @return
 	 */
 	@RequestMapping(value = "doVirementInterne.html", method = RequestMethod.POST)
-	public ModelAndView doVirement(Principal principal, @ModelAttribute @Valid VirementInterneForm virementInterneForm,
-			BindingResult result, RedirectAttributes redirectAttrs) {
+	public ModelAndView doVirementInterne(Principal principal,
+			@ModelAttribute @Valid VirementInterneForm virementInterneForm, BindingResult result,
+			RedirectAttributes redirectAttrs) {
 		ModelAndView mv = new ModelAndView();
 		boolean isCompteIdentiques = virementInterneForm.getCompteACrediter().equals(
 				virementInterneForm.getCompteADebiter());
 		if (result.hasErrors() || isCompteIdentiques) {
 			mv.addObject("comptesList", compteService.findComptesByUsername(principal.getName()));
 			if (isCompteIdentiques) {
-				result.addError(new FieldError("virementInterneForm", "compteADebiter", null, true,
+				result.addError(new FieldError("virementInterneForm", "compteACrediter", null, true,
 						new String[] { "virementInterneForm.comptesIdentiques" }, null, null));
 			}
 			mv.setViewName("virementInterne");
