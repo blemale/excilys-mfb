@@ -1,5 +1,6 @@
 package com.ebi.formation.mfb.webservices.jaxws;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.jws.WebParam;
@@ -23,4 +24,8 @@ public interface ICompteWebService extends ICompteService {
 
 	@Override
 	public Compte getCompteByNumeroCompte(@WebParam(name = "numeroCompte") String numeroCompte);
+
+	@Override
+	public Object[] save(@WebParam(name = "libelle") String libelle,
+			@WebParam(name = "usernamePerson") String usernamePerson, @WebParam(name = "solde") BigDecimal solde);
 }

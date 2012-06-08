@@ -1,5 +1,6 @@
 package com.ebi.formation.mfb.webservices.jaxws.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.jws.WebService;
@@ -33,5 +34,10 @@ public class CompteWebService implements ICompteService {
 	@Override
 	public Compte getCompteByNumeroCompte(String numeroCompte) {
 		return compteService.getCompteByNumeroCompte(numeroCompte);
+	}
+
+	@Override
+	public Object[] save(String libelle, String usernamePerson, BigDecimal solde) {
+		return compteService.save(libelle, usernamePerson, solde);
 	}
 }
