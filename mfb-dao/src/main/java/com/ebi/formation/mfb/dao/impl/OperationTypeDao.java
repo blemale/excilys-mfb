@@ -26,6 +26,7 @@ public class OperationTypeDao implements IOperationTypeDao {
 	 */
 	@Override
 	public OperationType getOperationTypeByType(Type type) {
+		logger.debug("getOperationTypeByType(type:{})", type);
 		return (OperationType) em.createNamedQuery("findOperationTypeByType").setParameter("type", type)
 				.getSingleResult();
 	}

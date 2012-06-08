@@ -60,8 +60,14 @@ public class PersonDao implements IPersonDao {
 	@Override
 	public Person findPersonByUsername(String username) {
 		logger.debug("findPersonByUsername(username:{})", username);
-		return em.createNamedQuery("findPersonByUsername", Person.class).setParameter("username", username)
-				.getSingleResult();
+		Person p = null;
+		try {
+			p = em.createNamedQuery("findPersonByUsername", Person.class).setParameter("username", username)
+					.getSingleResult();
+		} catch (NoResultException e) {
+			logger.debug("findPersonByUsername(username:{}) : Person not found", username);
+		}
+		return p;
 	}
 
 	/*
@@ -70,7 +76,7 @@ public class PersonDao implements IPersonDao {
 	 */
 	@Override
 	public void save(Person person) {
-		logger.debug("createPerson(person:{})");
+		logger.debug("createPerson(person:{})", person);
 		em.persist(person);
 	}
 }

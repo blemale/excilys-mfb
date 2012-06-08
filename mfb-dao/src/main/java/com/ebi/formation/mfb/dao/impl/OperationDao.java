@@ -181,7 +181,7 @@ public class OperationDao implements IOperationDao {
 	 */
 	@Override
 	public void save(Operation operation) {
-		logger.debug("save(operation:{})");
+		logger.debug("save(operation:{})", operation);
 		em.persist(operation);
 	}
 }
