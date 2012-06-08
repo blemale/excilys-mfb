@@ -5,9 +5,11 @@ import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -27,7 +29,7 @@ public class Compte implements Serializable {
 	 */
 	private static final long serialVersionUID = -77570121150098921L;
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column(nullable = false, length = 64, unique = true)
 	private String label;
@@ -37,7 +39,7 @@ public class Compte implements Serializable {
 	private BigDecimal soldePrevisionnel;
 	@Column(nullable = false)
 	private BigDecimal encoursCarte;
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "PERSON_COMPTE", joinColumns = @JoinColumn(name = "COMPTE_ID"), inverseJoinColumns = @JoinColumn(name = "PERSON_ID"))
 	private List<Person> owners;
 	@Column(nullable = false, unique = true)

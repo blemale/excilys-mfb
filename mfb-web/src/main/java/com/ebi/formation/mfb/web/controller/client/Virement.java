@@ -1,7 +1,6 @@
 package com.ebi.formation.mfb.web.controller.client;
 
 import java.security.Principal;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -16,14 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.support.RequestContextUtils;
-import org.springframework.web.servlet.view.RedirectView;
 
 import com.ebi.formation.mfb.services.ICompteService;
 import com.ebi.formation.mfb.services.IOperationService;
 import com.ebi.formation.mfb.services.IOperationService.ReturnCodeVirement;
 import com.ebi.formation.mfb.web.forms.VirementExterneForm;
 import com.ebi.formation.mfb.web.forms.VirementInterneForm;
+import com.ebi.formation.mfb.web.utils.ControllerUtils;
 
 @Controller
 @RequestMapping("/client/")
@@ -180,14 +178,7 @@ public class Virement {
 	 */
 	@RequestMapping(value = "confirmVirement.html", method = RequestMethod.GET)
 	public ModelAndView confirmVirement(HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView();
-		Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
-		if (flashMap == null) {
-			mv.setView(new RedirectView(request.getContextPath() + "/client/home.html"));
-		} else {
-			mv.setViewName("confirmVirement");
-		}
-		return mv;
+		return ControllerUtils.redirectPageInfoOrHome(request, "confirmVirement", "/client/home.html");
 	}
 
 	/**
@@ -198,13 +189,6 @@ public class Virement {
 	 */
 	@RequestMapping(value = "erreurVirement.html", method = RequestMethod.GET)
 	public ModelAndView erreurVirement(HttpServletRequest request) {
-		ModelAndView mv = new ModelAndView();
-		Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
-		if (flashMap == null) {
-			mv.setView(new RedirectView(request.getContextPath() + "/client/home.html"));
-		} else {
-			mv.setViewName("erreurVirement");
-		}
-		return mv;
+		return ControllerUtils.redirectPageInfoOrHome(request, "erreurVirement", "/client/home.html");
 	}
 }

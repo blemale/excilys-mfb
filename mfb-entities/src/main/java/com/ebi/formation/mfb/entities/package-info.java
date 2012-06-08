@@ -27,7 +27,10 @@
 		@NamedQuery(name = "findEncoursCarteCompte", query = "SELECT c.encoursCarte FROM Compte c WHERE c.id = :id"),
 		@NamedQuery(name = "findAllOperationsByMonthByCompte", query = "SELECT o FROM Operation o WHERE o.compte.id = :idcompte "
 				+ "and o.dateValeur BETWEEN :dateValeur AND :datePlusUnMois ORDER BY o.dateValeur DESC"),
-		@NamedQuery(name = "findOperationTypeByType", query = "SELECT ot FROM OperationType ot WHERE ot.label = :type") })
+		@NamedQuery(name = "findOperationTypeByType", query = "SELECT ot FROM OperationType ot WHERE ot.label = :type"),
+		@NamedQuery(name = "findAllPersons", query = "SELECT p FROM Person p"),
+		@NamedQuery(name = "findRoleByRight", query = "SELECT r FROM Role r WHERE r.right=:right"),
+		@NamedQuery(name = "findAllRights", query = "SELECT r.right FROM Role r ") })
 package com.ebi.formation.mfb.entities;
 
 import org.hibernate.annotations.NamedQueries;

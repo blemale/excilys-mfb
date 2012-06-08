@@ -1,5 +1,6 @@
 package com.ebi.formation.mfb.services;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.security.access.annotation.Secured;
@@ -13,6 +14,10 @@ import com.ebi.formation.mfb.entities.Compte;
  * 
  */
 public interface ICompteService {
+
+	public enum ReturnCodeCompte {
+		OK, OWNER_INEXISTANT
+	}
 
 	/**
 	 * Retourne la liste des comptes d'un utilisateur via son username
@@ -54,4 +59,15 @@ public interface ICompteService {
 	 */
 	@Secured("ROLE_CLIENT")
 	Compte getCompteByNumeroCompte(String numeroCompte);
+
+	/**
+	 * Sauvegarde un compte et renvoie le numéro de compte généré
+	 * 
+	 * @param libelle
+	 * @param usernamePerson
+	 * @param solde
+	 * @return
+	 */
+	@Secured("ROLE_ADMIN")
+	Object[] save(String libelle, String usernamePerson, BigDecimal solde);
 }

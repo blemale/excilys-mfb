@@ -1,5 +1,7 @@
 package com.ebi.formation.mfb.services.impl;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -10,7 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ebi.formation.mfb.dao.ICompteDao;
 import com.ebi.formation.mfb.entities.Compte;
+import com.ebi.formation.mfb.entities.Person;
 import com.ebi.formation.mfb.services.ICompteService;
+import com.ebi.formation.mfb.services.IPersonService;
 
 /**
  * Implémentation du service associé à CompteDao
@@ -25,6 +29,9 @@ public class CompteService implements ICompteService {
 	private final Logger logger = LoggerFactory.getLogger(CompteService.class);
 	@Autowired
 	private ICompteDao compteDao;
+	@Autowired
+	private IPersonService personService;
+	private static final int LENGTH_NUM_COMPTE = 8;
 
 	/*
 	 * (non-Javadoc)
@@ -65,5 +72,50 @@ public class CompteService implements ICompteService {
 	public Compte getCompteByNumeroCompte(String numeroCompte) {
 		logger.debug("getCompteByNumeroCompte(numeroCompte:{})", numeroCompte);
 		return compteDao.findCompteByNumeroCompte(numeroCompte);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.services.ICompteService#save(java.lang.String, java.lang.String, java.math.BigDecimal)
+	 */
+	@Override
+	public Object[] save(String libelle, String usernamePerson, BigDecimal solde) {
+		logger.debug("save(libelle:{}, usernamePerson:{}, solde:{})", new Object[] { libelle, usernamePerson, solde });
+		List<Person> listPerson = new ArrayList<Person>();
+		Person p = personService.findPersonByUsername(usernamePerson);
+		if (p == null) {
+			return new Object[] { ReturnCodeCompte.OWNER_INEXISTANT };
+		}
+		listPerson.add(p);
+		Compte compte = new Compte();
+		compte.setLabel(libelle);
+		compte.setOwners(listPerson);
+		compte.setSolde(solde);
+		compte.setEncoursCarte(new BigDecimal(0));
+		compte.setSoldePrevisionnel(new BigDecimal(0));
+		String numCompte = "";
+		// génère un numéro de compte et vérifie qu'il n'existe pas déjà !
+		do {
+			numCompte = this.getNumeroCompte();
+		} while (compteDao.findCompteByNumeroCompte(numCompte) != null);
+		compte.setNumeroCompte(numCompte);
+		compteDao.save(compte);
+		return new Object[] { ReturnCodeCompte.OK, numCompte };
+	}
+
+	/**
+	 * Méthode permettant de générer une String aléatoire
+	 * 
+	 * @return une chaine de caractères aléatoire composée de chiffres
+	 */
+	private String getNumeroCompte() {
+		String chars = "0123456789";
+		String res = "";
+		int numI;
+		for (int i = 0; i < LENGTH_NUM_COMPTE; i++) {
+			numI = (int) Math.floor(Math.random() * 10);
+			res += chars.charAt(numI);
+		}
+		return res;
 	}
 }

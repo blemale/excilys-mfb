@@ -20,7 +20,7 @@
 		<%@ include file="../common/formSelection.jsp"%>
 		<div class="span4 offset4 alignCenter">
 			<div class="alert alert-info">
-				<spring:message code="${message}" />
+				<spring:message code="${message}" /> ${infoPlus}
 			</div>
 		</div>
 	</div>

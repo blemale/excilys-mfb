@@ -1,26 +1,41 @@
 package com.ebi.formation.mfb.services.impl;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.NoResultException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ebi.formation.mfb.dao.IPersonDao;
+import com.ebi.formation.mfb.dao.IRoleDao;
 import com.ebi.formation.mfb.entities.Person;
+import com.ebi.formation.mfb.entities.Role;
+import com.ebi.formation.mfb.entities.Role.Right;
 import com.ebi.formation.mfb.services.IPersonService;
 
 /**
  * Implémentation du service associé à PersonDao
  * 
  * @author excilys
+ * @author fguillain
  * 
  */
 @Service
 @Transactional(readOnly = true)
 public class PersonService implements IPersonService {
 
+	private final Logger logger = LoggerFactory.getLogger(PersonService.class);
 	@Autowired
 	private IPersonDao personDao;
+	@Autowired
+	private IRoleDao roleDao;
 
 	/*
 	 * (non-Javadoc)
@@ -28,7 +43,13 @@ public class PersonService implements IPersonService {
 	 */
 	@Override
 	public Person findPersonByUsername(String username) {
-		return personDao.findPersonByUsername(username);
+		logger.debug("findPersonByUsername(username:{})", username);
+		Person p = null;
+		try {
+			p = personDao.findPersonByUsername(username);
+		} catch (NoResultException e) {
+		}
+		return p;
 	}
 
 	/*
@@ -36,7 +57,10 @@ public class PersonService implements IPersonService {
 	 * @see com.ebi.formation.mfb.services.IPersonService#save(com.ebi.formation.mfb.entities.Person)
 	 */
 	@Override
-	public ReturnCodePerson save(String username, String firstname, String lastname, String password) {
+	public ReturnCodePerson save(String username, String firstname, String lastname, String password,
+			List<Right> listRights) {
+		logger.debug("save(username:{}, firstname:{}, lastname:{}, password:{}, listRights)", new Object[] { username,
+				firstname, lastname, password, listRights });
 		if (findPersonByUsername(username) != null) {
 			return ReturnCodePerson.IDENTICAL_USERNAME;
 		}
@@ -45,7 +69,22 @@ public class PersonService implements IPersonService {
 		person.setFirstName(firstname);
 		person.setLastName(lastname);
 		person.setPassword(new ShaPasswordEncoder(512).encodePassword(password, null));
+		Set<Role> setRoles = new HashSet<Role>();
+		for (Right r : listRights) {
+			setRoles.add(roleDao.findRoleByRight(r));
+		}
+		System.out.println(setRoles.size());
+		person.setAuthorities(setRoles);
 		personDao.save(person);
 		return ReturnCodePerson.OK;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.services.IPersonService#findAllPersons()
+	 */
+	@Override
+	public List<Person> findAllPersons() {
+		return personDao.findAllPersons();
 	}
 }

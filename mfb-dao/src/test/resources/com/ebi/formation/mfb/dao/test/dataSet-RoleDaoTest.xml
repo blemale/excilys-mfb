@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<dataset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:noNamespaceSchemaLocation="dataset.xsd">
+
+	<role id="1" name="ROLE_ADMIN"/>
+	<role id="2" name="ROLE_CLIENT" />
+	
+</dataset>

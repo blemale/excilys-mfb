@@ -1,5 +1,7 @@
 package com.ebi.formation.mfb.dao;
 
+import java.util.List;
+
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.ebi.formation.mfb.entities.Person;
@@ -36,4 +38,11 @@ public interface IPersonDao {
 	 * @param person
 	 */
 	void save(Person person);
+
+	/**
+	 * Méthode permettant de récupérer la liste de tous les clients
+	 * 
+	 * @return
+	 */
+	List<Person> findAllPersons();
 }

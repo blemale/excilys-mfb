@@ -6,8 +6,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import com.ebi.formation.mfb.entities.Person;
-
 /**
  * Classe représentant le formulaire de demande de création d'un compte. Nécessaire pour la validation du formulaire.
  * 
@@ -20,7 +18,7 @@ public class CompteForm {
 	@Pattern(regexp = "\\w+")
 	private String label;
 	@NotNull
-	private Person owner;
+	private String usernameOwner;
 	@NotNull
 	private BigDecimal solde;
 
@@ -40,25 +38,25 @@ public class CompteForm {
 	}
 
 	/**
-	 * @return the owner
-	 */
-	public Person getOwner() {
-		return owner;
-	}
-
-	/**
-	 * @param owner
-	 *            the owner to set
-	 */
-	public void setOwner(Person owner) {
-		this.owner = owner;
-	}
-
-	/**
 	 * @return the solde
 	 */
 	public BigDecimal getSolde() {
 		return solde;
+	}
+
+	/**
+	 * @return the usernameOwner
+	 */
+	public String getUsernameOwner() {
+		return usernameOwner;
+	}
+
+	/**
+	 * @param usernameOwner
+	 *            the usernameOwner to set
+	 */
+	public void setUsernameOwner(String usernameOwner) {
+		this.usernameOwner = usernameOwner;
 	}
 
 	/**

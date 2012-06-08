@@ -2,6 +2,7 @@ package com.ebi.formation.mfb.dao.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -78,5 +79,16 @@ public class PersonDao implements IPersonDao {
 	public void save(Person person) {
 		logger.debug("createPerson(person:{})", person);
 		em.persist(person);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.dao.IPersonDao#findAllPersons()
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Person> findAllPersons() {
+		logger.debug("findAllPersons()");
+		return em.createNamedQuery("findAllPersons").getResultList();
 	}
 }

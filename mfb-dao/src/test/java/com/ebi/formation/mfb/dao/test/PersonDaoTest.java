@@ -88,7 +88,7 @@ public class PersonDaoTest {
 	}
 
 	/**
-	 * 
+	 * Test la récupération du lastname et du firstname d'une personne
 	 */
 	@DataSet("dataSet-PersonDaoTest.xml")
 	@Test
@@ -104,6 +104,9 @@ public class PersonDaoTest {
 		assertEquals("bastou2", p.getLastName());
 	}
 
+	/**
+	 * Test la persistence d'une personne
+	 */
 	@DataSet("dataSet-PersonDaoTest.xml")
 	@Test
 	public void testSavePerson() {
@@ -116,5 +119,15 @@ public class PersonDaoTest {
 		Person tmp = personDao.findPersonByUsername("test");
 		assertNotNull(tmp);
 		assertEquals(tmp, person);
+	}
+
+	/**
+	 * Test la récupération de toutes les personnes
+	 */
+	@DataSet("dataSet-PersonDaoTest.xml")
+	@Test
+	public void testFindAllPersons() {
+		List<Person> listPersons = personDao.findAllPersons();
+		assertEquals(3, listPersons.size());
 	}
 }
