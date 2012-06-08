@@ -10,7 +10,9 @@
 	<import resource="classpath:META-INF/cxf/cxf.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 	
-	<jaxws:endpoint id="OperationWebService" implementor="com.ebi.formation.mfb.webservices.jaxws.OperationWebService" address="/OperationWebService"/>
+	<jaxws:endpoint id="OperationWebService" implementor="com.ebi.formation.mfb.webservices.jaxws.impl.OperationWebService" address="/OperationWebService"/>
+	<jaxws:endpoint id="CompteWebService" implementor="com.ebi.formation.mfb.webservices.jaxws.impl.CompteWebService" address="/CompteWebService"/>
+	<jaxws:endpoint id="PersonWebService" implementor="com.ebi.formation.mfb.webservices.jaxws.impl.PersonWebService" address="/PersonWebService"/>	
 	
 	<import resource="classpath:services-config.xml"/>
 	<import resource="classpath:persistence-config.xml" />
