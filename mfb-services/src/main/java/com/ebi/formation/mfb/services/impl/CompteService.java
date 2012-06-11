@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ebi.formation.mfb.dao.ICompteDao;
@@ -78,6 +79,7 @@ public class CompteService implements ICompteService {
 	 * @see com.ebi.formation.mfb.services.ICompteService#save(java.lang.String, java.lang.String, java.math.BigDecimal)
 	 */
 	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public Object[] save(String libelle, String usernamePerson, BigDecimal solde) {
 		logger.debug("save(libelle:{}, usernamePerson:{}, solde:{})", new Object[] { libelle, usernamePerson, solde });
 		Person p = personService.findPersonByUsername(usernamePerson);

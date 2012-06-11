@@ -63,7 +63,6 @@ public class Client {
 		}
 		ReturnCodePerson returnCode = personService.save(clientForm.getUsername(), clientForm.getFirstname(),
 				clientForm.getLastname(), clientForm.getPassword(), clientForm.getListRights());
-		System.out.println(clientForm.getListRights());
 		String message = null;
 		mv.setViewName("redirect:erreurCreateClient.html");
 		switch (returnCode) {

@@ -60,7 +60,6 @@ public class Compte {
 				message = "admin.createCompteForm.noOwner";
 				break;
 			case 2:
-				System.out.println("---------");
 				message = "admin.createCompteForm.ok";
 				// res[1] = numéro du compte
 				redirectAttrs.addFlashAttribute("infoPlus", res[1].toString());

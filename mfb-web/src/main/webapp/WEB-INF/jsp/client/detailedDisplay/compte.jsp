@@ -65,7 +65,7 @@
 								</td>
 							</c:when>
 							<c:otherwise>
-							<td class="aligneSolde">- <fmt:formatNumber
+							<td class="aligneSolde"><fmt:formatNumber
 								value="${total}" minFractionDigits="2" pattern="#,###.##" />
 						</td>
 							</c:otherwise>
