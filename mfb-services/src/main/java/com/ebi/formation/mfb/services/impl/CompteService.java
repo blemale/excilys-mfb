@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ebi.formation.mfb.dao.ICompteDao;
+import com.ebi.formation.mfb.dao.IOperationDao;
 import com.ebi.formation.mfb.dao.IPersonDao;
 import com.ebi.formation.mfb.entities.Compte;
 import com.ebi.formation.mfb.entities.Person;
@@ -31,6 +32,8 @@ public class CompteService implements ICompteService {
 	private ICompteDao compteDao;
 	@Autowired
 	private IPersonDao personDao;
+	@Autowired
+	private IOperationDao operationDao;
 	private static final int LENGTH_NUM_COMPTE = 8;
 
 	/*

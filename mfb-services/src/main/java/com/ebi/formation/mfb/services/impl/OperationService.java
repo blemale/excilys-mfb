@@ -319,4 +319,13 @@ public class OperationService implements IOperationService {
 		}
 		return doVirement(idCompteADebiter, compteACrediter.getId(), label, montant);
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.services.IOperationService#updateCompteWithNewOperations()
+	 */
+	@Override
+	public void updateCompteWithNewOperations() {
+		operationDao.updateCompteWithNewOperations();
+	}
 }

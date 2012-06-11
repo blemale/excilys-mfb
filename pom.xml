@@ -19,6 +19,7 @@
 		<module>mfb-webservices</module>
 		<module>mfb-webservicessoap</module>
 		<module>mfb-webservicesapi</module>
+		<module>mfb-batch</module>
 	</modules>
 
 	<repositories>

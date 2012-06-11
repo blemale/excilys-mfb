@@ -83,12 +83,6 @@ public interface IOperationDao {
 			int offset, int numberOfResults);
 
 	/**
-	 * Met à jour les comptes à partir des opérations.
-	 * 
-	 */
-	void updateCompte();
-
-	/**
 	 * Recherche la liste des virements d'une personne pour un mois donné et paginé suivant un offset
 	 * 
 	 * @param idCompte
@@ -118,4 +112,10 @@ public interface IOperationDao {
 	 *            l'opération à persister
 	 */
 	void save(Operation operation);
+
+	/**
+	 * Met à jour les comptes à partir des opérations.
+	 * 
+	 */
+	void updateCompteWithNewOperations();
 }

@@ -118,4 +118,9 @@ public class OperationWebService implements IOperationWebService {
 			BigDecimal montant) {
 		return operationService.doVirement(idCompteADebiter, numeroCompteACrediter, label, montant);
 	}
+
+	@Override
+	public void updateCompteWithNewOperations() {
+		operationService.updateCompteWithNewOperations();
+	}
 }
