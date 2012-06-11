@@ -1,6 +1,7 @@
 package com.ebi.formation.mfb.web.controller.client;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.security.Principal;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -110,6 +111,21 @@ public class Detail {
 				operationService.getOperationsWithoutCarteByMonthPaginated(idCompte, month, year, page));
 		// Ajout du solde carte dans le modèle
 		mv.addObject("soldeCarte", operationService.getTotalOperationsCarteByMonth(idCompte, month, year));
+		// Calcul de la balance
+		List<Operation> allOperations = operationService.getAllOperationsByMonthByCompte(idCompte, month, year);
+		BigDecimal credit = BigDecimal.ZERO;
+		BigDecimal debit = BigDecimal.ZERO;
+		for (Operation operation : allOperations) {
+			if (operation.getMontant().signum() == 1) {
+				credit = credit.add(operation.getMontant());
+			} else {
+				debit = debit.add(operation.getMontant());
+			}
+		}
+		BigDecimal total = credit.add(debit);
+		mv.addObject("credit", credit);
+		mv.addObject("debit", debit);
+		mv.addObject("total", total);
 		// Ajout de des urls pour aller au mois suivant et précédent dans le modèle si ils existent
 		if (hasPreviousMonth(month, year)) {
 			YearMonth monthBefore = currentMonth.minusMonths(1);
