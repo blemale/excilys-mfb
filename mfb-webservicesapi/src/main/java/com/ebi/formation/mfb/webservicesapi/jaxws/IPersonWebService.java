@@ -1,4 +1,4 @@
-package com.ebi.formation.mfb.webservices.jaxws;
+package com.ebi.formation.mfb.webservicesapi.jaxws;
 
 import java.util.List;
 
