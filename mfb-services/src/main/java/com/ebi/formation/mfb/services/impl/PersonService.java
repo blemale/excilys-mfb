@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ebi.formation.mfb.dao.IPersonDao;
@@ -57,6 +58,7 @@ public class PersonService implements IPersonService {
 	 * @see com.ebi.formation.mfb.services.IPersonService#save(com.ebi.formation.mfb.entities.Person)
 	 */
 	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public ReturnCodePerson save(String username, String firstname, String lastname, String password,
 			List<Right> listRights) {
 		logger.debug("save(username:{}, firstname:{}, lastname:{}, password:{}, listRights)", new Object[] { username,
@@ -73,7 +75,6 @@ public class PersonService implements IPersonService {
 		for (Right r : listRights) {
 			setRoles.add(roleDao.findRoleByRight(r));
 		}
-		System.out.println(setRoles.size());
 		person.setAuthorities(setRoles);
 		personDao.save(person);
 		return ReturnCodePerson.OK;
