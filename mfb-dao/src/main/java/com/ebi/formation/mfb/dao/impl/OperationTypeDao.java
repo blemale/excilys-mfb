@@ -1,5 +1,7 @@
 package com.ebi.formation.mfb.dao.impl;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -29,5 +31,15 @@ public class OperationTypeDao implements IOperationTypeDao {
 		logger.debug("getOperationTypeByType(type:{})", type);
 		return (OperationType) em.createNamedQuery("findOperationTypeByType").setParameter("type", type)
 				.getSingleResult();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.dao.IOperationTypeDao#findAllOperationTypes()
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Type> findAllOperationTypes() {
+		return em.createNamedQuery("findAllOperationTypes").getResultList();
 	}
 }

@@ -70,4 +70,11 @@ public interface ICompteDao {
 	 * @param compte
 	 */
 	void save(Compte compte);
+
+	/**
+	 * Méthode retournant tous les comptes
+	 * 
+	 * @return
+	 */
+	List<Compte> findAllComptes();
 }

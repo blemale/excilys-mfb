@@ -41,4 +41,9 @@ public class CompteWebService implements ICompteWebService {
 	public Object[] save(String libelle, String usernamePerson, BigDecimal solde) {
 		return compteService.save(libelle, usernamePerson, solde);
 	}
+
+	@Override
+	public List<Compte> findAllComptes() {
+		return compteService.findAllComptes();
+	}
 }

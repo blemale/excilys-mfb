@@ -25,7 +25,6 @@ import com.ebi.formation.mfb.services.impl.UserDetailsServiceImpl;
  * 
  * @author excilys
  * 
- *         //
  */
 @RunWith(MockitoJUnitRunner.class)
 @ContextConfiguration(locations = "classpath:/services-config.xml")
