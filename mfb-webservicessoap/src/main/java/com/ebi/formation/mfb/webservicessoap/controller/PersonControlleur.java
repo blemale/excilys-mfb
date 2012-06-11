@@ -35,7 +35,7 @@ public class PersonControlleur {
 	}
 
 	/**
-	 * Test de la méthode findPersonByUsername
+	 * Test de la méthode findAllPersons
 	 * 
 	 * @return
 	 */

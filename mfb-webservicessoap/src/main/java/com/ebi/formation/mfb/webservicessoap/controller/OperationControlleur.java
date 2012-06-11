@@ -35,7 +35,7 @@ public class OperationControlleur {
 	}
 
 	/**
-	 * Test de la méthode findPersonByUsername
+	 * Test de la méthode getVirementsByMonthPaginated
 	 * 
 	 * @return
 	 */
