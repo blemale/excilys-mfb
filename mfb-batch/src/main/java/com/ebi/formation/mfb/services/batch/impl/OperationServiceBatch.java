@@ -4,7 +4,6 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
 import com.ebi.formation.mfb.services.IOperationService;
@@ -16,8 +15,15 @@ import com.ebi.formation.mfb.services.IOperationService;
 public class OperationServiceBatch extends QuartzJobBean {
 
 	private final Logger logger = LoggerFactory.getLogger(OperationServiceBatch.class);
-	@Autowired
 	private IOperationService operationService;
+
+	/**
+	 * @param operationService
+	 *            the operationService to set
+	 */
+	public void setOperationService(IOperationService operationService) {
+		this.operationService = operationService;
+	}
 
 	/*
 	 * (non-Javadoc)

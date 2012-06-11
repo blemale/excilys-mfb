@@ -326,6 +326,7 @@ public class OperationService implements IOperationService {
 	 */
 	@Override
 	public void updateCompteWithNewOperations() {
+		logger.debug("updateCompteWithNewOperations()");
 		operationDao.updateCompteWithNewOperations();
 	}
 }

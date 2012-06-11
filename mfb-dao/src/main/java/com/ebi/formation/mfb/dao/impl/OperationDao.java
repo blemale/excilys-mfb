@@ -28,7 +28,7 @@ import com.ebi.formation.mfb.entities.OperationType.Type;
  * @author excilys
  * 
  */
-@Repository("operationDao")
+@Repository
 public class OperationDao implements IOperationDao {
 
 	private final Logger logger = LoggerFactory.getLogger(OperationDao.class);
@@ -163,7 +163,7 @@ public class OperationDao implements IOperationDao {
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public void updateCompteWithNewOperations() {
-		logger.debug("updateCompte()");
+		logger.debug("updateCompteWithNewOperations()");
 		DateTime today = new DateTime();
 		List<Operation> l = em.createNamedQuery("findOperationsNotDone").setParameter("today", today).getResultList();
 		for (Operation o : l) {

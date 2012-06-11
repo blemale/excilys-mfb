@@ -8,17 +8,17 @@
 
 	<context:annotation-config />
 
-	<context:component-scan base-package="com.ebi.formation.mfb.services.batch" />
+	<context:component-scan base-package="com.ebi.formation.mfb.services.batch.impl" />
 	<util:properties id="batchProperties" location="classpath:batch.properties" />
 
 
 	<!-- Declaration du bean job -->
 	<bean name="runMeJob" class="org.springframework.scheduling.quartz.JobDetailBean">
 		<property name="jobClass"
-			value="com.ebi.formation.mfb.services.impl.OperationServiceBatch" />
+			value="com.ebi.formation.mfb.services.batch.impl.OperationServiceBatch" />
 		<property name="jobDataAsMap">
 			<map>
-				<entry key="operationDao" value-ref="operationDao" />
+				<entry key="operationService" value-ref="operationService" />
 			</map>
 		</property>
 	</bean>
