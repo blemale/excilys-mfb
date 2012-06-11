@@ -17,11 +17,11 @@
 	<import resource="classpath:META-INF/cxf/cxf.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 
-	<jaxws:endpoint id="OperationWebService" implementor="com.ebi.formation.mfb.webservices.jaxws.impl.OperationWebService" address="/OperationWebService"/>
-	<jaxws:endpoint id="CompteWebService" implementor="com.ebi.formation.mfb.webservices.jaxws.impl.CompteWebService" address="/CompteWebService"/>
-	<jaxws:endpoint id="PersonWebService" implementor="com.ebi.formation.mfb.webservices.jaxws.impl.PersonWebService" address="/PersonWebService"/>	
+	<jaxws:endpoint id="OperationWebServiceSOAP" implementor="com.ebi.formation.mfb.webservices.jaxws.impl.OperationWebService" address="/OperationWebService"/>
+	<jaxws:endpoint id="CompteWebServiceSOAP" implementor="com.ebi.formation.mfb.webservices.jaxws.impl.CompteWebService" address="/CompteWebService"/>
+	<jaxws:endpoint id="PersonWebServiceSOAP" implementor="com.ebi.formation.mfb.webservices.jaxws.impl.PersonWebService" address="/PersonWebService"/>	
 
-	<jaxrs:server id="CompteWebService" address="/compteService">
+	<jaxrs:server id="CompteWebServiceREST" address="/compteService">
 		<jaxrs:serviceBeans>
 			<bean id="serviceImpl" class="com.ebi.formation.mfb.webservices.CompteWebService" />
 		</jaxrs:serviceBeans>
@@ -29,7 +29,7 @@
 			<bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider"/>
 		</jaxrs:providers>
 	</jaxrs:server>
-	<jaxrs:server id="PersonneWebService" address="/personneService">
+	<jaxrs:server id="PersonneWebServiceREST" address="/personneService">
 		<jaxrs:serviceBeans>
 			<bean id="serviceImpl" class="com.ebi.formation.mfb.webservices.PersonneWebService" />
 		</jaxrs:serviceBeans>
