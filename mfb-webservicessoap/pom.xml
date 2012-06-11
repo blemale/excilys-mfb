@@ -19,13 +19,13 @@
 		</dependency>
 		<dependency>
 			<groupId>com.ebi.formation</groupId>
-			<artifactId>mfb-services</artifactId>
+			<artifactId>mfb-webservicesapi</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		<!-- <dependency> -->
-		<!-- <groupId>javax.servlet</groupId> -->
-		<!-- <artifactId>jstl</artifactId> -->
-		<!-- </dependency> -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
@@ -42,10 +42,14 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 		</dependency>
-		<!-- <dependency> -->
-		<!-- <groupId>org.apache.tomcat</groupId> -->
-		<!-- <artifactId>jsp-api</artifactId> -->
-		<!-- </dependency> -->
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxws</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>

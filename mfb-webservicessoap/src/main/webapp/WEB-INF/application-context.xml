@@ -1,8 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
-<!-- 	<import resource="classpath:persistence-config.xml" /> -->
-<!-- 	<import resource="classpath:services-config.xml" /> -->
-<!-- 	<import resource="/security-config.xml" /> -->
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+
+
+	<!-- <bean id="client" -->
+	<!-- class="com.ebi.formation.mfb.webservicessoap.controlleur.CompteControlleur"> -->
+	<!-- <property name="service" ref="CompteWebService" /> -->
+	<!-- </bean> -->
+
+	<!-- <bean id="CompteWebService" -->
+	<!-- class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean"> -->
+	<!-- <property name="serviceInterface" -->
+	<!-- value="com.ebi.formation.mfb.webservices.jaxws.ICompteWebService" /> -->
+	<!-- <property name="wsdlDocumentUrl" -->
+	<!-- value="http://localhost:8080/mfb-webservices/CompteWebService?" /> -->
+	<!-- <property name="namespaceUri" -->
+	<!-- value="http://localhost:8080/mfb-webservices/CompteWebService" /> -->
+	<!-- <property name="serviceName" value="CompteWebService" /> -->
+	<!-- <property name="portName" value="CompteWebServicePort" /> -->
+	<!-- </bean> -->
+
+	<jaxws:client id="CompteWebService" serviceClass="com.ebi.formation.mfb.webservicesapi.jaxws.ICompteWebService"
+		address="http://localhost:8080/mfb-webservices/CompteWebService" />
 </beans>
