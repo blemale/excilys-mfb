@@ -11,10 +11,10 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ebi.formation.mfb.dao.ICompteDao;
+import com.ebi.formation.mfb.dao.IPersonDao;
 import com.ebi.formation.mfb.entities.Compte;
 import com.ebi.formation.mfb.entities.Person;
 import com.ebi.formation.mfb.services.ICompteService;
-import com.ebi.formation.mfb.services.IPersonService;
 
 /**
  * Implémentation du service associé à CompteDao
@@ -30,7 +30,7 @@ public class CompteService implements ICompteService {
 	@Autowired
 	private ICompteDao compteDao;
 	@Autowired
-	private IPersonService personService;
+	private IPersonDao personDao;
 	private static final int LENGTH_NUM_COMPTE = 8;
 
 	/*
@@ -82,7 +82,7 @@ public class CompteService implements ICompteService {
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public Object[] save(String libelle, String usernamePerson, BigDecimal solde) {
 		logger.debug("save(libelle:{}, usernamePerson:{}, solde:{})", new Object[] { libelle, usernamePerson, solde });
-		Person p = personService.findPersonByUsername(usernamePerson);
+		Person p = personDao.findPersonByUsername(usernamePerson);
 		if (p == null) {
 			return new Object[] { ReturnCodeCompte.OWNER_INEXISTANT };
 		}
@@ -116,5 +116,14 @@ public class CompteService implements ICompteService {
 			res += chars.charAt(numI);
 		}
 		return res;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.services.ICompteService#findAllComptes()
+	 */
+	@Override
+	public List<Compte> findAllComptes() {
+		return compteDao.findAllComptes();
 	}
 }

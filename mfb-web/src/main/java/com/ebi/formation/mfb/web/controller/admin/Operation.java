@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ebi.formation.mfb.services.IOperationService;
+import com.ebi.formation.mfb.services.ICompteService;
+import com.ebi.formation.mfb.services.IOperationTypeService;
 import com.ebi.formation.mfb.web.controller.Admin;
 import com.ebi.formation.mfb.web.forms.admin.OperationForm;
 import com.ebi.formation.mfb.web.utils.SessionAttributesNames;
@@ -28,7 +29,9 @@ import com.ebi.formation.mfb.web.utils.SessionAttributesNames;
 public class Operation {
 
 	@Autowired
-	private IOperationService operationService;
+	private IOperationTypeService operationTypeService;
+	@Autowired
+	private ICompteService compteService;
 
 	/**
 	 * @param principal
@@ -42,8 +45,8 @@ public class Operation {
 		ModelAndView mv = new ModelAndView("admin");
 		mv.addObject(SessionAttributesNames.CLASS_ACTIVE, Admin.getClassActive(2));
 		if (result.hasErrors()) {
-			mv.addObject("comptesList", null);
-			mv.addObject("typesList", null);
+			mv.addObject("comptesList", compteService.findAllComptes());
+			mv.addObject("typesList", operationTypeService.findAllOperationTypes());
 			mv.setViewName("createOperation");
 		}
 		return mv;
@@ -56,8 +59,8 @@ public class Operation {
 	public ModelAndView createOperationForm() {
 		ModelAndView mv = new ModelAndView("createOperation");
 		mv.addObject(SessionAttributesNames.CLASS_ACTIVE, Admin.getClassActive(2));
-		mv.addObject("comptesList", null);
-		mv.addObject("typesList", null);
+		mv.addObject("comptesList", compteService.findAllComptes());
+		mv.addObject("typesList", operationTypeService.findAllOperationTypes());
 		mv.addObject(new OperationForm());
 		return mv;
 	}

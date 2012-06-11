@@ -25,6 +25,12 @@ import com.ebi.formation.mfb.entities.OperationType.Type;
 import com.ebi.formation.mfb.services.IOperationService.ReturnCodeVirement;
 import com.ebi.formation.mfb.services.impl.OperationService;
 
+/**
+ * Test unitaire de OperationService
+ * 
+ * @author excilys
+ * 
+ */
 @RunWith(MockitoJUnitRunner.class)
 @ContextConfiguration(locations = "classpath:/services-config.xml")
 public class OperationServiceTest {
@@ -38,6 +44,9 @@ public class OperationServiceTest {
 	@InjectMocks
 	OperationService operationService;
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testGetTotalOperationsCarteByMonthWithOperation() {
 		DateTime date = new DateTime(2012, 1, 1, 0, 0);
@@ -47,6 +56,9 @@ public class OperationServiceTest {
 		assertEquals(0, operationService.getTotalOperationsCarteByMonth(1, 1, 2012).compareTo(new BigDecimal(1)));
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testGetTotalOperationsCarteByMonthWithoutOperation() {
 		DateTime date = new DateTime(2012, 1, 1, 0, 0);
@@ -55,6 +67,9 @@ public class OperationServiceTest {
 		assertEquals(null, operationService.getTotalOperationsCarteByMonth(1, 1, 2012));
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testGetNumbreOfOperationsCarteByMonth() {
 		DateTime date = new DateTime(2012, 1, 1, 0, 0);
@@ -63,6 +78,9 @@ public class OperationServiceTest {
 		assertEquals(42L, operationService.getNumberOfOperationsCarteByMonth(1, 1, 2012));
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testGetNumbreOfOperationsWhithoutCarteByMonth() {
 		DateTime date = new DateTime(2012, 1, 1, 0, 0);
@@ -79,6 +97,9 @@ public class OperationServiceTest {
 		assertEquals(42L, operationService.getNumberOfVirementByMonth(0L, 1, 2012));
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testGetOperationsWithoutCarteByMonthPaginated() {
 		DateTime date = new DateTime(2012, 1, 1, 0, 0);
@@ -90,6 +111,9 @@ public class OperationServiceTest {
 		assertEquals(result, operationService.getOperationsWithoutCarteByMonthPaginated(1, 1, 2012, 0, 20));
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testGetOperationsWithoutCarteByMonthPaginatedWithPage() {
 		DateTime date = new DateTime(2012, 1, 1, 0, 0);
@@ -101,6 +125,9 @@ public class OperationServiceTest {
 		assertEquals(result, operationService.getOperationsWithoutCarteByMonthPaginated(1, 1, 2012, 0));
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testGetOperationsCarteByMonthPaginated() {
 		DateTime date = new DateTime(2012, 1, 1, 0, 0);
@@ -111,6 +138,9 @@ public class OperationServiceTest {
 		assertEquals(result, operationService.getOperationsCarteByMonthPaginated(1, 1, 2012, 0, 20));
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testGetVirementsByMonthPaginated() {
 		DateTime date = new DateTime(2012, 1, 1, 0, 0);
@@ -121,6 +151,9 @@ public class OperationServiceTest {
 		assertEquals(result, operationService.getVirementsByMonthPaginated(0L, 1, 2012, 0, 20));
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testGetOperationsCarteByMonthPaginatedWithPage() {
 		DateTime date = new DateTime(2012, 1, 1, 0, 0);
@@ -131,6 +164,9 @@ public class OperationServiceTest {
 		assertEquals(result, operationService.getOperationsCarteByMonthPaginated(1, 1, 2012, 0));
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testGetNumberOfPagesForOperationsWithoutCartesByMonth() {
 		DateTime date = new DateTime(2012, 1, 1, 0, 0);
@@ -141,6 +177,9 @@ public class OperationServiceTest {
 		assertEquals(21, operationService.getNumberOfPagesForOperationsWithoutCartesByMonth(2, 1, 2012));
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testGetNumberOfPagesForOperationsWithoutCartesByMonthWithCustom() {
 		DateTime date = new DateTime(2012, 1, 1, 0, 0);
@@ -151,6 +190,9 @@ public class OperationServiceTest {
 		assertEquals(21, operationService.getNumberOfPagesForOperationsWithoutCartesByMonth(2, 1, 2012, 30));
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testGetNumberOfPagesForOperationsCartesByMonth() {
 		DateTime date = new DateTime(2012, 1, 1, 0, 0);
@@ -161,6 +203,9 @@ public class OperationServiceTest {
 		assertEquals(21, operationService.getNumberOfPagesForOperationsCartesByMonth(2, 1, 2012));
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testGetNumberOfPagesForOperationsCartesByMonthWithCustom() {
 		DateTime date = new DateTime(2012, 1, 1, 0, 0);
@@ -171,6 +216,9 @@ public class OperationServiceTest {
 		assertEquals(31, operationService.getNumberOfPagesForOperationsWithoutCartesByMonth(2, 1, 2012, 30));
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testGetNumberOfPagesForVirementByMonth() {
 		DateTime date = new DateTime(2012, 1, 1, 0, 0);
@@ -181,6 +229,9 @@ public class OperationServiceTest {
 		assertEquals(21, operationService.getNumberOfPagesForVirementByMonth(1L, 1, 2012));
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testGetNumberOfPagesForVirementByMonthWithCustom() {
 		DateTime date = new DateTime(2012, 1, 1, 0, 0);
@@ -191,6 +242,9 @@ public class OperationServiceTest {
 		assertEquals(31, operationService.getNumberOfPagesForVirementByMonth(1L, 1, 2012, 30));
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testVirementInterneOk() {
 		Compte compteADebiter = new Compte();
@@ -208,6 +262,9 @@ public class OperationServiceTest {
 		assertEquals(0, compteACrediter.getSolde().compareTo(new BigDecimal(600)));
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testVirementExterneOk() {
 		Compte compteADebiter = new Compte();
@@ -226,6 +283,9 @@ public class OperationServiceTest {
 		assertEquals(0, compteACrediter.getSolde().compareTo(new BigDecimal(600)));
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testVirementComptesIdentiques() {
 		Compte compteADebiter = new Compte();
@@ -234,6 +294,9 @@ public class OperationServiceTest {
 		assertEquals(ReturnCodeVirement.IDENTICAL_COMPTES, result);
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testVirementDecouvert() {
 		Compte compteADebiter = new Compte();
@@ -248,6 +311,9 @@ public class OperationServiceTest {
 		assertEquals(ReturnCodeVirement.DECOUVERT, result);
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testVirementCompteDebitNonExistant() {
 		Compte compteACrediter = new Compte();
@@ -259,6 +325,9 @@ public class OperationServiceTest {
 		assertEquals(ReturnCodeVirement.COMPTE_DEBIT_INEXISTANT, result);
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testVirementCompteCreditNonExistant() {
 		Compte compteADebiter = new Compte();
@@ -270,6 +339,9 @@ public class OperationServiceTest {
 		assertEquals(ReturnCodeVirement.COMPTE_CREDIT_INEXISTANT, result);
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testVirementExterneCompteCreditNonExistant() {
 		Compte compteADebiter = new Compte();
@@ -280,6 +352,9 @@ public class OperationServiceTest {
 		assertEquals(ReturnCodeVirement.COMPTE_CREDIT_INEXISTANT, result);
 	}
 
+	/**
+	 * 
+	 */
 	@Test
 	public void testVirementValeurMontant() {
 		ReturnCodeVirement result = operationService.doVirement(0L, 1L, "", new BigDecimal(-200));

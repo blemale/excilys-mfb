@@ -1,5 +1,7 @@
 package com.ebi.formation.mfb.dao;
 
+import java.util.List;
+
 import com.ebi.formation.mfb.entities.OperationType;
 import com.ebi.formation.mfb.entities.OperationType.Type;
 
@@ -17,4 +19,11 @@ public interface IOperationTypeDao {
 	 * @return
 	 */
 	OperationType getOperationTypeByType(Type type);
+
+	/**
+	 * Méthode retournant toutes les types d'opérations
+	 * 
+	 * @return
+	 */
+	List<Type> findAllOperationTypes();
 }

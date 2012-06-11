@@ -35,7 +35,7 @@
 								code="admin.createOperationForm.compte" /></label>
 						<div class="controls">
 							<form:select path="compte">
-								<form:options items="${comptesList}" itemLabel="type"
+								<form:options items="${comptesList}" itemLabel="fullCompte"
 									itemValue="id" />
 							</form:select>
 							<form:errors path="compte" cssClass="colorError" />
@@ -47,8 +47,7 @@
 								code="admin.createOperationForm.type" /></label>
 						<div class="controls">
 							<form:select path="type">
-								<form:options items="${typesList}" itemLabel="type"
-									itemValue="id" />
+								<form:options items="${typesList}" />
 							</form:select>
 							<form:errors path="type" cssClass="colorError" />
 						</div>

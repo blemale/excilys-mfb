@@ -160,6 +160,14 @@ public class Compte implements Serializable {
 	}
 
 	/**
+	 * @return
+	 */
+	public String getFullCompte() {
+		return new StringBuilder(numeroCompte).append(" - ").append(label).append(" / ")
+				.append(NumberFormat.getCurrencyInstance().format(solde)).toString();
+	}
+
+	/**
 	 * @param person
 	 */
 	public void addOwner(Person person) {

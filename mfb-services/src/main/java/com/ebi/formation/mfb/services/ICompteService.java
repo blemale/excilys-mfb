@@ -70,4 +70,12 @@ public interface ICompteService {
 	 */
 	@Secured("ROLE_ADMIN")
 	Object[] save(String libelle, String usernamePerson, BigDecimal solde);
+
+	/**
+	 * Méthode retournant tous les comptes
+	 * 
+	 * @return
+	 */
+	@Secured("ROLE_ADMIN")
+	List<Compte> findAllComptes();
 }

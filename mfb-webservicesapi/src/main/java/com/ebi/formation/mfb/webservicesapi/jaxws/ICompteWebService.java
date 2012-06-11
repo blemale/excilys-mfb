@@ -22,4 +22,6 @@ public interface ICompteWebService {
 
 	public Object[] save(@WebParam(name = "libelle") String libelle,
 			@WebParam(name = "usernamePerson") String usernamePerson, @WebParam(name = "solde") BigDecimal solde);
+
+	public List<CompteDTO> findAllComptes();
 }
