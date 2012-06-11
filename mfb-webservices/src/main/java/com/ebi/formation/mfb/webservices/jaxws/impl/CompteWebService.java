@@ -9,9 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ebi.formation.mfb.entities.Compte;
 import com.ebi.formation.mfb.services.ICompteService;
+import com.ebi.formation.mfb.webservices.jaxws.ICompteWebService;
 
 @WebService(endpointInterface = "com.ebi.formation.mfb.webservices.jaxws.ICompteWebService")
-public class CompteWebService implements ICompteService {
+public class CompteWebService implements ICompteWebService {
 
 	@Autowired
 	private ICompteService compteService;

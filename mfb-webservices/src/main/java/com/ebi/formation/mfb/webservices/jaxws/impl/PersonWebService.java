@@ -9,9 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.ebi.formation.mfb.entities.Person;
 import com.ebi.formation.mfb.entities.Role.Right;
 import com.ebi.formation.mfb.services.IPersonService;
+import com.ebi.formation.mfb.webservices.jaxws.IPersonWebService;
 
 @WebService(endpointInterface = "com.ebi.formation.mfb.webservices.jaxws.IPersonWebService")
-public class PersonWebService implements IPersonService {
+public class PersonWebService implements IPersonWebService {
 
 	@Autowired
 	private IPersonService personService;
