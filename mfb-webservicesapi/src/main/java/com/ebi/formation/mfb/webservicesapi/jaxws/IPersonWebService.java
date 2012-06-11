@@ -7,7 +7,7 @@ import javax.jws.WebService;
 
 import com.ebi.formation.mfb.entities.Role.Right;
 import com.ebi.formation.mfb.services.IPersonService.ReturnCodePerson;
-import com.ebi.formation.mfb.webservices.dto.PersonDTO;
+import com.ebi.formation.mfb.webservicesapi.dto.PersonDTO;
 
 @WebService
 public interface IPersonWebService {
