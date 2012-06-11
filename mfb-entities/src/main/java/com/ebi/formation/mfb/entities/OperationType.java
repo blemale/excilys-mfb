@@ -1,5 +1,7 @@
 package com.ebi.formation.mfb.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -11,7 +13,9 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
-public class OperationType {
+public class OperationType implements Serializable {
+
+	private static final long serialVersionUID = -1483193605319067066L;
 
 	public enum Type {
 		VIREMENT, CARTE, ESPECE, CHEQUE

@@ -3,6 +3,7 @@ package com.ebi.formation.mfb.entities;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -156,5 +157,15 @@ public class Compte implements Serializable {
 	public String getFullLabel() {
 		return new StringBuilder(label).append(" / ").append(NumberFormat.getCurrencyInstance().format(solde))
 				.toString();
+	}
+
+	/**
+	 * @param person
+	 */
+	public void addOwner(Person person) {
+		if (this.owners == null) {
+			this.owners = new ArrayList<Person>();
+		}
+		this.owners.add(person);
 	}
 }

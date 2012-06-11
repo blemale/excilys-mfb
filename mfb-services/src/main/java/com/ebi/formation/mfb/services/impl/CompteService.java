@@ -1,7 +1,6 @@
 package com.ebi.formation.mfb.services.impl;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -81,15 +80,13 @@ public class CompteService implements ICompteService {
 	@Override
 	public Object[] save(String libelle, String usernamePerson, BigDecimal solde) {
 		logger.debug("save(libelle:{}, usernamePerson:{}, solde:{})", new Object[] { libelle, usernamePerson, solde });
-		List<Person> listPerson = new ArrayList<Person>();
 		Person p = personService.findPersonByUsername(usernamePerson);
 		if (p == null) {
 			return new Object[] { ReturnCodeCompte.OWNER_INEXISTANT };
 		}
-		listPerson.add(p);
 		Compte compte = new Compte();
 		compte.setLabel(libelle);
-		compte.setOwners(listPerson);
+		compte.addOwner(p);
 		compte.setSolde(solde);
 		compte.setEncoursCarte(new BigDecimal(0));
 		compte.setSoldePrevisionnel(new BigDecimal(0));

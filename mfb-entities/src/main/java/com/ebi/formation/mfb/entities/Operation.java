@@ -1,5 +1,6 @@
 package com.ebi.formation.mfb.entities;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
@@ -23,14 +24,9 @@ import org.joda.time.DateTime;
  * 
  */
 @Entity
-public class Operation {
+public class Operation implements Serializable {
 
-	/**
-	 * Enumération des différents types d'opérations
-	 * 
-	 * @author excilys
-	 * 
-	 */
+	private static final long serialVersionUID = 6686340799452073817L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
