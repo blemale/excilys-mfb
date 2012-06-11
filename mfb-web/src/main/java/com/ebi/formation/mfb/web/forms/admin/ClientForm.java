@@ -1,9 +1,14 @@
 package com.ebi.formation.mfb.web.forms.admin;
 
+import java.util.List;
+
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
+
+import com.ebi.formation.mfb.entities.Role.Right;
 
 /**
  * Classe représentant le formulaire de création d'un client. Nécessaire pour la validation du formulaire.
@@ -28,6 +33,8 @@ public class ClientForm {
 	@Size(min = 6, max = 20)
 	@Pattern(regexp = "\\w*")
 	private String password2;
+	@NotNull
+	private List<Right> listRights;
 
 	/**
 	 * @return the username
@@ -102,5 +109,20 @@ public class ClientForm {
 	 */
 	public void setPassword2(String password2) {
 		this.password2 = password2;
+	}
+
+	/**
+	 * @return the listRights
+	 */
+	public List<Right> getListRights() {
+		return listRights;
+	}
+
+	/**
+	 * @param listRights
+	 *            the listRights to set
+	 */
+	public void setListRights(List<Right> listRights) {
+		this.listRights = listRights;
 	}
 }

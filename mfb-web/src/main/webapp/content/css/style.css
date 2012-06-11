@@ -75,3 +75,8 @@
 	min-width: 220px;
 	width : 220px;
 }
+
+.control-group > .controls > span {
+	margin-right : 15px;
+	display : inline-block;
+}

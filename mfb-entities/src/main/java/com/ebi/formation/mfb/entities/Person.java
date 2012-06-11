@@ -3,9 +3,11 @@ package com.ebi.formation.mfb.entities;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -21,13 +23,13 @@ import javax.persistence.ManyToMany;
 public class Person {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column(unique = true, nullable = false, length = 20)
 	private String username;
 	@Column(nullable = false)
 	private String password;
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.PERSIST)
 	@JoinTable(name = "AUTHORITY", joinColumns = @JoinColumn(name = "PERSON_ID"), inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
 	@Column(nullable = false)
 	private Set<Role> authorities;
@@ -35,7 +37,7 @@ public class Person {
 	private String firstName;
 	@Column(length = 64)
 	private String lastName;
-	@ManyToMany(mappedBy = "owners")
+	@ManyToMany(mappedBy = "owners", cascade = CascadeType.ALL)
 	private List<Compte> comptes;
 
 	/**
@@ -52,6 +54,14 @@ public class Person {
 	 */
 	public Set<Role> getAuthorities() {
 		return authorities;
+	}
+
+	/**
+	 * @param authorities
+	 *            the authorities to set
+	 */
+	public void setAuthorities(Set<Role> authorities) {
+		this.authorities = authorities;
 	}
 
 	/**

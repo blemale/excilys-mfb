@@ -10,8 +10,6 @@
 	</parent>
 	<artifactId>mfb-webservices</artifactId>
 	<packaging>war</packaging>
-	<name>mfb-webservices</name>
-	<url>http://maven.apache.org</url>
 
 	<dependencies>
 		<dependency>

@@ -1,6 +1,7 @@
 package com.ebi.formation.mfb.services.test;
 
 import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 import org.junit.Test;
@@ -34,5 +35,15 @@ public class PersonServiceTest {
 		assertEquals(person.getUsername(), result.getUsername());
 		assertEquals(person.getFirstName(), result.getFirstName());
 		assertEquals(person.getLastName(), result.getLastName());
+	}
+
+	@Test
+	public void testSavePerson() {
+		Person person = new Person();
+		person.setUsername("toto");
+		person.setFirstName("titi");
+		person.setLastName("tutu");
+		person.setPassword("tata");
+		assertTrue(true);
 	}
 }

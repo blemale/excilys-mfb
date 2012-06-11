@@ -31,14 +31,14 @@
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label" for="owner"><spring:message
-								code="admin.createCompteForm.owner" /></label>
+						<label class="control-label" for="usernameOwner"><spring:message
+								code="admin.createCompteForm.usernameOwner" /></label>
 						<div class="controls">
-							<form:select path="owner">
+							<form:select path="usernameOwner">
 								<form:options items="${ownersList}" itemLabel="fullPerson"
-									itemValue="id" />
+									itemValue="username" />
 							</form:select>
-							<form:errors path="owner" cssClass="colorError" />
+							<form:errors path="usernameOwner" cssClass="colorError" />
 						</div>
 					</div>
 					<div class="control-group">

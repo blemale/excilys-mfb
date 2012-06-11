@@ -250,6 +250,8 @@ public class OperationService implements IOperationService {
 	@Override
 	@Transactional
 	public ReturnCodeVirement doVirement(long idCompteADebiter, long idCompteACrediter, String label, BigDecimal montant) {
+		logger.debug("doVirement(idCompteADebiter:{}, idCompteACrediter:{}, label:{}, montant:{})", new Object[] {
+				idCompteADebiter, idCompteACrediter, label, montant });
 		if (montant.signum() == -1 || montant.signum() == 0) {
 			return ReturnCodeVirement.MONTANT_INCORRECT;
 		}
@@ -309,6 +311,8 @@ public class OperationService implements IOperationService {
 	@Transactional
 	public ReturnCodeVirement doVirement(long idCompteADebiter, String numeroCompteACrediter, String label,
 			BigDecimal montant) {
+		logger.debug("doVirement(idCompteADebiter:{}, numeroCompteACrediter:{}, label:{}, montant:{})", new Object[] {
+				idCompteADebiter, numeroCompteACrediter, label, montant });
 		Compte compteACrediter = compteDao.findCompteByNumeroCompte(numeroCompteACrediter);
 		if (compteACrediter == null) {
 			return ReturnCodeVirement.COMPTE_CREDIT_INEXISTANT;

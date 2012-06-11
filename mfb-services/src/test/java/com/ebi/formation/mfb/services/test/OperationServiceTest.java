@@ -192,7 +192,7 @@ public class OperationServiceTest {
 	}
 
 	@Test
-	public void testVirementOk() {
+	public void testVirementInterneOk() {
 		Compte compteADebiter = new Compte();
 		compteADebiter.setId(0L);
 		compteADebiter.setSolde(new BigDecimal(300));

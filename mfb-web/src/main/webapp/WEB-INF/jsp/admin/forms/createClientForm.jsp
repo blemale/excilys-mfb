@@ -62,6 +62,14 @@
 							<form:errors path="password2" cssClass="colorError" />
 						</div>
 					</div>
+					<div class="control-group">
+						<label class="control-label" for="listRightsC"><spring:message
+								code="admin.createClientForm.listRights" /></label>
+						<div class="controls">
+							<form:checkboxes items="${listRights}" path="listRights" />
+							<form:errors path="listRights" cssClass="colorError" />
+						</div>
+					</div>
 					<div class="form-actions alignCenter">
 						<button class="btn btn-success" type="submit">
 							<spring:message code="admin.createClientForm.doCreateClient" />

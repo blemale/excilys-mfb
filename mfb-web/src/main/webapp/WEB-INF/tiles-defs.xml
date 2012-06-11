@@ -75,7 +75,7 @@
 			value="/WEB-INF/jsp/client/virement/confirmVirement.jsp" />
 	</definition>
 
-	<!-- erreur virement interne -->
+	<!-- Erreur virement interne -->
 	<definition name="erreurVirement" extends="baseLayout">
 		<put-attribute name="title" value="title.erreurVirement" />
 		<put-attribute name="body"
@@ -108,6 +108,20 @@
 		<put-attribute name="title" value="title.createOperation" />
 		<put-attribute name="body"
 			value="/WEB-INF/jsp/admin/forms/createOperationForm.jsp" />
+	</definition>
+
+	<!-- Confirmation de form (partie admin) -->
+	<definition name="confirmForm" extends="baseLayout">
+		<put-attribute name="title" value="title.confirmForm" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/admin/forms/confirmForm.jsp" />
+	</definition>
+
+	<!-- Erreur de form (partie admin) -->
+	<definition name="erreurForm" extends="baseLayout">
+		<put-attribute name="title" value="title.erreurForm" />
+		<put-attribute name="body"
+			value="/WEB-INF/jsp/admin/forms/erreurForm.jsp" />
 	</definition>
 
 

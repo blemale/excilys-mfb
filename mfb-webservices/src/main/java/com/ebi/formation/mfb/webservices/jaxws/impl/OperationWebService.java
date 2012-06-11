@@ -1,18 +1,18 @@
-package com.ebi.mfb.formation.webservices.jaxws;
+package com.ebi.formation.mfb.webservices.jaxws.impl;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-import javax.jws.WebMethod;
 import javax.jws.WebService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ebi.formation.mfb.entities.Operation;
 import com.ebi.formation.mfb.services.IOperationService;
+import com.ebi.formation.mfb.webservices.jaxws.IOperationWebService;
 
-@WebService
-public class OperationWebService implements IOperationService {
+@WebService(endpointInterface = "com.ebi.formation.mfb.webservices.jaxws.IOperationWebService")
+public class OperationWebService implements IOperationWebService {
 
 	@Autowired
 	private IOperationService operationService;
@@ -38,7 +38,6 @@ public class OperationWebService implements IOperationService {
 	}
 
 	@Override
-	@WebMethod(operationName = "getOperationsWithoutCarteByMonthPaginatedCustom")
 	public List<Operation> getOperationsWithoutCarteByMonthPaginated(long idCompte, int month, int year, int offset,
 			int numberOfResults) {
 		return operationService.getOperationsWithoutCarteByMonthPaginated(idCompte, month, year, offset,
@@ -51,7 +50,6 @@ public class OperationWebService implements IOperationService {
 	}
 
 	@Override
-	@WebMethod(operationName = "getOperationsCarteByMonthPaginatedCustom")
 	public List<Operation> getOperationsCarteByMonthPaginated(long idCompte, int month, int year, int offset,
 			int numberOfResults) {
 		return operationService.getOperationsCarteByMonthPaginated(idCompte, month, year, offset, numberOfResults);
@@ -63,7 +61,6 @@ public class OperationWebService implements IOperationService {
 	}
 
 	@Override
-	@WebMethod(operationName = "getVirementsByMonthPaginatedCustom")
 	public List<Operation> getVirementsByMonthPaginated(long idCompte, int month, int year, int offset,
 			int numberOfResults) {
 		return operationService.getVirementsByMonthPaginated(idCompte, month, year, offset, numberOfResults);
@@ -80,7 +77,6 @@ public class OperationWebService implements IOperationService {
 	}
 
 	@Override
-	@WebMethod(operationName = "getNumberOfPagesForOperationsWithoutCartesByMonthCustom")
 	public long getNumberOfPagesForOperationsWithoutCartesByMonth(long idCompte, int month, int year,
 			int numberOfResults) {
 		return operationService.getNumberOfPagesForOperationsWithoutCartesByMonth(idCompte, month, year,
@@ -88,13 +84,11 @@ public class OperationWebService implements IOperationService {
 	}
 
 	@Override
-	@WebMethod(operationName = "")
 	public long getNumberOfPagesForOperationsCartesByMonth(long idCompte, int month, int year) {
 		return operationService.getNumberOfPagesForOperationsCartesByMonth(idCompte, month, year);
 	}
 
 	@Override
-	@WebMethod(operationName = "getNumberOfPagesForOperationsCartesByMonthCustom")
 	public long getNumberOfPagesForOperationsCartesByMonth(long idCompte, int month, int years, int numberOfResults) {
 		return operationService.getNumberOfPagesForOperationsCartesByMonth(idCompte, month, years, numberOfResults);
 	}
@@ -105,7 +99,6 @@ public class OperationWebService implements IOperationService {
 	}
 
 	@Override
-	@WebMethod(operationName = "getNumberOfPagesForVirementByMonthCustom")
 	public long getNumberOfPagesForVirementByMonth(long idCompte, int month, int years, int numberOfResults) {
 		return operationService.getNumberOfPagesForVirementByMonth(idCompte, month, years, numberOfResults);
 	}
@@ -116,13 +109,11 @@ public class OperationWebService implements IOperationService {
 	}
 
 	@Override
-	@WebMethod(operationName = "doVirementInterne")
 	public ReturnCodeVirement doVirement(long idCompteADebiter, long idCompteACrediter, String label, BigDecimal montant) {
 		return operationService.doVirement(idCompteADebiter, idCompteACrediter, label, montant);
 	}
 
 	@Override
-	@WebMethod(operationName = "doVirementExterne")
 	public ReturnCodeVirement doVirement(long idCompteADebiter, String numeroCompteACrediter, String label,
 			BigDecimal montant) {
 		return operationService.doVirement(idCompteADebiter, numeroCompteACrediter, label, montant);
