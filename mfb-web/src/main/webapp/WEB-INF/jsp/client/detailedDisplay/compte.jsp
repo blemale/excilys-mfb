@@ -32,6 +32,47 @@
 	<!-- Div comprenant les différentes opérations -->
 	<div class="row">
 		<div class="span10 offset1">
+			<!-- Affichage de la balance -->
+			<h2>
+				<spring:message code="compte.balance.title" />
+			</h2>
+			<table class="table table-bordered">
+				<tbody>
+					<tr>
+						<td><spring:message code="compte.balance.credit" /></td>
+						<td class="aligneSolde coloreVert">+ <fmt:formatNumber
+								value="${credit}" minFractionDigits="2" pattern="#,###.##" />
+						</td>
+					</tr>
+					<tr>
+						<td><spring:message code="compte.balance.debit" /></td>
+						<td class="aligneSolde coloreRouge">- <fmt:formatNumber
+								value="${debit * (-1)}" minFractionDigits="2" pattern="#,###.##" />
+						</td>
+					</tr>
+					<tr>
+						<td><spring:message code="compte.balance.total" /></td>
+						<c:choose>
+							<c:when test="${total gt 0 }">
+								<td class="aligneSolde coloreVert">+ <fmt:formatNumber
+										value="${total}" minFractionDigits="2" pattern="#,###.##" />
+								</td>
+							</c:when>
+							<c:when test="${total lt 0 }">
+								<td class="aligneSolde coloreRouge">- <fmt:formatNumber
+										value="${total * (-1)}" minFractionDigits="2"
+										pattern="#,###.##" />
+								</td>
+							</c:when>
+							<c:otherwise>
+							<td class="aligneSolde">- <fmt:formatNumber
+								value="${total}" minFractionDigits="2" pattern="#,###.##" />
+						</td>
+							</c:otherwise>
+						</c:choose>
+					</tr>
+				</tbody>
+			</table>
 			<!-- Tableau d'affichage du cumul carte -->
 			<c:if test="${soldeCarte ne null}">
 				<h2>
