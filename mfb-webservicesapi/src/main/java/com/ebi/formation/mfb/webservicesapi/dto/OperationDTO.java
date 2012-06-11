@@ -1,4 +1,4 @@
-package com.ebi.formation.mfb.webservices.dto;
+package com.ebi.formation.mfb.webservicesapi.dto;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

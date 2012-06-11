@@ -6,7 +6,7 @@ import java.util.List;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 
-import com.ebi.formation.mfb.webservices.dto.CompteDTO;
+import com.ebi.formation.mfb.webservicesapi.dto.CompteDTO;
 
 @WebService
 public interface ICompteWebService {

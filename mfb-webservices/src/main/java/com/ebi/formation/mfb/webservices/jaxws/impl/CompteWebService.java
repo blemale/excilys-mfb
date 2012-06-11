@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ebi.formation.mfb.entities.Compte;
 import com.ebi.formation.mfb.services.ICompteService;
-import com.ebi.formation.mfb.webservices.dto.CompteDTO;
+import com.ebi.formation.mfb.webservicesapi.dto.CompteDTO;
 import com.ebi.formation.mfb.webservicesapi.jaxws.ICompteWebService;
 
 @WebService(endpointInterface = "com.ebi.formation.mfb.webservicesapi.jaxws.ICompteWebService")

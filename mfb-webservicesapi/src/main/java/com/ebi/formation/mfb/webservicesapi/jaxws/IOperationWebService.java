@@ -8,7 +8,7 @@ import javax.jws.WebParam;
 import javax.jws.WebService;
 
 import com.ebi.formation.mfb.services.IOperationService.ReturnCodeVirement;
-import com.ebi.formation.mfb.webservices.dto.OperationDTO;
+import com.ebi.formation.mfb.webservicesapi.dto.OperationDTO;
 
 @WebService
 public interface IOperationWebService {
