@@ -56,4 +56,9 @@ public class CompteWebService implements ICompteWebService {
 		}
 		return compteDTOs;
 	}
+
+	@Override
+	public List<CompteDTO> findAllComptes() {
+		return convertListCompteToListCompteDTO(compteService.findAllComptes());
+	}
 }

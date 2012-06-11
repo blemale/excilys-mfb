@@ -3,6 +3,8 @@ package com.ebi.formation.mfb.dao.test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,12 @@ import com.ebi.formation.mfb.entities.OperationType.Type;
 import com.excilys.ebi.spring.dbunit.test.DataSet;
 import com.excilys.ebi.spring.dbunit.test.RollbackTransactionalDataSetTestExecutionListener;
 
+/**
+ * Test unitaire de OperationTypeDao
+ * 
+ * @author fguillain
+ * 
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:persistence-config.xml")
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
@@ -31,11 +39,25 @@ public class OperationTypeDaoTest {
 	@Autowired
 	private IOperationTypeDao operationTypeDao;
 
+	/**
+	 * 
+	 */
 	@DataSet("dataSet-OperationTypeDaoTest.xml")
 	@Test
 	public void testGetOperationTypeByType() {
 		OperationType ot = operationTypeDao.getOperationTypeByType(OperationType.Type.VIREMENT);
 		assertNotNull(ot);
 		assertEquals(ot.getLabel(), Type.VIREMENT);
+	}
+
+	/**
+	 * 
+	 */
+	@DataSet("dataSet-OperationTypeDaoTest.xml")
+	@Test
+	public void testFindAllOperationTypes() {
+		List<Type> listOperationType = operationTypeDao.findAllOperationTypes();
+		assertNotNull(listOperationType);
+		assertEquals(4, listOperationType.size());
 	}
 }

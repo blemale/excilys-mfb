@@ -15,6 +15,12 @@ import com.ebi.formation.mfb.dao.IPersonDao;
 import com.ebi.formation.mfb.entities.Person;
 import com.ebi.formation.mfb.services.impl.PersonService;
 
+/**
+ * Test unitaire de PersonService
+ * 
+ * @author fguillain
+ * 
+ */
 @RunWith(MockitoJUnitRunner.class)
 @ContextConfiguration(locations = "classpath:/services-config.xml")
 public class PersonServiceTest {
@@ -24,6 +30,9 @@ public class PersonServiceTest {
 	@InjectMocks
 	PersonService ps;
 
+	/**
+	 * Test
+	 */
 	@Test
 	public void testFindPersonByUsername() {
 		Person person = new Person();
@@ -37,6 +46,9 @@ public class PersonServiceTest {
 		assertEquals(person.getLastName(), result.getLastName());
 	}
 
+	/**
+	 * Test
+	 */
 	@Test
 	public void testSavePerson() {
 		Person person = new Person();

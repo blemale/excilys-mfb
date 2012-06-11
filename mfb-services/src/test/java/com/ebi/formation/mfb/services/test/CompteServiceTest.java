@@ -21,6 +21,12 @@ import com.ebi.formation.mfb.dao.ICompteDao;
 import com.ebi.formation.mfb.entities.Compte;
 import com.ebi.formation.mfb.services.impl.CompteService;
 
+/**
+ * Test unitaire de CompteService
+ * 
+ * @author excilys
+ * 
+ */
 @RunWith(MockitoJUnitRunner.class)
 @ContextConfiguration(locations = "classpath:/services-config.xml")
 public class CompteServiceTest {
@@ -100,5 +106,22 @@ public class CompteServiceTest {
 		when(compteDao.findCompteByNumeroCompte("bar")).thenReturn(null);
 		assertNotNull(compteService.getCompteByNumeroCompte("foo"));
 		assertNull(compteService.getCompteByNumeroCompte("bar"));
+	}
+
+	/**
+	 * Test la récupération de tous les comptes
+	 */
+	@Test
+	public void testFindAllComtpes() {
+		Compte c1 = new Compte();
+		Compte c2 = new Compte();
+		Compte c3 = new Compte();
+		List<Compte> listComptes = new ArrayList<Compte>();
+		listComptes.add(c1);
+		listComptes.add(c2);
+		listComptes.add(c3);
+		when(compteDao.findAllComptes()).thenReturn(listComptes);
+		List<Compte> listComptes2 = compteService.findAllComptes();
+		assertEquals(3, listComptes2.size());
 	}
 }

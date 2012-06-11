@@ -54,4 +54,12 @@ public class Role implements Serializable {
 	public Right getRight() {
 		return right;
 	}
+
+	/**
+	 * @param right
+	 *            the right to set
+	 */
+	public void setRight(Right right) {
+		this.right = right;
+	}
 }

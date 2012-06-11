@@ -113,4 +113,14 @@ public class CompteDao implements ICompteDao {
 	public void save(Compte compte) {
 		em.persist(compte);
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.dao.ICompteDao#findAllComptes()
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Compte> findAllComptes() {
+		return em.createNamedQuery("findAllComptes").getResultList();
+	}
 }
