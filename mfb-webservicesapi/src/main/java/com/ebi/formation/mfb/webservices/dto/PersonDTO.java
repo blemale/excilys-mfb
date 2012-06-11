@@ -11,6 +11,9 @@ public class PersonDTO implements Serializable {
 	private String firstName;
 	private String lastName;
 
+	public PersonDTO() {
+	}
+
 	public PersonDTO(Long id, String username, String password, String firstName, String lastName) {
 		super();
 		this.id = id;

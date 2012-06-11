@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ebi.formation.mfb.entities.Operation;
 import com.ebi.formation.mfb.services.IOperationService;
-import com.ebi.formation.mfb.webservices.jaxws.IOperationWebService;
+import com.ebi.formation.mfb.webservicesapi.jaxws.IOperationWebService;
 
-@WebService(endpointInterface = "com.ebi.formation.mfb.webservices.jaxws.IOperationWebService")
+@WebService(endpointInterface = "com.ebi.formation.mfb.webservicesapi.jaxws.IOperationWebService")
 public class OperationWebService implements IOperationWebService {
 
 	@Autowired

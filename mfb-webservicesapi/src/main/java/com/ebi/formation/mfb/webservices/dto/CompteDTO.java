@@ -13,6 +13,9 @@ public class CompteDTO implements Serializable {
 	private BigDecimal encoursCarte;
 	private String numeroCompte;
 
+	public CompteDTO() {
+	}
+
 	public CompteDTO(Long id, String label, BigDecimal solde, BigDecimal soldePrevisionnel, BigDecimal encoursCarte,
 			String numeroCompte) {
 		super();

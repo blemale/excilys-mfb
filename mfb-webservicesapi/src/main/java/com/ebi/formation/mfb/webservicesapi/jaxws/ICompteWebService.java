@@ -6,26 +6,20 @@ import java.util.List;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 
-import com.ebi.formation.mfb.entities.Compte;
-import com.ebi.formation.mfb.services.ICompteService;
+import com.ebi.formation.mfb.webservices.dto.CompteDTO;
 
 @WebService
-public interface ICompteWebService extends ICompteService {
+public interface ICompteWebService {
 
-	@Override
 	public boolean checkCompteOwnershipByUsernameAndCompteId(@WebParam(name = "username") String username,
 			@WebParam(name = "compteId") Long compteId);
 
-	@Override
-	public List<Compte> findComptesByUsername(@WebParam(name = "username") String username);
+	public List<CompteDTO> findComptesByUsername(@WebParam(name = "username") String username);
 
-	@Override
-	public Compte getCompteById(@WebParam(name = "compteId") Long compteId);
+	public CompteDTO getCompteById(@WebParam(name = "compteId") Long compteId);
 
-	@Override
-	public Compte getCompteByNumeroCompte(@WebParam(name = "numeroCompte") String numeroCompte);
+	public CompteDTO getCompteByNumeroCompte(@WebParam(name = "numeroCompte") String numeroCompte);
 
-	@Override
 	public Object[] save(@WebParam(name = "libelle") String libelle,
 			@WebParam(name = "usernamePerson") String usernamePerson, @WebParam(name = "solde") BigDecimal solde);
 }
