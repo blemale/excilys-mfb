@@ -250,16 +250,20 @@ public class OperationServiceTest {
 		Compte compteADebiter = new Compte();
 		compteADebiter.setId(0L);
 		compteADebiter.setSolde(new BigDecimal(300));
+		compteADebiter.setSoldePrevisionnel(new BigDecimal(300));
 		Compte compteACrediter = new Compte();
 		compteACrediter.setId(1L);
 		compteACrediter.setSolde(new BigDecimal(400));
+		compteACrediter.setSoldePrevisionnel(new BigDecimal(400));
 		when(operationTypeDao.getOperationTypeByType(Type.VIREMENT)).thenReturn(new OperationType());
 		when(compteDao.findCompteById(0)).thenReturn(compteADebiter);
 		when(compteDao.findCompteById(1)).thenReturn(compteACrediter);
 		ReturnCodeVirement result = operationService.doVirement(0L, 1L, "", new BigDecimal(200));
 		assertEquals(ReturnCodeVirement.OK, result);
 		assertEquals(0, compteADebiter.getSolde().compareTo(new BigDecimal(100)));
+		assertEquals(0, compteADebiter.getSoldePrevisionnel().compareTo(new BigDecimal(100)));
 		assertEquals(0, compteACrediter.getSolde().compareTo(new BigDecimal(600)));
+		assertEquals(0, compteACrediter.getSoldePrevisionnel().compareTo(new BigDecimal(600)));
 	}
 
 	/**
@@ -270,17 +274,22 @@ public class OperationServiceTest {
 		Compte compteADebiter = new Compte();
 		compteADebiter.setId(0L);
 		compteADebiter.setSolde(new BigDecimal(300));
+		compteADebiter.setSoldePrevisionnel(new BigDecimal(300));
 		Compte compteACrediter = new Compte();
 		compteACrediter.setId(1L);
 		compteACrediter.setSolde(new BigDecimal(400));
+		compteACrediter.setSoldePrevisionnel(new BigDecimal(400));
 		when(operationTypeDao.getOperationTypeByType(Type.VIREMENT)).thenReturn(new OperationType());
 		when(compteDao.findCompteByNumeroCompte("foo")).thenReturn(compteACrediter);
 		when(compteDao.findCompteById(0)).thenReturn(compteADebiter);
 		when(compteDao.findCompteById(1)).thenReturn(compteACrediter);
 		ReturnCodeVirement result = operationService.doVirement(0L, "foo", "", new BigDecimal(200));
 		assertEquals(ReturnCodeVirement.OK, result);
+		assertEquals(ReturnCodeVirement.OK, result);
 		assertEquals(0, compteADebiter.getSolde().compareTo(new BigDecimal(100)));
+		assertEquals(0, compteADebiter.getSoldePrevisionnel().compareTo(new BigDecimal(100)));
 		assertEquals(0, compteACrediter.getSolde().compareTo(new BigDecimal(600)));
+		assertEquals(0, compteACrediter.getSoldePrevisionnel().compareTo(new BigDecimal(600)));
 	}
 
 	/**

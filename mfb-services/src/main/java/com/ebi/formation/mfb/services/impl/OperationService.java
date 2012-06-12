@@ -299,6 +299,10 @@ public class OperationService implements IOperationService {
 		BigDecimal newSoldeCredit = compteACrediter.getSolde().add(montant);
 		compteADebiter.setSolde(newSoldeDebit);
 		compteACrediter.setSolde(newSoldeCredit);
+		BigDecimal newSoldePreviDebit = compteADebiter.getSoldePrevisionnel().add(montant.negate());
+		BigDecimal newSoldePrevisCredit = compteACrediter.getSoldePrevisionnel().add(montant);
+		compteADebiter.setSoldePrevisionnel(newSoldePreviDebit);
+		compteACrediter.setSoldePrevisionnel(newSoldePrevisCredit);
 		return ReturnCodeVirement.OK;
 	}
 
