@@ -73,7 +73,7 @@ public class CompteDaoTest {
 	}
 
 	/**
-	 * 
+	 * Test l'appartenance d'un compte d'un utilisateur via le username et l'id du compte
 	 */
 	@DataSet("dataSet-CompteDaoTest.xml")
 	@Test
@@ -85,7 +85,7 @@ public class CompteDaoTest {
 	}
 
 	/**
-	 * 
+	 * Test la récupération d'un compte via son id
 	 */
 	@DataSet("dataSet-CompteDaoTest.xml")
 	@Test
@@ -98,7 +98,7 @@ public class CompteDaoTest {
 	}
 
 	/**
-	 * 
+	 * Test la récupération d'un compte via son numéro de compte
 	 */
 	@DataSet("dataSet-CompteDaoTest.xml")
 	@Test
@@ -111,7 +111,7 @@ public class CompteDaoTest {
 	}
 
 	/**
-	 * 
+	 * Test la persistance d'un compte
 	 */
 	@DataSet("dataSet-CompteDaoTest.xml")
 	@Test
@@ -129,7 +129,7 @@ public class CompteDaoTest {
 	}
 
 	/**
-	 * 
+	 * Test la récupération de tous les comptes
 	 */
 	@DataSet("dataSet-CompteDaoTest.xml")
 	@Test
@@ -137,5 +137,70 @@ public class CompteDaoTest {
 		List<Compte> listComptes = compteDao.findAllComptes();
 		assertNotNull(listComptes);
 		assertEquals(3, listComptes.size());
+	}
+
+	/**
+	 * Test la mise à jour du solde d'un compte
+	 */
+	@DataSet("dataSet-CompteDaoTest.xml")
+	@Test
+	public void testUpdateCompteSolde() {
+		compteDao.updateCompteSolde(1L, BigDecimal.TEN);
+		Compte c = compteDao.findCompteById(1L);
+		assertEquals(0, BigDecimal.TEN.compareTo(c.getSolde()));
+		compteDao.updateCompteSolde(2L, new BigDecimal(-10));
+		c = compteDao.findCompteById(2L);
+		assertEquals(0, new BigDecimal(-10).compareTo(c.getSolde()));
+	}
+
+	/**
+	 * Test la mise à jour du solde et de l'encours carte d'un compte
+	 */
+	@DataSet("dataSet-CompteDaoTest.xml")
+	@Test
+	public void testUpdateCompteSoldeAndEncoursCarte() {
+		compteDao.updateCompteSoldeAndEncoursCarte(1L, BigDecimal.TEN);
+		Compte c = compteDao.findCompteById(1L);
+		assertEquals(0, BigDecimal.TEN.compareTo(c.getSolde()));
+		assertEquals(0, new BigDecimal(-10).compareTo(c.getEncoursCarte()));
+		compteDao.updateCompteSoldeAndEncoursCarte(2L, new BigDecimal(-10));
+		c = compteDao.findCompteById(2L);
+		assertEquals(0, new BigDecimal(-10).compareTo(c.getSolde()));
+		assertEquals(0, BigDecimal.TEN.compareTo(c.getEncoursCarte()));
+	}
+
+	/**
+	 * Test la mise à jour de l'encours carte et du solde prévisionnel d'un compte
+	 */
+	@DataSet("dataSet-CompteDaoTest.xml")
+	@Test
+	public void testUpdateCompteEncoursCarteAndSoldePrevisionnel() {
+		compteDao.updateCompteEncoursCarteAndSoldePrevisionnel(1L, new BigDecimal(10));
+		Compte c = compteDao.findCompteById(1L);
+		assertEquals(0, BigDecimal.TEN.compareTo(c.getSoldePrevisionnel()));
+		assertEquals(0, BigDecimal.TEN.compareTo(c.getEncoursCarte()));
+	}
+
+	/**
+	 * Test la mise à jour du solde prévisionnel d'un compte
+	 */
+	@DataSet("dataSet-CompteDaoTest.xml")
+	@Test
+	public void testUpdateCompteSoldePrevisionnel() {
+		compteDao.updateCompteSoldePrevisionnel(1L, BigDecimal.TEN);
+		Compte c = compteDao.findCompteById(1L);
+		assertEquals(0, BigDecimal.TEN.compareTo(c.getSoldePrevisionnel()));
+	}
+
+	/**
+	 * Test la mise à jour du solde et du solde prévisionnel
+	 */
+	@DataSet("dataSet-CompteDaoTest.xml")
+	@Test
+	public void testUpdateCompteSoldeAndSoldePrevisionnel() {
+		compteDao.updateCompteSoldeAndSoldePrevisionnel(1L, BigDecimal.TEN);
+		Compte c = compteDao.findCompteById(1L);
+		assertEquals(0, BigDecimal.TEN.compareTo(c.getSolde()));
+		assertEquals(0, BigDecimal.TEN.compareTo(c.getSoldePrevisionnel()));
 	}
 }

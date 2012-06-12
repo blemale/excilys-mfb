@@ -41,7 +41,7 @@ public class RoleDaoTest {
 	private RoleDao roleDao;
 
 	/**
-	 * 
+	 * Test la récupération d'un Role via un Right
 	 */
 	@DataSet("dataSet-RoleDaoTest.xml")
 	@Test
@@ -55,7 +55,7 @@ public class RoleDaoTest {
 	}
 
 	/**
-	 * 
+	 * Test la récupération de tous les rôles
 	 */
 	@DataSet("dataSet-RoleDaoTest.xml")
 	@Test

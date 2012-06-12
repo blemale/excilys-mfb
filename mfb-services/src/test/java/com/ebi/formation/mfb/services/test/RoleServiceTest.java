@@ -34,7 +34,7 @@ public class RoleServiceTest {
 	RoleService roleService;
 
 	/**
-	 * Test
+	 * Test la récupération d'un Role par rapport à un Right
 	 */
 	@Test
 	public void testFindRoleByRight() {
@@ -51,7 +51,7 @@ public class RoleServiceTest {
 	}
 
 	/**
-	 * Test
+	 * Test la récupération de tous les Rights
 	 */
 	@Test
 	public void testFindAllRights() {

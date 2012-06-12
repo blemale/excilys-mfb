@@ -37,6 +37,7 @@ public class PersonService implements IPersonService {
 	private IPersonDao personDao;
 	@Autowired
 	private IRoleDao roleDao;
+	private static final int TAILLE_SHA = 512 ;
 
 	/*
 	 * (non-Javadoc)
@@ -70,7 +71,7 @@ public class PersonService implements IPersonService {
 		person.setUsername(username);
 		person.setFirstName(firstname);
 		person.setLastName(lastname);
-		person.setPassword(new ShaPasswordEncoder(512).encodePassword(password, null));
+		person.setPassword(new ShaPasswordEncoder(TAILLE_SHA).encodePassword(password, null));
 		Set<Role> setRoles = new HashSet<Role>();
 		for (Right r : listRights) {
 			setRoles.add(roleDao.findRoleByRight(r));

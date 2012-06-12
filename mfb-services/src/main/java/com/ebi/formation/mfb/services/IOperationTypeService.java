@@ -7,7 +7,9 @@ import org.springframework.security.access.annotation.Secured;
 import com.ebi.formation.mfb.entities.OperationType.Type;
 
 /**
- * @author excilys
+ * Interface du service associé à OperationTypeDao
+ * 
+ * @author fguillain
  * 
  */
 public interface IOperationTypeService {

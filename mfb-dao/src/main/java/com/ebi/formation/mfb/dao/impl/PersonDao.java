@@ -24,6 +24,7 @@ import com.ebi.formation.mfb.entities.Role;
  * Implémentation de IPersonDAO, via JPA.
  * 
  * @author excilys
+ * @author fguillain
  * 
  */
 @Repository

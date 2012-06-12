@@ -3,21 +3,28 @@ package com.ebi.formation.mfb.services;
 import java.math.BigDecimal;
 import java.util.List;
 
+import org.joda.time.DateTime;
 import org.springframework.security.access.annotation.Secured;
 
 import com.ebi.formation.mfb.entities.Compte;
 import com.ebi.formation.mfb.entities.Operation;
+import com.ebi.formation.mfb.entities.OperationType.Type;
 
 /**
- * Interface du service associé à {@link Operation}
+ * Interface du service associé à OperationDao
  * 
  * @author excilys
+ * @author fguillain
  * 
  */
 public interface IOperationService {
 
 	public enum ReturnCodeVirement {
 		OK, IDENTICAL_COMPTES, DECOUVERT, COMPTE_DEBIT_INEXISTANT, COMPTE_CREDIT_INEXISTANT, MONTANT_INCORRECT
+	}
+
+	public enum ReturnCodeOperation {
+		OK, COMPTE_INEXISTANT
 	}
 
 	/**
@@ -315,4 +322,19 @@ public interface IOperationService {
 	 * Permet de mettre à jour les comptes par rapport aux nouvelles opérations (via un batch)
 	 */
 	void updateCompteWithNewOperations();
+
+	/**
+	 * Permet de sauvegarder une opération lié à un compte
+	 * 
+	 * @param montant
+	 * @param idCompte
+	 * @param type
+	 * @param label
+	 * @param dateEffet
+	 * @param dateValeur
+	 * @return
+	 */
+	@Secured("ROLE_ADMIN")
+	ReturnCodeOperation saveOperation(BigDecimal montant, Long idCompte, Type type, String label, DateTime dateEffet,
+			DateTime dateValeur);
 }

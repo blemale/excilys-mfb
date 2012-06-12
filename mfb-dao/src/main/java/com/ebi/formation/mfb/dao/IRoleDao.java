@@ -6,6 +6,8 @@ import com.ebi.formation.mfb.entities.Role;
 import com.ebi.formation.mfb.entities.Role.Right;
 
 /**
+ * Cette interface représente le contrat à implémenter des DAO pour l'entité Role.
+ * 
  * @author fguillain
  * 
  */

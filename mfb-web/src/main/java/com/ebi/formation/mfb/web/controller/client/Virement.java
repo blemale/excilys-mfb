@@ -23,6 +23,10 @@ import com.ebi.formation.mfb.web.forms.VirementExterneForm;
 import com.ebi.formation.mfb.web.forms.VirementInterneForm;
 import com.ebi.formation.mfb.web.utils.ControllerUtils;
 
+/**
+ * @author excilys
+ * 
+ */
 @Controller
 @RequestMapping("/client/")
 public class Virement {
@@ -103,6 +107,8 @@ public class Virement {
 				message = "virement.ok";
 				mv.setViewName("redirect:confirmVirement.html");
 				break;
+			default:
+				break;
 		}
 		redirectAttrs.addFlashAttribute("message", message);
 		return mv;
@@ -164,6 +170,8 @@ public class Virement {
 			case OK:
 				message = "virement.ok";
 				mv.setViewName("redirect:confirmVirement.html");
+				break;
+			default:
 				break;
 		}
 		redirectAttrs.addFlashAttribute("message", message);

@@ -153,7 +153,7 @@ public class OperationDaoTest {
 	}
 
 	/**
-	 * 
+	 * Test
 	 */
 	@DataSet("dataSet-OperationDaoTest.xml")
 	@Test
@@ -171,7 +171,7 @@ public class OperationDaoTest {
 	}
 
 	/**
-	 * 
+	 * Test
 	 */
 	@DataSet("dataSet-OperationDaoTest.xml")
 	@Test
@@ -183,7 +183,7 @@ public class OperationDaoTest {
 	}
 
 	/**
-	 * 
+	 * Test la persistence d'une opération
 	 */
 	@DataSet("dataSet-OperationDaoTest.xml")
 	@Test
@@ -210,8 +210,10 @@ public class OperationDaoTest {
 	@Test
 	public void testUpdateCompte() {
 		operationDao.updateCompteWithNewOperations();
+		// Solde + 100
 		assertEquals(0, compteDao.findMontantCompteById(1L).compareTo(new BigDecimal(100)));
-		assertEquals(0, compteDao.findEncoursCarteCompteById(1L).compareTo(new BigDecimal(-100)));
+		// EncoursCarte + 100 (car avant il est censé être à -100)
+		assertEquals(0, compteDao.findEncoursCarteCompteById(1L).compareTo(new BigDecimal(100)));
 		DateTime date = new DateTime(2012, 6, 1, 0, 0);
 		DateTime datePlusUnMois = date.plusMonths(1);
 		List<Operation> l = operationDao.findAllOperationsByMonthByCompte(1L, date, datePlusUnMois);

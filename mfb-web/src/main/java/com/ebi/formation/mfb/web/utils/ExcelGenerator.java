@@ -20,7 +20,7 @@ import com.ebi.formation.mfb.entities.Operation;
  * @author kpogorzelski
  * 
  */
-public class ExcelGenerator {
+public final class ExcelGenerator {
 
 	private static CellStyle styleVert;
 	private static CellStyle styleRouge;
@@ -30,6 +30,14 @@ public class ExcelGenerator {
 	private static CellStyle styleCentreGras;
 	private static CellStyle styleBorderEncadreHaut;
 	private static int i;
+	private static final int FONT_GRAS_FONT_HEIGHT = 200;
+	private static final int END_MERGE_REGION = 4;
+	private static final int START_MERGE_REGION = 0;
+	private static final int DATE_EFFET_COLUMN = 0;
+	private static final int DATE_VALEUR_COLUMN = 1;
+	private static final int TYPE_COLUMN  = 2;
+	private static final int LIBELLE_COLUMN = 3;
+	private static final int MONTANT_COLUMN = 4;
 
 	/**
 	 * Constructeur empechant la classe ExcelGenerator d'être instanciée
@@ -99,7 +107,7 @@ public class ExcelGenerator {
 		styleCentreGras.setAlignment(CellStyle.ALIGN_CENTER);
 		Font fontGras = wb.createFont();
 		fontGras.setBoldweight(Font.BOLDWEIGHT_BOLD);
-		fontGras.setFontHeight((short) 200);
+		fontGras.setFontHeight((short) FONT_GRAS_FONT_HEIGHT);
 		styleCentreGras.setFont(fontGras);
 		/**/
 		styleBorderEncadreHaut = wb.createCellStyle();
@@ -120,19 +128,19 @@ public class ExcelGenerator {
 	private static void creeTitrePageEtTitresColonnes(Long idCompte, Sheet sheet, String nomCompte, int month, int year) {
 		sheet.createRow(i).createCell(0)
 				.setCellValue("Relevé du compte n°" + idCompte + " \"" + nomCompte + "\" de " + month + "/" + year);
-		sheet.addMergedRegion(new CellRangeAddress(i, i, 0, 4));
+		sheet.addMergedRegion(new CellRangeAddress(i, i, START_MERGE_REGION, END_MERGE_REGION));
 		sheet.getRow(i).getCell(0).setCellStyle(styleCentreGras);
 		i += 2;
-		sheet.createRow(i).createCell(0).setCellValue("Date d'effet");
-		sheet.getRow(i).getCell(0).setCellStyle(styleCentre);
-		sheet.getRow(i).createCell(1).setCellValue("Date de valeur");
-		sheet.getRow(i).getCell(1).setCellStyle(styleCentre);
-		sheet.getRow(i).createCell(2).setCellValue("Type");
-		sheet.getRow(i).getCell(2).setCellStyle(styleCentre);
-		sheet.getRow(i).createCell(3).setCellValue("Libellé");
-		sheet.getRow(i).getCell(3).setCellStyle(styleCentre);
-		sheet.getRow(i).createCell(4).setCellValue("Montant");
-		sheet.getRow(i).getCell(4).setCellStyle(styleCentre);
+		sheet.createRow(i).createCell(DATE_EFFET_COLUMN).setCellValue("Date d'effet");
+		sheet.getRow(i).getCell(DATE_EFFET_COLUMN).setCellStyle(styleCentre);
+		sheet.getRow(i).createCell(DATE_VALEUR_COLUMN).setCellValue("Date de valeur");
+		sheet.getRow(i).getCell(DATE_VALEUR_COLUMN).setCellStyle(styleCentre);
+		sheet.getRow(i).createCell(TYPE_COLUMN).setCellValue("Type");
+		sheet.getRow(i).getCell(TYPE_COLUMN).setCellStyle(styleCentre);
+		sheet.getRow(i).createCell(LIBELLE_COLUMN).setCellValue("Libellé");
+		sheet.getRow(i).getCell(LIBELLE_COLUMN).setCellStyle(styleCentre);
+		sheet.getRow(i).createCell(MONTANT_COLUMN).setCellValue("Montant");
+		sheet.getRow(i).getCell(MONTANT_COLUMN).setCellStyle(styleCentre);
 	}
 
 	/**
@@ -147,49 +155,49 @@ public class ExcelGenerator {
 		BigDecimal out = BigDecimal.ZERO;
 		for (Operation operation : listeOperations) {
 			sheet.createRow(i)
-					.createCell(0)
+					.createCell(DATE_EFFET_COLUMN)
 					.setCellValue(
 							operation.getDateEffet().getDayOfMonth() + "/" + operation.getDateEffet().getMonthOfYear()
 									+ "/" + operation.getDateEffet().getYear());
 			sheet.getRow(i)
-					.createCell(1)
+					.createCell(DATE_VALEUR_COLUMN)
 					.setCellValue(
 							operation.getDateValeur().getDayOfMonth() + "/"
 									+ operation.getDateValeur().getMonthOfYear() + "/"
 									+ operation.getDateValeur().getYear());
-			sheet.getRow(i).createCell(2).setCellValue(operation.getType().getLabel().name());
-			sheet.getRow(i).createCell(3).setCellValue(operation.getLabel());
-			sheet.getRow(i).getCell(0).setCellStyle(styleBorderEncadreHaut);
-			sheet.getRow(i).getCell(1).setCellStyle(styleBorderEncadreHaut);
-			sheet.getRow(i).getCell(2).setCellStyle(styleBorderEncadreHaut);
-			sheet.getRow(i).getCell(3).setCellStyle(styleBorderEncadreHaut);
+			sheet.getRow(i).createCell(TYPE_COLUMN).setCellValue(operation.getType().getLabel().name());
+			sheet.getRow(i).createCell(LIBELLE_COLUMN).setCellValue(operation.getLabel());
+			sheet.getRow(i).getCell(DATE_EFFET_COLUMN).setCellStyle(styleBorderEncadreHaut);
+			sheet.getRow(i).getCell(DATE_VALEUR_COLUMN).setCellStyle(styleBorderEncadreHaut);
+			sheet.getRow(i).getCell(TYPE_COLUMN).setCellStyle(styleBorderEncadreHaut);
+			sheet.getRow(i).getCell(LIBELLE_COLUMN).setCellStyle(styleBorderEncadreHaut);
 			if (operation.getMontant().compareTo(BigDecimal.ZERO) == 1) {
-				sheet.getRow(i).createCell(4).setCellValue("+ " + operation.getMontant().doubleValue());
-				sheet.getRow(i).getCell(4).setCellStyle(styleVert);
+				sheet.getRow(i).createCell(MONTANT_COLUMN).setCellValue("+ " + operation.getMontant().doubleValue());
+				sheet.getRow(i).getCell(MONTANT_COLUMN).setCellStyle(styleVert);
 				in = in.add(operation.getMontant());
 			} else {
-				sheet.getRow(i).createCell(4).setCellValue("- " + (-1 * operation.getMontant().doubleValue()));
-				sheet.getRow(i).getCell(4).setCellStyle(styleRouge);
+				sheet.getRow(i).createCell(MONTANT_COLUMN).setCellValue("- " + (-1 * operation.getMontant().doubleValue()));
+				sheet.getRow(i).getCell(MONTANT_COLUMN).setCellStyle(styleRouge);
 				out = out.add(operation.getMontant());
 			}
 			i++;
 		}
 		out = out.multiply(new BigDecimal(-1));
 		i = i + 2;
-		sheet.createRow(i).createCell(3).setCellValue("Crédits : ");
-		sheet.getRow(i).createCell(4).setCellValue("+ " + in.doubleValue());
-		sheet.getRow(i).getCell(3).setCellStyle(styleAlligneDroite);
-		sheet.getRow(i).getCell(4).setCellStyle(styleAlligneDroite);
+		sheet.createRow(i).createCell(LIBELLE_COLUMN).setCellValue("Crédits : ");
+		sheet.getRow(i).createCell(MONTANT_COLUMN).setCellValue("+ " + in.doubleValue());
+		sheet.getRow(i).getCell(LIBELLE_COLUMN).setCellStyle(styleAlligneDroite);
+		sheet.getRow(i).getCell(MONTANT_COLUMN).setCellStyle(styleAlligneDroite);
 		i++;
-		sheet.createRow(i).createCell(3).setCellValue("Débits : ");
-		sheet.getRow(i).createCell(4).setCellValue("- " + out.doubleValue());
-		sheet.getRow(i).getCell(3).setCellStyle(styleAlligneDroite);
-		sheet.getRow(i).getCell(4).setCellStyle(styleAlligneDroite);
+		sheet.createRow(i).createCell(LIBELLE_COLUMN).setCellValue("Débits : ");
+		sheet.getRow(i).createCell(MONTANT_COLUMN).setCellValue("- " + out.doubleValue());
+		sheet.getRow(i).getCell(LIBELLE_COLUMN).setCellStyle(styleAlligneDroite);
+		sheet.getRow(i).getCell(MONTANT_COLUMN).setCellStyle(styleAlligneDroite);
 		/****/
-		sheet.setColumnWidth(0, 3200);
-		sheet.setColumnWidth(1, 3200);
-		sheet.setColumnWidth(2, 3200);
-		sheet.setColumnWidth(3, 9000);
-		sheet.setColumnWidth(4, 4000);
+		sheet.setColumnWidth(DATE_EFFET_COLUMN, 3200);
+		sheet.setColumnWidth(DATE_VALEUR_COLUMN, 3200);
+		sheet.setColumnWidth(TYPE_COLUMN, 3200);
+		sheet.setColumnWidth(LIBELLE_COLUMN, 9000);
+		sheet.setColumnWidth(MONTANT_COLUMN, 4000);
 	}
 }

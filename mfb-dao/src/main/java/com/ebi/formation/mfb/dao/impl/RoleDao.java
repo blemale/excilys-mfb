@@ -14,6 +14,8 @@ import com.ebi.formation.mfb.entities.Role;
 import com.ebi.formation.mfb.entities.Role.Right;
 
 /**
+ * Implémentation de l'interface IRoleDao
+ * 
  * @author fguillain
  * 
  */

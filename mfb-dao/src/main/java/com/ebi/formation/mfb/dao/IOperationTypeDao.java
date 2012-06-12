@@ -6,6 +6,8 @@ import com.ebi.formation.mfb.entities.OperationType;
 import com.ebi.formation.mfb.entities.OperationType.Type;
 
 /**
+ * Cette interface représente le contrat à implémenter des DAO pour l'entité OperationType.
+ * 
  * @author excilys
  * 
  */

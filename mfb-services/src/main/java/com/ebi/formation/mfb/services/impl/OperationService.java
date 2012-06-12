@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ebi.formation.mfb.dao.ICompteDao;
@@ -15,6 +16,7 @@ import com.ebi.formation.mfb.dao.IOperationDao;
 import com.ebi.formation.mfb.dao.IOperationTypeDao;
 import com.ebi.formation.mfb.entities.Compte;
 import com.ebi.formation.mfb.entities.Operation;
+import com.ebi.formation.mfb.entities.OperationType;
 import com.ebi.formation.mfb.entities.OperationType.Type;
 import com.ebi.formation.mfb.services.IOperationService;
 
@@ -248,7 +250,7 @@ public class OperationService implements IOperationService {
 	 * java.math.BigDecimal)
 	 */
 	@Override
-	@Transactional
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public ReturnCodeVirement doVirement(long idCompteADebiter, long idCompteACrediter, String label, BigDecimal montant) {
 		logger.debug("doVirement(idCompteADebiter:{}, idCompteACrediter:{}, label:{}, montant:{})", new Object[] {
 				idCompteADebiter, idCompteACrediter, label, montant });
@@ -312,7 +314,7 @@ public class OperationService implements IOperationService {
 	 * java.math.BigDecimal)
 	 */
 	@Override
-	@Transactional
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public ReturnCodeVirement doVirement(long idCompteADebiter, String numeroCompteACrediter, String label,
 			BigDecimal montant) {
 		logger.debug("doVirement(idCompteADebiter:{}, numeroCompteACrediter:{}, label:{}, montant:{})", new Object[] {
@@ -332,5 +334,44 @@ public class OperationService implements IOperationService {
 	public void updateCompteWithNewOperations() {
 		logger.debug("updateCompteWithNewOperations()");
 		operationDao.updateCompteWithNewOperations();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.services.IOperationService#saveOperation(java.math.BigDecimal, java.lang.Long,
+	 * com.ebi.formation.mfb.entities.OperationType.Type, java.lang.String, org.joda.time.DateTime,
+	 * org.joda.time.DateTime)
+	 */
+	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+	public ReturnCodeOperation saveOperation(BigDecimal montant, Long idCompte, Type type, String label,
+			DateTime dateEffet, DateTime dateValeur) {
+		Compte c = compteDao.findCompteById(idCompte);
+		if (c == null) {
+			return ReturnCodeOperation.COMPTE_INEXISTANT;
+		}
+		OperationType ot = operationTypeDao.getOperationTypeByType(type);
+		Operation o = new Operation();
+		o.setCompte(c);
+		o.setDateEffet(dateEffet);
+		o.setDateValeur(dateValeur);
+		o.setLabel(label);
+		o.setMontant(montant);
+		o.setType(ot);
+		// operation immediate
+		if (dateValeur.isBeforeNow()) {
+			compteDao.updateCompteSoldeAndSoldePrevisionnel(idCompte, montant);
+			o.setOperationDone(Boolean.TRUE);
+		}
+		// operation en prévision
+		else {
+			if (Type.CARTE.equals(type))
+				compteDao.updateCompteEncoursCarteAndSoldePrevisionnel(idCompte, montant);
+			else
+				compteDao.updateCompteSoldePrevisionnel(idCompte, montant);
+			o.setOperationDone(Boolean.FALSE);
+		}
+		operationDao.save(o);
+		return ReturnCodeOperation.OK;
 	}
 }

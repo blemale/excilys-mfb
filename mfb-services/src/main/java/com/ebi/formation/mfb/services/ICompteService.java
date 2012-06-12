@@ -11,6 +11,7 @@ import com.ebi.formation.mfb.entities.Compte;
  * Interface du service associé à CompteDao
  * 
  * @author excilys
+ * @author fguillain
  * 
  */
 public interface ICompteService {

@@ -45,7 +45,7 @@ public class OperationServiceTest {
 	OperationService operationService;
 
 	/**
-	 * 
+	 * Test
 	 */
 	@Test
 	public void testGetTotalOperationsCarteByMonthWithOperation() {
@@ -57,7 +57,7 @@ public class OperationServiceTest {
 	}
 
 	/**
-	 * 
+	 * Test
 	 */
 	@Test
 	public void testGetTotalOperationsCarteByMonthWithoutOperation() {
@@ -68,7 +68,7 @@ public class OperationServiceTest {
 	}
 
 	/**
-	 * 
+	 * Test
 	 */
 	@Test
 	public void testGetNumbreOfOperationsCarteByMonth() {
@@ -79,7 +79,7 @@ public class OperationServiceTest {
 	}
 
 	/**
-	 * 
+	 * Test
 	 */
 	@Test
 	public void testGetNumbreOfOperationsWhithoutCarteByMonth() {
@@ -89,6 +89,9 @@ public class OperationServiceTest {
 		assertEquals(42L, operationService.getNumberOfOperationsWithoutCarteByMonth(1, 1, 2012));
 	}
 
+	/**
+	 * Test
+	 */
 	@Test
 	public void testGetNumbreOfVirementByMonth() {
 		DateTime date = new DateTime(2012, 1, 1, 0, 0);
@@ -98,7 +101,7 @@ public class OperationServiceTest {
 	}
 
 	/**
-	 * 
+	 * Test
 	 */
 	@Test
 	public void testGetOperationsWithoutCarteByMonthPaginated() {
@@ -112,7 +115,7 @@ public class OperationServiceTest {
 	}
 
 	/**
-	 * 
+	 * Test
 	 */
 	@Test
 	public void testGetOperationsWithoutCarteByMonthPaginatedWithPage() {
@@ -126,7 +129,7 @@ public class OperationServiceTest {
 	}
 
 	/**
-	 * 
+	 * Test
 	 */
 	@Test
 	public void testGetOperationsCarteByMonthPaginated() {
@@ -139,7 +142,7 @@ public class OperationServiceTest {
 	}
 
 	/**
-	 * 
+	 * Test
 	 */
 	@Test
 	public void testGetVirementsByMonthPaginated() {
@@ -152,7 +155,7 @@ public class OperationServiceTest {
 	}
 
 	/**
-	 * 
+	 * Test
 	 */
 	@Test
 	public void testGetOperationsCarteByMonthPaginatedWithPage() {
@@ -165,7 +168,7 @@ public class OperationServiceTest {
 	}
 
 	/**
-	 * 
+	 * Test
 	 */
 	@Test
 	public void testGetNumberOfPagesForOperationsWithoutCartesByMonth() {
@@ -178,7 +181,7 @@ public class OperationServiceTest {
 	}
 
 	/**
-	 * 
+	 * Test
 	 */
 	@Test
 	public void testGetNumberOfPagesForOperationsWithoutCartesByMonthWithCustom() {
@@ -191,7 +194,7 @@ public class OperationServiceTest {
 	}
 
 	/**
-	 * 
+	 * Test
 	 */
 	@Test
 	public void testGetNumberOfPagesForOperationsCartesByMonth() {
@@ -204,7 +207,7 @@ public class OperationServiceTest {
 	}
 
 	/**
-	 * 
+	 * Test
 	 */
 	@Test
 	public void testGetNumberOfPagesForOperationsCartesByMonthWithCustom() {
@@ -217,7 +220,7 @@ public class OperationServiceTest {
 	}
 
 	/**
-	 * 
+	 * Test
 	 */
 	@Test
 	public void testGetNumberOfPagesForVirementByMonth() {
@@ -230,7 +233,7 @@ public class OperationServiceTest {
 	}
 
 	/**
-	 * 
+	 * Test
 	 */
 	@Test
 	public void testGetNumberOfPagesForVirementByMonthWithCustom() {
@@ -243,7 +246,7 @@ public class OperationServiceTest {
 	}
 
 	/**
-	 * 
+	 * Test
 	 */
 	@Test
 	public void testVirementInterneOk() {
@@ -267,7 +270,7 @@ public class OperationServiceTest {
 	}
 
 	/**
-	 * 
+	 * Test
 	 */
 	@Test
 	public void testVirementExterneOk() {
@@ -293,7 +296,7 @@ public class OperationServiceTest {
 	}
 
 	/**
-	 * 
+	 * Test
 	 */
 	@Test
 	public void testVirementComptesIdentiques() {
@@ -304,7 +307,7 @@ public class OperationServiceTest {
 	}
 
 	/**
-	 * 
+	 * Test
 	 */
 	@Test
 	public void testVirementDecouvert() {
@@ -321,7 +324,7 @@ public class OperationServiceTest {
 	}
 
 	/**
-	 * 
+	 * Test
 	 */
 	@Test
 	public void testVirementCompteDebitNonExistant() {
@@ -335,7 +338,7 @@ public class OperationServiceTest {
 	}
 
 	/**
-	 * 
+	 * Test
 	 */
 	@Test
 	public void testVirementCompteCreditNonExistant() {
@@ -362,7 +365,7 @@ public class OperationServiceTest {
 	}
 
 	/**
-	 * 
+	 * Test
 	 */
 	@Test
 	public void testVirementValeurMontant() {

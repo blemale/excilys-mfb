@@ -16,7 +16,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 /**
- * Classe représentant une Person (utilisateur en base, qu'il soit un client ou un admin)
+ * Classe représentant une Person (utilisateur en base, qu'il soit un client ou un admin). Il peut posséder plusieurs
+ * comptes.
  * 
  * @author excilys
  * 

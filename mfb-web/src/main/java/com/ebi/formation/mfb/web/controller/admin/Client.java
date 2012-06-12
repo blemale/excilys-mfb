@@ -37,6 +37,7 @@ public class Client {
 	private IPersonService personService;
 	@Autowired
 	private IRoleService roleService;
+	private static final String OBJECT_LIST_RIGHTS = "listRights";
 
 	/**
 	 * 
@@ -56,8 +57,8 @@ public class Client {
 				result.addError(new FieldError("clientForm", "password2", null, true,
 						new String[] { "admin.clientForm.passwordNotSame" }, null, null));
 			}
-			mv.addObject("listRights", roleService.findAllRights());
-			mv.addObject("classActive", Admin.getClassActive(0));
+			mv.addObject(OBJECT_LIST_RIGHTS, roleService.findAllRights());
+			mv.addObject(SessionAttributesNames.CLASS_ACTIVE, Admin.getClassActive(0));
 			mv.setViewName("createClient");
 			return mv;
 		}
@@ -74,6 +75,8 @@ public class Client {
 			case IDENTICAL_USERNAME:
 				message = "admin.createClientForm.identicalUsername";
 				break;
+			default:
+				break;
 		}
 		redirectAttrs.addFlashAttribute("message", message);
 		return mv;
@@ -85,7 +88,7 @@ public class Client {
 	@RequestMapping(value = "createClient.html")
 	public ModelAndView createClientForm() {
 		ModelAndView mv = new ModelAndView("createClient");
-		mv.addObject("listRights", roleService.findAllRights());
+		mv.addObject(OBJECT_LIST_RIGHTS, roleService.findAllRights());
 		mv.addObject(SessionAttributesNames.CLASS_ACTIVE, Admin.getClassActive(0));
 		mv.addObject(new ClientForm());
 		return mv;

@@ -34,11 +34,10 @@
 						<label class="control-label" for=compte><spring:message
 								code="admin.createOperationForm.compte" /></label>
 						<div class="controls">
-							<form:select path="compte">
-								<form:options items="${comptesList}" itemLabel="fullCompte"
-									itemValue="id" />
+							<form:select path="idCompte">
+								<form:options items="${listComptes}" itemLabel="fullCompte" itemValue="id" />
 							</form:select>
-							<form:errors path="compte" cssClass="colorError" />
+							<form:errors path="idCompte" cssClass="colorError" />
 						</div>
 					</div>
 
@@ -47,7 +46,7 @@
 								code="admin.createOperationForm.type" /></label>
 						<div class="controls">
 							<form:select path="type">
-								<form:options items="${typesList}" />
+								<form:options items="${listTypes}" />
 							</form:select>
 							<form:errors path="type" cssClass="colorError" />
 						</div>
@@ -56,7 +55,7 @@
 						<label class="control-label" for="dateEffet"><spring:message
 								code="admin.createOperationForm.dateEffet" /></label>
 						<div class="controls">
-							<form:input path="dateEffet" cssClass="input-xlarge focused" />
+							<form:select path="dateEffet" items="${datesEffet}" itemLabel="dateTimeFormat" itemValue="dateTime" />
 							<form:errors path="dateEffet" cssClass="colorError" />
 						</div>
 					</div>
@@ -64,7 +63,7 @@
 						<label class="control-label" for="dateValeur"><spring:message
 								code="admin.createOperationForm.dateValeur" /></label>
 						<div class="controls">
-							<form:input path="dateValeur" cssClass="input-xlarge focused" />
+							<form:select path="dateValeur" items="${datesValeur}" itemLabel="dateTimeFormat" itemValue="dateTime" />
 							<form:errors path="dateValeur" cssClass="colorError" />
 						</div>
 					</div>

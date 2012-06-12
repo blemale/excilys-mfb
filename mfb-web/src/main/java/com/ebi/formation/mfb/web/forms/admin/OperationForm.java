@@ -6,8 +6,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.joda.time.DateTime;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import com.ebi.formation.mfb.entities.Compte;
 import com.ebi.formation.mfb.entities.OperationType.Type;
 
 /**
@@ -22,12 +22,16 @@ public class OperationForm {
 	@NotNull
 	private BigDecimal montant;
 	@NotNull
-	private Compte compte;
+	private Long idCompte;
 	@NotNull
 	private Type type;
 	@Size(max = 64)
 	private String label;
+	@NotNull
+	@DateTimeFormat
 	private DateTime dateEffet;
+	@NotNull
+	@DateTimeFormat
 	private DateTime dateValeur;
 
 	/**
@@ -46,18 +50,18 @@ public class OperationForm {
 	}
 
 	/**
-	 * @return the compte
+	 * @return the idCompte
 	 */
-	public Compte getCompte() {
-		return compte;
+	public Long getIdCompte() {
+		return idCompte;
 	}
 
 	/**
-	 * @param compte
-	 *            the compte to set
+	 * @param idCompte
+	 *            the idCompte to set
 	 */
-	public void setCompte(Compte compte) {
-		this.compte = compte;
+	public void setIdCompte(Long idCompte) {
+		this.idCompte = idCompte;
 	}
 
 	/**
