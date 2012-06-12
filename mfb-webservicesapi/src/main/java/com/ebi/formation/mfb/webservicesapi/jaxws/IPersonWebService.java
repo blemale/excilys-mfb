@@ -12,11 +12,11 @@ import com.ebi.formation.mfb.webservicesapi.dto.PersonDTO;
 @WebService
 public interface IPersonWebService {
 
-	public PersonDTO findPersonByUsername(@WebParam(name = "username") String username);
+	PersonDTO findPersonByUsername(@WebParam(name = "username") String username);
 
-	public ReturnCodePerson save(@WebParam(name = "username") String username,
+	ReturnCodePerson save(@WebParam(name = "username") String username,
 			@WebParam(name = "firstname") String firstname, @WebParam(name = "lastname") String lastname,
 			@WebParam(name = "password") String password, @WebParam(name = "listRights") List<Right> listRights);
 
-	public List<PersonDTO> findAllPersons();
+	List<PersonDTO> findAllPersons();
 }

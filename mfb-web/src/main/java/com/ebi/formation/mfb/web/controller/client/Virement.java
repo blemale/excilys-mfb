@@ -103,6 +103,8 @@ public class Virement {
 				message = "virement.ok";
 				mv.setViewName("redirect:confirmVirement.html");
 				break;
+			default:
+				break;
 		}
 		redirectAttrs.addFlashAttribute("message", message);
 		return mv;
@@ -164,6 +166,8 @@ public class Virement {
 			case OK:
 				message = "virement.ok";
 				mv.setViewName("redirect:confirmVirement.html");
+				break;
+			default:
 				break;
 		}
 		redirectAttrs.addFlashAttribute("message", message);

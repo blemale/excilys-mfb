@@ -11,17 +11,17 @@ import com.ebi.formation.mfb.webservicesapi.dto.CompteDTO;
 @WebService
 public interface ICompteWebService {
 
-	public boolean checkCompteOwnershipByUsernameAndCompteId(@WebParam(name = "username") String username,
+	boolean checkCompteOwnershipByUsernameAndCompteId(@WebParam(name = "username") String username,
 			@WebParam(name = "compteId") Long compteId);
 
-	public List<CompteDTO> findComptesByUsername(@WebParam(name = "username") String username);
+	List<CompteDTO> findComptesByUsername(@WebParam(name = "username") String username);
 
-	public CompteDTO getCompteById(@WebParam(name = "compteId") Long compteId);
+	CompteDTO getCompteById(@WebParam(name = "compteId") Long compteId);
 
-	public CompteDTO getCompteByNumeroCompte(@WebParam(name = "numeroCompte") String numeroCompte);
+	CompteDTO getCompteByNumeroCompte(@WebParam(name = "numeroCompte") String numeroCompte);
 
-	public Object[] save(@WebParam(name = "libelle") String libelle,
+	Object[] save(@WebParam(name = "libelle") String libelle,
 			@WebParam(name = "usernamePerson") String usernamePerson, @WebParam(name = "solde") BigDecimal solde);
 
-	public List<CompteDTO> findAllComptes();
+	List<CompteDTO> findAllComptes();
 }

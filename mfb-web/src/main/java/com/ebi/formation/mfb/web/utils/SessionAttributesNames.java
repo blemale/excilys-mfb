@@ -8,7 +8,7 @@ package com.ebi.formation.mfb.web.utils;
  */
 public interface SessionAttributesNames {
 
-	public static final String USER_LASTNAME = "userLastName";
-	public static final String USER_FIRSTNAME = "userFirstName";
-	public static final String CLASS_ACTIVE = "isClassActive";
+	String USER_LASTNAME = "userLastName";
+	String USER_FIRSTNAME = "userFirstName";
+	String CLASS_ACTIVE = "isClassActive";
 }

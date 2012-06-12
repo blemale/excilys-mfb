@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ebi.formation.mfb.dao.ICompteDao;
-import com.ebi.formation.mfb.dao.IOperationDao;
 import com.ebi.formation.mfb.dao.IPersonDao;
 import com.ebi.formation.mfb.entities.Compte;
 import com.ebi.formation.mfb.entities.Person;
@@ -32,8 +31,6 @@ public class CompteService implements ICompteService {
 	private ICompteDao compteDao;
 	@Autowired
 	private IPersonDao personDao;
-	@Autowired
-	private IOperationDao operationDao;
 	private static final int LENGTH_NUM_COMPTE = 8;
 
 	/*
@@ -93,8 +90,8 @@ public class CompteService implements ICompteService {
 		compte.setLabel(libelle);
 		compte.addOwner(p);
 		compte.setSolde(solde);
-		compte.setEncoursCarte(new BigDecimal(0));
-		compte.setSoldePrevisionnel(new BigDecimal(0));
+		compte.setEncoursCarte(BigDecimal.ZERO);
+		compte.setSoldePrevisionnel(BigDecimal.ZERO);
 		String numCompte = "";
 		// génère un numéro de compte et vérifie qu'il n'existe pas déjà !
 		do {
