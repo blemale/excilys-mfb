@@ -6,7 +6,7 @@ package com.ebi.formation.mfb.web.utils;
  * @author excilys
  * 
  */
-public class LinkBuilder {
+public final class LinkBuilder {
 
 	/**
 	 * Constructeur empechant la classe LinkBuilder d'être instanciée

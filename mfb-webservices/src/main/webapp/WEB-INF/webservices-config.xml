@@ -15,6 +15,7 @@
 	<context:component-scan base-package="com.ebi.formation.mfb.webservices" />
 
 	<import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml"/>
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 
 	<jaxws:endpoint id="OperationWebServiceSOAP" implementor="com.ebi.formation.mfb.webservices.jaxws.impl.OperationWebService" address="/OperationWebService"/>
@@ -23,22 +24,24 @@
 
 	<jaxrs:server id="CompteWebServiceREST" address="/compteService">
 		<jaxrs:serviceBeans>
-			<bean id="serviceImpl" class="com.ebi.formation.mfb.webservices.CompteWebService" />
+			<bean id="serviceImpl" class="com.ebi.formation.mfb.webservices.jaxrs.impl.CompteWebService" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
 			<bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider"/>
 		</jaxrs:providers>
 	</jaxrs:server>
+
 	<jaxrs:server id="PersonneWebServiceREST" address="/personneService">
 		<jaxrs:serviceBeans>
-			<bean id="serviceImpl" class="com.ebi.formation.mfb.webservices.PersonneWebService" />
+			<bean id="serviceImpl" class="com.ebi.formation.mfb.webservices.jaxrs.impl.PersonneWebService" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
 			<bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider"/>
 		</jaxrs:providers>
 	</jaxrs:server>
 
-
+	<bean id="binder" class="org.jdto.spring.SpringDTOBinder"/>
+	
 	<import resource="classpath:persistence-config.xml" />
 	<import resource="classpath:services-config.xml" />
 	

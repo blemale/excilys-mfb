@@ -65,6 +65,8 @@ public class Compte {
 				redirectAttrs.addFlashAttribute("infoPlus", res[1].toString());
 				mv.setViewName("redirect:confirmCreateCompte.html");
 				break;
+			default:
+				break;
 		}
 		redirectAttrs.addFlashAttribute("message", message);
 		return mv;

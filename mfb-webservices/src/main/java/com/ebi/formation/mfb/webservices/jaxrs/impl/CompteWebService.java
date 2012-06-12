@@ -1,24 +1,28 @@
-package com.ebi.formation.mfb.webservices.jaxws.impl;
+package com.ebi.formation.mfb.webservices.jaxrs.impl;
 
-import java.math.BigDecimal;
 import java.util.List;
 
-import javax.jws.WebService;
+import javax.ws.rs.Produces;
 
 import org.jdto.DTOBinder;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ebi.formation.mfb.services.ICompteService;
 import com.ebi.formation.mfb.webservicesapi.dto.CompteDTO;
-import com.ebi.formation.mfb.webservicesapi.jaxws.ICompteWebService;
+import com.ebi.formation.mfb.webservicesapi.jaxrs.ICompteWebService;
 
-@WebService(endpointInterface = "com.ebi.formation.mfb.webservicesapi.jaxws.ICompteWebService")
+@Produces({ "application/json", "text/xml" })
 public class CompteWebService implements ICompteWebService {
 
 	@Autowired
 	private ICompteService compteService;
 	@Autowired
 	private DTOBinder binder;
+
+	@Override
+	public CompteDTO getCompteById(Long compteId) {
+		return binder.bindFromBusinessObject(CompteDTO.class, compteService.getCompteById(compteId));
+	}
 
 	@Override
 	public List<CompteDTO> findComptesByUsername(String username) {
@@ -31,22 +35,7 @@ public class CompteWebService implements ICompteWebService {
 	}
 
 	@Override
-	public CompteDTO getCompteById(Long compteId) {
-		return binder.bindFromBusinessObject(CompteDTO.class, compteService.getCompteById(compteId));
-	}
-
-	@Override
 	public CompteDTO getCompteByNumeroCompte(String numeroCompte) {
 		return binder.bindFromBusinessObject(CompteDTO.class, compteService.getCompteByNumeroCompte(numeroCompte));
-	}
-
-	@Override
-	public Object[] save(String libelle, String usernamePerson, BigDecimal solde) {
-		return compteService.save(libelle, usernamePerson, solde);
-	}
-
-	@Override
-	public List<CompteDTO> findAllComptes() {
-		return binder.bindFromBusinessObjectList(CompteDTO.class, compteService.findAllComptes());
 	}
 }

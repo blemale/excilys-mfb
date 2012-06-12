@@ -33,7 +33,7 @@ public class ConsultationVirementIT {
 		selenium.type("name=j_password", "user");
 		selenium.click("css=button.btn");
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Historique virement");
+		selenium.click("link=Historique");
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isTextPresent("Pas de virement ce mois ci"));
 		selenium.click("link=2");
@@ -74,7 +74,7 @@ public class ConsultationVirementIT {
 		assertFalse(selenium.isTextPresent("Pas de virement ce mois ci"));
 		selenium.click("link=Revenir à la liste des comptes");
 		selenium.waitForPageToLoad("30000");
-		selenium.click("xpath=(//a[contains(text(),'Historique virement')])[2]");
+		selenium.click("xpath=(//a[contains(text(),'Historique')])[2]");
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Pas de virement ce mois ci"));
 		selenium.click("link=Revenir à la liste des comptes");

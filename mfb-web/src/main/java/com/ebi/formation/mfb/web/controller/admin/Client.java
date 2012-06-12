@@ -74,6 +74,8 @@ public class Client {
 			case IDENTICAL_USERNAME:
 				message = "admin.createClientForm.identicalUsername";
 				break;
+			default:
+				break;
 		}
 		redirectAttrs.addFlashAttribute("message", message);
 		return mv;
