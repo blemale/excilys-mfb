@@ -1,13 +1,12 @@
 package com.ebi.formation.mfb.webservices.jaxrs.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Produces;
 
+import org.jdto.DTOBinder;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.ebi.formation.mfb.entities.Compte;
 import com.ebi.formation.mfb.services.ICompteService;
 import com.ebi.formation.mfb.webservicesapi.dto.CompteDTO;
 import com.ebi.formation.mfb.webservicesapi.jaxrs.ICompteWebService;
@@ -17,15 +16,17 @@ public class CompteWebService implements ICompteWebService {
 
 	@Autowired
 	private ICompteService compteService;
+	@Autowired
+	private DTOBinder binder;
 
 	@Override
 	public CompteDTO getCompteById(Long compteId) {
-		return convertCompteToCompteDTO(compteService.getCompteById(compteId));
+		return binder.bindFromBusinessObject(CompteDTO.class, compteService.getCompteById(compteId));
 	}
 
 	@Override
 	public List<CompteDTO> findComptesByUsername(String username) {
-		return convertListCompteToListCompteDTO(compteService.findComptesByUsername(username));
+		return binder.bindFromBusinessObjectList(CompteDTO.class, compteService.findComptesByUsername(username));
 	}
 
 	@Override
@@ -35,24 +36,6 @@ public class CompteWebService implements ICompteWebService {
 
 	@Override
 	public CompteDTO getCompteByNumeroCompte(String numeroCompte) {
-		return convertCompteToCompteDTO(compteService.getCompteByNumeroCompte(numeroCompte));
-	}
-
-	private CompteDTO convertCompteToCompteDTO(Compte compte) {
-		if (compte == null) {
-			return null;
-		}
-		return new CompteDTO(compte.getId(), compte.getLabel(), compte.getSolde(), compte.getSoldePrevisionnel(),
-				compte.getEncoursCarte(), compte.getNumeroCompte());
-	}
-
-	private List<CompteDTO> convertListCompteToListCompteDTO(List<Compte> comptes) {
-		List<CompteDTO> compteDTOs = new ArrayList<CompteDTO>();
-		for (Compte c : comptes) {
-			if (c != null) {
-				compteDTOs.add(convertCompteToCompteDTO(c));
-			}
-		}
-		return compteDTOs;
+		return binder.bindFromBusinessObject(CompteDTO.class, compteService.getCompteByNumeroCompte(numeroCompte));
 	}
 }
