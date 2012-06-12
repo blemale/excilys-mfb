@@ -72,6 +72,9 @@ public class CompteDaoTest {
 		assertEquals(2, accounts.size());
 	}
 
+	/**
+	 * 
+	 */
 	@DataSet("dataSet-CompteDaoTest.xml")
 	@Test
 	public void testCompteOwnership() {
@@ -81,6 +84,9 @@ public class CompteDaoTest {
 		assertTrue(compteDao.checkCompteOwnershipByUsernameAndCompteId("bastou", 3L));
 	}
 
+	/**
+	 * 
+	 */
 	@DataSet("dataSet-CompteDaoTest.xml")
 	@Test
 	public void testFindCompteById() {
@@ -91,6 +97,9 @@ public class CompteDaoTest {
 		assertNull(result2);
 	}
 
+	/**
+	 * 
+	 */
 	@DataSet("dataSet-CompteDaoTest.xml")
 	@Test
 	public void testFindCompteByNumeroCompte() {
@@ -101,6 +110,9 @@ public class CompteDaoTest {
 		assertNull(result2);
 	}
 
+	/**
+	 * 
+	 */
 	@DataSet("dataSet-CompteDaoTest.xml")
 	@Test
 	public void testSaveCompte() {
@@ -114,5 +126,16 @@ public class CompteDaoTest {
 		Compte tmp = compteDao.findCompteById(4L);
 		assertNotNull(tmp);
 		assertEquals(compte, tmp);
+	}
+
+	/**
+	 * 
+	 */
+	@DataSet("dataSet-CompteDaoTest.xml")
+	@Test
+	public void testFindAllComptes() {
+		List<Compte> listComptes = compteDao.findAllComptes();
+		assertNotNull(listComptes);
+		assertEquals(3, listComptes.size());
 	}
 }

@@ -30,7 +30,9 @@
 		@NamedQuery(name = "findOperationTypeByType", query = "SELECT ot FROM OperationType ot WHERE ot.label = :type"),
 		@NamedQuery(name = "findAllPersons", query = "SELECT p FROM Person p"),
 		@NamedQuery(name = "findRoleByRight", query = "SELECT r FROM Role r WHERE r.right=:right"),
-		@NamedQuery(name = "findAllRights", query = "SELECT r.right FROM Role r ") })
+		@NamedQuery(name = "findAllRights", query = "SELECT r.right FROM Role r"),
+		@NamedQuery(name = "findAllOperationTypes", query = "SELECT ot.label FROM OperationType ot"),
+		@NamedQuery(name = "findAllComptes", query = "SELECT c FROM Compte c") })
 package com.ebi.formation.mfb.entities;
 
 import org.hibernate.annotations.NamedQueries;

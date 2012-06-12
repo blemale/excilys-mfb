@@ -1,5 +1,7 @@
 package com.ebi.formation.mfb.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -18,7 +20,9 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  */
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
-public class Role {
+public class Role implements Serializable {
+
+	private static final long serialVersionUID = -6664112446535283358L;
 
 	/**
 	 * Enumération des rôles
@@ -49,5 +53,13 @@ public class Role {
 	 */
 	public Right getRight() {
 		return right;
+	}
+
+	/**
+	 * @param right
+	 *            the right to set
+	 */
+	public void setRight(Right right) {
+		this.right = right;
 	}
 }

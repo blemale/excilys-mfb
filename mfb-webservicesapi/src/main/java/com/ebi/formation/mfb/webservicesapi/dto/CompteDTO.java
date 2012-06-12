@@ -1,4 +1,4 @@
-package com.ebi.formation.mfb.webservices.dto;
+package com.ebi.formation.mfb.webservicesapi.dto;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -12,6 +12,9 @@ public class CompteDTO implements Serializable {
 	private BigDecimal soldePrevisionnel;
 	private BigDecimal encoursCarte;
 	private String numeroCompte;
+
+	public CompteDTO() {
+	}
 
 	public CompteDTO(Long id, String label, BigDecimal solde, BigDecimal soldePrevisionnel, BigDecimal encoursCarte,
 			String numeroCompte) {

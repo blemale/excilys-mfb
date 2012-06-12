@@ -40,6 +40,9 @@ public class RoleDaoTest {
 	@Autowired
 	private RoleDao roleDao;
 
+	/**
+	 * 
+	 */
 	@DataSet("dataSet-RoleDaoTest.xml")
 	@Test
 	public void testFindRoleByRight() {
@@ -51,6 +54,9 @@ public class RoleDaoTest {
 		assertTrue(2L == r.getId());
 	}
 
+	/**
+	 * 
+	 */
 	@DataSet("dataSet-RoleDaoTest.xml")
 	@Test
 	public void testFindAllRoles() {

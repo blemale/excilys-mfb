@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.ebi.formation.mfb.entities.Person;
 import com.ebi.formation.mfb.services.IPersonService;
-import com.ebi.formation.mfb.webservices.dto.PersonDTO;
+import com.ebi.formation.mfb.webservicesapi.dto.PersonDTO;
 
 @Service
 @Produces({ "application/json", "text/xml" })

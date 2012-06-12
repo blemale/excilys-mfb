@@ -310,4 +310,9 @@ public interface IOperationService {
 	 */
 	@Secured("ROLE_CLIENT")
 	ReturnCodeVirement doVirement(long idCompteADebiter, String numeroCompteACrediter, String label, BigDecimal montant);
+
+	/**
+	 * Permet de mettre à jour les comptes par rapport aux nouvelles opérations (via un batch)
+	 */
+	void updateCompteWithNewOperations();
 }

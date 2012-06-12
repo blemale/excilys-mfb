@@ -1,4 +1,4 @@
-package com.ebi.formation.mfb.webservices.dto;
+package com.ebi.formation.mfb.webservicesapi.dto;
 
 import java.io.Serializable;
 
@@ -10,6 +10,9 @@ public class PersonDTO implements Serializable {
 	private String password;
 	private String firstName;
 	private String lastName;
+
+	public PersonDTO() {
+	}
 
 	public PersonDTO(Long id, String username, String password, String firstName, String lastName) {
 		super();

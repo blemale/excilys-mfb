@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
 import org.joda.time.DateTime;
 
 import com.ebi.formation.mfb.entities.Compte;
-import com.ebi.formation.mfb.entities.OperationType;
+import com.ebi.formation.mfb.entities.OperationType.Type;
 
 /**
  * Classe représentant le formulaire de demande de création d'une opération. Nécessaire pour la validation du
@@ -24,7 +24,7 @@ public class OperationForm {
 	@NotNull
 	private Compte compte;
 	@NotNull
-	private OperationType type;
+	private Type type;
 	@Size(max = 64)
 	private String label;
 	private DateTime dateEffet;
@@ -63,7 +63,7 @@ public class OperationForm {
 	/**
 	 * @return the type
 	 */
-	public OperationType getType() {
+	public Type getType() {
 		return type;
 	}
 
@@ -71,7 +71,7 @@ public class OperationForm {
 	 * @param type
 	 *            the type to set
 	 */
-	public void setType(OperationType type) {
+	public void setType(Type type) {
 		this.type = type;
 	}
 

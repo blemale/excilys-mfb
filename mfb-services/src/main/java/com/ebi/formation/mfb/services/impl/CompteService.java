@@ -1,20 +1,21 @@
 package com.ebi.formation.mfb.services.impl;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ebi.formation.mfb.dao.ICompteDao;
+import com.ebi.formation.mfb.dao.IOperationDao;
+import com.ebi.formation.mfb.dao.IPersonDao;
 import com.ebi.formation.mfb.entities.Compte;
 import com.ebi.formation.mfb.entities.Person;
 import com.ebi.formation.mfb.services.ICompteService;
-import com.ebi.formation.mfb.services.IPersonService;
 
 /**
  * Implémentation du service associé à CompteDao
@@ -30,7 +31,9 @@ public class CompteService implements ICompteService {
 	@Autowired
 	private ICompteDao compteDao;
 	@Autowired
-	private IPersonService personService;
+	private IPersonDao personDao;
+	@Autowired
+	private IOperationDao operationDao;
 	private static final int LENGTH_NUM_COMPTE = 8;
 
 	/*
@@ -79,17 +82,16 @@ public class CompteService implements ICompteService {
 	 * @see com.ebi.formation.mfb.services.ICompteService#save(java.lang.String, java.lang.String, java.math.BigDecimal)
 	 */
 	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public Object[] save(String libelle, String usernamePerson, BigDecimal solde) {
 		logger.debug("save(libelle:{}, usernamePerson:{}, solde:{})", new Object[] { libelle, usernamePerson, solde });
-		List<Person> listPerson = new ArrayList<Person>();
-		Person p = personService.findPersonByUsername(usernamePerson);
+		Person p = personDao.findPersonByUsername(usernamePerson);
 		if (p == null) {
 			return new Object[] { ReturnCodeCompte.OWNER_INEXISTANT };
 		}
-		listPerson.add(p);
 		Compte compte = new Compte();
 		compte.setLabel(libelle);
-		compte.setOwners(listPerson);
+		compte.addOwner(p);
 		compte.setSolde(solde);
 		compte.setEncoursCarte(new BigDecimal(0));
 		compte.setSoldePrevisionnel(new BigDecimal(0));
@@ -117,5 +119,14 @@ public class CompteService implements ICompteService {
 			res += chars.charAt(numI);
 		}
 		return res;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.services.ICompteService#findAllComptes()
+	 */
+	@Override
+	public List<Compte> findAllComptes() {
+		return compteDao.findAllComptes();
 	}
 }

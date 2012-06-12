@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+
+	<jaxws:client id="CompteWebService"
+		serviceClass="com.ebi.formation.mfb.webservicesapi.jaxws.ICompteWebService"
+		address="http://localhost:8080/mfb-webservices/CompteWebService" />
+	<jaxws:client id="PersonWebService"
+		serviceClass="com.ebi.formation.mfb.webservicesapi.jaxws.IPersonWebService"
+		address="http://localhost:8080/mfb-webservices/PersonWebService" />
+
+	<jaxws:client id="OperationWebService"
+		serviceClass="com.ebi.formation.mfb.webservicesapi.jaxws.IOperationWebService"
+		address="http://localhost:8080/mfb-webservices/OperationWebService" />
+</beans>

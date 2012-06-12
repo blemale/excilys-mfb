@@ -1,5 +1,7 @@
 package com.ebi.formation.mfb.entities;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -20,8 +22,9 @@ import javax.persistence.ManyToMany;
  * 
  */
 @Entity
-public class Person {
+public class Person implements Serializable {
 
+	private static final long serialVersionUID = 8137241115677392686L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -100,6 +103,14 @@ public class Person {
 	}
 
 	/**
+	 * @param comptes
+	 *            the list of comptes to set
+	 */
+	public void setComptes(List<Compte> comptes) {
+		this.comptes = comptes;
+	}
+
+	/**
 	 * @param username
 	 *            the username to set
 	 */
@@ -137,5 +148,15 @@ public class Person {
 	public String getFullPerson() {
 		return new StringBuilder(this.getUsername()).append(" - ").append(this.getFirstName()).append(" ")
 				.append(this.getLastName()).toString();
+	}
+
+	/**
+	 * @param compte
+	 */
+	public void addCompte(Compte compte) {
+		if (this.comptes == null) {
+			this.comptes = new ArrayList<Compte>();
+		}
+		this.comptes.add(compte);
 	}
 }
