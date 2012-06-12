@@ -31,7 +31,7 @@ public class PersonServiceTest {
 	PersonService ps;
 
 	/**
-	 * Test
+	 * Test la récupération d'une Person via son username
 	 */
 	@Test
 	public void testFindPersonByUsername() {
@@ -47,7 +47,7 @@ public class PersonServiceTest {
 	}
 
 	/**
-	 * Test
+	 * Test la sauvegarde d'une Person
 	 */
 	@Test
 	public void testSavePerson() {

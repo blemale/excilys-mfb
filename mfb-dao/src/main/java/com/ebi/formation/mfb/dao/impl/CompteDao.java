@@ -19,6 +19,7 @@ import com.ebi.formation.mfb.entities.Compte;
  * Implémentation de l'interface ICompteDao
  * 
  * @author excilys
+ * @author fguillain
  * 
  */
 @Repository

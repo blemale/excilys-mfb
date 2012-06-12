@@ -153,7 +153,7 @@ public class OperationDaoTest {
 	}
 
 	/**
-	 * 
+	 * Test
 	 */
 	@DataSet("dataSet-OperationDaoTest.xml")
 	@Test
@@ -171,7 +171,7 @@ public class OperationDaoTest {
 	}
 
 	/**
-	 * 
+	 * Test
 	 */
 	@DataSet("dataSet-OperationDaoTest.xml")
 	@Test
@@ -183,7 +183,7 @@ public class OperationDaoTest {
 	}
 
 	/**
-	 * 
+	 * Test la persistence d'une opération
 	 */
 	@DataSet("dataSet-OperationDaoTest.xml")
 	@Test

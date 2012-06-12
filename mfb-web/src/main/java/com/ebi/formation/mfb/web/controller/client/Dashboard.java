@@ -21,10 +21,6 @@ import com.ebi.formation.mfb.web.utils.LinkBuilder;
  * @author kpogorzelski
  * 
  */
-/**
- * @author excilys
- * 
- */
 @Controller
 @RequestMapping("/client")
 public class Dashboard {

@@ -11,6 +11,12 @@ import javax.persistence.Id;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+/**
+ * Classe représentatn le type d'une opération
+ * 
+ * @author excilys
+ * 
+ */
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 public class OperationType implements Serializable {

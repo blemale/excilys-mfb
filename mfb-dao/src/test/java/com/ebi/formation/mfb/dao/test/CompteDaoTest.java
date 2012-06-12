@@ -73,7 +73,7 @@ public class CompteDaoTest {
 	}
 
 	/**
-	 * 
+	 * Test l'appartenance d'un compte d'un utilisateur via le username et l'id du compte
 	 */
 	@DataSet("dataSet-CompteDaoTest.xml")
 	@Test
@@ -85,7 +85,7 @@ public class CompteDaoTest {
 	}
 
 	/**
-	 * 
+	 * Test la récupération d'un compte via son id
 	 */
 	@DataSet("dataSet-CompteDaoTest.xml")
 	@Test
@@ -98,7 +98,7 @@ public class CompteDaoTest {
 	}
 
 	/**
-	 * 
+	 * Test la récupération d'un compte via son numéro de compte
 	 */
 	@DataSet("dataSet-CompteDaoTest.xml")
 	@Test
@@ -111,7 +111,7 @@ public class CompteDaoTest {
 	}
 
 	/**
-	 * 
+	 * Test la persistance d'un compte
 	 */
 	@DataSet("dataSet-CompteDaoTest.xml")
 	@Test
@@ -129,7 +129,7 @@ public class CompteDaoTest {
 	}
 
 	/**
-	 * 
+	 * Test la récupération de tous les comptes
 	 */
 	@DataSet("dataSet-CompteDaoTest.xml")
 	@Test
@@ -140,7 +140,7 @@ public class CompteDaoTest {
 	}
 
 	/**
-	 * 
+	 * Test la mise à jour du solde d'un compte
 	 */
 	@DataSet("dataSet-CompteDaoTest.xml")
 	@Test
@@ -154,7 +154,7 @@ public class CompteDaoTest {
 	}
 
 	/**
-	 * 
+	 * Test la mise à jour du solde et de l'encours carte d'un compte
 	 */
 	@DataSet("dataSet-CompteDaoTest.xml")
 	@Test
@@ -170,7 +170,7 @@ public class CompteDaoTest {
 	}
 
 	/**
-	 * 
+	 * Test la mise à jour de l'encours carte et du solde prévisionnel d'un compte
 	 */
 	@DataSet("dataSet-CompteDaoTest.xml")
 	@Test
@@ -182,7 +182,7 @@ public class CompteDaoTest {
 	}
 
 	/**
-	 * 
+	 * Test la mise à jour du solde prévisionnel d'un compte
 	 */
 	@DataSet("dataSet-CompteDaoTest.xml")
 	@Test

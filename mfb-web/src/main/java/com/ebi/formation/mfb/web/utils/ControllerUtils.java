@@ -14,9 +14,12 @@ import org.springframework.web.servlet.view.RedirectView;
  */
 public final class ControllerUtils {
 
-	
-	private ControllerUtils(){}
-	
+	/**
+	 * Constructeur empechant la classe ControllerUtils d'être instanciée
+	 */
+	private ControllerUtils() {
+	}
+
 	/**
 	 * Méthode permettant de rediriger vers une page d'info (erreur ou confirmation) et Home en cas de refresh
 	 * 

@@ -40,7 +40,7 @@ public class OperationTypeDaoTest {
 	private IOperationTypeDao operationTypeDao;
 
 	/**
-	 * 
+	 * Test la récupération d'une OperationType via un Type
 	 */
 	@DataSet("dataSet-OperationTypeDaoTest.xml")
 	@Test
@@ -51,7 +51,7 @@ public class OperationTypeDaoTest {
 	}
 
 	/**
-	 * 
+	 * Test la récupération de toutes les types d'opération
 	 */
 	@DataSet("dataSet-OperationTypeDaoTest.xml")
 	@Test

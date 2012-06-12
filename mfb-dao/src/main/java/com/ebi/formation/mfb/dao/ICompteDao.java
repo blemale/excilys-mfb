@@ -6,7 +6,7 @@ import java.util.List;
 import com.ebi.formation.mfb.entities.Compte;
 
 /**
- * Cette interface représente le contrat à implémenter des DAO pour l'entité Account.
+ * Cette interface représente le contrat à implémenter des DAO pour l'entité Compte.
  * 
  * @author excilys
  * 

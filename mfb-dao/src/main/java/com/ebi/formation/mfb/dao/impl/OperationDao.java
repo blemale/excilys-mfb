@@ -24,10 +24,7 @@ import com.ebi.formation.mfb.entities.OperationType.Type;
  * 
  * @author kpogorzelski
  * @author tbakir
- * 
- */
-/**
- * @author excilys
+ * @author fguillain
  * 
  */
 @Repository

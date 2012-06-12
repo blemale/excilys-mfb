@@ -23,6 +23,10 @@ import com.ebi.formation.mfb.web.forms.VirementExterneForm;
 import com.ebi.formation.mfb.web.forms.VirementInterneForm;
 import com.ebi.formation.mfb.web.utils.ControllerUtils;
 
+/**
+ * @author excilys
+ * 
+ */
 @Controller
 @RequestMapping("/client/")
 public class Virement {

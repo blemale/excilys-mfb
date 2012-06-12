@@ -11,9 +11,10 @@ import com.ebi.formation.mfb.entities.Operation;
 import com.ebi.formation.mfb.entities.OperationType.Type;
 
 /**
- * Interface du service associé à {@link Operation}
+ * Interface du service associé à OperationDao
  * 
  * @author excilys
+ * @author fguillain
  * 
  */
 public interface IOperationService {
@@ -323,6 +324,8 @@ public interface IOperationService {
 	void updateCompteWithNewOperations();
 
 	/**
+	 * Permet de sauvegarder une opération lié à un compte
+	 * 
 	 * @param montant
 	 * @param idCompte
 	 * @param type

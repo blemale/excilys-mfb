@@ -13,6 +13,12 @@ import com.ebi.formation.mfb.dao.IOperationTypeDao;
 import com.ebi.formation.mfb.entities.OperationType;
 import com.ebi.formation.mfb.entities.OperationType.Type;
 
+/**
+ * Implémentation de l'interface IOperationTypeDao
+ * 
+ * @author fguillain
+ * 
+ */
 @Repository
 public class OperationTypeDao implements IOperationTypeDao {
 

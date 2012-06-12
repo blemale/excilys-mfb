@@ -19,10 +19,6 @@ import org.joda.time.DateTime;
  * @author excilys
  * 
  */
-/**
- * @author excilys
- * 
- */
 @Entity
 public class Operation implements Serializable {
 
