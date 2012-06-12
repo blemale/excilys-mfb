@@ -1,4 +1,4 @@
-package com.ebi.formation.mfb.webservices;
+package com.ebi.formation.mfb.webservices.jaxrs;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -26,6 +26,9 @@ public class PersonneWebService {
 	}
 
 	private PersonDTO convertPersonToPersonDTO(Person person) {
+		if (person == null) {
+			return null;
+		}
 		return new PersonDTO(person.getId(), person.getUsername(), person.getPassword(), person.getFirstName(),
 				person.getLastName());
 	}
