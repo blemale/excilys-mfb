@@ -1,9 +1,8 @@
-package com.ebi.formation.mfb.webservices.jaxrs;
+package com.ebi.formation.mfb.webservices.jaxrs.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.ebi.formation.mfb.entities.Compte;
 import com.ebi.formation.mfb.services.ICompteService;
 import com.ebi.formation.mfb.webservicesapi.dto.CompteDTO;
+import com.ebi.formation.mfb.webservicesapi.jaxrs.ICompteWebService;
 
 @Produces({ "application/json", "text/xml" })
 public class CompteWebService implements ICompteWebService {
@@ -19,23 +19,22 @@ public class CompteWebService implements ICompteWebService {
 	private ICompteService compteService;
 
 	@Override
-	public CompteDTO getCompteById(@PathParam("compteId") Long compteId) {
+	public CompteDTO getCompteById(Long compteId) {
 		return convertCompteToCompteDTO(compteService.getCompteById(compteId));
 	}
 
 	@Override
-	public List<CompteDTO> findComptesByUsername(@PathParam("username") String username) {
+	public List<CompteDTO> findComptesByUsername(String username) {
 		return convertListCompteToListCompteDTO(compteService.findComptesByUsername(username));
 	}
 
 	@Override
-	public boolean checkCompteOwnershipByUsernameAndCompteId(@PathParam("username") String username,
-			@PathParam("compteId") Long compteId) {
+	public boolean checkCompteOwnershipByUsernameAndCompteId(String username, Long compteId) {
 		return compteService.checkCompteOwnershipByUsernameAndCompteId(username, compteId);
 	}
 
 	@Override
-	public CompteDTO getCompteByNumeroCompte(@PathParam("numeroCompte") String numeroCompte) {
+	public CompteDTO getCompteByNumeroCompte(String numeroCompte) {
 		return convertCompteToCompteDTO(compteService.getCompteByNumeroCompte(numeroCompte));
 	}
 

@@ -1,4 +1,4 @@
-package com.ebi.formation.mfb.webservices.jaxrs;
+package com.ebi.formation.mfb.webservicesapi.jaxrs;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
-import com.ebi.formation.mfb.webservices.dto.CompteDTO;
+import com.ebi.formation.mfb.webservicesapi.dto.CompteDTO;
 
 public interface ICompteWebService {
 

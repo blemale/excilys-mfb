@@ -24,7 +24,7 @@
 
 	<jaxrs:server id="CompteWebServiceREST" address="/compteService">
 		<jaxrs:serviceBeans>
-			<bean id="serviceImpl" class="com.ebi.formation.mfb.webservices.CompteWebService" />
+			<bean id="serviceImpl" class="com.ebi.formation.mfb.webservices.jaxrs.impl.CompteWebService" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
 			<bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider"/>
@@ -33,7 +33,7 @@
 
 	<jaxrs:server id="PersonneWebServiceREST" address="/personneService">
 		<jaxrs:serviceBeans>
-			<bean id="serviceImpl" class="com.ebi.formation.mfb.webservices.PersonneWebService" />
+			<bean id="serviceImpl" class="com.ebi.formation.mfb.webservices.jaxrs.impl.PersonneWebService" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
 			<bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider"/>
