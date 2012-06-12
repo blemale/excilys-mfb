@@ -9,9 +9,11 @@ import javax.persistence.PersistenceContext;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ebi.formation.mfb.dao.ICompteDao;
 import com.ebi.formation.mfb.dao.IOperationDao;
 import com.ebi.formation.mfb.entities.Operation;
 import com.ebi.formation.mfb.entities.OperationType;
@@ -34,6 +36,8 @@ public class OperationDao implements IOperationDao {
 	private final Logger logger = LoggerFactory.getLogger(OperationDao.class);
 	@PersistenceContext
 	private EntityManager em;
+	@Autowired
+	private ICompteDao compteDao;
 
 	/*
 	 * (non-Javadoc)
@@ -171,11 +175,9 @@ public class OperationDao implements IOperationDao {
 					.append(o.getType().getLabel()).append(" Montant : ").append(o.getMontant()).toString());
 			em.createNamedQuery("updateOperationNotDone").setParameter("operationId", o.getId()).executeUpdate();
 			if (o.getType().getLabel().equals(Type.CARTE)) {
-				em.createNamedQuery("updateCompteNotDoneWithOperationTypeCarte").setParameter("valeur", o.getMontant())
-						.setParameter("compteOperationId", o.getCompte().getId()).executeUpdate();
+				compteDao.updateCompteSoldeAndSoldePrevisionnelAndEncoursCarte(o.getCompte().getId(), o.getMontant());
 			} else {
-				em.createNamedQuery("updateCompteNotDone").setParameter("valeur", o.getMontant())
-						.setParameter("compteOperationId", o.getCompte().getId()).executeUpdate();
+				compteDao.updateCompteSoldeAndSoldePrevisionnel(o.getCompte().getId(), o.getMontant());
 			}
 		}
 		em.clear();

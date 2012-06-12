@@ -112,13 +112,13 @@ public class CompteService implements ICompteService {
 	 */
 	private String getNumeroCompte() {
 		String chars = "0123456789";
-		String res = "";
+		StringBuilder res = new StringBuilder("");
 		int numI;
 		for (int i = 0; i < LENGTH_NUM_COMPTE; i++) {
 			numI = (int) Math.floor(Math.random() * 10);
-			res += chars.charAt(numI);
+			res.append(chars.charAt(numI));
 		}
-		return res;
+		return res.toString();
 	}
 
 	/*

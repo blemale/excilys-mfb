@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ebi.formation.mfb.dao.ICompteDao;
 import com.ebi.formation.mfb.entities.Compte;
@@ -122,5 +123,55 @@ public class CompteDao implements ICompteDao {
 	@SuppressWarnings("unchecked")
 	public List<Compte> findAllComptes() {
 		return em.createNamedQuery("findAllComptes").getResultList();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.dao.ICompteDao#updateCompte(java.lang.Long, java.math.BigDecimal)
+	 */
+	@Override
+	@Transactional
+	public void updateCompteSoldeAndSoldePrevisionnel(Long id, BigDecimal montant) {
+		em.createNamedQuery("updateCompteSoldeAndSoldePrevisionnel").setParameter("compteOperationId", id)
+				.setParameter("valeur", montant).executeUpdate();
+		em.clear();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.dao.ICompteDao#updateCompteWithOperationTypeCarte(java.lang.Long,
+	 * java.math.BigDecimal)
+	 */
+	@Override
+	@Transactional
+	public void updateCompteSoldeAndSoldePrevisionnelAndEncoursCarte(Long id, BigDecimal montant) {
+		em.createNamedQuery("updateCompteSoldeAndSoldePrevisionnelAndEncoursCarte")
+				.setParameter("compteOperationId", id).setParameter("valeur", montant).executeUpdate();
+		em.clear();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.dao.ICompteDao#updateCompteEncoursCarteAndSoldePrevisionnel(java.lang.Long,
+	 * java.math.BigDecimal)
+	 */
+	@Override
+	@Transactional
+	public void updateCompteEncoursCarteAndSoldePrevisionnel(Long id, BigDecimal montant) {
+		em.createNamedQuery("updateCompteEncoursCarteAndSoldePrevisionnel").setParameter("compteOperationId", id)
+				.setParameter("valeur", montant).executeUpdate();
+		em.clear();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.dao.ICompteDao#updateCompteSoldePrevisionnel(java.lang.Long, java.math.BigDecimal)
+	 */
+	@Override
+	@Transactional
+	public void updateCompteSoldePrevisionnel(Long id, BigDecimal montant) {
+		em.createNamedQuery("updateCompteSoldePrevisionnel").setParameter("compteOperationId", id)
+				.setParameter("valeur", montant).executeUpdate();
+		em.clear();
 	}
 }

@@ -57,7 +57,7 @@ public class Client {
 						new String[] { "admin.clientForm.passwordNotSame" }, null, null));
 			}
 			mv.addObject("listRights", roleService.findAllRights());
-			mv.addObject("classActive", Admin.getClassActive(0));
+			mv.addObject(SessionAttributesNames.CLASS_ACTIVE, Admin.getClassActive(0));
 			mv.setViewName("createClient");
 			return mv;
 		}

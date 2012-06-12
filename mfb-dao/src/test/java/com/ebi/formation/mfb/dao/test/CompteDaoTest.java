@@ -138,4 +138,66 @@ public class CompteDaoTest {
 		assertNotNull(listComptes);
 		assertEquals(3, listComptes.size());
 	}
+
+	/**
+	 * 
+	 */
+	@DataSet("dataSet-CompteDaoTest.xml")
+	@Test
+	public void testUpdateCompteSoldeAndSoldePrevisionnel() {
+		compteDao.updateCompteSoldeAndSoldePrevisionnel(1L, BigDecimal.TEN);
+		Compte c = compteDao.findCompteById(1L);
+		assertEquals(0, BigDecimal.TEN.compareTo(c.getSolde()));
+		assertEquals(0, new BigDecimal(-10).compareTo(c.getSoldePrevisionnel()));
+		assertEquals(0, BigDecimal.ZERO.compareTo(c.getEncoursCarte()));
+		compteDao.updateCompteSoldeAndSoldePrevisionnel(2L, new BigDecimal(-10));
+		c = compteDao.findCompteById(2L);
+		assertEquals(0, new BigDecimal(-10).compareTo(c.getSolde()));
+		assertEquals(0, BigDecimal.TEN.compareTo(c.getSoldePrevisionnel()));
+		assertEquals(0, BigDecimal.ZERO.compareTo(c.getEncoursCarte()));
+	}
+
+	/**
+	 * 
+	 */
+	@DataSet("dataSet-CompteDaoTest.xml")
+	@Test
+	public void testUpdateCompteSoldeAndSoldePrevisionnelAndEncoursCarte() {
+		compteDao.updateCompteSoldeAndSoldePrevisionnelAndEncoursCarte(1L, BigDecimal.TEN);
+		Compte c = compteDao.findCompteById(1L);
+		assertEquals(0, BigDecimal.TEN.compareTo(c.getSolde()));
+		assertEquals(0, new BigDecimal(-10).compareTo(c.getSoldePrevisionnel()));
+		assertEquals(0, new BigDecimal(-10).compareTo(c.getEncoursCarte()));
+		compteDao.updateCompteSoldeAndSoldePrevisionnelAndEncoursCarte(2L, new BigDecimal(-10));
+		c = compteDao.findCompteById(2L);
+		assertEquals(0, new BigDecimal(-10).compareTo(c.getSolde()));
+		assertEquals(0, BigDecimal.TEN.compareTo(c.getSoldePrevisionnel()));
+		assertEquals(0, BigDecimal.TEN.compareTo(c.getEncoursCarte()));
+	}
+
+	/**
+	 * 
+	 */
+	@DataSet("dataSet-CompteDaoTest.xml")
+	@Test
+	public void testUpdateCompteEncoursCarteAndSoldePrevisionnel() {
+		compteDao.updateCompteEncoursCarteAndSoldePrevisionnel(1L, new BigDecimal(10));
+		Compte c = compteDao.findCompteById(1L);
+		assertEquals(0, BigDecimal.ZERO.compareTo(c.getSolde()));
+		assertEquals(0, BigDecimal.TEN.compareTo(c.getSoldePrevisionnel()));
+		assertEquals(0, BigDecimal.TEN.compareTo(c.getEncoursCarte()));
+	}
+
+	/**
+	 * 
+	 */
+	@DataSet("dataSet-CompteDaoTest.xml")
+	@Test
+	public void testUpdateCompteSoldePrevisionnel() {
+		compteDao.updateCompteSoldePrevisionnel(1L, new BigDecimal(10));
+		Compte c = compteDao.findCompteById(1L);
+		assertEquals(0, new BigDecimal(0).compareTo(c.getSolde()));
+		assertEquals(0, new BigDecimal(10).compareTo(c.getSoldePrevisionnel()));
+		assertEquals(0, new BigDecimal(0).compareTo(c.getEncoursCarte()));
+	}
 }

@@ -19,8 +19,8 @@
 		@NamedQuery(name = "findCompteById", query = "SELECT c FROM Compte c WHERE c.id = :id"),
 		@NamedQuery(name = "findCompteByNumeroCompte", query = "SELECT c FROM Compte c WHERE c.numeroCompte = :numeroCompte"),
 		@NamedQuery(name = "findOperationsNotDone", query = "SELECT o FROM Operation o WHERE o.operationDone = false AND o.dateValeur <= :today"),
-		@NamedQuery(name = "updateCompteNotDone", query = "UPDATE Compte c SET c.solde = c.solde+ :valeur WHERE c.id = :compteOperationId"),
-		@NamedQuery(name = "updateCompteNotDoneWithOperationTypeCarte", query = "UPDATE Compte c SET c.solde = c.solde+ :valeur, c.encoursCarte = c.encoursCarte + :valeur WHERE c.id = :compteOperationId"),
+		@NamedQuery(name = "updateCompteSoldeAndSoldePrevisionnel", query = "UPDATE Compte c SET c.solde = c.solde+ :valeur, c.soldePrevisionnel = c.soldePrevisionnel- :valeur WHERE c.id = :compteOperationId"),
+		@NamedQuery(name = "updateCompteSoldeAndSoldePrevisionnelAndEncoursCarte", query = "UPDATE Compte c SET c.solde = c.solde+ :valeur, c.encoursCarte = c.encoursCarte- :valeur, c.soldePrevisionnel = c.soldePrevisionnel- :valeur WHERE c.id = :compteOperationId"),
 		@NamedQuery(name = "updateOperationNotDone", query = "UPDATE Operation o SET o.operationDone = true WHERE o.id = :operationId"),
 		@NamedQuery(name = "updateComptes", query = "UPDATE Compte c SET c.soldePrevisionnel=c.solde"),
 		@NamedQuery(name = "findSoldeCompte", query = "SELECT c.solde FROM Compte c WHERE c.id = :id"),
@@ -32,7 +32,9 @@
 		@NamedQuery(name = "findRoleByRight", query = "SELECT r FROM Role r WHERE r.right=:right"),
 		@NamedQuery(name = "findAllRights", query = "SELECT r.right FROM Role r"),
 		@NamedQuery(name = "findAllOperationTypes", query = "SELECT ot.label FROM OperationType ot"),
-		@NamedQuery(name = "findAllComptes", query = "SELECT c FROM Compte c") })
+		@NamedQuery(name = "findAllComptes", query = "SELECT c FROM Compte c"),
+		@NamedQuery(name = "updateCompteEncoursCarteAndSoldePrevisionnel", query = "UPDATE Compte c SET c.encoursCarte = c.encoursCarte+ :valeur, c.soldePrevisionnel = c.soldePrevisionnel+ :valeur WHERE c.id = :compteOperationId"),
+		@NamedQuery(name = "updateCompteSoldePrevisionnel", query = "UPDATE Compte c SET c.soldePrevisionnel = c.soldePrevisionnel+ :valeur WHERE c.id = :compteOperationId") })
 package com.ebi.formation.mfb.entities;
 
 import org.hibernate.annotations.NamedQueries;
