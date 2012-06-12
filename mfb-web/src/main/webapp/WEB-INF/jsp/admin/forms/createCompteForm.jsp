@@ -35,7 +35,7 @@
 								code="admin.createCompteForm.usernameOwner" /></label>
 						<div class="controls">
 							<form:select path="usernameOwner">
-								<form:options items="${ownersList}" itemLabel="fullPerson"
+								<form:options items="${listOwners}" itemLabel="fullPerson"
 									itemValue="username" />
 							</form:select>
 							<form:errors path="usernameOwner" cssClass="colorError" />

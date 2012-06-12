@@ -35,6 +35,7 @@ public class Compte {
 	private ICompteService compteService;
 	@Autowired
 	private IPersonService personService;
+	private static final String OBJECT_LIST_OWNERS = "listOwners";
 
 	/**
 	 * @param principal
@@ -47,7 +48,7 @@ public class Compte {
 			BindingResult result, RedirectAttributes redirectAttrs) {
 		ModelAndView mv = new ModelAndView();
 		if (result.hasErrors()) {
-			mv.addObject("ownersList", personService.findAllPersons());
+			mv.addObject(OBJECT_LIST_OWNERS, personService.findAllPersons());
 			mv.addObject(SessionAttributesNames.CLASS_ACTIVE, Admin.getClassActive(1));
 			mv.setViewName("createCompte");
 			return mv;
@@ -79,7 +80,7 @@ public class Compte {
 	public ModelAndView createCompteForm() {
 		ModelAndView mv = new ModelAndView("createCompte");
 		mv.addObject(SessionAttributesNames.CLASS_ACTIVE, Admin.getClassActive(1));
-		mv.addObject("ownersList", personService.findAllPersons());
+		mv.addObject(OBJECT_LIST_OWNERS, personService.findAllPersons());
 		mv.addObject(new CompteForm());
 		return mv;
 	}

@@ -4,6 +4,8 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 
 /**
+ * Classe utilisée pour le front
+ * 
  * @author fguillain
  * 
  */

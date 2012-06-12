@@ -44,8 +44,8 @@ public class Operation {
 	private IOperationTypeService operationTypeService;
 	@Autowired
 	private ICompteService compteService;
-	private static final String OBJECT_COMPTES_LIST = "comptesList";
-	private static final String OBJECT_TYPES_LIST = "typesList";
+	private static final String OBJECT_LIST_COMPTES = "listComptes";
+	private static final String OBJECT_LIST_TYPES = "listTypes";
 	private static final String OBJECT_DATES_VALEUR = "datesValeur";
 	private static final String OBJECT_DATES_EFFET = "datesEffet";
 	private static final int NUM_OF_DATE = 4;
@@ -67,8 +67,8 @@ public class Operation {
 				result.addError(new FieldError("operationForm", "dateValeur", null, true,
 						new String[] { "admin.operationForm.dateValeurError" }, null, null));
 			}
-			mv.addObject(OBJECT_COMPTES_LIST, compteService.findAllComptes());
-			mv.addObject(OBJECT_TYPES_LIST, operationTypeService.findAllOperationTypes());
+			mv.addObject(OBJECT_LIST_COMPTES, compteService.findAllComptes());
+			mv.addObject(OBJECT_LIST_TYPES, operationTypeService.findAllOperationTypes());
 			mv.addObject(OBJECT_DATES_VALEUR, getDates());
 			mv.addObject(OBJECT_DATES_EFFET, getDates());
 			mv.addObject(SessionAttributesNames.CLASS_ACTIVE, Admin.getClassActive(2));
@@ -103,8 +103,8 @@ public class Operation {
 	public ModelAndView createOperationForm() {
 		ModelAndView mv = new ModelAndView("createOperation");
 		mv.addObject(SessionAttributesNames.CLASS_ACTIVE, Admin.getClassActive(2));
-		mv.addObject(OBJECT_COMPTES_LIST, compteService.findAllComptes());
-		mv.addObject(OBJECT_TYPES_LIST, operationTypeService.findAllOperationTypes());
+		mv.addObject(OBJECT_LIST_COMPTES, compteService.findAllComptes());
+		mv.addObject(OBJECT_LIST_TYPES, operationTypeService.findAllOperationTypes());
 		mv.addObject(OBJECT_DATES_VALEUR, getDates());
 		mv.addObject(OBJECT_DATES_EFFET, getDates());
 		mv.addObject(new OperationForm());
