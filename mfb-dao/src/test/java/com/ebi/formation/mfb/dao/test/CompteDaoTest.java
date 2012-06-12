@@ -187,10 +187,20 @@ public class CompteDaoTest {
 	@DataSet("dataSet-CompteDaoTest.xml")
 	@Test
 	public void testUpdateCompteSoldePrevisionnel() {
-		compteDao.updateCompteSoldePrevisionnel(1L, new BigDecimal(10));
+		compteDao.updateCompteSoldePrevisionnel(1L, BigDecimal.TEN);
 		Compte c = compteDao.findCompteById(1L);
-		assertEquals(0, new BigDecimal(0).compareTo(c.getSolde()));
-		assertEquals(0, new BigDecimal(10).compareTo(c.getSoldePrevisionnel()));
-		assertEquals(0, new BigDecimal(0).compareTo(c.getEncoursCarte()));
+		assertEquals(0, BigDecimal.TEN.compareTo(c.getSoldePrevisionnel()));
+	}
+
+	/**
+	 * Test la mise à jour du solde et du solde prévisionnel
+	 */
+	@DataSet("dataSet-CompteDaoTest.xml")
+	@Test
+	public void testUpdateCompteSoldeAndSoldePrevisionnel() {
+		compteDao.updateCompteSoldeAndSoldePrevisionnel(1L, BigDecimal.TEN);
+		Compte c = compteDao.findCompteById(1L);
+		assertEquals(0, BigDecimal.TEN.compareTo(c.getSolde()));
+		assertEquals(0, BigDecimal.TEN.compareTo(c.getSoldePrevisionnel()));
 	}
 }

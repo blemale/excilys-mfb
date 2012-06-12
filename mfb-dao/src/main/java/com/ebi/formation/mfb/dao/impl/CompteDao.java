@@ -175,4 +175,17 @@ public class CompteDao implements ICompteDao {
 				.setParameter("valeur", montant).executeUpdate();
 		em.clear();
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.dao.ICompteDao#updateCompteSoldeAndSoldePrevisionnel(java.lang.Long,
+	 * java.math.BigDecimal)
+	 */
+	@Override
+	@Transactional
+	public void updateCompteSoldeAndSoldePrevisionnel(Long id, BigDecimal montant) {
+		em.createNamedQuery("updateCompteSoldeAndSoldePrevisionnel").setParameter("compteOperationId", id)
+				.setParameter("valeur", montant).executeUpdate();
+		em.clear();
+	}
 }

@@ -34,7 +34,8 @@
 		@NamedQuery(name = "findAllOperationTypes", query = "SELECT ot.label FROM OperationType ot"),
 		@NamedQuery(name = "findAllComptes", query = "SELECT c FROM Compte c"),
 		@NamedQuery(name = "updateCompteEncoursCarteAndSoldePrevisionnel", query = "UPDATE Compte c SET c.encoursCarte = c.encoursCarte+ :valeur, c.soldePrevisionnel = c.soldePrevisionnel+ :valeur WHERE c.id = :compteOperationId"),
-		@NamedQuery(name = "updateCompteSoldePrevisionnel", query = "UPDATE Compte c SET c.soldePrevisionnel = c.soldePrevisionnel+ :valeur WHERE c.id = :compteOperationId") })
+		@NamedQuery(name = "updateCompteSoldePrevisionnel", query = "UPDATE Compte c SET c.soldePrevisionnel = c.soldePrevisionnel+ :valeur WHERE c.id = :compteOperationId"),
+		@NamedQuery(name = "updateCompteSoldeAndSoldePrevisionnel", query = "UPDATE Compte c SET c.solde = c.solde+ :valeur, c.soldePrevisionnel = c.soldePrevisionnel+ :valeur WHERE c.id = :compteOperationId"), })
 package com.ebi.formation.mfb.entities;
 
 import org.hibernate.annotations.NamedQueries;

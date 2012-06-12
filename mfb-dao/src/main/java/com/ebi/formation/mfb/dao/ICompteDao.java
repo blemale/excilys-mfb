@@ -101,4 +101,10 @@ public interface ICompteDao {
 	 * @param montant
 	 */
 	void updateCompteEncoursCarteAndSoldePrevisionnel(Long id, BigDecimal montant);
+
+	/**
+	 * @param id
+	 * @param montant
+	 */
+	void updateCompteSoldeAndSoldePrevisionnel(Long id, BigDecimal montant);
 }

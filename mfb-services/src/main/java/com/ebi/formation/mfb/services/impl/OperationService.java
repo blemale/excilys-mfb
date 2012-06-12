@@ -358,13 +358,13 @@ public class OperationService implements IOperationService {
 		o.setLabel(label);
 		o.setMontant(montant);
 		o.setType(ot);
+		// operation immediate
 		if (dateValeur.isBeforeNow()) {
-			if (Type.CARTE.equals(type))
-				compteDao.updateCompteSoldeAndEncoursCarte(idCompte, montant);
-			else
-				compteDao.updateCompteSolde(idCompte, montant);
+			compteDao.updateCompteSoldeAndSoldePrevisionnel(idCompte, montant);
 			o.setOperationDone(Boolean.TRUE);
-		} else {
+		}
+		// operation en prévision
+		else {
 			if (Type.CARTE.equals(type))
 				compteDao.updateCompteEncoursCarteAndSoldePrevisionnel(idCompte, montant);
 			else
