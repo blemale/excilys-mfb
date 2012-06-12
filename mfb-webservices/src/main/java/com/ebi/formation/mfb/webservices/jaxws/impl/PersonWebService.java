@@ -1,13 +1,12 @@
 package com.ebi.formation.mfb.webservices.jaxws.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.jws.WebService;
 
+import org.jdto.DTOBinder;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.ebi.formation.mfb.entities.Person;
 import com.ebi.formation.mfb.entities.Role.Right;
 import com.ebi.formation.mfb.services.IPersonService;
 import com.ebi.formation.mfb.services.IPersonService.ReturnCodePerson;
@@ -19,10 +18,12 @@ public class PersonWebService implements IPersonWebService {
 
 	@Autowired
 	private IPersonService personService;
+	@Autowired
+	private DTOBinder binder;
 
 	@Override
 	public PersonDTO findPersonByUsername(String username) {
-		return convertPersonToPersonDTO(personService.findPersonByUsername(username));
+		return binder.bindFromBusinessObject(PersonDTO.class, personService.findPersonByUsername(username));
 	}
 
 	@Override
@@ -33,19 +34,6 @@ public class PersonWebService implements IPersonWebService {
 
 	@Override
 	public List<PersonDTO> findAllPersons() {
-		return convertListCompteToListPersonDTO(personService.findAllPersons());
-	}
-
-	private PersonDTO convertPersonToPersonDTO(Person person) {
-		return new PersonDTO(person.getId(), person.getUsername(), person.getPassword(), person.getFirstName(),
-				person.getLastName());
-	}
-
-	private List<PersonDTO> convertListCompteToListPersonDTO(List<Person> persons) {
-		List<PersonDTO> personDTOs = new ArrayList<PersonDTO>();
-		for (Person p : persons) {
-			personDTOs.add(convertPersonToPersonDTO(p));
-		}
-		return personDTOs;
+		return binder.bindFromBusinessObjectList(PersonDTO.class, personService.findAllPersons());
 	}
 }

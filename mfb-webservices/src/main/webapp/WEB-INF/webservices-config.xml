@@ -38,7 +38,8 @@
 		</jaxrs:providers>
 	</jaxrs:server>
 
-
+	<bean id="binder" class="org.jdto.spring.SpringDTOBinder"/>
+	
 	<import resource="classpath:persistence-config.xml" />
 	<import resource="classpath:services-config.xml" />
 	
