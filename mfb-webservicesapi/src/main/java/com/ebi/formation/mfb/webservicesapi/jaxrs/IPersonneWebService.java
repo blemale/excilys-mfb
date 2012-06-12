@@ -10,5 +10,5 @@ public interface IPersonneWebService {
 
 	@GET
 	@Path("getPersonneByUsername/{username}")
-	public abstract PersonDTO findPersonByUsername(@PathParam("username") String username);
+	PersonDTO findPersonByUsername(@PathParam("username") String username);
 }

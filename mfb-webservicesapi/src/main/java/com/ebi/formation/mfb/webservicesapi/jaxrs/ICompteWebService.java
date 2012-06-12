@@ -12,18 +12,18 @@ public interface ICompteWebService {
 
 	@GET
 	@Path("getCompteById/{compteId}")
-	public abstract CompteDTO getCompteById(@PathParam("compteId") Long compteId);
+	CompteDTO getCompteById(@PathParam("compteId") Long compteId);
 
 	@GET
 	@Path("getCompteByUsername/{username}")
-	public abstract List<CompteDTO> findComptesByUsername(@PathParam("username") String username);
+	List<CompteDTO> findComptesByUsername(@PathParam("username") String username);
 
 	@GET
 	@Path("checkCompte/{username}/{compteId}")
-	public abstract boolean checkCompteOwnershipByUsernameAndCompteId(@PathParam("username") String username,
+	boolean checkCompteOwnershipByUsernameAndCompteId(@PathParam("username") String username,
 			@PathParam("compteId") Long compteId);
 
 	@GET
 	@Path("getCompteByNumeroCompte/{numeroCompte}")
-	public abstract CompteDTO getCompteByNumeroCompte(@PathParam("numeroCompte") String numeroCompte);
+	CompteDTO getCompteByNumeroCompte(@PathParam("numeroCompte") String numeroCompte);
 }
