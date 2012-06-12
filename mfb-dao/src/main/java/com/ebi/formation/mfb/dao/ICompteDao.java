@@ -82,13 +82,13 @@ public interface ICompteDao {
 	 * @param id
 	 * @param montant
 	 */
-	void updateCompteSoldeAndSoldePrevisionnel(Long id, BigDecimal montant);
+	void updateCompteSolde(Long id, BigDecimal montant);
 
 	/**
 	 * @param id
 	 * @param montant
 	 */
-	void updateCompteSoldeAndSoldePrevisionnelAndEncoursCarte(Long id, BigDecimal montant);
+	void updateCompteSoldeAndEncoursCarte(Long id, BigDecimal montant);
 
 	/**
 	 * @param id

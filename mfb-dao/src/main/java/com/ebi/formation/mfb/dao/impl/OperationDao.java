@@ -175,9 +175,9 @@ public class OperationDao implements IOperationDao {
 					.append(o.getType().getLabel()).append(" Montant : ").append(o.getMontant()).toString());
 			em.createNamedQuery("updateOperationNotDone").setParameter("operationId", o.getId()).executeUpdate();
 			if (o.getType().getLabel().equals(Type.CARTE)) {
-				compteDao.updateCompteSoldeAndSoldePrevisionnelAndEncoursCarte(o.getCompte().getId(), o.getMontant());
+				compteDao.updateCompteSoldeAndEncoursCarte(o.getCompte().getId(), o.getMontant());
 			} else {
-				compteDao.updateCompteSoldeAndSoldePrevisionnel(o.getCompte().getId(), o.getMontant());
+				compteDao.updateCompteSolde(o.getCompte().getId(), o.getMontant());
 			}
 		}
 		em.clear();

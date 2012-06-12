@@ -360,9 +360,9 @@ public class OperationService implements IOperationService {
 		o.setType(ot);
 		if (dateValeur.isBeforeNow()) {
 			if (Type.CARTE.equals(type))
-				compteDao.updateCompteSoldeAndSoldePrevisionnelAndEncoursCarte(idCompte, montant);
+				compteDao.updateCompteSoldeAndEncoursCarte(idCompte, montant);
 			else
-				compteDao.updateCompteSoldeAndSoldePrevisionnel(idCompte, montant);
+				compteDao.updateCompteSolde(idCompte, montant);
 			o.setOperationDone(Boolean.TRUE);
 		} else {
 			if (Type.CARTE.equals(type))

@@ -131,9 +131,9 @@ public class CompteDao implements ICompteDao {
 	 */
 	@Override
 	@Transactional
-	public void updateCompteSoldeAndSoldePrevisionnel(Long id, BigDecimal montant) {
-		em.createNamedQuery("updateCompteSoldeAndSoldePrevisionnel").setParameter("compteOperationId", id)
-				.setParameter("valeur", montant).executeUpdate();
+	public void updateCompteSolde(Long id, BigDecimal montant) {
+		em.createNamedQuery("updateCompteSolde").setParameter("compteOperationId", id).setParameter("valeur", montant)
+				.executeUpdate();
 		em.clear();
 	}
 
@@ -144,9 +144,9 @@ public class CompteDao implements ICompteDao {
 	 */
 	@Override
 	@Transactional
-	public void updateCompteSoldeAndSoldePrevisionnelAndEncoursCarte(Long id, BigDecimal montant) {
-		em.createNamedQuery("updateCompteSoldeAndSoldePrevisionnelAndEncoursCarte")
-				.setParameter("compteOperationId", id).setParameter("valeur", montant).executeUpdate();
+	public void updateCompteSoldeAndEncoursCarte(Long id, BigDecimal montant) {
+		em.createNamedQuery("updateCompteSoldeAndEncoursCarte").setParameter("compteOperationId", id)
+				.setParameter("valeur", montant).executeUpdate();
 		em.clear();
 	}
 
