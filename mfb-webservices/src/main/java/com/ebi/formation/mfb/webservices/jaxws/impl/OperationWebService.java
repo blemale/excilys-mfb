@@ -1,14 +1,13 @@
 package com.ebi.formation.mfb.webservices.jaxws.impl;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.jws.WebService;
 
+import org.jdto.DTOBinder;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.ebi.formation.mfb.entities.Operation;
 import com.ebi.formation.mfb.services.IOperationService;
 import com.ebi.formation.mfb.services.IOperationService.ReturnCodeVirement;
 import com.ebi.formation.mfb.webservicesapi.dto.OperationDTO;
@@ -19,6 +18,8 @@ public class OperationWebService implements IOperationWebService {
 
 	@Autowired
 	private IOperationService operationService;
+	@Autowired
+	private DTOBinder binder;
 
 	@Override
 	public BigDecimal getTotalOperationsCarteByMonth(long idCompte, int month, int year) {
@@ -43,40 +44,40 @@ public class OperationWebService implements IOperationWebService {
 	@Override
 	public List<OperationDTO> getOperationsWithoutCarteByMonthPaginated(long idCompte, int month, int year, int offset,
 			int numberOfResults) {
-		return convertListOperationToListOperationDTO(operationService.getOperationsWithoutCarteByMonthPaginated(
-				idCompte, month, year, offset, numberOfResults));
+		return binder.bindFromBusinessObjectList(OperationDTO.class, operationService
+				.getOperationsWithoutCarteByMonthPaginated(idCompte, month, year, offset, numberOfResults));
 	}
 
 	@Override
 	public List<OperationDTO> getOperationsWithoutCarteByMonthPaginated(long idCompte, int month, int year, int page) {
-		return convertListOperationToListOperationDTO(operationService.getOperationsWithoutCarteByMonthPaginated(
-				idCompte, month, year, page));
+		return binder.bindFromBusinessObjectList(OperationDTO.class,
+				operationService.getOperationsWithoutCarteByMonthPaginated(idCompte, month, year, page));
 	}
 
 	@Override
 	public List<OperationDTO> getOperationsCarteByMonthPaginated(long idCompte, int month, int year, int offset,
 			int numberOfResults) {
-		return convertListOperationToListOperationDTO(operationService.getOperationsCarteByMonthPaginated(idCompte,
-				month, year, offset, numberOfResults));
+		return binder.bindFromBusinessObjectList(OperationDTO.class,
+				operationService.getOperationsCarteByMonthPaginated(idCompte, month, year, offset, numberOfResults));
 	}
 
 	@Override
 	public List<OperationDTO> getOperationsCarteByMonthPaginated(long idCompte, int month, int year, int page) {
-		return convertListOperationToListOperationDTO(operationService.getOperationsCarteByMonthPaginated(idCompte,
-				month, year, page));
+		return binder.bindFromBusinessObjectList(OperationDTO.class,
+				operationService.getOperationsCarteByMonthPaginated(idCompte, month, year, page));
 	}
 
 	@Override
 	public List<OperationDTO> getVirementsByMonthPaginated(long idCompte, int month, int year, int offset,
 			int numberOfResults) {
-		return convertListOperationToListOperationDTO(operationService.getVirementsByMonthPaginated(idCompte, month,
-				year, offset, numberOfResults));
+		return binder.bindFromBusinessObjectList(OperationDTO.class,
+				operationService.getVirementsByMonthPaginated(idCompte, month, year, offset, numberOfResults));
 	}
 
 	@Override
 	public List<OperationDTO> getVirementsByMonthPaginated(long idCompte, int month, int year, int page) {
-		return convertListOperationToListOperationDTO(operationService.getVirementsByMonthPaginated(idCompte, month,
-				year, page));
+		return binder.bindFromBusinessObjectList(OperationDTO.class,
+				operationService.getVirementsByMonthPaginated(idCompte, month, year, page));
 	}
 
 	@Override
@@ -113,8 +114,8 @@ public class OperationWebService implements IOperationWebService {
 
 	@Override
 	public List<OperationDTO> getAllOperationsByMonthByCompte(long idCompte, int month, int year) {
-		return convertListOperationToListOperationDTO(operationService.getAllOperationsByMonthByCompte(idCompte, month,
-				year));
+		return binder.bindFromBusinessObjectList(OperationDTO.class,
+				operationService.getAllOperationsByMonthByCompte(idCompte, month, year));
 	}
 
 	@Override
@@ -126,18 +127,5 @@ public class OperationWebService implements IOperationWebService {
 	public ReturnCodeVirement doVirement(long idCompteADebiter, String numeroCompteACrediter, String label,
 			BigDecimal montant) {
 		return operationService.doVirement(idCompteADebiter, numeroCompteACrediter, label, montant);
-	}
-
-	private OperationDTO convertOperationToOperationDTO(Operation operation) {
-		return new OperationDTO(operation.getId(), operation.getType(), operation.getMontant(),
-				operation.getDateValeur(), operation.getDateEffet(), operation.getLabel());
-	}
-
-	private List<OperationDTO> convertListOperationToListOperationDTO(List<Operation> operations) {
-		List<OperationDTO> operationDTOs = new ArrayList<OperationDTO>();
-		for (Operation o : operations) {
-			operationDTOs.add(convertOperationToOperationDTO(o));
-		}
-		return operationDTOs;
 	}
 }
