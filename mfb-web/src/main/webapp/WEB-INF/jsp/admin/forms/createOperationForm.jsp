@@ -27,7 +27,7 @@
 								code="admin.createOperationForm.montant" /></label>
 						<div class="controls">
 							<form:input path="montant" cssClass="input-xlarge focused" />
-							<form:errors path="montant" cssClass="colorError" />
+							<form:errors path="montant" cssClass="colorError" element="div" />
 						</div>
 					</div>
 					<div class="control-group">
@@ -37,7 +37,7 @@
 							<form:select path="idCompte">
 								<form:options items="${listComptes}" itemLabel="fullCompte" itemValue="id" />
 							</form:select>
-							<form:errors path="idCompte" cssClass="colorError" />
+							<form:errors path="idCompte" cssClass="colorError" element="div" />
 						</div>
 					</div>
 
@@ -48,7 +48,7 @@
 							<form:select path="type">
 								<form:options items="${listTypes}" />
 							</form:select>
-							<form:errors path="type" cssClass="colorError" />
+							<form:errors path="type" cssClass="colorError" element="div" />
 						</div>
 					</div>
 					<div class="control-group">
@@ -56,7 +56,7 @@
 								code="admin.createOperationForm.dateEffet" /></label>
 						<div class="controls">
 							<form:select path="dateEffet" items="${datesEffet}" itemLabel="dateTimeFormat" itemValue="dateTime" />
-							<form:errors path="dateEffet" cssClass="colorError" />
+							<form:errors path="dateEffet" cssClass="colorError" element="div" />
 						</div>
 					</div>
 					<div class="control-group">
@@ -64,7 +64,7 @@
 								code="admin.createOperationForm.dateValeur" /></label>
 						<div class="controls">
 							<form:select path="dateValeur" items="${datesValeur}" itemLabel="dateTimeFormat" itemValue="dateTime" />
-							<form:errors path="dateValeur" cssClass="colorError" />
+							<form:errors path="dateValeur" cssClass="colorError" element="div" />
 						</div>
 					</div>
 					<div class="control-group">
@@ -72,7 +72,7 @@
 								code="admin.createOperationForm.label" /></label>
 						<div class="controls">
 							<form:input path="label" cssClass="input-xlarge focused" />
-							<form:errors path="label" cssClass="colorError" />
+							<form:errors path="label" cssClass="colorError" element="div" />
 						</div>
 					</div>
 					<div class="form-actions alignCenter">

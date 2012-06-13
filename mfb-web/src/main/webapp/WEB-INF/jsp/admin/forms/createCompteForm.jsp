@@ -27,7 +27,7 @@
 								code="admin.createCompteForm.label" /></label>
 						<div class="controls">
 							<form:input path="label" cssClass="input-xlarge focused" />
-							<form:errors path="label" cssClass="colorError" />
+							<form:errors path="label" cssClass="colorError" element="div" />
 						</div>
 					</div>
 					<div class="control-group">
@@ -38,7 +38,7 @@
 								<form:options items="${listOwners}" itemLabel="fullPerson"
 									itemValue="username" />
 							</form:select>
-							<form:errors path="usernameOwner" cssClass="colorError" />
+							<form:errors path="usernameOwner" cssClass="colorError" element="div" />
 						</div>
 					</div>
 					<div class="control-group">
@@ -46,7 +46,7 @@
 								code="admin.createCompteForm.solde" /></label>
 						<div class="controls">
 							<form:input path="solde" cssClass="input-xlarge focused" />
-							<form:errors path="solde" cssClass="colorError" />
+							<form:errors path="solde" cssClass="colorError" element="div" />
 						</div>
 					</div>
 					<div class="form-actions alignCenter">

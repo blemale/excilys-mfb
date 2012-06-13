@@ -18,7 +18,7 @@ import com.ebi.formation.mfb.entities.Role.Right;
 public interface IPersonService {
 
 	public enum ReturnCodePerson {
-		OK, IDENTICAL_USERNAME
+		OK, IDENTICAL_USERNAME, ROLES_NOT_DEFINED
 	}
 
 	/**

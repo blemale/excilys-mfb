@@ -26,7 +26,7 @@
 						<label class="control-label" for="montant"><spring:message code="virementInterneForm.montant"/></label>
 						<div class="controls">
 							<form:input path="montant" cssClass="input-xlarge focused" />
-							<form:errors path="montant" cssClass="colorError"/>
+							<form:errors path="montant" cssClass="colorError" element="div" />
 						</div>
 					</div>
 					<div class="control-group">
@@ -36,6 +36,7 @@
 								<form:options items="${listComptes}" itemLabel="fullLabel"
 									itemValue="id" />
 							</form:select>
+							<form:errors path="compteADebiter" cssClass="colorError" element="div"/>
 						</div>
 					</div>
 					<div class="control-group">
@@ -54,7 +55,7 @@
 						<div class="controls">
 							<input id="motif" class="input-xlarge focused" type="text"
 								name="motif">
-							<form:errors path="motif" cssClass="colorError"/>
+							<form:errors path="motif" cssClass="colorError" element="div" />
 						</div>
 					</div>
 					<div class="form-actions alignCenter">

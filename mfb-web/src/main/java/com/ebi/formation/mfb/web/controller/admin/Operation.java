@@ -54,8 +54,12 @@ public class Operation {
 	public ModelAndView doCreateOperationForm(Principal principal, @ModelAttribute @Valid OperationForm operationForm,
 			BindingResult result, RedirectAttributes redirectAttrs) {
 		ModelAndView mv = new ModelAndView();
-		boolean isDatesDifferentes = operationForm.getDateEffet().isBefore(operationForm.getDateValeur());
-		boolean isDatesEgales = operationForm.getDateEffet().equals(operationForm.getDateValeur());
+		boolean isDatesDifferentes = false;
+		boolean isDatesEgales = false;
+		if (operationForm.getDateEffet() != null && operationForm.getDateValeur() != null) {
+			isDatesDifferentes = operationForm.getDateEffet().isBefore(operationForm.getDateValeur());
+			isDatesEgales = operationForm.getDateEffet().equals(operationForm.getDateValeur());
+		}
 		if (result.hasErrors()) {
 			if (!isDatesDifferentes && !isDatesEgales) {
 				result.addError(new FieldError("operationForm", "dateValeur", null, true,

@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -24,8 +25,10 @@ public class VirementExterneForm {
 	@NotNull
 	private Long compteADebiter;
 	@NotBlank
+	@Pattern(regexp = "\\d*")
 	private String numeroCompteACrediter;
 	@Size(max = 64)
+	@Pattern(regexp = "\\w*")
 	private String motif;
 	@NotNull
 	@DateTimeFormat

@@ -2,7 +2,9 @@ package com.ebi.formation.mfb.web.forms.admin;
 
 import java.math.BigDecimal;
 
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.joda.time.DateTime;
@@ -20,12 +22,14 @@ import com.ebi.formation.mfb.entities.OperationType.Type;
 public class OperationForm {
 
 	@NotNull
+	@DecimalMin("1")
 	private BigDecimal montant;
 	@NotNull
 	private Long idCompte;
 	@NotNull
 	private Type type;
 	@Size(max = 64)
+	@Pattern(regexp = "\\w*")
 	private String label;
 	@NotNull
 	@DateTimeFormat

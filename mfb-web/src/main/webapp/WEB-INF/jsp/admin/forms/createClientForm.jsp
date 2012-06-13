@@ -27,7 +27,7 @@
 								code="admin.createClientForm.username" /></label>
 						<div class="controls">
 							<form:input path="username" cssClass="input-xlarge focused" />
-							<form:errors path="username" cssClass="colorError" />
+							<form:errors path="username" cssClass="colorError" element="div" />
 						</div>
 					</div>
 					<div class="control-group">
@@ -35,7 +35,7 @@
 								code="admin.createClientForm.firstname" /></label>
 						<div class="controls">
 							<form:input path="firstname" cssClass="input-xlarge focused" />
-							<form:errors path="firstname" cssClass="colorError" />
+							<form:errors path="firstname" cssClass="colorError" element="div" />
 						</div>
 					</div>
 					<div class="control-group">
@@ -43,7 +43,7 @@
 								code="admin.createClientForm.lastname" /></label>
 						<div class="controls">
 							<form:input path="lastname" cssClass="input-xlarge focused" />
-							<form:errors path="lastname" cssClass="colorError" />
+							<form:errors path="lastname" cssClass="colorError" element="div" />
 						</div>
 					</div>
 					<div class="control-group">
@@ -51,7 +51,7 @@
 								code="admin.createClientForm.password" /></label>
 						<div class="controls">
 							<form:password path="password" cssClass="input-xlarge focused" />
-							<form:errors path="password" cssClass="colorError" />
+							<form:errors path="password" cssClass="colorError" element="div" />
 						</div>
 					</div>
 					<div class="control-group">
@@ -59,7 +59,7 @@
 								code="admin.createClientForm.password" /></label>
 						<div class="controls">
 							<form:password path="password2" cssClass="input-xlarge focused" />
-							<form:errors path="password2" cssClass="colorError" />
+							<form:errors path="password2" cssClass="colorError" element="div" />
 						</div>
 					</div>
 					<div class="control-group">
@@ -67,7 +67,7 @@
 								code="admin.createClientForm.listRights" /></label>
 						<div class="controls">
 							<form:checkboxes items="${listRights}" path="listRights" />
-							<form:errors path="listRights" cssClass="colorError" />
+							<form:errors path="listRights" cssClass="colorError" element="div" />
 						</div>
 					</div>
 					<div class="form-actions alignCenter">

@@ -3,6 +3,7 @@ package com.ebi.formation.mfb.dao.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import org.slf4j.Logger;
@@ -33,7 +34,13 @@ public class RoleDao implements IRoleDao {
 	@Override
 	public Role findRoleByRight(Right right) {
 		logger.debug("findRoleByRight(right:{})", right);
-		return em.createNamedQuery("findRoleByRight", Role.class).setParameter("right", right).getSingleResult();
+		Role r = null;
+		try {
+			r = em.createNamedQuery("findRoleByRight", Role.class).setParameter("right", right).getSingleResult();
+		} catch (NoResultException e) {
+			logger.debug("findRoleByRight(right:{}) : Role not found", right);
+		}
+		return r;
 	}
 
 	/*

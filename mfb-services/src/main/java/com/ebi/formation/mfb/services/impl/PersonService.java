@@ -37,7 +37,7 @@ public class PersonService implements IPersonService {
 	private IPersonDao personDao;
 	@Autowired
 	private IRoleDao roleDao;
-	private static final int TAILLE_SHA = 512 ;
+	private static final int TAILLE_SHA = 512;
 
 	/*
 	 * (non-Javadoc)
@@ -73,8 +73,15 @@ public class PersonService implements IPersonService {
 		person.setLastName(lastname);
 		person.setPassword(new ShaPasswordEncoder(TAILLE_SHA).encodePassword(password, null));
 		Set<Role> setRoles = new HashSet<Role>();
+		//
 		for (Right r : listRights) {
-			setRoles.add(roleDao.findRoleByRight(r));
+			try {
+				setRoles.add(roleDao.findRoleByRight(r));
+			} catch (Exception e) {
+				logger.debug("save(username:{}, firstname:{}, lastname:{}, password:{}, listRights) : Role not found",
+						new Object[] { username, firstname, lastname, password, listRights });
+				return ReturnCodePerson.ROLES_NOT_DEFINED;
+			}
 		}
 		person.setAuthorities(setRoles);
 		personDao.save(person);

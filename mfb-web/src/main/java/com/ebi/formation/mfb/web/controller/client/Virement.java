@@ -82,8 +82,11 @@ public class Virement {
 			@ModelAttribute @Valid VirementInterneForm virementInterneForm, BindingResult result,
 			RedirectAttributes redirectAttrs) {
 		ModelAndView mv = new ModelAndView();
-		boolean isCompteIdentiques = virementInterneForm.getCompteACrediter().equals(
-				virementInterneForm.getCompteADebiter());
+		boolean isCompteIdentiques = false;
+		if (virementInterneForm.getCompteADebiter() != null && virementInterneForm.getCompteACrediter() != null) {
+			isCompteIdentiques = virementInterneForm.getCompteACrediter().equals(
+					virementInterneForm.getCompteADebiter());
+		}
 		if (result.hasErrors() || isCompteIdentiques) {
 			mv.addObject(OBJECT_LIST_COMPTES, compteService.findComptesByUsername(principal.getName()));
 			if (isCompteIdentiques) {

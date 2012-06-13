@@ -75,6 +75,8 @@ public class Client {
 			case IDENTICAL_USERNAME:
 				message = "admin.createClientForm.identicalUsername";
 				break;
+			case ROLES_NOT_DEFINED:
+				message = "admin.createClientForm.error";
 			default:
 				break;
 		}

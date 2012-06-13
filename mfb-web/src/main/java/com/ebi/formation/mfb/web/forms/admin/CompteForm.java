@@ -2,9 +2,12 @@ package com.ebi.formation.mfb.web.forms.admin;
 
 import java.math.BigDecimal;
 
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * Classe représentant le formulaire de demande de création d'un compte. Nécessaire pour la validation du formulaire.
@@ -15,11 +18,13 @@ import javax.validation.constraints.Size;
 public class CompteForm {
 
 	@Size(max = 64)
-	@Pattern(regexp = "\\w+")
+	@Pattern(regexp = "\\w*")
+	@NotBlank
 	private String label;
 	@NotNull
 	private String usernameOwner;
 	@NotNull
+	@DecimalMin("0")
 	private BigDecimal solde;
 
 	/**

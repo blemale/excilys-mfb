@@ -27,7 +27,7 @@
 								code="virementExterneForm.montant" /></label>
 						<div class="controls">
 							<form:input path="montant" cssClass="input-xlarge focused" />
-							<form:errors path="montant" cssClass="colorError" />
+							<form:errors path="montant" cssClass="colorError" element="div" />
 						</div>
 					</div>
 					<div class="control-group">
@@ -38,8 +38,7 @@
 								<form:options items="${listComptes}" itemLabel="fullLabel"
 									itemValue="id" />
 							</form:select>
-							<form:errors path="compteADebiter" cssClass="colorError"
-								element="div" />
+							<form:errors path="compteADebiter" cssClass="colorError" element="div" />
 						</div>
 					</div>
 					<div class="control-group">
@@ -48,7 +47,7 @@
 						<div class="controls">
 							<form:input path="numeroCompteACrediter"
 								cssClass="input-xlarge focused" />
-							<form:errors path="numeroCompteACrediter" cssClass="colorError" />
+							<form:errors path="numeroCompteACrediter" cssClass="colorError" element="div" />
 						</div>
 					</div>
 					<div class="control-group">
@@ -57,7 +56,7 @@
 						<div class="controls">
 							<form:select path="dateEffet" items="${datesEffet}"
 								itemLabel="dateTimeFormat" itemValue="dateTime" />
-							<form:errors path="dateEffet" cssClass="colorError" />
+							<form:errors path="dateEffet" cssClass="colorError" element="div" />
 						</div>
 					</div>
 					<div class="control-group">
@@ -66,7 +65,7 @@
 						<div class="controls">
 							<form:select path="dateValeur" items="${datesValeur}"
 								itemLabel="dateTimeFormat" itemValue="dateTime" />
-							<form:errors path="dateValeur" cssClass="colorError" />
+							<form:errors path="dateValeur" cssClass="colorError" element="div" />
 						</div>
 					</div>
 					<div class="control-group">
@@ -75,7 +74,7 @@
 						<div class="controls">
 							<input id="motif" class="input-xlarge focused" type="text"
 								name="motif">
-							<form:errors path="motif" cssClass="colorError" />
+							<form:errors path="motif" cssClass="colorError" element="div" />
 						</div>
 					</div>
 					<div class="form-actions alignCenter">

@@ -19,13 +19,16 @@ import com.ebi.formation.mfb.entities.Role.Right;
 public class ClientForm {
 
 	@Size(max = 20)
-	@Pattern(regexp = "\\w+")
+	@Pattern(regexp = "\\w*")
+	@NotBlank
 	private String username;
 	@Size(max = 64)
 	@NotBlank
+	@Pattern(regexp = "\\w*")
 	private String firstname;
 	@Size(max = 64)
 	@NotBlank
+	@Pattern(regexp = "\\w*")
 	private String lastname;
 	@Size(min = 6, max = 20)
 	@Pattern(regexp = "\\w*")

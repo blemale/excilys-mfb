@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
@@ -22,6 +23,7 @@ public class VirementInterneForm {
 	@NotNull
 	private Long compteACrediter;
 	@Size(max = 64)
+	@Pattern(regexp = "\\w*")
 	private String motif;
 
 	/**
