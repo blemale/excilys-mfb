@@ -1,0 +1,60 @@
+\documentclass{beamer}
+\usepackage[francais]{babel}
+\usepackage{graphicx}
+\setbeamertemplate{items}[circle]
+\usetheme{default}
+%%\useoutertheme{infolines} 
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+\title{Projet MF Banking}
+\setbeamertemplate{navigation symbols}{}
+\author{K\'evin POGORZELSKI, Fran\c cois GUILLAIN, Tahar BAKIR\\ Bastien LEMALE, Guillaume VAROQUAUX et Pierre DAL-PRA}
+\begin{document}
+
+\begin{frame}
+	\maketitle
+\end{frame}
+
+\begin{frame}{Plan}
+	\begin{itemize}
+		\item Pr\'esentation des fonctionnalit\'es impl\'ement\'ees (user stories) 
+		\item Organisation du projet
+			\begin{itemize}
+				\item Management du travail
+				\item Environnement de d\'eveloppement
+			\end{itemize}
+		\item Architecture du projet
+			\begin{itemize}
+				\item Objets du mod\`ele
+				\item Organisation des modules
+			\end{itemize}
+		\item Pr\'esentation technique
+			\begin{itemize}
+				\item Back-office
+				\item Front-office
+				\item Tests (unitaires et d'int\'egration)
+				\item Web Services
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\include{fonctionnalites}
+\include{organisation}
+\include{architecture}
+\include{technique}
+\end{document}
