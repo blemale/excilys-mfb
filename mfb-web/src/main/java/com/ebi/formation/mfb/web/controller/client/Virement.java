@@ -112,11 +112,15 @@ public class Virement {
 			case DECOUVERT:
 				message = "virement.decouvert";
 				break;
+			case IDENTICAL_COMPTES:
+				message = "virement.comptesIdentiques";
+				break;
 			case OK:
 				message = "virement.ok";
 				mv.setViewName("redirect:confirmVirement.html");
 				break;
 			default:
+				message = "virement.error";
 				break;
 		}
 		redirectAttrs.addFlashAttribute("message", message);
@@ -178,11 +182,15 @@ public class Virement {
 			case DECOUVERT:
 				message = "virement.decouvert";
 				break;
+			case IDENTICAL_COMPTES:
+				message = "virement.comptesIdentiques";
+				break;
 			case OK:
 				message = "virement.ok";
 				mv.setViewName("redirect:confirmVirement.html");
 				break;
 			default:
+				message = "virement.error";
 				break;
 		}
 		redirectAttrs.addFlashAttribute("message", message);
