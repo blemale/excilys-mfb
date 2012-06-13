@@ -7,6 +7,10 @@ import org.joda.time.DateTime;
 
 import com.ebi.formation.mfb.entities.OperationType;
 
+/**
+ * @author excilys
+ * 
+ */
 public class OperationDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -17,9 +21,20 @@ public class OperationDTO implements Serializable {
 	private DateTime dateEffet;
 	private String label;
 
+	/**
+	 * 
+	 */
 	public OperationDTO() {
 	}
 
+	/**
+	 * @param id
+	 * @param type
+	 * @param montant
+	 * @param dateValeur
+	 * @param dateEffet
+	 * @param label
+	 */
 	public OperationDTO(Long id, OperationType type, BigDecimal montant, DateTime dateValeur, DateTime dateEffet,
 			String label) {
 		super();

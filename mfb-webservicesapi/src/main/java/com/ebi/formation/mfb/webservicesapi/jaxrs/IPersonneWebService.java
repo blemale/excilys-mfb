@@ -6,8 +6,16 @@ import javax.ws.rs.PathParam;
 
 import com.ebi.formation.mfb.webservicesapi.dto.PersonDTO;
 
+/**
+ * @author excilys
+ * 
+ */
 public interface IPersonneWebService {
 
+	/**
+	 * @param username
+	 * @return
+	 */
 	@GET
 	@Path("getPersonneByUsername/{username}")
 	PersonDTO findPersonByUsername(@PathParam("username") String username);

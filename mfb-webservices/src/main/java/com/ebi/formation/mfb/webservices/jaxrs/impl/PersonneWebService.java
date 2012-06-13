@@ -12,6 +12,10 @@ import com.ebi.formation.mfb.services.IPersonService;
 import com.ebi.formation.mfb.webservicesapi.dto.PersonDTO;
 import com.ebi.formation.mfb.webservicesapi.jaxrs.IPersonneWebService;
 
+/**
+ * @author excilys
+ * 
+ */
 @Produces({ "application/json", "text/xml" })
 public class PersonneWebService implements IPersonneWebService {
 
