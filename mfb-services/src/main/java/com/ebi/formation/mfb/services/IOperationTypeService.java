@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.security.access.annotation.Secured;
 
 import com.ebi.formation.mfb.entities.OperationType.Type;
+import com.ebi.formation.mfb.entities.Role;
 
 /**
  * Interface du service associé à OperationTypeDao
@@ -19,6 +20,6 @@ public interface IOperationTypeService {
 	 * 
 	 * @return
 	 */
-	@Secured("ROLE_ADMIN")
+	@Secured(Role.ROLE_ADMIN)
 	List<Type> findAllOperationTypes();
 }

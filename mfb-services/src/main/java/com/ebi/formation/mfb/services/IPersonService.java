@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.security.access.annotation.Secured;
 
 import com.ebi.formation.mfb.entities.Person;
+import com.ebi.formation.mfb.entities.Role;
 import com.ebi.formation.mfb.entities.Role.Right;
 
 /**
@@ -39,7 +40,7 @@ public interface IPersonService {
 	 * @param listRights
 	 * @return
 	 */
-	@Secured("ROLE_ADMIN")
+	@Secured(Role.ROLE_ADMIN)
 	ReturnCodePerson save(String username, String firstname, String lastname, String password, List<Right> listRights);
 
 	/**
@@ -47,6 +48,6 @@ public interface IPersonService {
 	 * 
 	 * @return
 	 */
-	@Secured("ROLE_ADMIN")
+	@Secured(Role.ROLE_ADMIN)
 	List<Person> findAllPersons();
 }

@@ -9,6 +9,7 @@ import org.springframework.security.access.annotation.Secured;
 import com.ebi.formation.mfb.entities.Compte;
 import com.ebi.formation.mfb.entities.Operation;
 import com.ebi.formation.mfb.entities.OperationType.Type;
+import com.ebi.formation.mfb.entities.Role;
 
 /**
  * Interface du service associé à OperationDao
@@ -39,7 +40,7 @@ public interface IOperationService {
 	 *            une année donnée (yyyy)
 	 * @return le total des opérations carte
 	 */
-	@Secured("ROLE_CLIENT")
+	@Secured(Role.ROLE_CLIENT)
 	BigDecimal getTotalOperationsCarteByMonth(long idCompte, int month, int year);
 
 	/**
@@ -53,7 +54,7 @@ public interface IOperationService {
 	 *            une année donnée (yyyy)
 	 * @return le nombre d'opération carte
 	 */
-	@Secured("ROLE_CLIENT")
+	@Secured(Role.ROLE_CLIENT)
 	long getNumberOfOperationsCarteByMonth(long idCompte, int month, int year);
 
 	/**
@@ -67,7 +68,7 @@ public interface IOperationService {
 	 *            une année donnée (yyyy)
 	 * @return le nombre d'opération carte
 	 */
-	@Secured("ROLE_CLIENT")
+	@Secured(Role.ROLE_CLIENT)
 	long getNumberOfOperationsWithoutCarteByMonth(long idCompte, int month, int year);
 
 	/**
@@ -81,7 +82,7 @@ public interface IOperationService {
 	 *            une année donnée (yyyy)
 	 * @return le nombre d'opération carte
 	 */
-	@Secured("ROLE_CLIENT")
+	@Secured(Role.ROLE_CLIENT)
 	long getNumberOfVirementByMonth(long idCompte, int month, int year);
 
 	/**
@@ -97,7 +98,7 @@ public interface IOperationService {
 	 *            la page à afficher avec le nombre de résultats par défaut. Commence à 0.
 	 * @return la liste des {@link Operation}
 	 */
-	@Secured("ROLE_CLIENT")
+	@Secured(Role.ROLE_CLIENT)
 	List<Operation> getOperationsWithoutCarteByMonthPaginated(long idCompte, int month, int year, int page);
 
 	/**
@@ -113,7 +114,7 @@ public interface IOperationService {
 	 *            la page à afficher avec le nombre de résultats par défaut. Commence à 0.
 	 * @return la liste des {@link Operation}
 	 */
-	@Secured("ROLE_CLIENT")
+	@Secured(Role.ROLE_CLIENT)
 	List<Operation> getOperationsCarteByMonthPaginated(long idCompte, int month, int year, int page);
 
 	/**
@@ -129,7 +130,7 @@ public interface IOperationService {
 	 *            la page à afficher avec le nombre de résultats par défaut. Commence à 0.
 	 * @return la liste des {@link Operation}
 	 */
-	@Secured("ROLE_CLIENT")
+	@Secured(Role.ROLE_CLIENT)
 	List<Operation> getVirementsByMonthPaginated(long idCompte, int month, int year, int page);
 
 	/**
@@ -143,7 +144,7 @@ public interface IOperationService {
 	 *            une année donnée (yyyy)
 	 * @return le nombre de pages à afficher
 	 */
-	@Secured("ROLE_CLIENT")
+	@Secured(Role.ROLE_CLIENT)
 	long getNumberOfPagesForOperationsWithoutCartesByMonth(long idCompte, int month, int year);
 
 	/**
@@ -157,7 +158,7 @@ public interface IOperationService {
 	 *            une année donnée (yyyy)
 	 * @return le nombre de pages à afficher
 	 */
-	@Secured("ROLE_CLIENT")
+	@Secured(Role.ROLE_CLIENT)
 	long getNumberOfPagesForOperationsCartesByMonth(long idCompte, int month, int year);
 
 	/**
@@ -171,7 +172,7 @@ public interface IOperationService {
 	 *            une année donnée (yyyy)
 	 * @return le nombre de pages à afficher
 	 */
-	@Secured("ROLE_CLIENT")
+	@Secured(Role.ROLE_CLIENT)
 	long getNumberOfPagesForVirementByMonth(long idCompte, int month, int year);
 
 	/**
@@ -183,7 +184,7 @@ public interface IOperationService {
 	 * @param year
 	 * @return
 	 */
-	@Secured("ROLE_CLIENT")
+	@Secured(Role.ROLE_CLIENT)
 	List<Operation> getAllOperationsByMonthByCompte(long idCompte, int month, int year);
 
 	/**
@@ -199,7 +200,7 @@ public interface IOperationService {
 	 *         découvert; 3 si le compte à débiter n'existe pas; 4 si le compte à créditer n'existe pas; 5 si le montant
 	 *         est négatif ou nul
 	 */
-	@Secured("ROLE_CLIENT")
+	@Secured(Role.ROLE_CLIENT)
 	ReturnCodeVirement doVirement(long idCompteADebiter, long idCompteACrediter, String label, BigDecimal montant,
 			DateTime dateEffet, DateTime dateValeur);
 
@@ -216,7 +217,7 @@ public interface IOperationService {
 	 *         découvert; 3 si le compte à débiter n'existe pas; 4 si le compte à créditer n'existe pas; 5 si le montant
 	 *         est négatif ou nul
 	 */
-	@Secured("ROLE_CLIENT")
+	@Secured(Role.ROLE_CLIENT)
 	ReturnCodeVirement doVirement(long idCompteADebiter, String numeroCompteACrediter, String label,
 			BigDecimal montant, DateTime dateEffet, DateTime dateValeur);
 
@@ -236,7 +237,7 @@ public interface IOperationService {
 	 * @param dateValeur
 	 * @return
 	 */
-	@Secured("ROLE_ADMIN")
+	@Secured(Role.ROLE_ADMIN)
 	ReturnCodeOperation saveOperation(BigDecimal montant, Long idCompte, Type type, String label, DateTime dateEffet,
 			DateTime dateValeur);
 }

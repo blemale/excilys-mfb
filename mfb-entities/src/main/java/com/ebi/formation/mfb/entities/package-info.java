@@ -5,17 +5,17 @@
 		@NamedQuery(name = "checkCompteOwnershipByUsernameAndCompteId", query = "SELECT COUNT(c) FROM Person p, Compte c WHERE p.username = :username AND c.id = :compteId AND c MEMBER OF p.comptes"),
 		@NamedQuery(name = "findPersonByUsername", query = "SELECT p FROM Person p WHERE p.username = :username"),
 		@NamedQuery(name = "findTotalOperationsCarteByMonth", query = "SELECT SUM(o.montant) FROM Operation o WHERE o.type.label = :type AND o.compte.id = :idcompte "
-				+ "and o.dateValeur BETWEEN :dateValeur AND :datePlusUnMois"),
+				+ "AND o.dateValeur BETWEEN :dateValeur AND :datePlusUnMois"),
 		@NamedQuery(name = "findNumberOfOperationsByTypeByMonth", query = "SELECT COUNT(o) FROM Operation o WHERE o.type.label = :type AND o.compte.id = :idcompte "
-				+ "and o.dateValeur BETWEEN :dateValeur AND :datePlusUnMois"),
+				+ "AND o.dateValeur BETWEEN :dateValeur AND :datePlusUnMois"),
 		@NamedQuery(name = "findNumberOfOperationsWithoutTypeByMonth", query = "SELECT COUNT(o) FROM Operation o WHERE o.type.label != :type AND o.compte.id = :idcompte "
-				+ "and o.dateValeur BETWEEN :dateValeur AND :datePlusUnMois"),
+				+ "AND o.dateValeur BETWEEN :dateValeur AND :datePlusUnMois"),
 		@NamedQuery(name = "findOperationsWithoutCarteByMonthPaginated", query = "SELECT o FROM Operation o WHERE o.type.label <> 'CARTE' AND o.compte.id = :idcompte "
-				+ "and o.dateValeur BETWEEN :dateValeur AND :datePlusUnMois ORDER BY o.dateValeur DESC"),
+				+ "AND o.dateValeur BETWEEN :dateValeur AND :datePlusUnMois ORDER BY o.dateValeur DESC"),
 		@NamedQuery(name = "findOperationsCarteByMonthPaginated", query = "SELECT o FROM Operation o WHERE o.type.label = 'CARTE' AND o.compte.id = :idcompte "
-				+ "and o.dateValeur BETWEEN :dateValeur AND :datePlusUnMois ORDER BY o.dateValeur DESC"),
+				+ "AND o.dateValeur BETWEEN :dateValeur AND :datePlusUnMois ORDER BY o.dateValeur DESC"),
 		@NamedQuery(name = "findVirementByMonthPaginated", query = "SELECT o FROM Operation o WHERE o.type.label = 'VIREMENT' AND o.compte.id = :idCompte "
-				+ "and o.dateValeur BETWEEN :dateValeur AND :datePlusUnMois ORDER BY o.dateValeur DESC"),
+				+ "AND o.dateValeur BETWEEN :dateValeur AND :datePlusUnMois ORDER BY o.dateValeur DESC"),
 		@NamedQuery(name = "findCompteById", query = "SELECT c FROM Compte c WHERE c.id = :id"),
 		@NamedQuery(name = "findCompteByNumeroCompte", query = "SELECT c FROM Compte c WHERE c.numeroCompte = :numeroCompte"),
 		@NamedQuery(name = "findOperationsNotDone", query = "SELECT o FROM Operation o WHERE o.operationDone = false AND o.dateValeur <= :today"),
@@ -26,7 +26,7 @@
 		@NamedQuery(name = "findSoldeCompte", query = "SELECT c.solde FROM Compte c WHERE c.id = :id"),
 		@NamedQuery(name = "findEncoursCarteCompte", query = "SELECT c.encoursCarte FROM Compte c WHERE c.id = :id"),
 		@NamedQuery(name = "findAllOperationsByMonthByCompte", query = "SELECT o FROM Operation o WHERE o.compte.id = :idcompte "
-				+ "and o.dateValeur BETWEEN :dateValeur AND :datePlusUnMois ORDER BY o.dateValeur DESC"),
+				+ "AND o.dateValeur BETWEEN :dateValeur AND :datePlusUnMois ORDER BY o.dateValeur DESC"),
 		@NamedQuery(name = "findOperationTypeByType", query = "SELECT ot FROM OperationType ot WHERE ot.label = :type"),
 		@NamedQuery(name = "findAllPersons", query = "SELECT p FROM Person p"),
 		@NamedQuery(name = "findRoleByRight", query = "SELECT r FROM Role r WHERE r.right=:right"),

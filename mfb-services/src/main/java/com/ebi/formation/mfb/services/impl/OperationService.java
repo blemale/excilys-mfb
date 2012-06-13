@@ -185,8 +185,9 @@ public class OperationService implements IOperationService {
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public ReturnCodeVirement doVirement(long idCompteADebiter, long idCompteACrediter, String label,
 			BigDecimal montant, DateTime dateEffet, DateTime dateValeur) {
-		logger.debug("doVirement(idCompteADebiter:{}, idCompteACrediter:{}, label:{}, montant:{})", new Object[] {
-				idCompteADebiter, idCompteACrediter, label, montant });
+		logger.debug(
+				"doVirement(idCompteADebiter:{}, idCompteACrediter:{}, label:{}, montant:{}, dateEffet:{}, dateValeur:{})",
+				new Object[] { idCompteADebiter, idCompteACrediter, label, montant, dateEffet, dateValeur });
 		if (montant.signum() == -1 || montant.signum() == 0) {
 			return ReturnCodeVirement.MONTANT_INCORRECT;
 		}
@@ -266,8 +267,9 @@ public class OperationService implements IOperationService {
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public ReturnCodeVirement doVirement(long idCompteADebiter, String numeroCompteACrediter, String label,
 			BigDecimal montant, DateTime dateEffet, DateTime dateValeur) {
-		logger.debug("doVirement(idCompteADebiter:{}, numeroCompteACrediter:{}, label:{}, montant:{})", new Object[] {
-				idCompteADebiter, numeroCompteACrediter, label, montant });
+		logger.debug(
+				"doVirement(idCompteADebiter:{}, numeroCompteACrediter:{}, label:{}, montant:{}, dateEffet:{}, dateValeur:{})",
+				new Object[] { idCompteADebiter, numeroCompteACrediter, label, montant, dateEffet, dateValeur });
 		Compte compteACrediter = compteDao.findCompteByNumeroCompte(numeroCompteACrediter);
 		if (compteACrediter == null) {
 			return ReturnCodeVirement.COMPTE_CREDIT_INEXISTANT;
@@ -295,6 +297,8 @@ public class OperationService implements IOperationService {
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public ReturnCodeOperation saveOperation(BigDecimal montant, Long idCompte, Type type, String label,
 			DateTime dateEffet, DateTime dateValeur) {
+		logger.debug("saveOperation(montant:{}, idCompte:{}, type:{}, label:{}, dateEffet:{}, dateValeur:{})",
+				new Object[] { montant, idCompte, type, label, dateEffet, dateValeur });
 		Compte c = compteDao.findCompteById(idCompte);
 		if (c == null) {
 			return ReturnCodeOperation.COMPTE_INEXISTANT;

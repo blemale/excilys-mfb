@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.security.access.annotation.Secured;
 
 import com.ebi.formation.mfb.entities.Compte;
+import com.ebi.formation.mfb.entities.Role;
 
 /**
  * Interface du service associé à CompteDao
@@ -26,7 +27,7 @@ public interface ICompteService {
 	 * @param username
 	 * @return
 	 */
-	@Secured("ROLE_CLIENT")
+	@Secured(Role.ROLE_CLIENT)
 	List<Compte> findComptesByUsername(String username);
 
 	/**
@@ -38,7 +39,7 @@ public interface ICompteService {
 	 *            id du {@link Compte}
 	 * @return vrai si le compte appartient bien à l'utilisateur, faux sinon.
 	 */
-	@Secured("ROLE_CLIENT")
+	@Secured(Role.ROLE_CLIENT)
 	boolean checkCompteOwnershipByUsernameAndCompteId(String username, Long compteId);
 
 	/**
@@ -48,7 +49,7 @@ public interface ICompteService {
 	 *            l'id du {@link Compte}
 	 * @return un {@link Compte} ou null s le compte n'existe pas.
 	 */
-	@Secured("ROLE_CLIENT")
+	@Secured(Role.ROLE_CLIENT)
 	Compte getCompteById(Long compteId);
 
 	/**
@@ -58,7 +59,7 @@ public interface ICompteService {
 	 *            le numeroCompte du {@link Compte}
 	 * @return un {@link Compte} ou null s le compte n'existe pas.
 	 */
-	@Secured("ROLE_CLIENT")
+	@Secured(Role.ROLE_CLIENT)
 	Compte getCompteByNumeroCompte(String numeroCompte);
 
 	/**
@@ -69,7 +70,7 @@ public interface ICompteService {
 	 * @param solde
 	 * @return
 	 */
-	@Secured("ROLE_ADMIN")
+	@Secured(Role.ROLE_ADMIN)
 	Object[] save(String libelle, String usernamePerson, BigDecimal solde);
 
 	/**
@@ -77,6 +78,6 @@ public interface ICompteService {
 	 * 
 	 * @return
 	 */
-	@Secured("ROLE_ADMIN")
+	@Secured(Role.ROLE_ADMIN)
 	List<Compte> findAllComptes();
 }

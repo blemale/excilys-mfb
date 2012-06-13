@@ -21,7 +21,7 @@ public interface IRoleService {
 	 * @param right
 	 * @return
 	 */
-	@Secured("ROLE_ADMIN")
+	@Secured(Role.ROLE_ADMIN)
 	Role findRoleByRight(Right right);
 
 	/**
@@ -29,6 +29,6 @@ public interface IRoleService {
 	 * 
 	 * @return
 	 */
-	@Secured("ROLE_ADMIN")
+	@Secured(Role.ROLE_ADMIN)
 	List<Right> findAllRights();
 }

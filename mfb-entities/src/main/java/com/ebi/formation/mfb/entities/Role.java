@@ -34,6 +34,8 @@ public class Role implements Serializable {
 		ROLE_CLIENT, ROLE_ADMIN
 	}
 
+	public static final String ROLE_CLIENT = "ROLE_CLIENT";
+	public static final String ROLE_ADMIN = "ROLE_ADMIN";
 	@Id
 	@GeneratedValue
 	private Long id;
