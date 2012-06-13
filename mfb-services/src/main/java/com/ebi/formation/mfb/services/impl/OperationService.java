@@ -251,7 +251,8 @@ public class OperationService implements IOperationService {
 	 */
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
-	public ReturnCodeVirement doVirement(long idCompteADebiter, long idCompteACrediter, String label, BigDecimal montant) {
+	public ReturnCodeVirement doVirement(long idCompteADebiter, long idCompteACrediter, String label,
+			BigDecimal montant, DateTime dateEffet, DateTime dateValeur) {
 		logger.debug("doVirement(idCompteADebiter:{}, idCompteACrediter:{}, label:{}, montant:{})", new Object[] {
 				idCompteADebiter, idCompteACrediter, label, montant });
 		if (montant.signum() == -1 || montant.signum() == 0) {
@@ -278,33 +279,49 @@ public class OperationService implements IOperationService {
 			labelCredit = "Virement de " + compteADebiter.getLabel();
 		}
 		Operation debit = new Operation();
+		Operation credit = new Operation();
+		// operation immediate
+		if (dateValeur.isBeforeNow() || dateValeur.equals(new DateTime())) {
+			BigDecimal newSoldeDebit = compteADebiter.getSolde().add(montant.negate());
+			BigDecimal newSoldeCredit = compteACrediter.getSolde().add(montant);
+			compteADebiter.setSolde(newSoldeDebit);
+			compteACrediter.setSolde(newSoldeCredit);
+			BigDecimal newSoldePreviDebit = compteADebiter.getSoldePrevisionnel().add(montant.negate());
+			BigDecimal newSoldePrevisCredit = compteACrediter.getSoldePrevisionnel().add(montant);
+			compteADebiter.setSoldePrevisionnel(newSoldePreviDebit);
+			compteACrediter.setSoldePrevisionnel(newSoldePrevisCredit);
+			// compteDao.updateCompteSoldeAndSoldePrevisionnel(idCompteACrediter, montant);
+			// compteDao.updateCompteSoldeAndSoldePrevisionnel(idCompteADebiter, montant.negate());
+			debit.setOperationDone(Boolean.TRUE);
+			credit.setOperationDone(Boolean.TRUE);
+		}
+		// operation en prévision
+		else {
+			BigDecimal newSoldePreviDebit = compteADebiter.getSoldePrevisionnel().add(montant.negate());
+			BigDecimal newSoldePrevisCredit = compteACrediter.getSoldePrevisionnel().add(montant);
+			compteADebiter.setSoldePrevisionnel(newSoldePreviDebit);
+			compteACrediter.setSoldePrevisionnel(newSoldePrevisCredit);
+			// compteDao.updateCompteSoldePrevisionnel(idCompteACrediter, montant);
+			// compteDao.updateCompteSoldePrevisionnel(idCompteADebiter, montant.negate());
+			debit.setOperationDone(Boolean.FALSE);
+			credit.setOperationDone(Boolean.FALSE);
+		}
+		// operation debit
 		debit.setCompte(compteADebiter);
-		DateTime now = DateTime.now();
-		debit.setDateEffet(now);
-		debit.setDateValeur(now);
+		debit.setDateEffet(dateEffet);
+		debit.setDateValeur(dateValeur);
 		debit.setLabel(labelDebit);
 		debit.setMontant(montant.negate());
 		debit.setType(operationTypeDao.getOperationTypeByType(Type.VIREMENT));
-		debit.setOperationDone(Boolean.TRUE);
-		Operation credit = new Operation();
+		// operation credit
 		credit.setCompte(compteACrediter);
-		credit.setDateEffet(now);
-		credit.setDateValeur(now);
+		credit.setDateEffet(dateEffet);
+		credit.setDateValeur(dateValeur);
 		credit.setLabel(labelCredit);
 		credit.setMontant(montant);
 		credit.setType(operationTypeDao.getOperationTypeByType(Type.VIREMENT));
-		credit.setOperationDone(Boolean.TRUE);
 		operationDao.save(debit);
 		operationDao.save(credit);
-		// TODO demander à Stéphane pour l'isolation des données
-		BigDecimal newSoldeDebit = compteADebiter.getSolde().add(montant.negate());
-		BigDecimal newSoldeCredit = compteACrediter.getSolde().add(montant);
-		compteADebiter.setSolde(newSoldeDebit);
-		compteACrediter.setSolde(newSoldeCredit);
-		BigDecimal newSoldePreviDebit = compteADebiter.getSoldePrevisionnel().add(montant.negate());
-		BigDecimal newSoldePrevisCredit = compteACrediter.getSoldePrevisionnel().add(montant);
-		compteADebiter.setSoldePrevisionnel(newSoldePreviDebit);
-		compteACrediter.setSoldePrevisionnel(newSoldePrevisCredit);
 		return ReturnCodeVirement.OK;
 	}
 
@@ -316,14 +333,14 @@ public class OperationService implements IOperationService {
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public ReturnCodeVirement doVirement(long idCompteADebiter, String numeroCompteACrediter, String label,
-			BigDecimal montant) {
+			BigDecimal montant, DateTime dateEffet, DateTime dateValeur) {
 		logger.debug("doVirement(idCompteADebiter:{}, numeroCompteACrediter:{}, label:{}, montant:{})", new Object[] {
 				idCompteADebiter, numeroCompteACrediter, label, montant });
 		Compte compteACrediter = compteDao.findCompteByNumeroCompte(numeroCompteACrediter);
 		if (compteACrediter == null) {
 			return ReturnCodeVirement.COMPTE_CREDIT_INEXISTANT;
 		}
-		return doVirement(idCompteADebiter, compteACrediter.getId(), label, montant);
+		return doVirement(idCompteADebiter, compteACrediter.getId(), label, montant, dateEffet, dateValeur);
 	}
 
 	/*
@@ -359,7 +376,7 @@ public class OperationService implements IOperationService {
 		o.setMontant(montant);
 		o.setType(ot);
 		// operation immediate
-		if (dateValeur.isBeforeNow()) {
+		if (dateValeur.isBeforeNow() || dateValeur.equals(new DateTime())) {
 			compteDao.updateCompteSoldeAndSoldePrevisionnel(idCompte, montant);
 			o.setOperationDone(Boolean.TRUE);
 		}

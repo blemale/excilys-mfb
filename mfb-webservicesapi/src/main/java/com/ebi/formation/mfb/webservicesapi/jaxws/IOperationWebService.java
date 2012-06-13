@@ -7,6 +7,8 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 
+import org.joda.time.DateTime;
+
 import com.ebi.formation.mfb.services.IOperationService.ReturnCodeVirement;
 import com.ebi.formation.mfb.webservicesapi.dto.OperationDTO;
 
@@ -204,7 +206,8 @@ public interface IOperationWebService {
 	@WebMethod(operationName = "doVirementInterne")
 	ReturnCodeVirement doVirement(@WebParam(name = "idCompteADebiter") long idCompteADebiter,
 			@WebParam(name = "idCompteACrediter") long idCompteACrediter, @WebParam(name = "label") String label,
-			@WebParam(name = "montant") BigDecimal montant);
+			@WebParam(name = "montant") BigDecimal montant, @WebParam(name = "dateEffet") DateTime dateEffet,
+			@WebParam(name = "dateValeur") DateTime dateValeur);
 
 	/**
 	 * @param idCompteADebiter
@@ -216,5 +219,6 @@ public interface IOperationWebService {
 	@WebMethod(operationName = "doVirementExterne")
 	ReturnCodeVirement doVirement(@WebParam(name = "idCompteADebiter") long idCompteADebiter,
 			@WebParam(name = "idCompteACrediter") String numeroCompteACrediter, @WebParam(name = "label") String label,
-			@WebParam(name = "montant") BigDecimal montant);
+			@WebParam(name = "montant") BigDecimal montant, @WebParam(name = "dateEffet") DateTime dateEffet,
+			@WebParam(name = "dateValeur") DateTime dateValeur);
 }

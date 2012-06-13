@@ -1,13 +1,10 @@
 package com.ebi.formation.mfb.web.controller.admin;
 
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -46,9 +43,6 @@ public class Operation {
 	private ICompteService compteService;
 	private static final String OBJECT_LIST_COMPTES = "listComptes";
 	private static final String OBJECT_LIST_TYPES = "listTypes";
-	private static final String OBJECT_DATES_VALEUR = "datesValeur";
-	private static final String OBJECT_DATES_EFFET = "datesEffet";
-	private static final int NUM_OF_DATE = 4;
 
 	/**
 	 * @param principal
@@ -69,8 +63,8 @@ public class Operation {
 			}
 			mv.addObject(OBJECT_LIST_COMPTES, compteService.findAllComptes());
 			mv.addObject(OBJECT_LIST_TYPES, operationTypeService.findAllOperationTypes());
-			mv.addObject(OBJECT_DATES_VALEUR, getDates());
-			mv.addObject(OBJECT_DATES_EFFET, getDates());
+			mv.addObject(DateTimeUtils.OBJECT_DATES_VALEUR, DateTimeUtils.getDates());
+			mv.addObject(DateTimeUtils.OBJECT_DATES_EFFET, DateTimeUtils.getDates());
 			mv.addObject(SessionAttributesNames.CLASS_ACTIVE, Admin.getClassActive(2));
 			mv.setViewName("createOperation");
 			return mv;
@@ -105,8 +99,8 @@ public class Operation {
 		mv.addObject(SessionAttributesNames.CLASS_ACTIVE, Admin.getClassActive(2));
 		mv.addObject(OBJECT_LIST_COMPTES, compteService.findAllComptes());
 		mv.addObject(OBJECT_LIST_TYPES, operationTypeService.findAllOperationTypes());
-		mv.addObject(OBJECT_DATES_VALEUR, getDates());
-		mv.addObject(OBJECT_DATES_EFFET, getDates());
+		mv.addObject(DateTimeUtils.OBJECT_DATES_VALEUR, DateTimeUtils.getDates());
+		mv.addObject(DateTimeUtils.OBJECT_DATES_EFFET, DateTimeUtils.getDates());
 		mv.addObject(new OperationForm());
 		return mv;
 	}
@@ -141,16 +135,5 @@ public class Operation {
 	@RequestMapping(value = "erreurCreateOperation.html", method = RequestMethod.GET)
 	public ModelAndView erreurCreateOperation(HttpServletRequest request) {
 		return ControllerUtils.redirectPageInfoOrHome(request, "erreurForm", "/admin/home.html");
-	}
-
-	/**
-	 * @return
-	 */
-	private List<DateTimeUtils> getDates() {
-		List<DateTimeUtils> listDates = new ArrayList<DateTimeUtils>();
-		for (int i = 0; i < NUM_OF_DATE; i++) {
-			listDates.add(new DateTimeUtils(new DateTime().plusDays(i)));
-		}
-		return listDates;
 	}
 }

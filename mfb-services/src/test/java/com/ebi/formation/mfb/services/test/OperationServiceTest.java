@@ -261,7 +261,8 @@ public class OperationServiceTest {
 		when(operationTypeDao.getOperationTypeByType(Type.VIREMENT)).thenReturn(new OperationType());
 		when(compteDao.findCompteById(0)).thenReturn(compteADebiter);
 		when(compteDao.findCompteById(1)).thenReturn(compteACrediter);
-		ReturnCodeVirement result = operationService.doVirement(0L, 1L, "", new BigDecimal(200));
+		DateTime now = new DateTime();
+		ReturnCodeVirement result = operationService.doVirement(0L, 1L, "", new BigDecimal(200), now, now);
 		assertEquals(ReturnCodeVirement.OK, result);
 		assertEquals(0, compteADebiter.getSolde().compareTo(new BigDecimal(100)));
 		assertEquals(0, compteADebiter.getSoldePrevisionnel().compareTo(new BigDecimal(100)));
@@ -286,7 +287,8 @@ public class OperationServiceTest {
 		when(compteDao.findCompteByNumeroCompte("foo")).thenReturn(compteACrediter);
 		when(compteDao.findCompteById(0)).thenReturn(compteADebiter);
 		when(compteDao.findCompteById(1)).thenReturn(compteACrediter);
-		ReturnCodeVirement result = operationService.doVirement(0L, "foo", "", new BigDecimal(200));
+		DateTime now = new DateTime();
+		ReturnCodeVirement result = operationService.doVirement(0L, "foo", "", new BigDecimal(200), now, now);
 		assertEquals(ReturnCodeVirement.OK, result);
 		assertEquals(ReturnCodeVirement.OK, result);
 		assertEquals(0, compteADebiter.getSolde().compareTo(new BigDecimal(100)));
@@ -302,7 +304,8 @@ public class OperationServiceTest {
 	public void testVirementComptesIdentiques() {
 		Compte compteADebiter = new Compte();
 		compteADebiter.setId(0L);
-		ReturnCodeVirement result = operationService.doVirement(0L, 0L, "", new BigDecimal(200));
+		DateTime now = new DateTime();
+		ReturnCodeVirement result = operationService.doVirement(0L, 0L, "", new BigDecimal(200), now, now);
 		assertEquals(ReturnCodeVirement.IDENTICAL_COMPTES, result);
 	}
 
@@ -319,7 +322,8 @@ public class OperationServiceTest {
 		compteACrediter.setSolde(new BigDecimal(400));
 		when(compteDao.findCompteById(0)).thenReturn(compteADebiter);
 		when(compteDao.findCompteById(1)).thenReturn(compteACrediter);
-		ReturnCodeVirement result = operationService.doVirement(0L, 1L, "", new BigDecimal(200));
+		DateTime now = new DateTime();
+		ReturnCodeVirement result = operationService.doVirement(0L, 1L, "", new BigDecimal(200), now, now);
 		assertEquals(ReturnCodeVirement.DECOUVERT, result);
 	}
 
@@ -333,7 +337,8 @@ public class OperationServiceTest {
 		compteACrediter.setSolde(new BigDecimal(400));
 		when(compteDao.findCompteById(0)).thenReturn(null);
 		when(compteDao.findCompteById(1)).thenReturn(compteACrediter);
-		ReturnCodeVirement result = operationService.doVirement(0L, 1L, "", new BigDecimal(200));
+		DateTime now = new DateTime();
+		ReturnCodeVirement result = operationService.doVirement(0L, 1L, "", new BigDecimal(200), now, now);
 		assertEquals(ReturnCodeVirement.COMPTE_DEBIT_INEXISTANT, result);
 	}
 
@@ -347,7 +352,8 @@ public class OperationServiceTest {
 		compteADebiter.setSolde(new BigDecimal(100));
 		when(compteDao.findCompteById(0)).thenReturn(compteADebiter);
 		when(compteDao.findCompteById(1)).thenReturn(null);
-		ReturnCodeVirement result = operationService.doVirement(0L, 1L, "", new BigDecimal(200));
+		DateTime now = new DateTime();
+		ReturnCodeVirement result = operationService.doVirement(0L, 1L, "", new BigDecimal(200), now, now);
 		assertEquals(ReturnCodeVirement.COMPTE_CREDIT_INEXISTANT, result);
 	}
 
@@ -360,7 +366,8 @@ public class OperationServiceTest {
 		compteADebiter.setId(0L);
 		compteADebiter.setSolde(new BigDecimal(100));
 		when(compteDao.findCompteByNumeroCompte("foo")).thenReturn(null);
-		ReturnCodeVirement result = operationService.doVirement(0L, "foo", "", new BigDecimal(200));
+		DateTime now = new DateTime();
+		ReturnCodeVirement result = operationService.doVirement(0L, "foo", "", new BigDecimal(200), now, now);
 		assertEquals(ReturnCodeVirement.COMPTE_CREDIT_INEXISTANT, result);
 	}
 
@@ -369,9 +376,10 @@ public class OperationServiceTest {
 	 */
 	@Test
 	public void testVirementValeurMontant() {
-		ReturnCodeVirement result = operationService.doVirement(0L, 1L, "", new BigDecimal(-200));
+		DateTime now = new DateTime();
+		ReturnCodeVirement result = operationService.doVirement(0L, 1L, "", new BigDecimal(-200), now, now);
 		assertEquals(ReturnCodeVirement.MONTANT_INCORRECT, result);
-		ReturnCodeVirement result2 = operationService.doVirement(0L, 1L, "", new BigDecimal(0));
+		ReturnCodeVirement result2 = operationService.doVirement(0L, 1L, "", new BigDecimal(0), now, now);
 		assertEquals(ReturnCodeVirement.MONTANT_INCORRECT, result2);
 	}
 }

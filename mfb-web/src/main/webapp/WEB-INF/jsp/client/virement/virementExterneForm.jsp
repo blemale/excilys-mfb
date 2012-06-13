@@ -35,7 +35,7 @@
 								code="virementExterneForm.compteDebit" /></label>
 						<div class="controls">
 							<form:select path="compteADebiter">
-								<form:options items="${comptesList}" itemLabel="fullLabel"
+								<form:options items="${listComptes}" itemLabel="fullLabel"
 									itemValue="id" />
 							</form:select>
 							<form:errors path="compteADebiter" cssClass="colorError"
@@ -43,13 +43,32 @@
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label" for="credit"><spring:message code="virementInterneForm.compteCredit" /></label>
-							<div class="controls">
-								<form:input path="numeroCompteACrediter"
-									cssClass="input-xlarge focused" />
-								<form:errors path="numeroCompteACrediter" cssClass="colorError" />
-							</div>
-					</div>	
+						<label class="control-label" for="credit"><spring:message
+								code="virementInterneForm.compteCredit" /></label>
+						<div class="controls">
+							<form:input path="numeroCompteACrediter"
+								cssClass="input-xlarge focused" />
+							<form:errors path="numeroCompteACrediter" cssClass="colorError" />
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="dateEffet"><spring:message
+								code="admin.createOperationForm.dateEffet" /></label>
+						<div class="controls">
+							<form:select path="dateEffet" items="${datesEffet}"
+								itemLabel="dateTimeFormat" itemValue="dateTime" />
+							<form:errors path="dateEffet" cssClass="colorError" />
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="dateValeur"><spring:message
+								code="admin.createOperationForm.dateValeur" /></label>
+						<div class="controls">
+							<form:select path="dateValeur" items="${datesValeur}"
+								itemLabel="dateTimeFormat" itemValue="dateTime" />
+							<form:errors path="dateValeur" cssClass="colorError" />
+						</div>
+					</div>
 					<div class="control-group">
 						<label class="control-label" for="motif"><spring:message
 								code="virementInterneForm.label" /></label>

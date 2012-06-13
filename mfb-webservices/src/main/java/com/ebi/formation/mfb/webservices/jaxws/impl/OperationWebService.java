@@ -6,6 +6,7 @@ import java.util.List;
 import javax.jws.WebService;
 
 import org.jdto.DTOBinder;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ebi.formation.mfb.services.IOperationService;
@@ -219,8 +220,9 @@ public class OperationWebService implements IOperationWebService {
 	 * java.math.BigDecimal)
 	 */
 	@Override
-	public ReturnCodeVirement doVirement(long idCompteADebiter, long idCompteACrediter, String label, BigDecimal montant) {
-		return operationService.doVirement(idCompteADebiter, idCompteACrediter, label, montant);
+	public ReturnCodeVirement doVirement(long idCompteADebiter, long idCompteACrediter, String label,
+			BigDecimal montant, DateTime dateEffet, DateTime dateValeur) {
+		return operationService.doVirement(idCompteADebiter, idCompteACrediter, label, montant, dateEffet, dateValeur);
 	}
 
 	/*
@@ -230,7 +232,8 @@ public class OperationWebService implements IOperationWebService {
 	 */
 	@Override
 	public ReturnCodeVirement doVirement(long idCompteADebiter, String numeroCompteACrediter, String label,
-			BigDecimal montant) {
-		return operationService.doVirement(idCompteADebiter, numeroCompteACrediter, label, montant);
+			BigDecimal montant, DateTime dateEffet, DateTime dateValeur) {
+		return operationService.doVirement(idCompteADebiter, numeroCompteACrediter, label, montant, dateEffet,
+				dateValeur);
 	}
 }

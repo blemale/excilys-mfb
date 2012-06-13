@@ -7,6 +7,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.joda.time.DateTime;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * Classe représentant le formulaire de demande de virement externe. Nécessaire pour la validation du formulaire.
@@ -25,6 +27,12 @@ public class VirementExterneForm {
 	private String numeroCompteACrediter;
 	@Size(max = 64)
 	private String motif;
+	@NotNull
+	@DateTimeFormat
+	private DateTime dateEffet;
+	@NotNull
+	@DateTimeFormat
+	private DateTime dateValeur;
 
 	/**
 	 * @return
@@ -80,5 +88,35 @@ public class VirementExterneForm {
 	 */
 	public void setMotif(String motif) {
 		this.motif = motif;
+	}
+
+	/**
+	 * @return the dateEffet
+	 */
+	public DateTime getDateEffet() {
+		return dateEffet;
+	}
+
+	/**
+	 * @param dateEffet
+	 *            the dateEffet to set
+	 */
+	public void setDateEffet(DateTime dateEffet) {
+		this.dateEffet = dateEffet;
+	}
+
+	/**
+	 * @return the dateValeur
+	 */
+	public DateTime getDateValeur() {
+		return dateValeur;
+	}
+
+	/**
+	 * @param dateValeur
+	 *            the dateValeur to set
+	 */
+	public void setDateValeur(DateTime dateValeur) {
+		this.dateValeur = dateValeur;
 	}
 }

@@ -33,7 +33,7 @@
 						<label class="control-label" for="debit"><spring:message code="virementInterneForm.compteDebit"/></label>
 						<div class="controls">
 							<form:select path="compteADebiter">
-								<form:options items="${comptesList}" itemLabel="fullLabel"
+								<form:options items="${listComptes}" itemLabel="fullLabel"
 									itemValue="id" />
 							</form:select>
 						</div>
@@ -42,7 +42,7 @@
 						<label class="control-label" for="credit"><spring:message code="virementInterneForm.compteCredit"/></label>
 						<div class="controls">
 							<form:select path="compteACrediter">
-								<form:options items="${comptesList}" itemLabel="fullLabel"
+								<form:options items="${listComptes}" itemLabel="fullLabel"
 									itemValue="id" />
 							</form:select>
 							<form:errors path="compteACrediter" cssClass="colorError" element="div"/>

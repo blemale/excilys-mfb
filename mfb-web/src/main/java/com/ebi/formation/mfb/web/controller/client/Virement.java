@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.apache.commons.lang.StringUtils;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -22,6 +23,7 @@ import com.ebi.formation.mfb.services.IOperationService.ReturnCodeVirement;
 import com.ebi.formation.mfb.web.forms.VirementExterneForm;
 import com.ebi.formation.mfb.web.forms.VirementInterneForm;
 import com.ebi.formation.mfb.web.utils.ControllerUtils;
+import com.ebi.formation.mfb.web.utils.DateTimeUtils;
 
 /**
  * @author excilys
@@ -35,6 +37,7 @@ public class Virement {
 	private ICompteService compteService;
 	@Autowired
 	private IOperationService operationService;
+	private static final String OBJECT_LIST_COMPTES = "listComptes";
 
 	/**
 	 * Affiche le formulaire permettant de saisir un virement
@@ -45,7 +48,7 @@ public class Virement {
 	@RequestMapping(value = "virementInterne.html")
 	public ModelAndView virementInterneForm(Principal principal) {
 		ModelAndView mv = new ModelAndView("virementInterne");
-		mv.addObject("comptesList", compteService.findComptesByUsername(principal.getName()));
+		mv.addObject(OBJECT_LIST_COMPTES, compteService.findComptesByUsername(principal.getName()));
 		mv.addObject(new VirementInterneForm());
 		return mv;
 	}
@@ -59,7 +62,9 @@ public class Virement {
 	@RequestMapping(value = "virementExterne.html")
 	public ModelAndView virementExterneForm(Principal principal) {
 		ModelAndView mv = new ModelAndView("virementExterne");
-		mv.addObject("comptesList", compteService.findComptesByUsername(principal.getName()));
+		mv.addObject(OBJECT_LIST_COMPTES, compteService.findComptesByUsername(principal.getName()));
+		mv.addObject(DateTimeUtils.OBJECT_DATES_VALEUR, DateTimeUtils.getDates());
+		mv.addObject(DateTimeUtils.OBJECT_DATES_EFFET, DateTimeUtils.getDates());
 		mv.addObject(new VirementExterneForm());
 		return mv;
 	}
@@ -80,7 +85,7 @@ public class Virement {
 		boolean isCompteIdentiques = virementInterneForm.getCompteACrediter().equals(
 				virementInterneForm.getCompteADebiter());
 		if (result.hasErrors() || isCompteIdentiques) {
-			mv.addObject("comptesList", compteService.findComptesByUsername(principal.getName()));
+			mv.addObject(OBJECT_LIST_COMPTES, compteService.findComptesByUsername(principal.getName()));
 			if (isCompteIdentiques) {
 				result.addError(new FieldError("virementInterneForm", "compteACrediter", null, true,
 						new String[] { "virementInterneForm.comptesIdentiques" }, null, null));
@@ -88,9 +93,10 @@ public class Virement {
 			mv.setViewName("virementInterne");
 			return mv;
 		}
+		DateTime now = new DateTime();
 		ReturnCodeVirement returnCode = operationService.doVirement(virementInterneForm.getCompteADebiter(),
 				virementInterneForm.getCompteACrediter(), StringUtils.trimToNull(virementInterneForm.getMotif()),
-				virementInterneForm.getMontant());
+				virementInterneForm.getMontant(), now, now);
 		mv.setViewName("redirect:erreurVirement.html");
 		String message = null;
 		switch (returnCode) {
@@ -144,17 +150,19 @@ public class Virement {
 	 */
 	@RequestMapping(value = "doVirementExterne.html", method = RequestMethod.POST)
 	public ModelAndView doVirementExterne(Principal principal,
-			@ModelAttribute @Valid VirementExterneForm virementInterneForm, BindingResult result,
+			@ModelAttribute @Valid VirementExterneForm virementExternForm, BindingResult result,
 			RedirectAttributes redirectAttrs) {
 		ModelAndView mv = new ModelAndView();
 		if (result.hasErrors()) {
-			mv.addObject("comptesList", compteService.findComptesByUsername(principal.getName()));
+			mv.addObject(OBJECT_LIST_COMPTES, compteService.findComptesByUsername(principal.getName()));
+			mv.addObject(DateTimeUtils.OBJECT_DATES_VALEUR, DateTimeUtils.getDates());
+			mv.addObject(DateTimeUtils.OBJECT_DATES_EFFET, DateTimeUtils.getDates());
 			mv.setViewName("virementExterne");
 			return mv;
 		}
-		ReturnCodeVirement returnCode = operationService.doVirement(virementInterneForm.getCompteADebiter(),
-				virementInterneForm.getNumeroCompteACrediter(), StringUtils.trimToNull(virementInterneForm.getMotif()),
-				virementInterneForm.getMontant());
+		ReturnCodeVirement returnCode = operationService.doVirement(virementExternForm.getCompteADebiter(),
+				virementExternForm.getNumeroCompteACrediter(), StringUtils.trimToNull(virementExternForm.getMotif()),
+				virementExternForm.getMontant(), virementExternForm.getDateEffet(), virementExternForm.getDateValeur());
 		mv.setViewName("redirect:erreurVirement.html");
 		String message = null;
 		switch (returnCode) {
