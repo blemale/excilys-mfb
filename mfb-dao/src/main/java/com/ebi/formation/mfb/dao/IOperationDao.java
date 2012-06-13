@@ -118,4 +118,13 @@ public interface IOperationDao {
 	 * 
 	 */
 	void updateCompteWithNewOperations();
+
+	/**
+	 * Récupère la liste des dernières opérations pour un compte donné.
+	 * 
+	 * @param idCompte
+	 * @param numberOfOperations
+	 * @return
+	 */
+	List<Operation> findLastOperationByCompte(long idCompte, int numberOfOperations);
 }

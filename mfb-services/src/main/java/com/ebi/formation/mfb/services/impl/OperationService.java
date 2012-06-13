@@ -335,4 +335,9 @@ public class OperationService implements IOperationService {
 		operationDao.save(o);
 		return ReturnCodeOperation.OK;
 	}
+
+	@Override
+	public List<Operation> getLastOperationByCompte(long idCompte, int numberOfOperations) {
+		return operationDao.findLastOperationByCompte(idCompte, numberOfOperations);
+	}
 }

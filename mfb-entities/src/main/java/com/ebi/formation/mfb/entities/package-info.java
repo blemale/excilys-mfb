@@ -27,6 +27,8 @@
 		@NamedQuery(name = "findEncoursCarteCompte", query = "SELECT c.encoursCarte FROM Compte c WHERE c.id = :id"),
 		@NamedQuery(name = "findAllOperationsByMonthByCompte", query = "SELECT o FROM Operation o WHERE o.compte.id = :idcompte "
 				+ "AND o.dateValeur BETWEEN :dateValeur AND :datePlusUnMois ORDER BY o.dateValeur DESC"),
+		@NamedQuery(name = "findAllOperationsByCompte", query = "SELECT o FROM Operation o WHERE o.compte.id = :idcompte "
+				+ "ORDER BY o.dateValeur DESC"),
 		@NamedQuery(name = "findOperationTypeByType", query = "SELECT ot FROM OperationType ot WHERE ot.label = :type"),
 		@NamedQuery(name = "findAllPersons", query = "SELECT p FROM Person p"),
 		@NamedQuery(name = "findRoleByRight", query = "SELECT r FROM Role r WHERE r.right=:right"),

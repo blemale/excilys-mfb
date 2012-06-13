@@ -104,6 +104,17 @@ public class OperationServiceTest {
 	 * Test
 	 */
 	@Test
+	public void testGetLastOperationByCompte() {
+		List<Operation> result = new ArrayList<Operation>();
+		result.add(new Operation());
+		when(operationDao.findLastOperationByCompte(1, 5)).thenReturn(result);
+		assertEquals(result, operationService.getLastOperationByCompte(1, 5));
+	}
+
+	/**
+	 * Test
+	 */
+	@Test
 	public void testGetOperationsWithoutCarteByMonthPaginatedWithPage() {
 		DateTime date = new DateTime(2012, 1, 1, 0, 0);
 		DateTime datePlusUnMois = date.plusMonths(1);

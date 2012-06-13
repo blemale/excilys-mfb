@@ -160,6 +160,10 @@ public class OperationDao implements IOperationDao {
 		em.persist(operation);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.dao.IOperationDao#updateCompteWithNewOperations()
+	 */
 	@Override
 	@SuppressWarnings("unchecked")
 	@Transactional
@@ -178,5 +182,16 @@ public class OperationDao implements IOperationDao {
 			}
 		}
 		em.clear();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.dao.IOperationDao#findLastOperationByCompte(long, int)
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Operation> findLastOperationByCompte(long idCompte, int numberOfOperations) {
+		return em.createNamedQuery("findAllOperationsByCompte").setParameter("idcompte", idCompte).setFirstResult(0)
+				.setMaxResults(numberOfOperations).getResultList();
 	}
 }

@@ -240,4 +240,13 @@ public interface IOperationService {
 	@Secured(Role.ROLE_ADMIN)
 	ReturnCodeOperation saveOperation(BigDecimal montant, Long idCompte, Type type, String label, DateTime dateEffet,
 			DateTime dateValeur);
+
+	/**
+	 * Récupère la liste des dernières opérations pour un compte donné.
+	 * 
+	 * @param idCompte
+	 * @param numberOfOperations
+	 * @return
+	 */
+	List<Operation> getLastOperationByCompte(long idCompte, int numberOfOperations);
 }

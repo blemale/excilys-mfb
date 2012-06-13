@@ -104,6 +104,16 @@ public class OperationDaoTest {
 	}
 
 	/**
+	 * Test liste des dernières opérations pour un compte donné.
+	 */
+	@DataSet("dataSet-OperationDaoTest.xml")
+	@Test
+	public void testFindLastOperationByCompte() {
+		List<Operation> operations = operationDao.findLastOperationByCompte(1, 5);
+		assertEquals(5, operations.size());
+	}
+
+	/**
 	 * Test liste des opérations non carte pour un mois et un offset donnés
 	 */
 	@DataSet("dataSet-OperationDaoTest.xml")

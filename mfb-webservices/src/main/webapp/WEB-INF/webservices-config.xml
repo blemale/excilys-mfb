@@ -39,6 +39,16 @@
 			<bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider"/>
 		</jaxrs:providers>
 	</jaxrs:server>
+	
+	<jaxrs:server id="OperationWebServiceREST" address="/operationService">
+		<jaxrs:serviceBeans>
+			<bean id="serviceImpl" class="com.ebi.formation.mfb.webservices.jaxrs.impl.OperationWebService" />
+		</jaxrs:serviceBeans>
+		<jaxrs:providers>
+			<bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider"/>
+		</jaxrs:providers>
+	</jaxrs:server>
+	
 
 	<bean id="binder" class="org.jdto.spring.SpringDTOBinder"/>
 	
