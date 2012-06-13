@@ -321,6 +321,13 @@ public class Detail {
 		return null;
 	}
 
+	@RequestMapping(value = "{year}/{month:[1-9]|1[012]}/{[0-9]*}/export.html", method = RequestMethod.GET)
+	public ModelAndView exportExcelWithPage(HttpServletRequest request, HttpServletResponse response,
+			Principal principal, Locale locale, @PathVariable Long idCompte, @PathVariable int year,
+			@PathVariable int month) {
+		return exportExcel(request, response, principal, locale, idCompte, year, month);
+	}
+
 	/**
 	 * Retourne une feuille excel générée.
 	 * 
