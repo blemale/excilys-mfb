@@ -309,17 +309,25 @@ public class OperationService implements IOperationService {
 		o.setType(ot);
 		// operation immediate
 		if (dateValeur.isBeforeNow() || dateValeur.equals(new DateTime())) {
+			// BigDecimal newSolde = c.getSolde().add(montant);
+			// c.setSolde(newSolde);
 			compteDao.updateCompteSoldeAndSoldePrevisionnel(idCompte, montant);
 			o.setOperationDone(Boolean.TRUE);
 		}
 		// operation en prévision
 		else {
-			if (Type.CARTE.equals(type))
+			if (Type.CARTE.equals(type)) {
+				// BigDecimal newEncoursCarte = c.getEncoursCarte().add(montant);
+				// c.setEncoursCarte(newEncoursCarte);
 				compteDao.updateCompteEncoursCarteAndSoldePrevisionnel(idCompte, montant);
-			else
+			} else {
 				compteDao.updateCompteSoldePrevisionnel(idCompte, montant);
+			}
 			o.setOperationDone(Boolean.FALSE);
 		}
+		// dans tous les cas...
+		// BigDecimal newSoldePrevi = c.getSoldePrevisionnel().add(montant);
+		// c.setSoldePrevisionnel(newSoldePrevi);
 		operationDao.save(o);
 		return ReturnCodeOperation.OK;
 	}
