@@ -90,8 +90,8 @@ public class CompteService implements ICompteService {
 		compte.setLabel(libelle);
 		compte.addOwner(p);
 		compte.setSolde(solde);
+		compte.setSoldePrevisionnel(solde);
 		compte.setEncoursCarte(BigDecimal.ZERO);
-		compte.setSoldePrevisionnel(BigDecimal.ZERO);
 		String numCompte = "";
 		// génère un numéro de compte et vérifie qu'il n'existe pas déjà !
 		do {
