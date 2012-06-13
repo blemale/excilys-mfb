@@ -1,0 +1,56 @@
+\begin{frame}
+	\begin{center}
+		 \huge{Pr\'esentation technique}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Back-office}
+	\begin{itemize}
+		\item Spring (IOC, DB, TX, MVC,Validation\ldots) \& Spring Security
+		\item Persistence
+		\begin{itemize}
+			\item ORM : Hibernate + JPA 
+			\item Versionnement des sch\'emas : Liquibase
+			\item Pool de connexion : Tomcat JDBC			
+			\item Cache de 2nd niveau: Ehcache
+		\end{itemize}
+		\item Spring Batch
+		\item Logging : SLF4J \& Logback
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Front-office}	
+	\begin{itemize}
+		\item Apache Tiles
+		\item Twitter Bootstrap
+		\item Apache POI
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Tests}
+	\begin{itemize}
+		\item Tests unitaires : 
+			\begin{itemize}
+				\item Junit
+				\item DBUnit (via spring-db-unit)
+				\item Mockito
+			\end{itemize}
+		\item Tests d'intégrations $\rightarrow$ Selenium :
+			\begin{itemize}
+				\item Int\'egration \`a Maven
+				\item D\'eploy\'e sur un serveur Jetty
+				\item Utilise une base PostgreSQL de test (remplie/vid\'ee \`a chaque test), suite \`a des probl\`emes avec HSQLDB
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Web Services}
+	\begin{itemize}
+		\item Apache CXF
+		\begin{itemize}
+			\item SOAP
+			\item REST (JSON, via Jackson)
+		\end{itemize}
+		\item Conversion entit\'es $\rightarrow$ DTO avec jDTO
+	\end{itemize}
+\end{frame}
