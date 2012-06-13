@@ -59,19 +59,6 @@ public interface IOperationWebService {
 	 * @param idCompte
 	 * @param month
 	 * @param year
-	 * @param offset
-	 * @param numberOfResults
-	 * @return
-	 */
-	@WebMethod(operationName = "getOperationsWithoutCarteByMonthPaginatedCustom")
-	List<OperationDTO> getOperationsWithoutCarteByMonthPaginated(@WebParam(name = "idCompte") long idCompte,
-			@WebParam(name = "month") int month, @WebParam(name = "year") int year,
-			@WebParam(name = "offset") int offset, @WebParam(name = "numberOfResults") int numberOfResults);
-
-	/**
-	 * @param idCompte
-	 * @param month
-	 * @param year
 	 * @param page
 	 * @return
 	 */
@@ -82,37 +69,11 @@ public interface IOperationWebService {
 	 * @param idCompte
 	 * @param month
 	 * @param year
-	 * @param offset
-	 * @param numberOfResults
-	 * @return
-	 */
-	@WebMethod(operationName = "getOperationsCarteByMonthPaginatedCustom")
-	List<OperationDTO> getOperationsCarteByMonthPaginated(@WebParam(name = "idCompte") long idCompte,
-			@WebParam(name = "month") int month, @WebParam(name = "year") int year,
-			@WebParam(name = "offset") int offset, @WebParam(name = "numberOfResults") int numberOfResults);
-
-	/**
-	 * @param idCompte
-	 * @param month
-	 * @param year
 	 * @param page
 	 * @return
 	 */
 	List<OperationDTO> getOperationsCarteByMonthPaginated(@WebParam(name = "idCompte") long idCompte,
 			@WebParam(name = "month") int month, @WebParam(name = "year") int year, @WebParam(name = "page") int page);
-
-	/**
-	 * @param idCompte
-	 * @param month
-	 * @param year
-	 * @param offset
-	 * @param numberOfResults
-	 * @return
-	 */
-	@WebMethod(operationName = "getVirementsByMonthPaginatedCustom")
-	List<OperationDTO> getVirementsByMonthPaginated(@WebParam(name = "idCompte") long idCompte,
-			@WebParam(name = "month") int month, @WebParam(name = "year") int year,
-			@WebParam(name = "offset") int offset, @WebParam(name = "numberOfResults") int numberOfResults);
 
 	/**
 	 * @param idCompte
@@ -137,34 +98,10 @@ public interface IOperationWebService {
 	 * @param idCompte
 	 * @param month
 	 * @param year
-	 * @param numberOfResults
-	 * @return
-	 */
-	@WebMethod(operationName = "getNumberOfPagesForOperationsWithoutCartesByMonthCustom")
-	long getNumberOfPagesForOperationsWithoutCartesByMonth(@WebParam(name = "idCompte") long idCompte,
-			@WebParam(name = "month") int month, @WebParam(name = "year") int year,
-			@WebParam(name = "numberOfResults") int numberOfResults);
-
-	/**
-	 * @param idCompte
-	 * @param month
-	 * @param year
 	 * @return
 	 */
 	long getNumberOfPagesForOperationsCartesByMonth(@WebParam(name = "idCompte") long idCompte,
 			@WebParam(name = "month") int month, @WebParam(name = "year") int year);
-
-	/**
-	 * @param idCompte
-	 * @param month
-	 * @param years
-	 * @param numberOfResults
-	 * @return
-	 */
-	@WebMethod(operationName = "getNumberOfPagesForOperationsCartesByMonthCustom")
-	long getNumberOfPagesForOperationsCartesByMonth(@WebParam(name = "idCompte") long idCompte,
-			@WebParam(name = "month") int month, @WebParam(name = "year") int years,
-			@WebParam(name = "numberOfResults") int numberOfResults);
 
 	/**
 	 * @param idCompte
@@ -174,18 +111,6 @@ public interface IOperationWebService {
 	 */
 	long getNumberOfPagesForVirementByMonth(@WebParam(name = "idCompte") long idCompte,
 			@WebParam(name = "month") int month, @WebParam(name = "year") int year);
-
-	/**
-	 * @param idCompte
-	 * @param month
-	 * @param years
-	 * @param numberOfResults
-	 * @return
-	 */
-	@WebMethod(operationName = "getNumberOfPagesForVirementByMonthCustom")
-	long getNumberOfPagesForVirementByMonth(@WebParam(name = "idCompte") long idCompte,
-			@WebParam(name = "month") int month, @WebParam(name = "year") int years,
-			@WebParam(name = "numberOfResults") int numberOfResults);
 
 	/**
 	 * @param idCompte

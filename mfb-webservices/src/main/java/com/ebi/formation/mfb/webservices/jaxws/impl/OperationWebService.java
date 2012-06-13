@@ -70,19 +70,6 @@ public class OperationWebService implements IOperationWebService {
 	 * (non-Javadoc)
 	 * @see
 	 * com.ebi.formation.mfb.webservicesapi.jaxws.IOperationWebService#getOperationsWithoutCarteByMonthPaginated(long,
-	 * int, int, int, int)
-	 */
-	@Override
-	public List<OperationDTO> getOperationsWithoutCarteByMonthPaginated(long idCompte, int month, int year, int offset,
-			int numberOfResults) {
-		return binder.bindFromBusinessObjectList(OperationDTO.class, operationService
-				.getOperationsWithoutCarteByMonthPaginated(idCompte, month, year, offset, numberOfResults));
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.ebi.formation.mfb.webservicesapi.jaxws.IOperationWebService#getOperationsWithoutCarteByMonthPaginated(long,
 	 * int, int, int)
 	 */
 	@Override
@@ -94,36 +81,12 @@ public class OperationWebService implements IOperationWebService {
 	/*
 	 * (non-Javadoc)
 	 * @see com.ebi.formation.mfb.webservicesapi.jaxws.IOperationWebService#getOperationsCarteByMonthPaginated(long,
-	 * int, int, int, int)
-	 */
-	@Override
-	public List<OperationDTO> getOperationsCarteByMonthPaginated(long idCompte, int month, int year, int offset,
-			int numberOfResults) {
-		return binder.bindFromBusinessObjectList(OperationDTO.class,
-				operationService.getOperationsCarteByMonthPaginated(idCompte, month, year, offset, numberOfResults));
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.ebi.formation.mfb.webservicesapi.jaxws.IOperationWebService#getOperationsCarteByMonthPaginated(long,
 	 * int, int, int)
 	 */
 	@Override
 	public List<OperationDTO> getOperationsCarteByMonthPaginated(long idCompte, int month, int year, int page) {
 		return binder.bindFromBusinessObjectList(OperationDTO.class,
 				operationService.getOperationsCarteByMonthPaginated(idCompte, month, year, page));
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.ebi.formation.mfb.webservicesapi.jaxws.IOperationWebService#getVirementsByMonthPaginated(long, int, int,
-	 * int, int)
-	 */
-	@Override
-	public List<OperationDTO> getVirementsByMonthPaginated(long idCompte, int month, int year, int offset,
-			int numberOfResults) {
-		return binder.bindFromBusinessObjectList(OperationDTO.class,
-				operationService.getVirementsByMonthPaginated(idCompte, month, year, offset, numberOfResults));
 	}
 
 	/*
@@ -151,19 +114,6 @@ public class OperationWebService implements IOperationWebService {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.ebi.formation.mfb.webservicesapi.jaxws.IOperationWebService#getNumberOfPagesForOperationsWithoutCartesByMonth
-	 * (long, int, int, int)
-	 */
-	@Override
-	public long getNumberOfPagesForOperationsWithoutCartesByMonth(long idCompte, int month, int year,
-			int numberOfResults) {
-		return operationService.getNumberOfPagesForOperationsWithoutCartesByMonth(idCompte, month, year,
-				numberOfResults);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
 	 * com.ebi.formation.mfb.webservicesapi.jaxws.IOperationWebService#getNumberOfPagesForOperationsCartesByMonth(long,
 	 * int, int)
 	 */
@@ -174,33 +124,12 @@ public class OperationWebService implements IOperationWebService {
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * com.ebi.formation.mfb.webservicesapi.jaxws.IOperationWebService#getNumberOfPagesForOperationsCartesByMonth(long,
-	 * int, int, int)
-	 */
-	@Override
-	public long getNumberOfPagesForOperationsCartesByMonth(long idCompte, int month, int years, int numberOfResults) {
-		return operationService.getNumberOfPagesForOperationsCartesByMonth(idCompte, month, years, numberOfResults);
-	}
-
-	/*
-	 * (non-Javadoc)
 	 * @see com.ebi.formation.mfb.webservicesapi.jaxws.IOperationWebService#getNumberOfPagesForVirementByMonth(long,
 	 * int, int)
 	 */
 	@Override
 	public long getNumberOfPagesForVirementByMonth(long idCompte, int month, int year) {
 		return operationService.getNumberOfPagesForVirementByMonth(idCompte, month, year);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.ebi.formation.mfb.webservicesapi.jaxws.IOperationWebService#getNumberOfPagesForVirementByMonth(long,
-	 * int, int, int)
-	 */
-	@Override
-	public long getNumberOfPagesForVirementByMonth(long idCompte, int month, int years, int numberOfResults) {
-		return operationService.getNumberOfPagesForVirementByMonth(idCompte, month, years, numberOfResults);
 	}
 
 	/*
