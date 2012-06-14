@@ -340,4 +340,20 @@ public class OperationService implements IOperationService {
 	public List<Operation> getLastOperationByCompte(long idCompte, int numberOfOperations) {
 		return operationDao.findLastOperationByCompte(idCompte, numberOfOperations);
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.services.IOperationService#saveOperation(java.math.BigDecimal, java.lang.String,
+	 * com.ebi.formation.mfb.entities.OperationType.Type, java.lang.String, org.joda.time.DateTime,
+	 * org.joda.time.DateTime)
+	 */
+	@Override
+	public ReturnCodeOperation saveOperation(BigDecimal montant, String numeroCompte, Type type, String label,
+			DateTime dateEffet, DateTime dateValeur) {
+		Compte compte = compteDao.findCompteByNumeroCompte(numeroCompte);
+		if (compte == null) {
+			return ReturnCodeOperation.COMPTE_INEXISTANT;
+		}
+		return saveOperation(montant, compte.getId(), type, label, dateEffet, dateValeur);
+	}
 }

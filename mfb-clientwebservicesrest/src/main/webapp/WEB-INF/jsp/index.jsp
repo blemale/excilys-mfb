@@ -20,5 +20,9 @@
 	<div>
 		<a href="${contextPath }/findPersonByUsername.html">findPersonByUsername(user)</a>
 	</div>
+	<h3>COMPTE</h3>
+	<div>
+		<a href="${contextPath }/addNewOperation.html">addNewOperation()</a>
+	</div>
 </body>
 </html>
