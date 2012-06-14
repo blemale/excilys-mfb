@@ -1,37 +1,30 @@
 package com.ebi.formation.mfb.services.batch.impl;
 
-import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.scheduling.quartz.QuartzJobBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.ebi.formation.mfb.servicesapi.IOperationService;
 
 /**
- * @author fguillain
+ * Classe qui sert à mettre à jour les opérations via un bach
+ * 
+ * @author excilys
  * 
  */
-public class OperationServiceBatch extends QuartzJobBean {
+@Service
+public class OperationServiceBatch {
 
 	private final Logger logger = LoggerFactory.getLogger(OperationServiceBatch.class);
+	@Autowired
 	private IOperationService operationService;
 
 	/**
-	 * @param operationService
-	 *            the operationService to set
+	 * Méthode qui est exécutée par le batch
 	 */
-	public void setOperationService(IOperationService operationService) {
-		this.operationService = operationService;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see org.springframework.scheduling.quartz.QuartzJobBean#executeInternal(org.quartz.JobExecutionContext)
-	 */
-	@Override
-	protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
-		logger.debug("executeInternal()");
+	public void doIt() {
+		logger.debug("doIt()");
 		operationService.updateCompteWithNewOperations();
 	}
 }

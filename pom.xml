@@ -39,9 +39,10 @@
 		<system>Jenkins</system>
 	</ciManagement>
 
-	<scm>
-		<connection>git@github.com:excilys-pdalpra/excilys-mfb.git</connection>
-	</scm>
+	<distributionManagement>
+	
+	</distributionManagement>
+
 
 	<developers>
 		<developer>
@@ -354,11 +355,6 @@
 				<version>${spring.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>opensymphony</groupId>
-				<artifactId>quartz</artifactId>
-				<version>1.6.3</version>
-			</dependency>
-			<dependency>
 				<groupId>commons-collections</groupId>
 				<artifactId>commons-collections</artifactId>
 				<version>3.2.1</version>
@@ -436,8 +432,19 @@
 						<target>${java.version}</target>
 					</configuration>
 				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>3.1</version>
+					<configuration>
+						<locales>en,fr</locales>
+					</configuration>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
 
+	<scm>
+		<url>scm:git:https://github.com/excilys-pdalpra/excilys-mfb</url>
+	</scm>
 </project>

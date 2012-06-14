@@ -11,9 +11,8 @@
 	<context:component-scan base-package="com.ebi.formation.mfb.services.batch.impl" />
 	<util:properties id="batchProperties" location="classpath:batch.properties" />
 
-
-	<!-- Declaration du bean job -->
-	<bean name="runMeJob" class="org.springframework.scheduling.quartz.JobDetailBean">
+	<!-- pom.xml -> dependency : opensymphony ; quartz ; 1.6.3 -->
+	<!--<bean name="runMeJob" class="org.springframework.scheduling.quartz.JobDetailBean">
 		<property name="jobClass"
 			value="com.ebi.formation.mfb.services.batch.impl.OperationServiceBatch" />
 		<property name="jobDataAsMap">
@@ -21,6 +20,14 @@
 				<entry key="operationService" value-ref="operationService" />
 			</map>
 		</property>
+	</bean>-->
+	
+	<!-- Declaration du bean job -->
+	<bean id="runMeJob"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="operationServiceBatch" />
+		<property name="targetMethod" value="doIt" />
+		<property name="concurrent" value="false" />
 	</bean>
 
 	<!-- Cron Trigger -->
