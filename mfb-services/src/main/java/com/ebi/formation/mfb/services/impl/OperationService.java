@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ebi.formation.mfb.dao.ICompteDao;
@@ -182,7 +181,7 @@ public class OperationService implements IOperationService {
 	 * java.math.BigDecimal)
 	 */
 	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+	@Transactional(readOnly = false)
 	public ReturnCodeVirement doVirement(long idCompteADebiter, long idCompteACrediter, String label,
 			BigDecimal montant, DateTime dateEffet, DateTime dateValeur) {
 		logger.debug(
@@ -264,7 +263,7 @@ public class OperationService implements IOperationService {
 	 * java.math.BigDecimal)
 	 */
 	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+	@Transactional(readOnly = false)
 	public ReturnCodeVirement doVirement(long idCompteADebiter, String numeroCompteACrediter, String label,
 			BigDecimal montant, DateTime dateEffet, DateTime dateValeur) {
 		logger.debug(
@@ -282,6 +281,7 @@ public class OperationService implements IOperationService {
 	 * @see com.ebi.formation.mfb.services.IOperationService#updateCompteWithNewOperations()
 	 */
 	@Override
+	@Transactional(readOnly = false)
 	public void updateCompteWithNewOperations() {
 		logger.debug("updateCompteWithNewOperations()");
 		operationDao.updateCompteWithNewOperations();
@@ -294,7 +294,7 @@ public class OperationService implements IOperationService {
 	 * org.joda.time.DateTime)
 	 */
 	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+	@Transactional(readOnly = false)
 	public ReturnCodeOperation saveOperation(BigDecimal montant, Long idCompte, Type type, String label,
 			DateTime dateEffet, DateTime dateValeur) {
 		logger.debug("saveOperation(montant:{}, idCompte:{}, type:{}, label:{}, dateEffet:{}, dateValeur:{})",
@@ -313,25 +313,25 @@ public class OperationService implements IOperationService {
 		o.setType(ot);
 		// operation immediate
 		if (dateValeur.isBeforeNow() || dateValeur.equals(new DateTime())) {
-			// BigDecimal newSolde = c.getSolde().add(montant);
-			// c.setSolde(newSolde);
-			compteDao.updateCompteSoldeAndSoldePrevisionnel(idCompte, montant);
+			BigDecimal newSolde = c.getSolde().add(montant);
+			c.setSolde(newSolde);
+			// compteDao.updateCompteSoldeAndSoldePrevisionnel(idCompte, montant);
 			o.setOperationDone(Boolean.TRUE);
 		}
 		// operation en prévision
 		else {
 			if (Type.CARTE.equals(type)) {
-				// BigDecimal newEncoursCarte = c.getEncoursCarte().add(montant);
-				// c.setEncoursCarte(newEncoursCarte);
-				compteDao.updateCompteEncoursCarteAndSoldePrevisionnel(idCompte, montant);
+				BigDecimal newEncoursCarte = c.getEncoursCarte().add(montant);
+				c.setEncoursCarte(newEncoursCarte);
+				// compteDao.updateCompteEncoursCarteAndSoldePrevisionnel(idCompte, montant);
 			} else {
 				compteDao.updateCompteSoldePrevisionnel(idCompte, montant);
 			}
 			o.setOperationDone(Boolean.FALSE);
 		}
 		// dans tous les cas...
-		// BigDecimal newSoldePrevi = c.getSoldePrevisionnel().add(montant);
-		// c.setSoldePrevisionnel(newSoldePrevi);
+		BigDecimal newSoldePrevi = c.getSoldePrevisionnel().add(montant);
+		c.setSoldePrevisionnel(newSoldePrevi);
 		operationDao.save(o);
 		return ReturnCodeOperation.OK;
 	}
@@ -348,6 +348,7 @@ public class OperationService implements IOperationService {
 	 * org.joda.time.DateTime)
 	 */
 	@Override
+	@Transactional(readOnly = false)
 	public ReturnCodeOperation saveOperation(BigDecimal montant, String numeroCompte, Type type, String label,
 			DateTime dateEffet, DateTime dateValeur) {
 		Compte compte = compteDao.findCompteByNumeroCompte(numeroCompte);

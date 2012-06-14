@@ -9,6 +9,7 @@
 		inheritHeaders="true">
 		<jaxrs:headers>
 			<entry key="Accept" value="application/json" />
+			<entry key="Content-Type" value="application/json" />
 		</jaxrs:headers>
 		<jaxrs:providers>
 			<bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider" />
@@ -21,6 +22,7 @@
 		inheritHeaders="true">
 		<jaxrs:headers>
 			<entry key="Accept" value="application/json" />
+			<entry key="Content-Type" value="application/json" />
 		</jaxrs:headers>
 		<jaxrs:providers>
 			<bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider" />
@@ -33,6 +35,7 @@
 		inheritHeaders="true">
 		<jaxrs:headers>
 			<entry key="Accept" value="application/json" />
+			<entry key="Content-Type" value="application/json" />
 		</jaxrs:headers>
 		<jaxrs:providers>
 			<bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider" />
