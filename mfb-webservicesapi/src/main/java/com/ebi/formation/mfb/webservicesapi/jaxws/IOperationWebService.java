@@ -9,7 +9,7 @@ import javax.jws.WebService;
 
 import org.joda.time.DateTime;
 
-import com.ebi.formation.mfb.services.IOperationService.ReturnCodeVirement;
+import com.ebi.formation.mfb.servicesapi.IOperationService.ReturnCodeVirement;
 import com.ebi.formation.mfb.webservicesapi.dto.OperationDTO;
 
 /**

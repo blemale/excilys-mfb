@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
-import com.ebi.formation.mfb.services.IOperationService;
+import com.ebi.formation.mfb.servicesapi.IOperationService;
 
 /**
  * @author fguillain

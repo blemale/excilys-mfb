@@ -8,8 +8,8 @@ import org.jdto.DTOBinder;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ebi.formation.mfb.entities.Role.Right;
-import com.ebi.formation.mfb.services.IPersonService;
-import com.ebi.formation.mfb.services.IPersonService.ReturnCodePerson;
+import com.ebi.formation.mfb.servicesapi.IPersonService;
+import com.ebi.formation.mfb.servicesapi.IPersonService.ReturnCodePerson;
 import com.ebi.formation.mfb.webservicesapi.dto.PersonDTO;
 import com.ebi.formation.mfb.webservicesapi.jaxws.IPersonWebService;
 

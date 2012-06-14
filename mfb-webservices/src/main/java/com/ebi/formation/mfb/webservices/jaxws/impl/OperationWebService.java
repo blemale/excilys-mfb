@@ -9,8 +9,8 @@ import org.jdto.DTOBinder;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.ebi.formation.mfb.services.IOperationService;
-import com.ebi.formation.mfb.services.IOperationService.ReturnCodeVirement;
+import com.ebi.formation.mfb.servicesapi.IOperationService;
+import com.ebi.formation.mfb.servicesapi.IOperationService.ReturnCodeVirement;
 import com.ebi.formation.mfb.webservicesapi.dto.OperationDTO;
 import com.ebi.formation.mfb.webservicesapi.jaxws.IOperationWebService;
 

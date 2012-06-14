@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.ebi.formation.mfb.services.IPersonService;
-import com.ebi.formation.mfb.services.IPersonService.ReturnCodePerson;
-import com.ebi.formation.mfb.services.IRoleService;
+import com.ebi.formation.mfb.servicesapi.IPersonService;
+import com.ebi.formation.mfb.servicesapi.IRoleService;
+import com.ebi.formation.mfb.servicesapi.IPersonService.ReturnCodePerson;
 import com.ebi.formation.mfb.web.controller.Admin;
 import com.ebi.formation.mfb.web.forms.admin.ClientForm;
 import com.ebi.formation.mfb.web.utils.ControllerUtils;

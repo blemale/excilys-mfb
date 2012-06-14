@@ -7,7 +7,7 @@ import javax.ws.rs.PathParam;
 import org.jdto.DTOBinder;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.ebi.formation.mfb.services.IPersonService;
+import com.ebi.formation.mfb.servicesapi.IPersonService;
 import com.ebi.formation.mfb.webservicesapi.dto.PersonDTO;
 import com.ebi.formation.mfb.webservicesapi.jaxrs.IPersonneWebService;
 

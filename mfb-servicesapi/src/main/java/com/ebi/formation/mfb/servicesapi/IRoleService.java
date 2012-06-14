@@ -1,4 +1,4 @@
-package com.ebi.formation.mfb.services;
+package com.ebi.formation.mfb.servicesapi;
 
 import java.util.List;
 

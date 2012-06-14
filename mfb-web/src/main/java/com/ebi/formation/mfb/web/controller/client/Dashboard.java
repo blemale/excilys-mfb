@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ebi.formation.mfb.entities.Compte;
-import com.ebi.formation.mfb.services.ICompteService;
+import com.ebi.formation.mfb.servicesapi.ICompteService;
 import com.ebi.formation.mfb.web.utils.LinkBuilder;
 
 /**

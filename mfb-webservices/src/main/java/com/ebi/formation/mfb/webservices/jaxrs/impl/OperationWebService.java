@@ -5,8 +5,8 @@ import java.util.List;
 import org.jdto.DTOBinder;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.ebi.formation.mfb.services.IOperationService;
-import com.ebi.formation.mfb.services.IOperationService.ReturnCodeOperation;
+import com.ebi.formation.mfb.servicesapi.IOperationService;
+import com.ebi.formation.mfb.servicesapi.IOperationService.ReturnCodeOperation;
 import com.ebi.formation.mfb.webservicesapi.dto.IntegrationOperationDTO;
 import com.ebi.formation.mfb.webservicesapi.dto.OperationDTO;
 import com.ebi.formation.mfb.webservicesapi.jaxrs.IOperationWebService;
