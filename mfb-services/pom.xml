@@ -48,10 +48,6 @@
 			<artifactId>spring-context-support</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>opensymphony</groupId>
-			<artifactId>quartz</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>
 		</dependency>
