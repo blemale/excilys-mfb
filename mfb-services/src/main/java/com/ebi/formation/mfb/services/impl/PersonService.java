@@ -19,7 +19,7 @@ import com.ebi.formation.mfb.dao.IRoleDao;
 import com.ebi.formation.mfb.entities.Person;
 import com.ebi.formation.mfb.entities.Role;
 import com.ebi.formation.mfb.entities.Role.Right;
-import com.ebi.formation.mfb.services.IPersonService;
+import com.ebi.formation.mfb.servicesapi.IPersonService;
 
 /**
  * Implémentation du service associé à PersonDao

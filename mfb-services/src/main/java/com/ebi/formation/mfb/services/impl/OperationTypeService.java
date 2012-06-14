@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ebi.formation.mfb.dao.IOperationTypeDao;
 import com.ebi.formation.mfb.entities.OperationType.Type;
-import com.ebi.formation.mfb.services.IOperationTypeService;
+import com.ebi.formation.mfb.servicesapi.IOperationTypeService;
 
 /**
  * @author excilys

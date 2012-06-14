@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ebi.formation.mfb.dao.IRoleDao;
 import com.ebi.formation.mfb.entities.Role;
 import com.ebi.formation.mfb.entities.Role.Right;
-import com.ebi.formation.mfb.services.IRoleService;
+import com.ebi.formation.mfb.servicesapi.IRoleService;
 
 /**
  * @author excilys

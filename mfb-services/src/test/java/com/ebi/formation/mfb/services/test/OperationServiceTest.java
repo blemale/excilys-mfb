@@ -22,8 +22,8 @@ import com.ebi.formation.mfb.entities.Compte;
 import com.ebi.formation.mfb.entities.Operation;
 import com.ebi.formation.mfb.entities.OperationType;
 import com.ebi.formation.mfb.entities.OperationType.Type;
-import com.ebi.formation.mfb.services.IOperationService.ReturnCodeVirement;
 import com.ebi.formation.mfb.services.impl.OperationService;
+import com.ebi.formation.mfb.servicesapi.IOperationService.ReturnCodeVirement;
 
 /**
  * Test unitaire de OperationService

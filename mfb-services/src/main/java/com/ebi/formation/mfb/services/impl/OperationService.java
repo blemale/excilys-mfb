@@ -18,7 +18,7 @@ import com.ebi.formation.mfb.entities.Compte;
 import com.ebi.formation.mfb.entities.Operation;
 import com.ebi.formation.mfb.entities.OperationType;
 import com.ebi.formation.mfb.entities.OperationType.Type;
-import com.ebi.formation.mfb.services.IOperationService;
+import com.ebi.formation.mfb.servicesapi.IOperationService;
 
 @Service
 @Transactional(readOnly = true)
