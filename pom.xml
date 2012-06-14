@@ -40,7 +40,7 @@
 	</ciManagement>
 
 	<distributionManagement>
-	
+
 	</distributionManagement>
 
 
@@ -349,6 +349,11 @@
 				<scope>provided</scope>
 			</dependency>
 			<!-- Quartz framework -->
+			<dependency>
+				<groupId>opensymphony</groupId>
+				<artifactId>quartz</artifactId>
+				<version>1.6.3</version>
+			</dependency>
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-context-support</artifactId>
