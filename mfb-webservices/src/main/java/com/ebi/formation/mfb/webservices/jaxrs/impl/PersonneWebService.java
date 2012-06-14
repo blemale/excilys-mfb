@@ -12,6 +12,8 @@ import com.ebi.formation.mfb.webservicesapi.dto.PersonDTO;
 import com.ebi.formation.mfb.webservicesapi.jaxrs.IPersonneWebService;
 
 /**
+ * Implémentation de {@link IPersonneWebService}.
+ * 
  * @author excilys
  * 
  */

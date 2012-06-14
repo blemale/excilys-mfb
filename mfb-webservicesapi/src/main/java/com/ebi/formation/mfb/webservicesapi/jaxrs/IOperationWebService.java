@@ -13,10 +13,13 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import com.ebi.formation.mfb.entities.Operation;
 import com.ebi.formation.mfb.webservicesapi.dto.IntegrationOperationDTO;
 import com.ebi.formation.mfb.webservicesapi.dto.OperationDTO;
 
 /**
+ * Interface du webservice REST d'accès aux services métier des {@link Operation}.
+ * 
  * @author excilys
  * 
  */
@@ -24,11 +27,24 @@ import com.ebi.formation.mfb.webservicesapi.dto.OperationDTO;
 @Consumes(MediaType.APPLICATION_JSON)
 public interface IOperationWebService {
 
+	/**
+	 * Permet de récupérer les dernières opérations d'un compte.
+	 * 
+	 * @param compteId
+	 * @param numberOfOperations
+	 * @return
+	 */
 	@GET
 	@Path("getLastOperationsByCompteId/{compteId}/{numberOfOperations}")
-	List<OperationDTO> getLastFiveOperationsByCompteId(@PathParam("compteId") Long compteId,
+	List<OperationDTO> getLastOperationsByCompteId(@PathParam("compteId") Long compteId,
 			@PathParam("numberOfOperations") int numberOfOperations);
 
+	/**
+	 * Permet d'ajouter une opération.
+	 * 
+	 * @param integrationOperationDTO
+	 * @return
+	 */
 	@POST
 	@Path("addNewOperation")
 	Boolean addNewOperation(IntegrationOperationDTO integrationOperationDTO);

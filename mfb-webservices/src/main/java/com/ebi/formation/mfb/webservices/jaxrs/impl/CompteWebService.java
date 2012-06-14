@@ -10,6 +10,8 @@ import com.ebi.formation.mfb.webservicesapi.dto.CompteDTO;
 import com.ebi.formation.mfb.webservicesapi.jaxrs.ICompteWebService;
 
 /**
+ * Implémentation de {@link ICompteWebService}
+ * 
  * @author excilys
  * 
  */

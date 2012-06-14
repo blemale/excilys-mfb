@@ -11,6 +11,12 @@ import com.ebi.formation.mfb.webservicesapi.dto.IntegrationOperationDTO;
 import com.ebi.formation.mfb.webservicesapi.dto.OperationDTO;
 import com.ebi.formation.mfb.webservicesapi.jaxrs.IOperationWebService;
 
+/**
+ * Implémentation de {@link IOperationWebService}
+ * 
+ * @author excilys
+ * 
+ */
 public class OperationWebService implements IOperationWebService {
 
 	@Autowired
@@ -18,13 +24,24 @@ public class OperationWebService implements IOperationWebService {
 	@Autowired
 	private DTOBinder binder;
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.ebi.formation.mfb.webservicesapi.jaxrs.IOperationWebService#getLastOperationsByCompteId(java.lang.Long,
+	 * int)
+	 */
 	@Override
-	public List<OperationDTO> getLastFiveOperationsByCompteId(Long compteId, int numberOfOperations) {
+	public List<OperationDTO> getLastOperationsByCompteId(Long compteId, int numberOfOperations) {
 		List<OperationDTO> operationDTOs = binder.bindFromBusinessObjectList(OperationDTO.class,
 				operationService.getLastOperationByCompte(compteId, numberOfOperations));
 		return operationDTOs;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.ebi.formation.mfb.webservicesapi.jaxrs.IOperationWebService#addNewOperation(com.ebi.formation.mfb.webservicesapi
+	 * .dto.IntegrationOperationDTO)
+	 */
 	@Override
 	public Boolean addNewOperation(IntegrationOperationDTO integrationOperationDTO) {
 		ReturnCodeOperation returnedCode = operationService.saveOperation(integrationOperationDTO.getMontant(),

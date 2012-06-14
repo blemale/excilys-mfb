@@ -5,9 +5,12 @@ import java.math.BigDecimal;
 
 import org.joda.time.DateTime;
 
+import com.ebi.formation.mfb.entities.Operation;
 import com.ebi.formation.mfb.entities.OperationType;
 
 /**
+ * DTO pour l'entité {@link Operation}.
+ * 
  * @author excilys
  * 
  */

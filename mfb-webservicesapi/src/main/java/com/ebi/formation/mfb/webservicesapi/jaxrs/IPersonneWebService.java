@@ -6,9 +6,14 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.springframework.security.core.userdetails.User;
+
+import com.ebi.formation.mfb.entities.Person;
 import com.ebi.formation.mfb.webservicesapi.dto.PersonDTO;
 
 /**
+ * Interface du webservice REST d'accès aux services métier des {@link Person}.
+ * 
  * @author excilys
  * 
  */
@@ -16,6 +21,8 @@ import com.ebi.formation.mfb.webservicesapi.dto.PersonDTO;
 public interface IPersonneWebService {
 
 	/**
+	 * Permet de récupérer un {@link User} grâce à son username.
+	 * 
 	 * @param username
 	 * @return
 	 */
