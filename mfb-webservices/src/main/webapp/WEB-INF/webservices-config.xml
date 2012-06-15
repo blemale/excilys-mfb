@@ -11,45 +11,56 @@
        	http://www.springframework.org/schema/context 
        	http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
+	<import resource="/security-config.xml" />
+
 	<context:annotation-config />
 	<context:component-scan base-package="com.ebi.formation.mfb.webservices" />
 
 	<import resource="classpath:META-INF/cxf/cxf.xml" />
-	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml"/>
+	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 
-	<jaxws:endpoint id="OperationWebServiceSOAP" implementor="com.ebi.formation.mfb.webservices.jaxws.impl.OperationWebService" address="/OperationWebService"/>
-	<jaxws:endpoint id="CompteWebServiceSOAP" implementor="com.ebi.formation.mfb.webservices.jaxws.impl.CompteWebService" address="/CompteWebService"/>
-	<jaxws:endpoint id="PersonWebServiceSOAP" implementor="com.ebi.formation.mfb.webservices.jaxws.impl.PersonWebService" address="/PersonWebService"/>	
+	<jaxws:endpoint id="OperationWebServiceSOAP"
+		implementor="com.ebi.formation.mfb.webservices.jaxws.impl.OperationWebService"
+		address="/OperationWebService" />
+	<jaxws:endpoint id="CompteWebServiceSOAP"
+		implementor="com.ebi.formation.mfb.webservices.jaxws.impl.CompteWebService"
+		address="/CompteWebService" />
+	<jaxws:endpoint id="PersonWebServiceSOAP"
+		implementor="com.ebi.formation.mfb.webservices.jaxws.impl.PersonWebService"
+		address="/PersonWebService" />
 
 	<jaxrs:server id="CompteWebServiceREST" address="/compteService">
 		<jaxrs:serviceBeans>
-			<bean id="serviceImpl" class="com.ebi.formation.mfb.webservices.jaxrs.impl.CompteWebService" />
+			<bean id="serviceImpl"
+				class="com.ebi.formation.mfb.webservices.jaxrs.impl.CompteWebService" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
-			<bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider"/>
+			<bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider" />
 		</jaxrs:providers>
 	</jaxrs:server>
 
 	<jaxrs:server id="PersonneWebServiceREST" address="/personneService">
 		<jaxrs:serviceBeans>
-			<bean id="serviceImpl" class="com.ebi.formation.mfb.webservices.jaxrs.impl.PersonneWebService" />
+			<bean id="serviceImpl"
+				class="com.ebi.formation.mfb.webservices.jaxrs.impl.PersonneWebService" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
-			<bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider"/>
+			<bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider" />
 		</jaxrs:providers>
 	</jaxrs:server>
-	
+
 	<jaxrs:server id="OperationWebServiceREST" address="/operationService">
 		<jaxrs:serviceBeans>
-			<bean id="serviceImpl" class="com.ebi.formation.mfb.webservices.jaxrs.impl.OperationWebService" />
+			<bean id="serviceImpl"
+				class="com.ebi.formation.mfb.webservices.jaxrs.impl.OperationWebService" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
-			<bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider"/>
+			<bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider" />
 		</jaxrs:providers>
 	</jaxrs:server>
-		
+
 	<import resource="classpath:persistence-config.xml" />
 	<import resource="classpath:services-config.xml" />
-	
+
 </beans>
