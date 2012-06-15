@@ -42,7 +42,7 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${virements}" var="o">
-							<tr class="clickLine">
+							<tr>
 								<td><joda:format value="${o.dateEffet}" style="SS" /></td>
 								<td><joda:format value="${o.dateValeur}" style="SS" /></td>
 								<td>${o.label}</td>

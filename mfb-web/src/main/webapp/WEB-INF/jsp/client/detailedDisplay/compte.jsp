@@ -134,7 +134,7 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${operations}" var="o">
-							<tr class="clickLine">
+							<tr>
 								<td><joda:format value="${o.dateValeur}" style="SS" /></td>
 								<td><spring:message code="operationType.${o.type.label}" /></td>
 								<td>${o.label}</td>
