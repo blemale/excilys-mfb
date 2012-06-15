@@ -10,7 +10,7 @@
 	<div class="row-fluid">
 		<div class="span12">
 			<h1 align="center">
-				<spring:message code="historiqueVirement.pageTitle" />
+				<spring:message code="historiqueVirement.pageTitle" /> "${compte.label}" (${compte.numeroCompte})
 			</h1>
 
 			<p align="right">
