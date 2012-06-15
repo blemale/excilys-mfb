@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.ebi.formation.mfb.dao.ICompteDao;
 import com.ebi.formation.mfb.dao.IOperationDao;
@@ -166,7 +165,6 @@ public class OperationDao implements IOperationDao {
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
-	@Transactional
 	public void updateCompteWithNewOperations() {
 		logger.debug("updateCompteWithNewOperations()");
 		DateTime today = new DateTime();

@@ -9,16 +9,16 @@ import com.ebi.formation.mfb.entities.Operation;
 import com.ebi.formation.mfb.entities.OperationType;
 
 /**
- * DTO pour l'entité {@link Operation}.
+ * DTO pour l'intégration d'{@link Operation} dans l'application.
  * 
  * @author excilys
  * 
  */
-public class OperationDTO implements Serializable {
+public class IntegrationOperationDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private Long id;
-	private OperationType type;
+	private String numeroCompte;
+	private OperationType.Type type;
 	private BigDecimal montant;
 	private DateTime dateValeur;
 	private DateTime dateEffet;
@@ -27,7 +27,7 @@ public class OperationDTO implements Serializable {
 	/**
 	 * 
 	 */
-	public OperationDTO() {
+	public IntegrationOperationDTO() {
 	}
 
 	/**
@@ -38,10 +38,10 @@ public class OperationDTO implements Serializable {
 	 * @param dateEffet
 	 * @param label
 	 */
-	public OperationDTO(Long id, OperationType type, BigDecimal montant, DateTime dateValeur, DateTime dateEffet,
-			String label) {
+	public IntegrationOperationDTO(String numeroCompte, OperationType.Type type, BigDecimal montant,
+			DateTime dateValeur, DateTime dateEffet, String label) {
 		super();
-		this.id = id;
+		this.numeroCompte = numeroCompte;
 		this.type = type;
 		this.montant = montant;
 		this.dateValeur = dateValeur;
@@ -52,22 +52,22 @@ public class OperationDTO implements Serializable {
 	/**
 	 * @return the id
 	 */
-	public Long getId() {
-		return id;
+	public String getNumeroCompte() {
+		return numeroCompte;
 	}
 
 	/**
 	 * @param id
 	 *            the id to set
 	 */
-	public void setId(Long id) {
-		this.id = id;
+	public void setNumeroCompte(String numeroCompte) {
+		this.numeroCompte = numeroCompte;
 	}
 
 	/**
 	 * @return the type
 	 */
-	public OperationType getType() {
+	public OperationType.Type getType() {
 		return type;
 	}
 
@@ -75,7 +75,7 @@ public class OperationDTO implements Serializable {
 	 * @param type
 	 *            the type to set
 	 */
-	public void setType(OperationType type) {
+	public void setType(OperationType.Type type) {
 		this.type = type;
 	}
 

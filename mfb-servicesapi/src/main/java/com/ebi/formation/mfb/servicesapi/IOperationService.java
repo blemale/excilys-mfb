@@ -1,4 +1,4 @@
-package com.ebi.formation.mfb.services;
+package com.ebi.formation.mfb.servicesapi;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -240,6 +240,21 @@ public interface IOperationService {
 	@Secured(Role.ROLE_ADMIN)
 	ReturnCodeOperation saveOperation(BigDecimal montant, Long idCompte, Type type, String label, DateTime dateEffet,
 			DateTime dateValeur);
+
+	/**
+	 * Permet de sauvegarder une opération lié à un compte
+	 * 
+	 * @param montant
+	 * @param numeroCompte
+	 * @param type
+	 * @param label
+	 * @param dateEffet
+	 * @param dateValeur
+	 * @return
+	 */
+	@Secured(Role.ROLE_ADMIN)
+	ReturnCodeOperation saveOperation(BigDecimal montant, String numeroCompte, Type type, String label,
+			DateTime dateEffet, DateTime dateValeur);
 
 	/**
 	 * Récupère la liste des dernières opérations pour un compte donné.

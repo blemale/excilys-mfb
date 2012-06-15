@@ -14,7 +14,7 @@ import com.ebi.formation.mfb.dao.ICompteDao;
 import com.ebi.formation.mfb.dao.IPersonDao;
 import com.ebi.formation.mfb.entities.Compte;
 import com.ebi.formation.mfb.entities.Person;
-import com.ebi.formation.mfb.services.ICompteService;
+import com.ebi.formation.mfb.servicesapi.ICompteService;
 
 /**
  * Implémentation du service associé à CompteDao

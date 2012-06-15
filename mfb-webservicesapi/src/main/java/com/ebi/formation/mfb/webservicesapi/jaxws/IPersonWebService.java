@@ -6,7 +6,7 @@ import javax.jws.WebParam;
 import javax.jws.WebService;
 
 import com.ebi.formation.mfb.entities.Role.Right;
-import com.ebi.formation.mfb.services.IPersonService.ReturnCodePerson;
+import com.ebi.formation.mfb.servicesapi.IPersonService.ReturnCodePerson;
 import com.ebi.formation.mfb.webservicesapi.dto.PersonDTO;
 
 /**

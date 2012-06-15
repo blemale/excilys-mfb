@@ -2,7 +2,11 @@ package com.ebi.formation.mfb.webservicesapi.dto;
 
 import java.io.Serializable;
 
+import com.ebi.formation.mfb.entities.Person;
+
 /**
+ * DTO pour l'entité {@link Person}.
+ * 
  * @author excilys
  * 
  */

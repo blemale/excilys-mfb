@@ -27,8 +27,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ebi.formation.mfb.entities.Operation;
-import com.ebi.formation.mfb.services.ICompteService;
-import com.ebi.formation.mfb.services.IOperationService;
+import com.ebi.formation.mfb.servicesapi.ICompteService;
+import com.ebi.formation.mfb.servicesapi.IOperationService;
 import com.ebi.formation.mfb.web.exception.ResourceNotFoundException;
 import com.ebi.formation.mfb.web.utils.ExcelGenerator;
 import com.ebi.formation.mfb.web.utils.LinkBuilder;

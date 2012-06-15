@@ -2,20 +2,19 @@ package com.ebi.formation.mfb.webservices.jaxrs.impl;
 
 import java.util.List;
 
-import javax.ws.rs.Produces;
-
 import org.jdto.DTOBinder;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.ebi.formation.mfb.services.ICompteService;
+import com.ebi.formation.mfb.servicesapi.ICompteService;
 import com.ebi.formation.mfb.webservicesapi.dto.CompteDTO;
 import com.ebi.formation.mfb.webservicesapi.jaxrs.ICompteWebService;
 
 /**
+ * Implémentation de {@link ICompteWebService}
+ * 
  * @author excilys
  * 
  */
-@Produces({ "application/json", "text/xml" })
 public class CompteWebService implements ICompteWebService {
 
 	@Autowired

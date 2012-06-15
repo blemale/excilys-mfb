@@ -9,6 +9,7 @@
 		inheritHeaders="true">
 		<jaxrs:headers>
 			<entry key="Accept" value="application/json" />
+			<entry key="Content-Type" value="application/json" />
 		</jaxrs:headers>
 		<jaxrs:providers>
 			<bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider" />
@@ -21,6 +22,20 @@
 		inheritHeaders="true">
 		<jaxrs:headers>
 			<entry key="Accept" value="application/json" />
+			<entry key="Content-Type" value="application/json" />
+		</jaxrs:headers>
+		<jaxrs:providers>
+			<bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider" />
+		</jaxrs:providers>
+	</jaxrs:client>
+
+	<jaxrs:client id="operationService"
+		address="http://localhost:8080/mfb-webservices/operationService"
+		serviceClass="com.ebi.formation.mfb.webservicesapi.jaxrs.IOperationWebService"
+		inheritHeaders="true">
+		<jaxrs:headers>
+			<entry key="Accept" value="application/json" />
+			<entry key="Content-Type" value="application/json" />
 		</jaxrs:headers>
 		<jaxrs:providers>
 			<bean id="jacksonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider" />

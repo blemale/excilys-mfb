@@ -3,7 +3,11 @@ package com.ebi.formation.mfb.webservicesapi.dto;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import com.ebi.formation.mfb.entities.Compte;
+
 /**
+ * DTO pour l'entité {@link Compte}
+ * 
  * @author excilys
  * 
  */
