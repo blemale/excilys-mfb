@@ -10,7 +10,7 @@
 	<div class="row-fluid">
 		<div class="span12">
 			<h1 align="center">
-				<spring:message code="historiqueVirement.pageTitle" />
+				<spring:message code="historiqueVirement.pageTitle" /> "${compte.label}" (${compte.numeroCompte})
 			</h1>
 
 			<p align="right">
@@ -42,7 +42,7 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${virements}" var="o">
-							<tr class="clickLine">
+							<tr>
 								<td><joda:format value="${o.dateEffet}" style="SS" /></td>
 								<td><joda:format value="${o.dateValeur}" style="SS" /></td>
 								<td>${o.label}</td>

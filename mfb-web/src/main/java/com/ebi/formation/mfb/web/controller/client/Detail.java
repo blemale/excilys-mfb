@@ -94,7 +94,7 @@ public class Detail {
 	 * @param page
 	 * @return
 	 */
-	@RequestMapping(value = "{year}/{month:[1-9]|1[012]}/{page:[0-9]+}/detail.html", method = RequestMethod.GET)
+	@RequestMapping(value = "{year:20\\d{2}}/{month:[1-9]|1[012]}/{page:[0-9]+}/detail.html", method = RequestMethod.GET)
 	public ModelAndView detailCompteMoisAndPage(Principal principal, Locale locale, @PathVariable Long idCompte,
 			@PathVariable int year, @PathVariable int month, @PathVariable int page) {
 		// Vérifie que le compte appartient au user connecté, que le mois demandé existe, que la page demandée existe.
@@ -143,6 +143,8 @@ public class Detail {
 		}
 		mv.addObject("urlDetailCarte",
 				LinkBuilder.getLink("client", "compte", idCompte, year, month, "carte", "detail.html"));
+		mv.addObject("linksVirement",
+				LinkBuilder.getLink("client", "compte", idCompte.longValue(), "virement", "history.html"));
 		return mv;
 	}
 
@@ -186,7 +188,7 @@ public class Detail {
 	 * @param page
 	 * @return
 	 */
-	@RequestMapping(value = "{year}/{month:[1-9]|1[012]}/{page:[0-9]+}/carte/detail.html", method = RequestMethod.GET)
+	@RequestMapping(value = "{year:20\\d{2}}/{month:[1-9]|1[012]}/{page:[0-9]+}/carte/detail.html", method = RequestMethod.GET)
 	public ModelAndView detailCarteMoisAndPage(Principal principal, Locale locale, @PathVariable Long idCompte,
 			@PathVariable int year, @PathVariable int month, @PathVariable int page) {
 		if (!compteService.checkCompteOwnershipByUsernameAndCompteId(principal.getName(), idCompte)
@@ -260,7 +262,7 @@ public class Detail {
 	 * @param page
 	 * @return
 	 */
-	@RequestMapping(value = "{year}/{month:[1-9]|1[012]}/{page:[0-9]+}/virement/history.html", method = RequestMethod.GET)
+	@RequestMapping(value = "{year:20\\d{2}}/{month:[1-9]|1[012]}/{page:[0-9]+}/virement/history.html", method = RequestMethod.GET)
 	public ModelAndView virementHistoryByMonthAndPage(Principal principal, Locale locale, @PathVariable Long idCompte,
 			@PathVariable int year, @PathVariable int month, @PathVariable int page) {
 		// Vérifie que le mois demandé existe, que la page demandée existe.
@@ -301,7 +303,7 @@ public class Detail {
 	 * @param month
 	 * @return
 	 */
-	@RequestMapping(value = "{year}/{month:[1-9]|1[012]}/export.html", method = RequestMethod.GET)
+	@RequestMapping(value = "{year:20\\d{2}}/{month:[1-9]|1[012]}/export.html", method = RequestMethod.GET)
 	public ModelAndView exportExcel(HttpServletRequest request, HttpServletResponse response, Principal principal,
 			Locale locale, @PathVariable Long idCompte, @PathVariable int year, @PathVariable int month) {
 		String nomCompte = compteService.getCompteById(idCompte).getLabel();
@@ -321,7 +323,7 @@ public class Detail {
 		return null;
 	}
 
-	@RequestMapping(value = "{year}/{month:[1-9]|1[012]}/{[0-9]*}/export.html", method = RequestMethod.GET)
+	@RequestMapping(value = "{year:20\\d{2}}/{month:[1-9]|1[012]}/{[0-9]*}/export.html", method = RequestMethod.GET)
 	public ModelAndView exportExcelWithPage(HttpServletRequest request, HttpServletResponse response,
 			Principal principal, Locale locale, @PathVariable Long idCompte, @PathVariable int year,
 			@PathVariable int month) {
