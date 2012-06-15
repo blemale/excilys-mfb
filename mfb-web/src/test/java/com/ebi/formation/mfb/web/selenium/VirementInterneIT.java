@@ -45,7 +45,7 @@ public class VirementInterneIT {
 		selenium.click("css=button.btn.btn-success");
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isTextPresent("Vous devez saisir un nombre"));
-		assertTrue(selenium.isTextPresent("Même compte"));
+		assertTrue(selenium.isTextPresent("Le compte à créditer ne peut être identique du compte à débiter"));
 		assertTrue(selenium.isTextPresent("Le motif doit faire 64 caractères max"));
 		selenium.click("link=Annuler le virement");
 		selenium.waitForPageToLoad("30000");

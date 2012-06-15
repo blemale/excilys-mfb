@@ -5,11 +5,11 @@ import java.util.List;
 
 import javax.jws.WebService;
 
-import org.jdto.DTOBinder;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ebi.formation.mfb.servicesapi.ICompteService;
 import com.ebi.formation.mfb.webservicesapi.dto.CompteDTO;
+import com.ebi.formation.mfb.webservicesapi.dto.converters.CompteConverter;
 import com.ebi.formation.mfb.webservicesapi.jaxws.ICompteWebService;
 
 /**
@@ -21,8 +21,6 @@ public class CompteWebService implements ICompteWebService {
 
 	@Autowired
 	private ICompteService compteService;
-	@Autowired
-	private DTOBinder binder;
 
 	/*
 	 * (non-Javadoc)
@@ -30,7 +28,7 @@ public class CompteWebService implements ICompteWebService {
 	 */
 	@Override
 	public List<CompteDTO> findComptesByUsername(String username) {
-		return binder.bindFromBusinessObjectList(CompteDTO.class, compteService.findComptesByUsername(username));
+		return CompteConverter.convertCompteListToCompteDTOList(compteService.findComptesByUsername(username));
 	}
 
 	/*
@@ -50,7 +48,7 @@ public class CompteWebService implements ICompteWebService {
 	 */
 	@Override
 	public CompteDTO getCompteById(Long compteId) {
-		return binder.bindFromBusinessObject(CompteDTO.class, compteService.getCompteById(compteId));
+		return CompteConverter.convertCompteToCompteDTO(compteService.getCompteById(compteId));
 	}
 
 	/*
@@ -59,7 +57,7 @@ public class CompteWebService implements ICompteWebService {
 	 */
 	@Override
 	public CompteDTO getCompteByNumeroCompte(String numeroCompte) {
-		return binder.bindFromBusinessObject(CompteDTO.class, compteService.getCompteByNumeroCompte(numeroCompte));
+		return CompteConverter.convertCompteToCompteDTO(compteService.getCompteByNumeroCompte(numeroCompte));
 	}
 
 	/*
@@ -78,6 +76,6 @@ public class CompteWebService implements ICompteWebService {
 	 */
 	@Override
 	public List<CompteDTO> findAllComptes() {
-		return binder.bindFromBusinessObjectList(CompteDTO.class, compteService.findAllComptes());
+		return CompteConverter.convertCompteListToCompteDTOList(compteService.findAllComptes());
 	}
 }

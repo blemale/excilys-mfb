@@ -28,7 +28,6 @@ public class VirementExterneForm {
 	@Pattern(regexp = "\\d*")
 	private String numeroCompteACrediter;
 	@Size(max = 64)
-	@Pattern(regexp = "\\w*")
 	private String motif;
 	@NotNull
 	@DateTimeFormat

@@ -4,13 +4,13 @@ import java.util.List;
 
 import javax.jws.WebService;
 
-import org.jdto.DTOBinder;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ebi.formation.mfb.entities.Role.Right;
 import com.ebi.formation.mfb.servicesapi.IPersonService;
 import com.ebi.formation.mfb.servicesapi.IPersonService.ReturnCodePerson;
 import com.ebi.formation.mfb.webservicesapi.dto.PersonDTO;
+import com.ebi.formation.mfb.webservicesapi.dto.converters.PersonConverter;
 import com.ebi.formation.mfb.webservicesapi.jaxws.IPersonWebService;
 
 /**
@@ -22,8 +22,6 @@ public class PersonWebService implements IPersonWebService {
 
 	@Autowired
 	private IPersonService personService;
-	@Autowired
-	private DTOBinder binder;
 
 	/*
 	 * (non-Javadoc)
@@ -31,7 +29,7 @@ public class PersonWebService implements IPersonWebService {
 	 */
 	@Override
 	public PersonDTO findPersonByUsername(String username) {
-		return binder.bindFromBusinessObject(PersonDTO.class, personService.findPersonByUsername(username));
+		return PersonConverter.convertPersonToPersonDTO(personService.findPersonByUsername(username));
 	}
 
 	/*
@@ -51,6 +49,6 @@ public class PersonWebService implements IPersonWebService {
 	 */
 	@Override
 	public List<PersonDTO> findAllPersons() {
-		return binder.bindFromBusinessObjectList(PersonDTO.class, personService.findAllPersons());
+		return PersonConverter.convertPersonListToPersonDTOList(personService.findAllPersons());
 	}
 }
