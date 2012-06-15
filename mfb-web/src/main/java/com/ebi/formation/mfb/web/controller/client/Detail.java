@@ -30,6 +30,7 @@ import com.ebi.formation.mfb.entities.Operation;
 import com.ebi.formation.mfb.servicesapi.ICompteService;
 import com.ebi.formation.mfb.servicesapi.IOperationService;
 import com.ebi.formation.mfb.web.exception.ResourceNotFoundException;
+import com.ebi.formation.mfb.web.utils.ControllerUtils;
 import com.ebi.formation.mfb.web.utils.ExcelGenerator;
 import com.ebi.formation.mfb.web.utils.LinkBuilder;
 
@@ -129,22 +130,25 @@ public class Detail {
 		// Ajout de des urls pour aller au mois suivant et précédent dans le modèle si ils existent
 		if (hasPreviousMonth(month, year)) {
 			YearMonth monthBefore = currentMonth.minusMonths(1);
-			mv.addObject(
-					"urlPreviousMonth",
-					LinkBuilder.getLink("client", "compte", idCompte.longValue(), monthBefore.getYear(),
-							monthBefore.getMonthOfYear(), "detail.html"));
+			mv.addObject("urlPreviousMonth", LinkBuilder.getLink(ControllerUtils.LINK_CLIENT,
+					ControllerUtils.LINK_COMPTE, idCompte.longValue(), monthBefore.getYear(),
+					monthBefore.getMonthOfYear(), "detail.html"));
 		}
 		if (hasNextMonth(month, year)) {
 			YearMonth monthAfter = currentMonth.plusMonths(1);
-			mv.addObject(
-					"urlNextMonth",
-					LinkBuilder.getLink("client", "compte", idCompte.longValue(), monthAfter.getYear(),
-							monthAfter.getMonthOfYear(), "detail.html"));
+			mv.addObject("urlNextMonth", LinkBuilder.getLink(ControllerUtils.LINK_CLIENT, ControllerUtils.LINK_COMPTE,
+					idCompte.longValue(), monthAfter.getYear(), monthAfter.getMonthOfYear(), "detail.html"));
 		}
-		mv.addObject("urlDetailCarte",
-				LinkBuilder.getLink("client", "compte", idCompte, year, month, "carte", "detail.html"));
-		mv.addObject("linksVirement",
-				LinkBuilder.getLink("client", "compte", idCompte.longValue(), "virement", "history.html"));
+		mv.addObject("urlDetailCarte", LinkBuilder.getLink(ControllerUtils.LINK_CLIENT, ControllerUtils.LINK_COMPTE,
+				idCompte, year, month, "carte", "detail.html"));
+		mv.addObject("linksVirement", LinkBuilder.getLink(ControllerUtils.LINK_CLIENT, ControllerUtils.LINK_COMPTE,
+				idCompte.longValue(), "virement", "history.html"));
+		// TODO fil d'ariane
+		Map<String, String> linksfilAriane = new LinkedHashMap<String, String>();
+		linksfilAriane.put("linkFilAriane.home", LinkBuilder.getLink(ControllerUtils.LINK_CLIENT, "home.html"));
+		linksfilAriane.put("linkFilAriane.detailCompte", LinkBuilder.getLink(ControllerUtils.LINK_CLIENT,
+				ControllerUtils.LINK_COMPTE, idCompte.longValue(), "detail.html"));
+		mv.addObject(ControllerUtils.OBJECT_LINK_FIL_ARIANE, linksfilAriane);
 		return mv;
 	}
 
@@ -204,20 +208,28 @@ public class Detail {
 		// Ajout de des urls pour aller au mois suivant et précédent dans le modèle si ils existent
 		if (hasPreviousMonth(month, year)) {
 			YearMonth monthBefore = currentMonth.minusMonths(1);
-			mv.addObject(
-					"urlPreviousMonth",
-					LinkBuilder.getLink("client", "compte", idCompte.longValue(), monthBefore.getYear(),
-							monthBefore.getMonthOfYear(), "carte", "detail.html"));
+			mv.addObject("urlPreviousMonth", LinkBuilder.getLink(ControllerUtils.LINK_CLIENT,
+					ControllerUtils.LINK_COMPTE, idCompte.longValue(), monthBefore.getYear(),
+					monthBefore.getMonthOfYear(), ControllerUtils.LINK_CARTE, "detail.html"));
 		}
 		if (hasNextMonth(month, year)) {
 			YearMonth monthAfter = currentMonth.plusMonths(1);
-			mv.addObject(
-					"urlNextMonth",
-					LinkBuilder.getLink("client", "compte", idCompte.longValue(), monthAfter.getYear(),
-							monthAfter.getMonthOfYear(), "carte", "detail.html"));
+			mv.addObject("urlNextMonth", LinkBuilder.getLink(ControllerUtils.LINK_CLIENT, ControllerUtils.LINK_COMPTE,
+					idCompte.longValue(), monthAfter.getYear(), monthAfter.getMonthOfYear(),
+					ControllerUtils.LINK_CARTE, "detail.html"));
 		}
 		// Ajout de l'url pour revenir au détail du compte dans le modèle
-		mv.addObject("urlDetailCompte", LinkBuilder.getLink("client", "compte", idCompte, year, month, "detail.html"));
+		mv.addObject("urlDetailCompte", LinkBuilder.getLink(ControllerUtils.LINK_CLIENT, ControllerUtils.LINK_COMPTE,
+				idCompte, year, month, "detail.html"));
+		// TODO fil d'ariane
+		Map<String, String> linksfilAriane = new LinkedHashMap<String, String>();
+		linksfilAriane.put("linkFilAriane.home", LinkBuilder.getLink(ControllerUtils.LINK_CLIENT, "home.html"));
+		linksfilAriane.put("linkFilAriane.detailCompte", LinkBuilder.getLink(ControllerUtils.LINK_CLIENT,
+				ControllerUtils.LINK_COMPTE, idCompte.longValue(), "detail.html"));
+		linksfilAriane.put("linkFilAriane.detailCarte", LinkBuilder.getLink(ControllerUtils.LINK_CLIENT,
+				ControllerUtils.LINK_COMPTE, idCompte.longValue(), year, month, ControllerUtils.LINK_CARTE,
+				"detail.html"));
+		mv.addObject(ControllerUtils.OBJECT_LINK_FIL_ARIANE, linksfilAriane);
 		return mv;
 	}
 
@@ -278,16 +290,24 @@ public class Detail {
 		// Ajout de des urls pour aller au mois suivant et précédent dans le modèle si ils existent
 		if (hasPreviousMonth(month, year)) {
 			YearMonth monthBefore = currentMonth.minusMonths(1);
-			mv.addObject(
-					"urlPreviousMonth",
-					LinkBuilder.getLink("client", "compte", idCompte, monthBefore.getYear(),
-							monthBefore.getMonthOfYear(), "virement", "history.html"));
+			mv.addObject("urlPreviousMonth", LinkBuilder.getLink(ControllerUtils.LINK_CLIENT,
+					ControllerUtils.LINK_COMPTE, idCompte, monthBefore.getYear(), monthBefore.getMonthOfYear(),
+					ControllerUtils.LINK_VIREMENT, "history.html"));
 		}
 		if (hasNextMonth(month, year)) {
 			YearMonth monthAfter = currentMonth.plusMonths(1);
-			mv.addObject("urlNextMonth", LinkBuilder.getLink("client", "compte", idCompte, monthAfter.getYear(),
-					monthAfter.getMonthOfYear(), "virement", "history.html"));
+			mv.addObject("urlNextMonth", LinkBuilder.getLink(ControllerUtils.LINK_CLIENT, ControllerUtils.LINK_COMPTE,
+					idCompte, monthAfter.getYear(), monthAfter.getMonthOfYear(), ControllerUtils.LINK_VIREMENT,
+					"history.html"));
 		}
+		// TODO fil d'ariane
+		Map<String, String> linksfilAriane = new LinkedHashMap<String, String>();
+		linksfilAriane.put("linkFilAriane.home", LinkBuilder.getLink(ControllerUtils.LINK_CLIENT, "home.html"));
+		linksfilAriane.put("linkFilAriane.detailCompte", LinkBuilder.getLink(ControllerUtils.LINK_CLIENT,
+				ControllerUtils.LINK_COMPTE, idCompte.longValue(), "detail.html"));
+		linksfilAriane.put("linkFilAriane.virementHistory", LinkBuilder.getLink(ControllerUtils.LINK_CLIENT,
+				ControllerUtils.LINK_COMPTE, idCompte.longValue(), ControllerUtils.LINK_VIREMENT, "history.html"));
+		mv.addObject(ControllerUtils.OBJECT_LINK_FIL_ARIANE, linksfilAriane);
 		return mv;
 	}
 
@@ -440,16 +460,16 @@ public class Detail {
 		for (long indexPage = 0; indexPage < nbPages; indexPage++) {
 			switch (typeDetail) {
 				case COMPTE:
-					map.put(indexPage,
-							LinkBuilder.getLink("client", "compte", idCompte, year, month, indexPage, "detail.html"));
+					map.put(indexPage, LinkBuilder.getLink(ControllerUtils.LINK_CLIENT, ControllerUtils.LINK_COMPTE,
+							idCompte, year, month, indexPage, "detail.html"));
 					break;
 				case CARTE:
-					map.put(indexPage, LinkBuilder.getLink("client", "compte", idCompte, year, month, indexPage,
-							"carte", "detail.html"));
+					map.put(indexPage, LinkBuilder.getLink(ControllerUtils.LINK_CLIENT, ControllerUtils.LINK_COMPTE,
+							idCompte, year, month, indexPage, ControllerUtils.LINK_CARTE, "detail.html"));
 					break;
 				case VIREMENT:
-					map.put(indexPage, LinkBuilder.getLink("client", "compte", idCompte, year, month, indexPage,
-							"virement", "history.html"));
+					map.put(indexPage, LinkBuilder.getLink(ControllerUtils.LINK_CLIENT, ControllerUtils.LINK_COMPTE,
+							idCompte, year, month, indexPage, ControllerUtils.LINK_VIREMENT, "history.html"));
 					break;
 				default:
 					break;
@@ -476,16 +496,19 @@ public class Detail {
 			DateTimeFormatter localeFmt = fmt.withLocale(locale);
 			switch (typeDetail) {
 				case COMPTE:
-					mapNamesUrls.put(localeFmt.print(month), LinkBuilder.getLink("client", "compte", idCompte,
-							month.getYear(), month.getMonthOfYear(), "detail.html"));
+					mapNamesUrls.put(localeFmt.print(month), LinkBuilder.getLink(ControllerUtils.LINK_CLIENT,
+							ControllerUtils.LINK_COMPTE, idCompte, month.getYear(), month.getMonthOfYear(),
+							"detail.html"));
 					break;
 				case CARTE:
-					mapNamesUrls.put(localeFmt.print(month), LinkBuilder.getLink("client", "compte", idCompte,
-							month.getYear(), month.getMonthOfYear(), "carte", "detail.html"));
+					mapNamesUrls.put(localeFmt.print(month), LinkBuilder.getLink(ControllerUtils.LINK_CLIENT,
+							ControllerUtils.LINK_COMPTE, idCompte, month.getYear(), month.getMonthOfYear(),
+							ControllerUtils.LINK_CARTE, "detail.html"));
 					break;
 				case VIREMENT:
-					mapNamesUrls.put(localeFmt.print(month), LinkBuilder.getLink("client", "compte", idCompte,
-							month.getYear(), month.getMonthOfYear(), "virement", "history.html"));
+					mapNamesUrls.put(localeFmt.print(month), LinkBuilder.getLink(ControllerUtils.LINK_CLIENT,
+							ControllerUtils.LINK_COMPTE, idCompte, month.getYear(), month.getMonthOfYear(),
+							ControllerUtils.LINK_VIREMENT, "history.html"));
 					break;
 				default:
 					break;

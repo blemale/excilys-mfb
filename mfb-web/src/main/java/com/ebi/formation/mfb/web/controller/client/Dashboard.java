@@ -2,6 +2,7 @@ package com.ebi.formation.mfb.web.controller.client;
 
 import java.security.Principal;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ebi.formation.mfb.entities.Compte;
 import com.ebi.formation.mfb.servicesapi.ICompteService;
+import com.ebi.formation.mfb.web.utils.ControllerUtils;
 import com.ebi.formation.mfb.web.utils.LinkBuilder;
 
 /**
@@ -41,6 +43,9 @@ public class Dashboard {
 		mv.addObject("comptes", comptes);
 		mv.addObject("linksDetail", getMapLinksDetailByCompteId(comptes));
 		mv.addObject("linksVirement", getMapLinksVirementByCompteId(comptes));
+		Map<String, String> linksfilAriane = new LinkedHashMap<String, String>();
+		linksfilAriane.put("linkFilAriane.home", LinkBuilder.getLink(ControllerUtils.LINK_CLIENT, "home.html"));
+		mv.addObject("linksfilAriane", linksfilAriane);
 		return mv;
 	}
 
@@ -53,7 +58,8 @@ public class Dashboard {
 	private Map<Long, String> getMapLinksDetailByCompteId(List<Compte> comptes) {
 		Map<Long, String> mapLinksDetailById = new HashMap<Long, String>();
 		for (Compte c : comptes) {
-			mapLinksDetailById.put(c.getId(), LinkBuilder.getLink("client", "compte", c.getId(), "detail.html"));
+			mapLinksDetailById.put(c.getId(), LinkBuilder.getLink(ControllerUtils.LINK_CLIENT,
+					ControllerUtils.LINK_COMPTE, c.getId(), "detail.html"));
 		}
 		return mapLinksDetailById;
 	}
@@ -67,8 +73,8 @@ public class Dashboard {
 	private Map<Long, String> getMapLinksVirementByCompteId(List<Compte> comptes) {
 		Map<Long, String> mapLinksVirementById = new HashMap<Long, String>();
 		for (Compte c : comptes) {
-			mapLinksVirementById.put(c.getId(),
-					LinkBuilder.getLink("client", "compte", c.getId(), "virement", "history.html"));
+			mapLinksVirementById.put(c.getId(), LinkBuilder.getLink(ControllerUtils.LINK_CLIENT,
+					ControllerUtils.LINK_COMPTE, c.getId(), ControllerUtils.LINK_VIREMENT, "history.html"));
 		}
 		return mapLinksVirementById;
 	}

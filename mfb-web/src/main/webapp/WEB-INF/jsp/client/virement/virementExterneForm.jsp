@@ -6,13 +6,19 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-<header id="overview" class="span10 offset2">
-	<h1>
-		<spring:message code="home.title" />
-	</h1>
-	<p class="lead">
-		<spring:message code="home.virementExterneForm" />
-	</p>
+<header id="overview">
+	<%@ include file="../filAriane.jsp"%>
+
+	<div class="row">
+		<div class="span10 offset2">
+			<h1>
+				<spring:message code="home.title" />
+			</h1>
+			<p class="lead">
+				<spring:message code="home.virementExterneForm" />
+			</p>
+		</div>
+	</div>
 </header>
 
 <section id="virement">
@@ -38,7 +44,8 @@
 								<form:options items="${listComptes}" itemLabel="fullLabel"
 									itemValue="id" />
 							</form:select>
-							<form:errors path="compteADebiter" cssClass="colorError" element="div" />
+							<form:errors path="compteADebiter" cssClass="colorError"
+								element="div" />
 						</div>
 					</div>
 					<div class="control-group">
@@ -47,16 +54,8 @@
 						<div class="controls">
 							<form:input path="numeroCompteACrediter"
 								cssClass="input-xlarge focused" />
-							<form:errors path="numeroCompteACrediter" cssClass="colorError" element="div" />
-						</div>
-					</div>
-					<div class="control-group">
-						<label class="control-label" for="dateEffet"><spring:message
-								code="admin.createOperationForm.dateEffet" /></label>
-						<div class="controls">
-							<form:select path="dateEffet" items="${datesEffet}"
-								itemLabel="dateTimeFormat" itemValue="dateTime" />
-							<form:errors path="dateEffet" cssClass="colorError" element="div" />
+							<form:errors path="numeroCompteACrediter" cssClass="colorError"
+								element="div" />
 						</div>
 					</div>
 					<div class="control-group">
@@ -65,7 +64,8 @@
 						<div class="controls">
 							<form:select path="dateValeur" items="${datesValeur}"
 								itemLabel="dateTimeFormat" itemValue="dateTime" />
-							<form:errors path="dateValeur" cssClass="colorError" element="div" />
+							<form:errors path="dateValeur" cssClass="colorError"
+								element="div" />
 						</div>
 					</div>
 					<div class="control-group">

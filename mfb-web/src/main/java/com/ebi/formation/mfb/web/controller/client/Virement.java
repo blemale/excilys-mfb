@@ -1,6 +1,8 @@
 package com.ebi.formation.mfb.web.controller.client;
 
 import java.security.Principal;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -24,6 +26,7 @@ import com.ebi.formation.mfb.web.forms.VirementExterneForm;
 import com.ebi.formation.mfb.web.forms.VirementInterneForm;
 import com.ebi.formation.mfb.web.utils.ControllerUtils;
 import com.ebi.formation.mfb.web.utils.DateTimeUtils;
+import com.ebi.formation.mfb.web.utils.LinkBuilder;
 
 /**
  * @author excilys
@@ -50,6 +53,12 @@ public class Virement {
 		ModelAndView mv = new ModelAndView("virementInterne");
 		mv.addObject(OBJECT_LIST_COMPTES, compteService.findComptesByUsername(principal.getName()));
 		mv.addObject(new VirementInterneForm());
+		Map<String, String> linksfilAriane = new LinkedHashMap<String, String>();
+		linksfilAriane.put("linkFilAriane.home", LinkBuilder.getLink(ControllerUtils.LINK_CLIENT, "home.html"));
+		linksfilAriane.put("linkFilAriane.virementInterne",
+				LinkBuilder.getLink(ControllerUtils.LINK_CLIENT, "virementInterne.html"));
+		mv.addObject("linksfilAriane", linksfilAriane);
+		mv.setViewName("virementInterne");
 		return mv;
 	}
 
@@ -64,8 +73,14 @@ public class Virement {
 		ModelAndView mv = new ModelAndView("virementExterne");
 		mv.addObject(OBJECT_LIST_COMPTES, compteService.findComptesByUsername(principal.getName()));
 		mv.addObject(DateTimeUtils.OBJECT_DATES_VALEUR, DateTimeUtils.getDates());
-		mv.addObject(DateTimeUtils.OBJECT_DATES_EFFET, DateTimeUtils.getDates());
 		mv.addObject(new VirementExterneForm());
+		// TODO fil d'ariane
+		Map<String, String> linksfilAriane = new LinkedHashMap<String, String>();
+		linksfilAriane.put("linkFilAriane.home", LinkBuilder.getLink(ControllerUtils.LINK_CLIENT, "home.html"));
+		linksfilAriane.put("linkFilAriane.virementExterne",
+				LinkBuilder.getLink(ControllerUtils.LINK_CLIENT, "virementExterne.html"));
+		mv.addObject(ControllerUtils.OBJECT_LINK_FIL_ARIANE, linksfilAriane);
+		mv.setViewName("virementExterne");
 		return mv;
 	}
 
@@ -93,6 +108,12 @@ public class Virement {
 				result.addError(new FieldError("virementInterneForm", "compteACrediter", null, true,
 						new String[] { "virementInterneForm.comptesIdentiques" }, null, null));
 			}
+			// TODO fil d'ariane
+			Map<String, String> linksfilAriane = new LinkedHashMap<String, String>();
+			linksfilAriane.put("linkFilAriane.home", LinkBuilder.getLink(ControllerUtils.LINK_CLIENT, "home.html"));
+			linksfilAriane.put("linkFilAriane.virementInterne",
+					LinkBuilder.getLink(ControllerUtils.LINK_CLIENT, "virementInterne.html"));
+			mv.addObject(ControllerUtils.OBJECT_LINK_FIL_ARIANE, linksfilAriane);
 			mv.setViewName("virementInterne");
 			return mv;
 		}
@@ -163,13 +184,18 @@ public class Virement {
 		if (result.hasErrors()) {
 			mv.addObject(OBJECT_LIST_COMPTES, compteService.findComptesByUsername(principal.getName()));
 			mv.addObject(DateTimeUtils.OBJECT_DATES_VALEUR, DateTimeUtils.getDates());
-			mv.addObject(DateTimeUtils.OBJECT_DATES_EFFET, DateTimeUtils.getDates());
+			// TODO fil d'ariane
+			Map<String, String> linksfilAriane = new LinkedHashMap<String, String>();
+			linksfilAriane.put("linkFilAriane.home", LinkBuilder.getLink(ControllerUtils.LINK_CLIENT, "home.html"));
+			linksfilAriane.put("linkFilAriane.virementExterne",
+					LinkBuilder.getLink(ControllerUtils.LINK_CLIENT, "virementExterne.html"));
+			mv.addObject(ControllerUtils.OBJECT_LINK_FIL_ARIANE, linksfilAriane);
 			mv.setViewName("virementExterne");
 			return mv;
 		}
 		ReturnCodeVirement returnCode = operationService.doVirement(virementExternForm.getCompteADebiter(),
 				virementExternForm.getNumeroCompteACrediter(), StringUtils.trimToNull(virementExternForm.getMotif()),
-				virementExternForm.getMontant(), virementExternForm.getDateEffet(), virementExternForm.getDateValeur());
+				virementExternForm.getMontant(), DateTime.now(), virementExternForm.getDateValeur());
 		mv.setViewName("redirect:erreurVirement.html");
 		String message = null;
 		switch (returnCode) {
@@ -205,7 +231,8 @@ public class Virement {
 	 */
 	@RequestMapping(value = "confirmVirement.html", method = RequestMethod.GET)
 	public ModelAndView confirmVirement(HttpServletRequest request) {
-		return ControllerUtils.redirectPageInfoOrHome(request, "confirmVirement", "/client/home.html");
+		return ControllerUtils.redirectPageInfoOrHome(request, "confirmVirement",
+				LinkBuilder.getLink(ControllerUtils.LINK_CLIENT, "home.html"));
 	}
 
 	/**
@@ -216,6 +243,7 @@ public class Virement {
 	 */
 	@RequestMapping(value = "erreurVirement.html", method = RequestMethod.GET)
 	public ModelAndView erreurVirement(HttpServletRequest request) {
-		return ControllerUtils.redirectPageInfoOrHome(request, "erreurVirement", "/client/home.html");
+		return ControllerUtils.redirectPageInfoOrHome(request, "erreurVirement",
+				LinkBuilder.getLink(ControllerUtils.LINK_CLIENT, "home.html"));
 	}
 }

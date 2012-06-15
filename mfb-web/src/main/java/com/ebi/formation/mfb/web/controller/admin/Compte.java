@@ -19,6 +19,7 @@ import com.ebi.formation.mfb.servicesapi.IPersonService;
 import com.ebi.formation.mfb.web.controller.Admin;
 import com.ebi.formation.mfb.web.forms.admin.CompteForm;
 import com.ebi.formation.mfb.web.utils.ControllerUtils;
+import com.ebi.formation.mfb.web.utils.LinkBuilder;
 import com.ebi.formation.mfb.web.utils.SessionAttributesNames;
 
 /**
@@ -103,7 +104,8 @@ public class Compte {
 	 */
 	@RequestMapping(value = "confirmCreateCompte.html", method = RequestMethod.GET)
 	public ModelAndView confirmCreateClient(HttpServletRequest request) {
-		return ControllerUtils.redirectPageInfoOrHome(request, "confirmForm", "/admin/home.html");
+		return ControllerUtils.redirectPageInfoOrHome(request, "confirmForm",
+				LinkBuilder.getLink(ControllerUtils.LINK_ADMIN, "home.html"));
 	}
 
 	/**
@@ -114,6 +116,7 @@ public class Compte {
 	 */
 	@RequestMapping(value = "erreurCreateCompte.html", method = RequestMethod.GET)
 	public ModelAndView erreurCreateClient(HttpServletRequest request) {
-		return ControllerUtils.redirectPageInfoOrHome(request, "erreurForm", "/admin/home.html");
+		return ControllerUtils.redirectPageInfoOrHome(request, "erreurForm",
+				LinkBuilder.getLink(ControllerUtils.LINK_ADMIN, "home.html"));
 	}
 }

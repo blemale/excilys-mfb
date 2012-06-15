@@ -2,13 +2,13 @@ package com.ebi.formation.mfb.webservices.jaxrs.impl;
 
 import java.util.List;
 
-import org.jdto.DTOBinder;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ebi.formation.mfb.servicesapi.IOperationService;
 import com.ebi.formation.mfb.servicesapi.IOperationService.ReturnCodeOperation;
 import com.ebi.formation.mfb.webservicesapi.dto.IntegrationOperationDTO;
 import com.ebi.formation.mfb.webservicesapi.dto.OperationDTO;
+import com.ebi.formation.mfb.webservicesapi.dto.converters.OperationConverter;
 import com.ebi.formation.mfb.webservicesapi.jaxrs.IOperationWebService;
 
 /**
@@ -21,8 +21,6 @@ public class OperationWebService implements IOperationWebService {
 
 	@Autowired
 	private IOperationService operationService;
-	@Autowired
-	private DTOBinder binder;
 
 	/*
 	 * (non-Javadoc)
@@ -31,9 +29,8 @@ public class OperationWebService implements IOperationWebService {
 	 */
 	@Override
 	public List<OperationDTO> getLastOperationsByCompteId(Long compteId, int numberOfOperations) {
-		List<OperationDTO> operationDTOs = binder.bindFromBusinessObjectList(OperationDTO.class,
-				operationService.getLastOperationByCompte(compteId, numberOfOperations));
-		return operationDTOs;
+		return OperationConverter.convertOperationListToOperationDTOList(operationService.getLastOperationByCompte(
+				compteId, numberOfOperations));
 	}
 
 	/*

@@ -31,9 +31,6 @@ public class VirementExterneForm {
 	private String motif;
 	@NotNull
 	@DateTimeFormat
-	private DateTime dateEffet;
-	@NotNull
-	@DateTimeFormat
 	private DateTime dateValeur;
 
 	/**
@@ -90,21 +87,6 @@ public class VirementExterneForm {
 	 */
 	public void setMotif(String motif) {
 		this.motif = motif;
-	}
-
-	/**
-	 * @return the dateEffet
-	 */
-	public DateTime getDateEffet() {
-		return dateEffet;
-	}
-
-	/**
-	 * @param dateEffet
-	 *            the dateEffet to set
-	 */
-	public void setDateEffet(DateTime dateEffet) {
-		this.dateEffet = dateEffet;
 	}
 
 	/**

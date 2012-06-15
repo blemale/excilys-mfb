@@ -17,12 +17,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ebi.formation.mfb.servicesapi.ICompteService;
 import com.ebi.formation.mfb.servicesapi.IOperationService;
-import com.ebi.formation.mfb.servicesapi.IOperationTypeService;
 import com.ebi.formation.mfb.servicesapi.IOperationService.ReturnCodeOperation;
+import com.ebi.formation.mfb.servicesapi.IOperationTypeService;
 import com.ebi.formation.mfb.web.controller.Admin;
 import com.ebi.formation.mfb.web.forms.admin.OperationForm;
 import com.ebi.formation.mfb.web.utils.ControllerUtils;
 import com.ebi.formation.mfb.web.utils.DateTimeUtils;
+import com.ebi.formation.mfb.web.utils.LinkBuilder;
 import com.ebi.formation.mfb.web.utils.SessionAttributesNames;
 
 /**
@@ -127,7 +128,8 @@ public class Operation {
 	 */
 	@RequestMapping(value = "confirmCreateOperation.html", method = RequestMethod.GET)
 	public ModelAndView confirmCreateOperation(HttpServletRequest request) {
-		return ControllerUtils.redirectPageInfoOrHome(request, "confirmForm", "/admin/home.html");
+		return ControllerUtils.redirectPageInfoOrHome(request, "confirmForm",
+				LinkBuilder.getLink(ControllerUtils.LINK_ADMIN, "home.html"));
 	}
 
 	/**
@@ -138,6 +140,7 @@ public class Operation {
 	 */
 	@RequestMapping(value = "erreurCreateOperation.html", method = RequestMethod.GET)
 	public ModelAndView erreurCreateOperation(HttpServletRequest request) {
-		return ControllerUtils.redirectPageInfoOrHome(request, "erreurForm", "/admin/home.html");
+		return ControllerUtils.redirectPageInfoOrHome(request, "erreurForm",
+				LinkBuilder.getLink(ControllerUtils.LINK_ADMIN, "home.html"));
 	}
 }

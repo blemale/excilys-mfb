@@ -7,11 +7,14 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <header id="overview">
+	<%@ include file="../filAriane.jsp"%>
+
 	<div class="row-fluid">
 		<div class="span12">
 			<h1 align="center">
 				<spring:message code="carte.pageTitle" />
 			</h1>
+			<br/><br/>
 
 			<p align="right">
 				<a href="${contextPath}${urlDetailCompte}" class="btn btn-info"><spring:message
@@ -41,7 +44,7 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${operations}" var="o">
-							<tr class="clickLine">
+							<tr>
 								<td><joda:format value="${o.dateValeur}" style="SS" /></td>
 								<td>${o.label}</td>
 								<c:if test="${o.montant >= 0}">
