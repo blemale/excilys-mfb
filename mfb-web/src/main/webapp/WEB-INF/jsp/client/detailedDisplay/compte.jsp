@@ -16,9 +16,9 @@
 
 			<p align="right">
 				<a class="btn btn-success" href="export.html"><spring:message
-						code="home.account.exportExcel" /></a> <a
-					href="${contextPath}/client/home.html" class="btn btn-info"><spring:message
-						code="compte.home" /></a>
+						code="home.account.exportExcel" /></a> <a href="${contextPath}${linksVirement}" class="btn"><spring:message
+						code="home.account.hitory" /></a> <a href="${contextPath}/client/home.html"
+					class="btn btn-info"><spring:message code="compte.home" /></a>
 			</p>
 		</div>
 	</div>
@@ -65,9 +65,8 @@
 								</td>
 							</c:when>
 							<c:otherwise>
-							<td class="aligneSolde"><fmt:formatNumber
-								value="${total}" minFractionDigits="2" pattern="#,###.##" />
-						</td>
+								<td class="aligneSolde"><fmt:formatNumber value="${total}"
+										minFractionDigits="2" pattern="#,###.##" /></td>
 							</c:otherwise>
 						</c:choose>
 					</tr>
