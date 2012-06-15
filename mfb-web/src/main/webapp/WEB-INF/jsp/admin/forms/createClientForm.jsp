@@ -67,14 +67,17 @@
 								code="admin.createClientForm.listRights" /></label>
 						<div class="controls">
 							<form:checkboxes items="${listRights}" path="listRights" />
-							<form:errors path="listRights" cssClass="colorError" element="div" />
+							<form:errors path="listRights" cssClass="colorError"
+								element="div" />
 						</div>
 					</div>
 					<div class="form-actions alignCenter">
 						<button class="btn btn-success" type="submit">
+							<i class="icon-ok"></i>
 							<spring:message code="admin.createClientForm.doCreateClient" />
 						</button>
-						<a class="btn" href="${contextPath}/admin/home.html"><spring:message
+						<a class="btn btn-danger" href="${contextPath}/admin/home.html"><i
+							class="icon-remove"></i> <spring:message
 								code="admin.createClientForm.cancel" /></a>
 					</div>
 				</fieldset>

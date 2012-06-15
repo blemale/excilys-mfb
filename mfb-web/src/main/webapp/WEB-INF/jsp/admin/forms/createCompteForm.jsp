@@ -38,7 +38,8 @@
 								<form:options items="${listOwners}" itemLabel="fullPerson"
 									itemValue="username" />
 							</form:select>
-							<form:errors path="usernameOwner" cssClass="colorError" element="div" />
+							<form:errors path="usernameOwner" cssClass="colorError"
+								element="div" />
 						</div>
 					</div>
 					<div class="control-group">
@@ -51,9 +52,11 @@
 					</div>
 					<div class="form-actions alignCenter">
 						<button class="btn btn-success" type="submit">
+							<i class="icon-ok"></i>
 							<spring:message code="admin.createCompteForm.doCompteClient" />
 						</button>
-						<a class="btn" href="${contextPath}/admin/home.html"><spring:message
+						<a class="btn btn-danger" href="${contextPath}/admin/home.html"><i
+							class="icon-remove"></i> <spring:message
 								code="admin.createCompteForm.cancel" /></a>
 					</div>
 				</fieldset>

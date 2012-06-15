@@ -35,7 +35,8 @@
 								code="admin.createOperationForm.compte" /></label>
 						<div class="controls">
 							<form:select path="idCompte">
-								<form:options items="${listComptes}" itemLabel="fullCompte" itemValue="id" />
+								<form:options items="${listComptes}" itemLabel="fullCompte"
+									itemValue="id" />
 							</form:select>
 							<form:errors path="idCompte" cssClass="colorError" element="div" />
 						</div>
@@ -55,7 +56,8 @@
 						<label class="control-label" for="dateEffet"><spring:message
 								code="admin.createOperationForm.dateEffet" /></label>
 						<div class="controls">
-							<form:select path="dateEffet" items="${datesEffet}" itemLabel="dateTimeFormat" itemValue="dateTime" />
+							<form:select path="dateEffet" items="${datesEffet}"
+								itemLabel="dateTimeFormat" itemValue="dateTime" />
 							<form:errors path="dateEffet" cssClass="colorError" element="div" />
 						</div>
 					</div>
@@ -63,8 +65,10 @@
 						<label class="control-label" for="dateValeur"><spring:message
 								code="admin.createOperationForm.dateValeur" /></label>
 						<div class="controls">
-							<form:select path="dateValeur" items="${datesValeur}" itemLabel="dateTimeFormat" itemValue="dateTime" />
-							<form:errors path="dateValeur" cssClass="colorError" element="div" />
+							<form:select path="dateValeur" items="${datesValeur}"
+								itemLabel="dateTimeFormat" itemValue="dateTime" />
+							<form:errors path="dateValeur" cssClass="colorError"
+								element="div" />
 						</div>
 					</div>
 					<div class="control-group">
@@ -77,10 +81,12 @@
 					</div>
 					<div class="form-actions alignCenter">
 						<button class="btn btn-success" type="submit">
+							<i class="icon-ok"></i>
 							<spring:message
 								code="admin.createOperationForm.doCreateOperation" />
 						</button>
-						<a class="btn" href="${contextPath}/admin/home.html"><spring:message
+						<a class="btn btn-danger" href="${contextPath}/admin/home.html"><i
+							class="icon-remove"></i> <spring:message
 								code="admin.createOperationForm.cancel" /></a>
 					</div>
 				</fieldset>

@@ -20,9 +20,9 @@
 					</sec:authorize>
 					<sec:authorize access="hasRole('ROLE_CLIENT')">
 						<li><a href="${contextPath}/client/virementInterne.html"><spring:message
-								code="header.link.virementInterne" /></a></li>
+									code="header.link.virementInterne" /></a></li>
 						<li><a href="${contextPath}/client/virementExterne.html"><spring:message
-								code="header.link.virementExterne" /></a></li>
+									code="header.link.virementExterne" /></a></li>
 						<%--<li class="dropdown">
 							<a href="#" data-toggle="dropdown" class="dropdown-toggle"> 
 								<spring:message code="header.button.virement" /> <b class="caret"></b>
@@ -53,6 +53,7 @@
 							class="input-small form-top"
 							placeholder="<spring:message code="header.placeholder.password" />">
 						<button type="submit" class="btn">
+							<i class="icon-home"></i>
 							<spring:message code="header.button.login" />
 						</button>
 						<a href="?lang=en"><img
@@ -68,6 +69,7 @@
 						class="navbar-form form-inline pull-right" method="post">
 						${userFirstName} ${userLastName}
 						<button class="btn">
+							<i class="icon-off"></i>
 							<spring:message code="header.button.logout" />
 						</button>
 						<a href="?lang=en"><img

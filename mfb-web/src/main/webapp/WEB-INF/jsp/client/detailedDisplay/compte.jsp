@@ -15,13 +15,17 @@
 				<spring:message code="compte.pageTitle" />
 				"${compte.label}" (${compte.numeroCompte})
 			</h1>
-			<br/><br/>
+			<br /> <br />
 
 			<p align="right">
-				<a class="btn btn-success" href="export.html"><spring:message
-						code="home.account.exportExcel" /></a> <a href="${contextPath}${linksVirement}" class="btn"><spring:message
-						code="home.account.hitory" /></a> <a href="${contextPath}/client/home.html"
-					class="btn btn-info"><spring:message code="compte.home" /></a>
+				<a class="btn btn-success" href="export.html"><i
+					class="icon-download-alt"></i> <spring:message
+						code="home.account.exportExcel" /></a> <a
+					href="${contextPath}${linksVirement}" class="btn"><i
+					class="icon-folder-close"></i> <spring:message
+						code="home.account.hitory" /></a> <a
+					href="${contextPath}/client/home.html" class="btn btn-info"><i
+					class="icon-share-alt"></i> <spring:message code="compte.home" /></a>
 			</p>
 		</div>
 	</div>
@@ -103,7 +107,8 @@
 							</c:if>
 							<!-- TODO -->
 							<td><a class="btn btn-mini btn-info"
-								href="${contextPath}${urlDetailCarte}"><spring:message
+								href="${contextPath}${urlDetailCarte}"><i
+									class="icon-folder-open"></i> <spring:message
 										code="home.account.carte.details" /></a></td>
 						</tr>
 					</tbody>

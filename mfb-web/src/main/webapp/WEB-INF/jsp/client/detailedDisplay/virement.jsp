@@ -8,17 +8,19 @@
 
 <header id="overview">
 	<%@ include file="../filAriane.jsp"%>
-	
+
 	<div class="row-fluid">
 		<div class="span12">
 			<h1 align="center">
-				<spring:message code="historiqueVirement.pageTitle" /> "${compte.label}" (${compte.numeroCompte})
+				<spring:message code="historiqueVirement.pageTitle" />
+				"${compte.label}" (${compte.numeroCompte})
 			</h1>
-			<br/><br/>
+			<br />
+			<br />
 
 			<p align="right">
-				<a href="${contextPath}/client/home.html" class="btn btn-info"><spring:message
-						code="compte.home" /></a>
+				<a href="${contextPath}/client/home.html" class="btn btn-info"><i
+					class="icon-share-alt"></i> <spring:message code="compte.home" /></a>
 			</p>
 		</div>
 	</div>
@@ -40,7 +42,8 @@
 							<th class="fixedCol"><spring:message
 									code="historiqueVirement.dateValeur" /></th>
 							<th><spring:message code="historiqueVirement.label" /></th>
-							<th class="colMontant"><spring:message code="historiqueVirement.montant" /></th>
+							<th class="colMontant"><spring:message
+									code="historiqueVirement.montant" /></th>
 						</tr>
 					</thead>
 					<tbody>

@@ -73,9 +73,11 @@
 					</div>
 					<div class="form-actions alignCenter">
 						<button class="btn btn-success" type="submit">
+							<i class="icon-ok"></i>
 							<spring:message code="virementInterneForm.doVirement" />
 						</button>
-						<a class="btn" href="${contextPath}/client/home.html"><spring:message
+						<a class="btn" href="${contextPath}/client/home.html"><i
+							class="icon-remove"></i> <spring:message
 								code="virementInterneForm.cancel" /></a>
 					</div>
 				</fieldset>

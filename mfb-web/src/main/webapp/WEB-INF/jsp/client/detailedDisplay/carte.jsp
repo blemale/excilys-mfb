@@ -14,11 +14,12 @@
 			<h1 align="center">
 				<spring:message code="carte.pageTitle" />
 			</h1>
-			<br/><br/>
+			<br />
+			<br />
 
 			<p align="right">
-				<a href="${contextPath}${urlDetailCompte}" class="btn btn-info"><spring:message
-						code="carte.home" /></a>
+				<a href="${contextPath}${urlDetailCompte}" class="btn btn-info"><i
+					class="icon-share-alt"></i> <spring:message code="carte.home" /></a>
 			</p>
 		</div>
 	</div>
@@ -39,7 +40,8 @@
 							<th class="fixedCol"><spring:message
 									code="carte.dateOperation" /></th>
 							<th><spring:message code="carte.labelOperation" /></th>
-							<th class="colMontant"><spring:message code="carte.montantOperation" /></th>
+							<th class="colMontant"><spring:message
+									code="carte.montantOperation" /></th>
 						</tr>
 					</thead>
 					<tbody>
