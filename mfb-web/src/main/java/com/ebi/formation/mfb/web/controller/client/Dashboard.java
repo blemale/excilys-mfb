@@ -2,6 +2,7 @@ package com.ebi.formation.mfb.web.controller.client;
 
 import java.security.Principal;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -41,6 +42,9 @@ public class Dashboard {
 		mv.addObject("comptes", comptes);
 		mv.addObject("linksDetail", getMapLinksDetailByCompteId(comptes));
 		mv.addObject("linksVirement", getMapLinksVirementByCompteId(comptes));
+		Map<String, String> linksfilAriane = new LinkedHashMap<String, String>();
+		linksfilAriane.put("linkFilAriane.home", LinkBuilder.getLink("client", "home.html"));
+		mv.addObject("linksfilAriane", linksfilAriane);
 		return mv;
 	}
 

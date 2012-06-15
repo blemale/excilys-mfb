@@ -1,6 +1,8 @@
 package com.ebi.formation.mfb.web.controller.client;
 
 import java.security.Principal;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -24,6 +26,7 @@ import com.ebi.formation.mfb.web.forms.VirementExterneForm;
 import com.ebi.formation.mfb.web.forms.VirementInterneForm;
 import com.ebi.formation.mfb.web.utils.ControllerUtils;
 import com.ebi.formation.mfb.web.utils.DateTimeUtils;
+import com.ebi.formation.mfb.web.utils.LinkBuilder;
 
 /**
  * @author excilys
@@ -50,6 +53,11 @@ public class Virement {
 		ModelAndView mv = new ModelAndView("virementInterne");
 		mv.addObject(OBJECT_LIST_COMPTES, compteService.findComptesByUsername(principal.getName()));
 		mv.addObject(new VirementInterneForm());
+		Map<String, String> linksfilAriane = new LinkedHashMap<String, String>();
+		linksfilAriane.put("linkFilAriane.home", LinkBuilder.getLink("client", "home.html"));
+		linksfilAriane.put("linkFilAriane.virementInterne", LinkBuilder.getLink("client", "virementInterne.html"));
+		mv.addObject("linksfilAriane", linksfilAriane);
+		mv.setViewName("virementInterne");
 		return mv;
 	}
 
@@ -64,8 +72,12 @@ public class Virement {
 		ModelAndView mv = new ModelAndView("virementExterne");
 		mv.addObject(OBJECT_LIST_COMPTES, compteService.findComptesByUsername(principal.getName()));
 		mv.addObject(DateTimeUtils.OBJECT_DATES_VALEUR, DateTimeUtils.getDates());
-		mv.addObject(DateTimeUtils.OBJECT_DATES_EFFET, DateTimeUtils.getDates());
 		mv.addObject(new VirementExterneForm());
+		Map<String, String> linksfilAriane = new LinkedHashMap<String, String>();
+		linksfilAriane.put("linkFilAriane.home", LinkBuilder.getLink("client", "home.html"));
+		linksfilAriane.put("linkFilAriane.virementExterne", LinkBuilder.getLink("client", "virementExterne.html"));
+		mv.addObject("linksfilAriane", linksfilAriane);
+		mv.setViewName("virementExterne");
 		return mv;
 	}
 
@@ -93,6 +105,10 @@ public class Virement {
 				result.addError(new FieldError("virementInterneForm", "compteACrediter", null, true,
 						new String[] { "virementInterneForm.comptesIdentiques" }, null, null));
 			}
+			Map<String, String> linksfilAriane = new LinkedHashMap<String, String>();
+			linksfilAriane.put("linkFilAriane.home", LinkBuilder.getLink("client", "home.html"));
+			linksfilAriane.put("linkFilAriane.virementInterne", LinkBuilder.getLink("client", "virementInterne.html"));
+			mv.addObject("linksfilAriane", linksfilAriane);
 			mv.setViewName("virementInterne");
 			return mv;
 		}
@@ -163,13 +179,16 @@ public class Virement {
 		if (result.hasErrors()) {
 			mv.addObject(OBJECT_LIST_COMPTES, compteService.findComptesByUsername(principal.getName()));
 			mv.addObject(DateTimeUtils.OBJECT_DATES_VALEUR, DateTimeUtils.getDates());
-			mv.addObject(DateTimeUtils.OBJECT_DATES_EFFET, DateTimeUtils.getDates());
+			Map<String, String> linksfilAriane = new LinkedHashMap<String, String>();
+			linksfilAriane.put("linkFilAriane.home", LinkBuilder.getLink("client", "home.html"));
+			linksfilAriane.put("linkFilAriane.virementExterne", LinkBuilder.getLink("client", "virementExterne.html"));
+			mv.addObject("linksfilAriane", linksfilAriane);
 			mv.setViewName("virementExterne");
 			return mv;
 		}
 		ReturnCodeVirement returnCode = operationService.doVirement(virementExternForm.getCompteADebiter(),
 				virementExternForm.getNumeroCompteACrediter(), StringUtils.trimToNull(virementExternForm.getMotif()),
-				virementExternForm.getMontant(), virementExternForm.getDateEffet(), virementExternForm.getDateValeur());
+				virementExternForm.getMontant(), DateTime.now(), virementExternForm.getDateValeur());
 		mv.setViewName("redirect:erreurVirement.html");
 		String message = null;
 		switch (returnCode) {

@@ -7,6 +7,8 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <header id="overview" class="span10 offset2">
+	<%@ include file="../filAriane.jsp"%>
+
 	<h1>
 		<spring:message code="home.title" />
 	</h1>

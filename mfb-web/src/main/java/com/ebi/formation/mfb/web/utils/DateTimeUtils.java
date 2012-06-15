@@ -17,7 +17,6 @@ public class DateTimeUtils {
 	private DateTime dateTime;
 	private static final int NUM_OF_DATE = 4;
 	public static final String OBJECT_DATES_VALEUR = "datesValeur";
-	public static final String OBJECT_DATES_EFFET = "datesEffet";
 
 	/**
 	 * @return

@@ -145,6 +145,11 @@ public class Detail {
 				LinkBuilder.getLink("client", "compte", idCompte, year, month, "carte", "detail.html"));
 		mv.addObject("linksVirement",
 				LinkBuilder.getLink("client", "compte", idCompte.longValue(), "virement", "history.html"));
+		Map<String, String> linksfilAriane = new LinkedHashMap<String, String>();
+		linksfilAriane.put("linkFilAriane.home", LinkBuilder.getLink("client", "home.html"));
+		linksfilAriane.put("linkFilAriane.detailCompte",
+				LinkBuilder.getLink("client", "compte", idCompte.longValue(), "detail.html"));
+		mv.addObject("linksfilAriane", linksfilAriane);
 		return mv;
 	}
 
@@ -218,6 +223,13 @@ public class Detail {
 		}
 		// Ajout de l'url pour revenir au détail du compte dans le modèle
 		mv.addObject("urlDetailCompte", LinkBuilder.getLink("client", "compte", idCompte, year, month, "detail.html"));
+		Map<String, String> linksfilAriane = new LinkedHashMap<String, String>();
+		linksfilAriane.put("linkFilAriane.home", LinkBuilder.getLink("client", "home.html"));
+		linksfilAriane.put("linkFilAriane.detailCompte",
+				LinkBuilder.getLink("client", "compte", idCompte.longValue(), "detail.html"));
+		linksfilAriane.put("linkFilAriane.detailCarte",
+				LinkBuilder.getLink("client", "compte", idCompte.longValue(), year, month, "carte", "detail.html"));
+		mv.addObject("linksfilAriane", linksfilAriane);
 		return mv;
 	}
 
@@ -288,6 +300,13 @@ public class Detail {
 			mv.addObject("urlNextMonth", LinkBuilder.getLink("client", "compte", idCompte, monthAfter.getYear(),
 					monthAfter.getMonthOfYear(), "virement", "history.html"));
 		}
+		Map<String, String> linksfilAriane = new LinkedHashMap<String, String>();
+		linksfilAriane.put("linkFilAriane.home", LinkBuilder.getLink("client", "home.html"));
+		linksfilAriane.put("linkFilAriane.detailCompte",
+				LinkBuilder.getLink("client", "compte", idCompte.longValue(), "detail.html"));
+		linksfilAriane.put("linkFilAriane.virementHistory",
+				LinkBuilder.getLink("client", "compte", idCompte.longValue(), "virement", "history.html"));
+		mv.addObject("linksfilAriane", linksfilAriane);
 		return mv;
 	}
 

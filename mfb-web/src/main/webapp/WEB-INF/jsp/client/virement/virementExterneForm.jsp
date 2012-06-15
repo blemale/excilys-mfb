@@ -7,6 +7,8 @@
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <header id="overview" class="span10 offset2">
+	<%@ include file="../filAriane.jsp"%>
+
 	<h1>
 		<spring:message code="home.title" />
 	</h1>
@@ -48,15 +50,6 @@
 							<form:input path="numeroCompteACrediter"
 								cssClass="input-xlarge focused" />
 							<form:errors path="numeroCompteACrediter" cssClass="colorError" element="div" />
-						</div>
-					</div>
-					<div class="control-group">
-						<label class="control-label" for="dateEffet"><spring:message
-								code="admin.createOperationForm.dateEffet" /></label>
-						<div class="controls">
-							<form:select path="dateEffet" items="${datesEffet}"
-								itemLabel="dateTimeFormat" itemValue="dateTime" />
-							<form:errors path="dateEffet" cssClass="colorError" element="div" />
 						</div>
 					</div>
 					<div class="control-group">
