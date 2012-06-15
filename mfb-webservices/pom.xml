@@ -45,14 +45,6 @@
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-xc</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.jdto</groupId>
-			<artifactId>jdto</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
-		</dependency>
 
 		<dependency>
 			<groupId>com.ebi.formation</groupId>
