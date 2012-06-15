@@ -38,12 +38,8 @@
 
 	<ciManagement>
 		<system>Jenkins</system>
+		<url>http://mfb.ebi/jenkins/</url>
 	</ciManagement>
-
-	<distributionManagement>
-
-	</distributionManagement>
-
 
 	<developers>
 		<developer>
@@ -466,6 +462,6 @@
 	</reporting>
 
 	<scm>
-		<url>scm:git:https://github.com/excilys-pdalpra/excilys-mfb</url>
+		<url>https://github.com/excilys-pdalpra/excilys-mfb</url>
 	</scm>
 </project>
