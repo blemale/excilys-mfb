@@ -6,15 +6,20 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-<header id="overview" class="span10 offset2">
+<header id="overview">
 	<%@ include file="../filAriane.jsp"%>
 
-	<h1>
-		<spring:message code="home.title" />
-	</h1>
-	<p class="lead">
-		<spring:message code="home.virementInterneForm" />
-	</p>
+	<div class="row">
+		<div class="span10 offset2">
+
+			<h1>
+				<spring:message code="home.title" />
+			</h1>
+			<p class="lead">
+				<spring:message code="home.virementInterneForm" />
+			</p>
+		</div>
+	</div>
 </header>
 
 <section id="virement">
@@ -25,35 +30,41 @@
 				commandName="virementInterneForm">
 				<fieldset>
 					<div class="control-group">
-						<label class="control-label" for="montant"><spring:message code="virementInterneForm.montant"/></label>
+						<label class="control-label" for="montant"><spring:message
+								code="virementInterneForm.montant" /></label>
 						<div class="controls">
 							<form:input path="montant" cssClass="input-xlarge focused" />
 							<form:errors path="montant" cssClass="colorError" element="div" />
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label" for="debit"><spring:message code="virementInterneForm.compteDebit"/></label>
+						<label class="control-label" for="debit"><spring:message
+								code="virementInterneForm.compteDebit" /></label>
 						<div class="controls">
 							<form:select path="compteADebiter">
 								<form:options items="${listComptes}" itemLabel="fullLabel"
 									itemValue="id" />
 							</form:select>
-							<form:errors path="compteADebiter" cssClass="colorError" element="div"/>
+							<form:errors path="compteADebiter" cssClass="colorError"
+								element="div" />
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label" for="credit"><spring:message code="virementInterneForm.compteCredit"/></label>
+						<label class="control-label" for="credit"><spring:message
+								code="virementInterneForm.compteCredit" /></label>
 						<div class="controls">
 							<form:select path="compteACrediter">
 								<form:options items="${listComptes}" itemLabel="fullLabel"
 									itemValue="id" />
 							</form:select>
-							<form:errors path="compteACrediter" cssClass="colorError" element="div"/>
+							<form:errors path="compteACrediter" cssClass="colorError"
+								element="div" />
 						</div>
-						
+
 					</div>
 					<div class="control-group">
-						<label class="control-label" for="motif"><spring:message code="virementInterneForm.label"/></label>
+						<label class="control-label" for="motif"><spring:message
+								code="virementInterneForm.label" /></label>
 						<div class="controls">
 							<input id="motif" class="input-xlarge focused" type="text"
 								name="motif">
@@ -61,8 +72,11 @@
 						</div>
 					</div>
 					<div class="form-actions alignCenter">
-						<button class="btn btn-success" type="submit"><spring:message code="virementInterneForm.doVirement"/></button>
-						<a class="btn" href="${contextPath}/client/home.html"><spring:message code="virementInterneForm.cancel"/></a>
+						<button class="btn btn-success" type="submit">
+							<spring:message code="virementInterneForm.doVirement" />
+						</button>
+						<a class="btn" href="${contextPath}/client/home.html"><spring:message
+								code="virementInterneForm.cancel" /></a>
 					</div>
 				</fieldset>
 			</form:form>

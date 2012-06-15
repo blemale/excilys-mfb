@@ -14,6 +14,13 @@ import org.springframework.web.servlet.view.RedirectView;
  */
 public final class ControllerUtils {
 
+	public static final String OBJECT_LINK_FIL_ARIANE = "linksfilAriane";
+	public static final String LINK_CLIENT = "client";
+	public static final String LINK_COMPTE = "compte";
+	public static final String LINK_CARTE = "carte";
+	public static final String LINK_VIREMENT = "virement";
+	public static final String LINK_ADMIN = "admin";
+
 	/**
 	 * Constructeur empechant la classe ControllerUtils d'être instanciée
 	 */

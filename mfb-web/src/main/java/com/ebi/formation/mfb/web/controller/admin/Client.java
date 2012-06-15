@@ -16,11 +16,12 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ebi.formation.mfb.servicesapi.IPersonService;
-import com.ebi.formation.mfb.servicesapi.IRoleService;
 import com.ebi.formation.mfb.servicesapi.IPersonService.ReturnCodePerson;
+import com.ebi.formation.mfb.servicesapi.IRoleService;
 import com.ebi.formation.mfb.web.controller.Admin;
 import com.ebi.formation.mfb.web.forms.admin.ClientForm;
 import com.ebi.formation.mfb.web.utils.ControllerUtils;
+import com.ebi.formation.mfb.web.utils.LinkBuilder;
 import com.ebi.formation.mfb.web.utils.SessionAttributesNames;
 
 /**
@@ -114,7 +115,8 @@ public class Client {
 	 */
 	@RequestMapping(value = "confirmCreateClient.html", method = RequestMethod.GET)
 	public ModelAndView confirmCreateClient(HttpServletRequest request) {
-		return ControllerUtils.redirectPageInfoOrHome(request, "confirmForm", "/admin/home.html");
+		return ControllerUtils.redirectPageInfoOrHome(request, "confirmForm",
+				LinkBuilder.getLink(ControllerUtils.LINK_ADMIN, "home.html"));
 	}
 
 	/**
@@ -125,6 +127,7 @@ public class Client {
 	 */
 	@RequestMapping(value = "erreurCreateClient.html", method = RequestMethod.GET)
 	public ModelAndView erreurCreateClient(HttpServletRequest request) {
-		return ControllerUtils.redirectPageInfoOrHome(request, "erreurForm", "/admin/home.html");
+		return ControllerUtils.redirectPageInfoOrHome(request, "erreurForm",
+				LinkBuilder.getLink(ControllerUtils.LINK_ADMIN, "home.html"));
 	}
 }

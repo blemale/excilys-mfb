@@ -15,6 +15,7 @@
 				<spring:message code="compte.pageTitle" />
 				"${compte.label}" (${compte.numeroCompte})
 			</h1>
+			<br/><br/>
 
 			<p align="right">
 				<a class="btn btn-success" href="export.html"><spring:message

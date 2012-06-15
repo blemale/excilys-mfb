@@ -5,15 +5,19 @@
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
-<header id="overview" class="span10 offset1">
+<header id="overview">
 	<%@ include file="filAriane.jsp"%>
 
-	<h1>
-		<spring:message code="home.title" />
-	</h1>
-	<p class="lead">
-		<spring:message code="home.welcome" />
-	</p>
+	<div class="row">
+		<div class="span10 offset1">
+			<h1>
+				<spring:message code="home.title" />
+			</h1>
+			<p class="lead">
+				<spring:message code="home.welcome" />
+			</p>
+		</div>
+	</div>
 </header>
 
 <section id="comptes">

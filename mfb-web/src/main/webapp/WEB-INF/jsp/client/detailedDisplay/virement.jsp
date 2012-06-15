@@ -14,6 +14,7 @@
 			<h1 align="center">
 				<spring:message code="historiqueVirement.pageTitle" /> "${compte.label}" (${compte.numeroCompte})
 			</h1>
+			<br/><br/>
 
 			<p align="right">
 				<a href="${contextPath}/client/home.html" class="btn btn-info"><spring:message
