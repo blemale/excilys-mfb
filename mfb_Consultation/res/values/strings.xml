@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">MF Banking</string>
+    <string name="app_name">MF Banking</string>
+    <string name="HelloMoto">Choix d\'un compte</string>
+    <string name="HelloDetailsCompte">Soldes et dernières opérations</string>
+    
+    
+</resources>
