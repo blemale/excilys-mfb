@@ -74,7 +74,7 @@ public class Virement {
 		mv.addObject(OBJECT_LIST_COMPTES, compteService.findComptesByUsername(principal.getName()));
 		mv.addObject(DateTimeUtils.OBJECT_DATES_VALEUR, DateTimeUtils.getDates());
 		mv.addObject(new VirementExterneForm());
-		// TODO fil d'ariane
+		// fil d'ariane
 		Map<String, String> linksfilAriane = new LinkedHashMap<String, String>();
 		linksfilAriane.put("linkFilAriane.home", LinkBuilder.getLink(ControllerUtils.LINK_CLIENT, "home.html"));
 		linksfilAriane.put("linkFilAriane.virementExterne",
@@ -108,7 +108,7 @@ public class Virement {
 				result.addError(new FieldError("virementInterneForm", "compteACrediter", null, true,
 						new String[] { "virementInterneForm.comptesIdentiques" }, null, null));
 			}
-			// TODO fil d'ariane
+			// fil d'ariane
 			Map<String, String> linksfilAriane = new LinkedHashMap<String, String>();
 			linksfilAriane.put("linkFilAriane.home", LinkBuilder.getLink(ControllerUtils.LINK_CLIENT, "home.html"));
 			linksfilAriane.put("linkFilAriane.virementInterne",
@@ -184,7 +184,7 @@ public class Virement {
 		if (result.hasErrors()) {
 			mv.addObject(OBJECT_LIST_COMPTES, compteService.findComptesByUsername(principal.getName()));
 			mv.addObject(DateTimeUtils.OBJECT_DATES_VALEUR, DateTimeUtils.getDates());
-			// TODO fil d'ariane
+			// fil d'ariane
 			Map<String, String> linksfilAriane = new LinkedHashMap<String, String>();
 			linksfilAriane.put("linkFilAriane.home", LinkBuilder.getLink(ControllerUtils.LINK_CLIENT, "home.html"));
 			linksfilAriane.put("linkFilAriane.virementExterne",

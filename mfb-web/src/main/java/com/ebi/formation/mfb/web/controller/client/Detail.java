@@ -143,7 +143,7 @@ public class Detail {
 				idCompte, year, month, "carte", "detail.html"));
 		mv.addObject("linksVirement", LinkBuilder.getLink(ControllerUtils.LINK_CLIENT, ControllerUtils.LINK_COMPTE,
 				idCompte.longValue(), "virement", "history.html"));
-		// TODO fil d'ariane
+		// fil d'ariane
 		Map<String, String> linksfilAriane = new LinkedHashMap<String, String>();
 		linksfilAriane.put("linkFilAriane.home", LinkBuilder.getLink(ControllerUtils.LINK_CLIENT, "home.html"));
 		linksfilAriane.put("linkFilAriane.detailCompte", LinkBuilder.getLink(ControllerUtils.LINK_CLIENT,
@@ -221,7 +221,7 @@ public class Detail {
 		// Ajout de l'url pour revenir au détail du compte dans le modèle
 		mv.addObject("urlDetailCompte", LinkBuilder.getLink(ControllerUtils.LINK_CLIENT, ControllerUtils.LINK_COMPTE,
 				idCompte, year, month, "detail.html"));
-		// TODO fil d'ariane
+		// fil d'ariane
 		Map<String, String> linksfilAriane = new LinkedHashMap<String, String>();
 		linksfilAriane.put("linkFilAriane.home", LinkBuilder.getLink(ControllerUtils.LINK_CLIENT, "home.html"));
 		linksfilAriane.put("linkFilAriane.detailCompte", LinkBuilder.getLink(ControllerUtils.LINK_CLIENT,
@@ -300,7 +300,7 @@ public class Detail {
 					idCompte, monthAfter.getYear(), monthAfter.getMonthOfYear(), ControllerUtils.LINK_VIREMENT,
 					"history.html"));
 		}
-		// TODO fil d'ariane
+		// fil d'ariane
 		Map<String, String> linksfilAriane = new LinkedHashMap<String, String>();
 		linksfilAriane.put("linkFilAriane.home", LinkBuilder.getLink(ControllerUtils.LINK_CLIENT, "home.html"));
 		linksfilAriane.put("linkFilAriane.detailCompte", LinkBuilder.getLink(ControllerUtils.LINK_CLIENT,
